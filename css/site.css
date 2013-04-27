@@ -7,6 +7,10 @@ a {
     height:400px;
 }
 
+#findme-map {
+    height:200px;
+}
+
 .hidden {
     display: none;
 }
