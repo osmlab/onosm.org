@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>On OpenStreetMap</title>
+        <link rel='stylesheet' type='text/css' href='css/style.css' />
+        <link rel='stylesheet' type='text/css' href='css/site.css' />
+        <meta http-equiv='content-type' content='text/html; charset=utf-8' />
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
+        <![endif]-->
+        <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+    </head>
+    <body>
+        <div class='container pad2'>
+            <h2>On OpenStreetMap</h2>
+            <p>Add your business to OpenStreetMap quickly and easily!</p>
+
+            <div class='affix col6 pad2' id='address-step'>
+                <p>Start by telling us where your business is located.</p>
+                <div class='col10'>
+                    <input class='col12' id='address' placeholder='501 West Main Street, Alexandria, VA' />
+                    <button class='col12 pad1' id='findme'>Find Me!</button>
+                </div>
+            </div>
+
+            <div class='hidden affix col6 pad2' id='map-refine-step'>
+                <p>It looks like you're new to OpenStreetMap. Move this marker to your business location.</p>
+                <div class='col10'>
+                    <div id='refine-map'></div>
+                </div>
+            </div>
+
+            <div class='hidden affix col6 pad2' id='map-refine-step'>
+                <p>We found your location. Now tell us about your business.</p>
+                <div class='col10'>
+                    <label for='name'>Name</label>
+                    <input id='name' type='text' placeholder='ACME Parts'></input>
+                    <label for='phone'>Phone Number</label>
+                    <input id='phone' type='text' placeholder='414-555-1212'></input>
+                    <label for='phone'>Fax Number</label>
+                    <input id='phone' type='text' placeholder='414-555-1214'></input>
+                    <label for='phone'>Website</label>
+                    <input id='phone' type='text' placeholder='http://www.example.com/'></input>
+                </div>
+            </div>
+
+            <div class='hidden affix col6 pad2' id='map-refine-step'>
+                <p><strong>Thanks for submitting your information!</strong> You can submit your information
+                    now by creating an OpenStreetMap account or wait for one of our volunteer contributors
+                    to add it for you.</p>
+                <div class='col10'>
+                    <h4>OSM OAuth Here.</h4>
+                </div>
+            </div>
+        </div>
+        <script src='js/site.js'></script>
+    </body>
+</html>

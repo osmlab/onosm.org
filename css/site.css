@@ -1,0 +1,40 @@
+a {
+    text-decoration:underline;
+    color:darkred !important;
+}
+
+#map {
+    height:400px;
+}
+
+.hidden {
+    display: none;
+}
+
+.result {
+    border-bottom:1px solid #eee;
+}
+
+.affix {
+    position:fixed;
+}
+
+a.load {
+    text-decoration:none;
+}
+
+a.l {
+    padding:2px;
+    text-decoration:underline;
+    font-size:13px;
+    margin:0 4px;
+}
+
+.active {
+    font-weight:bold;
+}
+
+h2, p {
+    margin:0;
+    padding:0 20px;
+}
