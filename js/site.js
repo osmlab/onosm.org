@@ -8,6 +8,22 @@ var findme_marker = L.marker([0,0], {draggable:true});
 findme_marker.addTo(findme_map);
 findme_marker.setOpacity(0);
 
+$("#category").select2({
+    placeholder: "Select a category",
+    minimumInputLength: 3,
+    ajax: {
+        url: "categories.json",
+        id: function(obj) { return obj; },
+        results: function(data, page) { return { results: data }; }
+    },
+    formatResult: function (data) {
+        return "<div class='select2-user-result'>" + data + "</div>";
+    },
+    formatSelection: function (data) {
+        return data;
+    }
+});
+
 $("#findme").click(function() {
     $("#couldnt-find").hide();
 
