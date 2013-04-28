@@ -31,14 +31,12 @@ $("#findme").click(function() {
             var chosen_place = data[0];
             console.log(chosen_place);
 
-            var ll = new L.LatLng(+chosen_place.lat, +chosen_place.lon);
-            findme_marker.setLatLng(ll);
-            findme_marker.setOpacity(1);
+            var bounds = new L.LatLngBounds([+chosen_place.boundingbox[0], +chosen_place.boundingbox[2]],
+                                            [+chosen_place.boundingbox[1], +chosen_place.boundingbox[3]]);
+            findme_map.fitBounds(bounds);
 
-            findme_map.panTo(ll);
-            $("#address-step").hide();
-            $("#collect-data-step").show();
-            findme_map.invalidateSize();
+            findme_marker.setOpacity(1);
+            findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
         } else {
             console.log("No data found :(");
             $("#couldnt-find").show();
