@@ -37,11 +37,13 @@ $("#findme").click(function() {
 
             findme_map.panTo(ll);
             $("#address-step").hide();
-            $("#map-refine-step").show();
+            $("#collect-data-step").show();
             findme_map.invalidateSize();
         } else {
             console.log("No data found :(");
             $("#couldnt-find").show();
+            $("#findme h4").text("Find Me!");
+            $("#findme").removeClass("loading");
         }
     });
 });

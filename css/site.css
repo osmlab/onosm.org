@@ -19,10 +19,6 @@ a {
     border-bottom:1px solid #eee;
 }
 
-.affix {
-    position:fixed;
-}
-
 a.load {
     text-decoration:none;
 }
