@@ -37,6 +37,15 @@ $("#findme").click(function() {
 
             findme_marker.setOpacity(1);
             findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
+
+            $("#instructions").text("We found it! Click and drag the marker to sit on your business.");
+
+            $("#findme h4").text("Done!");
+            $("#findme").removeClass("loading");
+            $("#findme").unbind('click').click(function() {
+                $("#address-step").hide();
+                $("#collect-data-step").show();
+            });
         } else {
             console.log("No data found :(");
             $("#couldnt-find").show();
