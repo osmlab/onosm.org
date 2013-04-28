@@ -8,11 +8,11 @@ a {
 }
 
 #findme-map {
-    height:200px;
+    height:300px;
 }
 
-.hidden {
-    display: none;
+.loading {
+    background: url('../img/loading.gif') left top;
 }
 
 .result {

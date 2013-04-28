@@ -22,18 +22,20 @@
                 <div class='col10'>
                     <input class='col12' id='address' placeholder='501 West Main Street, Alexandria, VA' />
                     <button class='col12' id='findme'><h4>Find Me!</h4></button>
-                    <div class='hidden col12' id='findme-map'></div>
+                    <p id="couldnt-find" style='display: none;'>
+                        <strong>We couldn't find your address.</strong> Try searching for your street or city without the address.
+                    </p>
                 </div>
             </div>
 
-            <div class='hidden affix col6 pad2' id='map-refine-step'>
-                <p>It looks like you're new to OpenStreetMap. Move this marker to your business location.</p>
+            <div class='affix col6 pad2' id='map-refine-step' style='display: none;'>
+                <p>Move the map marker to your business.</p>
                 <div class='col10'>
-                    <div id='refine-map'></div>
+                    <div class='col12' id='findme-map'></div>
                 </div>
             </div>
 
-            <div class='hidden affix col6 pad2' id='map-refine-step'>
+            <div class='affix col6 pad2' id='map-refine-step' style='display: none;'>
                 <p>We found your location. Now tell us about your business.</p>
                 <div class='col10'>
                     <label for='name'>Name</label>
@@ -47,7 +49,7 @@
                 </div>
             </div>
 
-            <div class='hidden affix col6 pad2' id='map-refine-step'>
+            <div class='affix col6 pad2' id='map-refine-step' style='display: none;'>
                 <p><strong>Thanks for submitting your information!</strong> You can submit your information
                     now by creating an OpenStreetMap account or wait for one of our volunteer contributors
                     to add it for you.</p>
