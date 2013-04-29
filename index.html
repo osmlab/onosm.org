@@ -42,15 +42,15 @@
                     <input id='name' type='text' placeholder='ACME Parts'></input>
                     <label for='phone'>Phone Number</label>
                     <input id='phone' type='text' placeholder='414-555-1212'></input>
-                    <label for='phone'>Fax Number</label>
-                    <input id='phone' type='text' placeholder='414-555-1214'></input>
-                    <label for='phone'>Website</label>
-                    <input id='phone' type='text' placeholder='http://www.example.com/'></input>
-                    <button class='col12' id='collect-data-done'>Done!</button>
+                    <label for='fax'>Fax Number</label>
+                    <input id='fax' type='text' placeholder='414-555-1214'></input>
+                    <label for='website'>Website</label>
+                    <input id='website' type='text' placeholder='http://www.example.com/'></input>
+                    <button class='col12' id='collect-data-done'><h4>Done!</h4></button>
                 </div>
             </div>
 
-            <div class='col6 pad2' id='confirm-step' style='display: none;'>
+            <div class='col6 pad2' id='confirm-step' style=''>
                 <p>
                     <strong>Thanks for submitting your information!</strong> An OpenStreetMap volunteer
                     will add your data to the map soon.
@@ -60,9 +60,8 @@
                     It's very easy to get started using <a href="http://ideditor.com/">an editor</a>
                     in your browser.
                 </p>
-                <div class='col10'>
-                    <h4>OSM OAuth Here.</h4>
-                </div>
+                <span class="note-debug" id="note-debug">This is a note.
+                </span>
             </div>
         </div>
         <script src='js/site.js'></script>

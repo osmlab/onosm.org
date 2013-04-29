@@ -15,8 +15,9 @@ a {
     background: url('../img/loading.gif') left top;
 }
 
-.result {
+.note-debug {
     border-bottom:1px solid #eee;
+    font-family: monospace;
 }
 
 a.load {

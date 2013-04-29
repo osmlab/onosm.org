@@ -78,4 +78,14 @@ $("#findme").click(function() {
 $("#collect-data-done").click(function() {
     $("#collect-data-step").hide();
     $("#confirm-step").show();
+
+    var note_body = "onosm.org submitted note from a business: " +
+        "name: " + $("#name").val() +
+        "phone: " + $("#phone").val() +
+        "fax: " + $("#fax").val() +
+        "website: " + $("#website").val() +
+        "category: " + $("#category").val();
+    console.log(note_body);
+
+    $("#note-debug").text("I was going to create a note like: " + note_body);
 });
