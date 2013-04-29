@@ -70,3 +70,8 @@ $("#findme").click(function() {
         }
     });
 });
+
+$("#collect-data-done").click(function() {
+    $("#collect-data-step").hide();
+    $("#confirm-step").show();
+});

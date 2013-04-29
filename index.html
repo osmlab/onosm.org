@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <div class='col6 pad2' id='collect-data-step' style=''>
+            <div class='col6 pad2' id='collect-data-step' style='display: none;'>
                 <p>We found your location. Now tell us about your business.</p>
                 <div class='col10'>
                     <div class='clearfix col12'>
@@ -46,13 +46,20 @@
                     <input id='phone' type='text' placeholder='414-555-1214'></input>
                     <label for='phone'>Website</label>
                     <input id='phone' type='text' placeholder='http://www.example.com/'></input>
+                    <button class='col12' id='collect-data-done'>Done!</button>
                 </div>
             </div>
 
-            <div class='col6 pad2' id='map-refine-step' style='display: none;'>
-                <p><strong>Thanks for submitting your information!</strong> You can submit your information
-                    now by creating an OpenStreetMap account or wait for one of our volunteer contributors
-                    to add it for you.</p>
+            <div class='col6 pad2' id='confirm-step' style='display: none;'>
+                <p>
+                    <strong>Thanks for submitting your information!</strong> An OpenStreetMap volunteer
+                    will add your data to the map soon.
+                </p>
+                <p>
+                    Did you know you can add your own data to the map and skip the wait?
+                    It's very easy to get started using <a href="http://ideditor.com/">an editor</a>
+                    in your browser.
+                </p>
                 <div class='col10'>
                     <h4>OSM OAuth Here.</h4>
                 </div>
