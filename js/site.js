@@ -8,19 +8,23 @@ var findme_marker = L.marker([0,0], {draggable:true});
 findme_marker.addTo(findme_map);
 findme_marker.setOpacity(0);
 
+var category_data = [];
+
+$.ajax('./categories.json').success(function(data){
+    category_data = data;
+});
+
 $("#category").select2({
-    placeholder: "Select a category",
-    minimumInputLength: 3,
-    ajax: {
-        url: "categories.json",
-        id: function(obj) { return obj; },
-        results: function(data, page) { return { results: data }; }
-    },
-    formatResult: function (data) {
-        return "<div class='select2-user-result'>" + data + "</div>";
-    },
-    formatSelection: function (data) {
-        return data;
+    query: function (query) {
+        var data = {results: []}, i;
+
+        for (i = 0; i < category_data.length; i++) {
+            if (query.term.length === 0 || category_data[i].toLowerCase().indexOf(query.term.toLowerCase()) >= 0) {
+                data.results.push({id: category_data[i], text: category_data[i]});
+            }
+        }
+
+        query.callback(data);
     }
 });
 
