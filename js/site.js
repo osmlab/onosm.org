@@ -98,4 +98,19 @@ $("#collect-data-done").click(function() {
         type: "POST",
         data: qwarg
     });
+
+    $.post('https://docs.google.com/forms/d/1nKvXEBAAvRM8zux1DS4m_oDdJkEawRqGipMWYHbymKc/formResponse', {
+        data: {
+            "entry.1538146744: ": $("#name").val(),
+            "entry.28414640": $("#phone").val(),
+            "entry.1154915960": $("#fax").val(),
+            "entry.344564845": $("#website").val(),
+            "entry.230340604": $("#twitter").val(),
+            "entry.1730928989": $("#opening_hours").val(),
+            "entry.17653642": $("#category").val(),
+            "entry.852232247": latlon.lat,
+            "entry.36050767": latlon.lng,
+            "entry.455393553": $("email").val()
+        }
+    });
 });
