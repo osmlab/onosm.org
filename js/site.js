@@ -79,13 +79,23 @@ $("#collect-data-done").click(function() {
     $("#collect-data-step").hide();
     $("#confirm-step").show();
 
-    var note_body = "onosm.org submitted note from a business: " +
-        "name: " + $("#name").val() +
-        "phone: " + $("#phone").val() +
-        "fax: " + $("#fax").val() +
-        "website: " + $("#website").val() +
-        "category: " + $("#category").val();
-    console.log(note_body);
+    var note_body = "onosm.org submitted note from a business:\n" +
+        "name: " + $("#name").val() + "\n" +
+        "phone: " + $("#phone").val() + "\n" +
+        "fax: " + $("#fax").val() + "\n" +
+        "website: " + $("#website").val() + "\n" +
+        "twitter: " + $("#twitter").val() + "\n" +
+        "hours: " + $("#opening_hours").val() + "\n" +
+        "category: " + $("#category").val(),
+        latlon = findme_marker.getLatLng(),
+        qwarg = {
+            lat: latlon.lat,
+            lon: latlon.lng,
+            text: note_body
+        };
 
-    $("#note-debug").text("I was going to create a note like: " + note_body);
+    console.log({
+        type: "POST",
+        data: qwarg
+    });
 });
