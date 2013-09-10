@@ -15,47 +15,75 @@
         <script src="js/select2.min.js"></script>
     </head>
     <body>
-        <div class='container pad2'>
-            <h2>On OpenStreetMap</h2>
-            <p>Add your business to OpenStreetMap quickly and easily!</p>
+        <div class='container pad2 margin2 col8'>
+            <div class='pad2'>
+                <img src='img/osm.png' class='fl mr' alt='OpenStreetMap' />
+                <h2>On OpenStreetMap</h2>
+                <p>OpenStreetMap is an open, global map used by people around the world
+                to navigate and find local businesses.<br />
+                It's easy and free to get on the map!</p>
+            </div>
 
-            <div class='col6 pad2' id='address-step'>
-                <span id='instructions'>Start by telling us where your business is located.</span>
-                <div class='col10'>
-                    <input class='col12' id='address' placeholder='501 West Main Street, Alexandria, VA' />
+            <div class='col12 on-1 steps clearfix'>
+                <div class='col4 center pad1 step-1'>
+                    <a href='#location'>Location</a>
+                </div>
+                <div class='col4 center pad1 step-2'>
+                    <a>Details</a>
+                </div>
+                <div class='col4 center pad1 step-3'>
+                    <strong>Done</strong>
+                </div>
+            </div>
+
+            <div class='col12' id='address-step'>
+                <div class='center pad2'>
+                    <span id='instructions'>Start by telling us where your business is located.</span>
+                </div>
+                <div class='col12'>
+                    <div class='pad1'>
+                        <form id='find'>
+                            <input class='col8' id='address' placeholder='501 West Main Street, Alexandria, VA' />
+                            <button class='col4' id='findme'>Find Me!</button>
+                        </form>
+                    </div>
+                    <br />
+                    <br />
                     <div class='col12' id='findme-map'></div>
-                    <button class='col12' id='findme'><h4>Find Me!</h4></button>
                     <p id="couldnt-find" style='display: none;'>
                         <strong>We couldn't find your address.</strong> Try searching for your street or city without the address.
                     </p>
                 </div>
             </div>
 
-            <div class='col6 pad2 hide' id='collect-data-step'>
+            <div class='col12 hide' id='collect-data-step'>
                 <p>We found your location. Now tell us about your business.</p>
-                <div class='col10'>
+                <div class='col12'>
                     <div class='clearfix col12'>
                         <label for='category'>Category</label>
-                        <input id='category' data-placeholder='Pick a category...' class='col10'></input>
+                        <input id='category' data-placeholder='Pick a category...' class='col10' />
                     </div>
-                    <label for='name'>Name</label>
-                    <input id='name' type='text' placeholder='ACME Parts'></input>
-                    <label for='phone'>Phone Number</label>
-                    <input id='phone' type='text' placeholder='414-555-1212'></input>
-                    <label for='website'>Website</label>
-                    <input id='website' type='text' placeholder='http://www.example.com/'></input>
-                    <label for='twitter'>Twitter</label>
-                    <input id='twitter' type='text' placeholder='@example'></input>
-                    <label for='opening_hours'>Hours</label>
-                    <input id='opening_hours' type='text' placeholder='Monday-Friday 10am to 8pm'></input>
+                    <div class='col6'>
+                        <label for='name'>Name</label>
+                        <input id='name' type='text' placeholder='ACME Parts' />
+                        <label for='phone'>Phone Number</label>
+                        <input id='phone' type='text' placeholder='414-555-1212' />
+                    </div>
+                    <div>
+                        <label for='website'>Website</label>
+                        <input id='website' type='text' placeholder='http://www.example.com/' />
+                        <label for='twitter'>Twitter</label>
+                        <input id='twitter' type='text' placeholder='@example' />
+                        <label for='opening_hours'>Hours</label>
+                        <input id='opening_hours' type='text' placeholder='Monday-Friday 10am to 8pm' />
+                    </div>
                     <button class='col12' id='collect-data-done'><h4>Done!</h4></button>
                 </div>
             </div>
 
-            <div class='col6 pad2 hide' id='confirm-step'>
+            <div class='col12 pad2 hide' id='confirm-step'>
                 <p>
-                    <strong>Thanks for submitting your information!</strong> An OpenStreetMap volunteer
-                    will add your data to the map soon.
+                    <strong>Thanks!</strong> An OpenStreetMap volunteer will add your data to the map soon.
                 </p>
                 <p>
                     Did you know you can add your own data to the map and skip the wait?

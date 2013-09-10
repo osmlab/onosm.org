@@ -3,6 +3,10 @@ a {
     color:darkred !important;
 }
 
+.fillL {
+    background:#f4f4ff;
+}
+
 #map {
     height:400px;
 }
@@ -35,7 +39,41 @@ a.l {
     font-weight:bold;
 }
 
-h2, p {
-    margin:0;
-    padding:0 20px;
+button {
+    font:inherit;
+}
+
+.done {
+    background:#9ed485;
+    border:0;
+    font-weight:bold;
+}
+
+.on-1 .step-1,
+.on-2 .step-2,
+.on-3 .step-3 {
+    background:#eee;
+}
+
+.steps {
+    border:1px solid #ccc;
+}
+
+.steps div {
+    -webkit-transition:all 500ms ease-in;
+    transition:all 500ms ease-in;
+}
+
+.steps.on-3 div {
+    background:#9ed485;
+}
+
+.steps div a {
+    font-weight:bold;
+    text-decoration:none;
+    color:#000 !important;
+}
+
+.mr {
+    margin-right:10px;
 }
