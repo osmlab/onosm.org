@@ -87,7 +87,7 @@ $("#collect-data-done").click(function() {
         "twitter: " + $("#twitter").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
         "category: " + $("#category").val() + "\n" +
-        "address:" + $("#address").val(),
+        "address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
         qwarg = {
             lat: latlon.lat,
@@ -95,7 +95,5 @@ $("#collect-data-done").click(function() {
             text: note_body
         };
 
-    $.post('http://api.openstreetmap.org/api/0.6/notes.json', {
-        data: qwarg
-    });
+    $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg);
 });
