@@ -82,7 +82,6 @@ $("#collect-data-done").click(function() {
     var note_body = "onosm.org submitted note from a business:\n" +
         "name: " + $("#name").val() + "\n" +
         "phone: " + $("#phone").val() + "\n" +
-        "fax: " + $("#fax").val() + "\n" +
         "website: " + $("#website").val() + "\n" +
         "twitter: " + $("#twitter").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
