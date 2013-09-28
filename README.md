@@ -1,3 +1,3 @@
-# onosm.org
+# su.openstreetmap.it
 
-An easy way to get a business on to OpenStreetMap.
+Un modo veloce di aggiungere una attività commerciale su OpenStreetMap
