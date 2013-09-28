@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>On OpenStreetMap</title>
+        <title>Su OpenStreetMap</title>
         <meta http-equiv='content-type' content='text/html; charset=utf-8' />
         <link rel='stylesheet' type='text/css' href='css/style.css' />
         <link rel='stylesheet' type='text/css' href='css/site.css' />
@@ -18,77 +18,77 @@
         <div class='container pad2 margin2 col8'>
             <div class='pad2'>
                 <img src='img/osm.png' class='fl mr' alt='OpenStreetMap' />
-                <h2>On OpenStreetMap</h2>
-                <p>OpenStreetMap is an open, global map used by people around the world
-                to navigate and find local businesses.<br />
-                It's easy and free to get on the map!</p>
+                <h2>Su OpenStreetMap</h2>
+                <p>OpenStreetMap è una mappa libera e globale usata da persone di tutto il mondo
+		per navigare e cercare attività commerciali del posto.<br />
+                Comparire sulla mappa è facile e gratuito!</p>
             </div>
 
             <div class='col12 on-1 steps clearfix'>
                 <div class='col4 center pad1 step-1'>
-                    <a href='#location'>Location</a>
+                    <a href='#location'>Posizione</a>
                 </div>
                 <div class='col4 center pad1 step-2'>
-                    <a>Details</a>
+                    <a>Dettagli</a>
                 </div>
                 <div class='col4 center pad1 step-3'>
-                    <strong>Done</strong>
+                    <strong>Fatto</strong>
                 </div>
             </div>
 
             <div class='col12' id='address-step'>
                 <div class='center pad2'>
-                    <span id='instructions'>Start by telling us where your business is located.</span>
+                    <span id='instructions'>Inizia col dirci dove è posizionata la tua attività commerciale.</span>
                 </div>
                 <div class='col12'>
                     <div class='pad1'>
                         <form id='find'>
-                            <input class='col8' id='address' placeholder='501 West Main Street, Alexandria, VA' />
-                            <button class='col4' id='findme'>Find Me!</button>
+                            <input class='col8' id='address' placeholder='Viale Brigate Partigiane, Genova' />
+                            <button class='col4' id='findme'>Cercami!</button>
                         </form>
                     </div>
                     <br />
                     <br />
                     <div class='col12' id='findme-map'></div>
                     <p id="couldnt-find" style='display: none;'>
-                        <strong>We couldn't find your address.</strong> Try searching for your street or city without the address.
+                        <strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.
                     </p>
                 </div>
             </div>
 
             <div class='col12 hide' id='collect-data-step'>
-                <p>We found your location. Now tell us about your business.</p>
+                <p>Abbiamo trovato la tua posizione. Adesso descrivi la tua attività.</p>
                 <div class='col12'>
                     <div class='clearfix col12'>
-                        <label for='category'>Category</label>
-                        <input id='category' data-placeholder='Pick a category...' class='col10' />
+                        <label for='category'>Categoria</label>
+                        <input id='category' data-placeholder='Scegli una categoria...' class='col10' />
                     </div>
                     <div class='col6'>
-                        <label for='name'>Name</label>
-                        <input id='name' type='text' placeholder='ACME Parts' />
-                        <label for='phone'>Phone Number</label>
-                        <input id='phone' type='text' placeholder='414-555-1212' />
+                        <label for='name'>Nome</label>
+                        <input id='name' type='text' placeholder='Bar Sport' />
+                        <label for='phone'>Numero di telefono</label>
+                        <input id='phone' type='text' placeholder='+39 0123 456789' />
                     </div>
                     <div>
-                        <label for='website'>Website</label>
+                        <label for='website'>Sito Web</label>
                         <input id='website' type='text' placeholder='http://www.example.com/' />
                         <label for='twitter'>Twitter</label>
                         <input id='twitter' type='text' placeholder='@example' />
-                        <label for='opening_hours'>Hours</label>
-                        <input id='opening_hours' type='text' placeholder='Monday-Friday 10am to 8pm' />
+                        <label for='opening_hours'>Orario di apertura</label>
+                        <input id='opening_hours' type='text' placeholder='Lunedì-Venerdì dalle 10:00 alle 19:00' />
                     </div>
-                    <button class='col12' id='collect-data-done'><h4>Done!</h4></button>
+                    <button class='col12' id='collect-data-done'><h4>Fatto!</h4></button>
                 </div>
             </div>
 
             <div class='col12 pad2 hide' id='confirm-step'>
                 <p>
-                    <strong>Thanks!</strong> An OpenStreetMap volunteer will add your data to the map soon.
+                    <strong>Grazie!</strong> Un volontario di OpenStreetMap presto aggiungerà i tuoi dati sulla mappa.
                 </p>
                 <p>
-                    Did you know you can add your own data to the map and skip the wait?
-                    It's very easy to get started <a href="http://openstreetmap.org/edit">editing OSM</a>
-                    in your browser.
+                    Lo sapevi che puoi aggiungere i tuoi dati direttamente sulla mappa senza aspettare?
+                    E' facile iniziare a <a href="http://openstreetmap.org/edit">modificare OSM</a>
+                    nel tuo browser.
                 </p>
             </div>
         </div>
