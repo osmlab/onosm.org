@@ -10,8 +10,11 @@ findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
 
-$.ajax('./categories.json').success(function(data){
+$.getJSON('./categories.json').success(function(data){
+
     category_data = data;
+
+console.log(category_data);
 });
 
 $("#category").select2({
@@ -86,7 +89,7 @@ $(window).on('hashchange', function() {
 $("#collect-data-done").click(function() {
     location.hash = '#done';
 
-    var note_body = "SuOsm ha inviato una nota da una attività commerciale:\n" +
+    var note_body = "su.openstreetmap.it ha inviato una nota da una attività commerciale:\n" +
         "nome: " + $("#name").val() + "\n" +
         "telefono: " + $("#phone").val() + "\n" +
         "sito web: " + $("#website").val() + "\n" +
