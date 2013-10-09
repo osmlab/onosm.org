@@ -8,13 +8,11 @@ var findme_map = L.map('findme-map')
 var findme_marker = L.marker([41.69, 12.71], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
+
 if (location.hash) location.hash = '';
 
 $.getJSON('./categories.json').success(function(data){
-
     category_data = data;
-
-console.log(category_data);
 });
 
 $("#category").select2({
@@ -29,6 +27,7 @@ $("#category").select2({
     }
 });
 
+/* search action */
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
@@ -62,6 +61,14 @@ $("#find").submit(function(e) {
         }
         $("#findme").removeClass("loading");
     });
+});
+
+/* map action */
+findme_map.on('click', function(e){ 
+findme_marker.setOpacity(1);
+findme_marker.setLatLng(e.latlng); 
+$('#instructions').html('Hai attivato l\'indicatore! Cliccalo e trascinalo sulla posizione della tua attività commerciale, così sarai pronto/a a <a href="#details">aggiungere dettagli alla tua scheda</a>.');
+$('.step-2 a').attr('href', '#details');
 });
 
 $(window).on('hashchange', function() {
