@@ -97,13 +97,14 @@ $("#collect-data-done").click(function() {
     location.hash = '#done';
 
     var note_body = "su.openstreetmap.it ha inviato una nota da una attività commerciale:\n" +
-        "nome: " + $("#name").val() + "\n" +
-        "telefono: " + $("#phone").val() + "\n" +
-        "sito web: " + $("#website").val() + "\n" +
-        "twitter: " + $("#twitter").val() + "\n" +
-        "orario di apertura: " + $("#opening_hours").val() + "\n" +
-        "categoria: " + $("#category").val() + "\n" +
-        "indirizzo: " + $("#address").val(),
+        "Nome: " + $("#name").val() + "\n" +
+        "Telefono: " + $("#phone").val() + "\n" +
+        "Sito web: " + $("#website").val() + "\n" +
+        "Twitter: " + $("#twitter").val() + "\n" +
+        "Orario di apertura: " + $("#opening_hours").val() + "\n" +
+        "Categoria: " + $("#category").val() + "\n" +
+        "Descrizione: " + $("#categoryalt").val() + "\n" +
+        "Indirizzo: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
         qwarg = {
             lat: latlon.lat,
