@@ -96,17 +96,17 @@ $(window).on('hashchange', function() {
 $("#collect-data-done").click(function() {
     location.hash = '#done';
 
-    var note_body = "su.openstreetmap.it ha inviato una nota da una attività commerciale:\n" +
-        "Nome: " + $("#name").val() + "\n" +
-        "Telefono: " + $("#phone").val() + "\n" +
-        "Sito web: " + $("#website").val() + "\n" +
-        "Twitter: " + $("#twitter").val() + "\n" +
-        "Orario di apertura: " + $("#opening_hours").val() + "\n" +
-        "Categoria: " + $("#category").val() + "\n" +
-        "Descrizione: " + $("#categoryalt").val() + "\n" +
-        "Indirizzo: " + $("#address").val(),
-        latlon = findme_marker.getLatLng(),
-        qwarg = {
+    var note_body = "E' stata inviata una nota tramite su.openstreetmap.it:\n";
+	if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
+        if ($("#phone").val()) note_body += "Telefono: " + $("#phone").val() + "\n";
+        if ($("#phone").val()) note_body += "Sito web: " + $("#website").val() + "\n";
+        if ($("#twitter").val()) note_body += "Twitter: " + $("#twitter").val() + "\n";
+        if ($("#opening_hours").val()) note_body += "Orario di apertura: " + $("#opening_hours").val() + "\n";
+        if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
+        if ($("#categoryalt").val()) note_body += "Descrizione: " + $("#categoryalt").val() + "\n";
+        if ($("#address").val()) note_body += "Indirizzo: " + $("#address").val();
+    var latlon = findme_marker.getLatLng();
+    var qwarg = {
             lat: latlon.lat,
             lon: latlon.lng,
             text: note_body
