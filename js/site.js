@@ -4,6 +4,7 @@ var findme_map = L.map('findme-map')
     osmAttrib = 'Dati © OpenStreetMap contributors',
     osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
+var	payment_data = [];
 
 var findme_marker = L.marker([41.69, 12.71], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
@@ -14,6 +15,11 @@ if (location.hash) location.hash = '';
 $.getJSON('./categories.json').success(function(data){
     category_data = data;
 });
+
+$.getJSON('./payment.json').success(function(data){
+    payment_data = data;
+});
+
 
 $("#category").select2({
     query: function (query) {
@@ -26,6 +32,36 @@ $("#category").select2({
         query.callback(data);
     }
 });
+
+$("#payment").select2({
+    multiple:true,
+    query:function(query) {
+        var data={results:[]}, 
+            results=data.results, 
+            t=query.term;
+        if (t!==""&&payment_data.indexOf(t)<0) {
+            results.push({id:t, text:t});
+        }
+        
+        $(payment_data)
+         .filter(function() { return t===""||this.indexOf(t)>=0; })
+         .each(function() { results.push({id:this, text:this}); });
+
+        query.callback(data);
+    }
+});
+   /*
+$("#payment").select2({
+    query: function (query) {
+        var data = {results: []}, i;
+        for (i = 0; i < payment_data.length; i++) {
+            if (query.term.length === 0 || payment_data[i].toLowerCase().indexOf(query.term.toLowerCase()) >= 0) {
+                data.results.push({id: payment_data[i], text: payment_data[i]});
+            }
+        }
+        query.callback(data);
+    }
+});*/
 
 /* search action */
 $("#find").submit(function(e) {
@@ -147,7 +183,7 @@ $("#collect-data-done").click(function() {
 	if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
         if ($("#phone").val()) note_body += "Telefono: " + $("#phone").val() + "\n";
         if ($("#phone").val()) note_body += "Sito web: " + $("#website").val() + "\n";
-        if ($("#twitter").val()) note_body += "Twitter: " + $("#twitter").val() + "\n";
+        if ($("#social").val()) note_body += "Social Network: " + $("#social").val() + "\n";
         if ($("#opening_hours").val()) note_body += "Orario di apertura: " + $("#opening_hours").val() + "\n";
         if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
         if ($("#categoryalt").val()) note_body += "Descrizione: " + $("#categoryalt").val() + "\n";

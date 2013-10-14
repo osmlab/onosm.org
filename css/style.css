@@ -197,7 +197,8 @@ label {
   }
 select,
 textarea,
-input[type=text] {
+input[type=text],
+div.select2-container {
   display:inline-block;
   height:30px;
   width:95%;
