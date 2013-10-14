@@ -33,15 +33,50 @@ $("#find").submit(function(e) {
     $("#couldnt-find").hide();
     var address_to_find = $("#address").val();
     if (address_to_find.length === 0) return;
-    var qwarg = {
+    
+    /* NOMINATIM PARAM */
+    var qwarg_nominatim = {
         format: 'json',
         q: address_to_find
     };
-    var url = "http://nominatim.openstreetmap.org/search?" + $.param(qwarg);
+    var url_nominatim = "http://nominatim.openstreetmap.org/search?" + $.param(qwarg_nominatim);
+    
+    /* SOLR TEST SERVER */
+    var qwarg_solr = {
+        wt: 'json',
+        indent: 'true',
+        qt: 'italian',
+        q: address_to_find
+    };
+    var url_solr = "http://95.240.35.64:8080/solr-example/collection1/select?" + $.param(qwarg_solr);
+    
+    var instance='nominatim';
+    
     $("#findme h4").text("Sto cercando...");
     $("#findme").addClass("loading");
-    $.getJSON(url, function(data) {
-        if (data.length > 0) {
+	
+	if (instance=='nominatim')
+	{
+		$.ajax({
+		  'url': url_nominatim,
+		  'success': nominatim_callback,
+		  'dataType': 'jsonp',
+		  'jsonp': 'json_callback'
+		});
+	}
+	else
+	{
+		$.ajax({
+		  'url': url_solr,
+		  'success': solr_callback,
+		  'dataType': 'jsonp',
+		  'jsonp': 'json.wrf'
+		});	
+	}
+});
+
+function nominatim_callback(data){
+	if (data.length > 0) {
             var chosen_place = data[0];
             console.log(chosen_place);
 
@@ -50,18 +85,30 @@ $("#find").submit(function(e) {
                 [+chosen_place.boundingbox[1], +chosen_place.boundingbox[3]]);
 
             findme_map.fitBounds(bounds);
-
             findme_marker.setOpacity(1);
             findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
-
             $('#instructions').html('Trovato! Clicca e trascina l\'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a a <a href="#details">aggiungere dettagli alla tua scheda</a>.');
             $('.step-2 a').attr('href', '#details');
-        } else {
+    }	else {
             $('#instructions').html('<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.');
         }
-        $("#findme").removeClass("loading");
-    });
-});
+    $("#findme").removeClass("loading");
+}
+
+function solr_callback(data){
+	if (data.response.docs.length > 0) {
+	    var docs=data.response.docs;
+		var coords=docs[0].coordinate.split(',');
+            findme_marker.setOpacity(1);
+            findme_marker.setLatLng([coords[0], coords[1]]);
+			findme_map.setView([coords[0], coords[1]],16);
+            $('#instructions').html('Trovato! Clicca e trascina l\'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a a <a href="#details">aggiungere dettagli alla tua scheda</a>.');
+            $('.step-2 a').attr('href', '#details');
+    }   else {
+            $('#instructions').html('<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.');
+        }
+	$("#findme").removeClass("loading");
+}
 
 /* map action */
 findme_map.on('click', function(e){ 
