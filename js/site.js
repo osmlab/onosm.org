@@ -188,6 +188,7 @@ $("#collect-data-done").click(function() {
         if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
         if ($("#categoryalt").val()) note_body += "Descrizione: " + $("#categoryalt").val() + "\n";
         if ($("#address").val()) note_body += "Indirizzo: " + $("#address").val();
+        if ($("#payment").val()) note_body += "Tipologie di pagamento accettate: " + $("#payment").val() + "\n";
     var latlon = findme_marker.getLatLng();
     var qwarg = {
             lat: latlon.lat,
