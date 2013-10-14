@@ -50,18 +50,6 @@ $("#payment").select2({
         query.callback(data);
     }
 });
-   /*
-$("#payment").select2({
-    query: function (query) {
-        var data = {results: []}, i;
-        for (i = 0; i < payment_data.length; i++) {
-            if (query.term.length === 0 || payment_data[i].toLowerCase().indexOf(query.term.toLowerCase()) >= 0) {
-                data.results.push({id: payment_data[i], text: payment_data[i]});
-            }
-        }
-        query.callback(data);
-    }
-});*/
 
 /* search action */
 $("#find").submit(function(e) {
@@ -182,7 +170,7 @@ $("#collect-data-done").click(function() {
     var note_body = "E' stata inviata una nota tramite su.openstreetmap.it:\n";
 	if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
         if ($("#phone").val()) note_body += "Telefono: " + $("#phone").val() + "\n";
-        if ($("#phone").val()) note_body += "Sito web: " + $("#website").val() + "\n";
+        if ($("#website").val()) note_body += "Sito web: " + $("#website").val() + "\n";
         if ($("#social").val()) note_body += "Social Network: " + $("#social").val() + "\n";
         if ($("#opening_hours").val()) note_body += "Orario di apertura: " + $("#opening_hours").val() + "\n";
         if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
