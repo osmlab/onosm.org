@@ -168,7 +168,7 @@ $("#collect-data-done").click(function() {
     location.hash = '#done';
 
     var note_body = "E' stata inviata una nota tramite su.openstreetmap.it:\n";
-	if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
+		if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
         if ($("#phone").val()) note_body += "Telefono: " + $("#phone").val() + "\n";
         if ($("#website").val()) note_body += "Sito web: " + $("#website").val() + "\n";
         if ($("#social").val()) note_body += "Social Network: " + $("#social").val() + "\n";
@@ -184,5 +184,24 @@ $("#collect-data-done").click(function() {
             text: note_body
         };
 
-    $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg);
+    $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
+		console.log( data );
+		var noteId=data['properties']['id'];
+		var link='http://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
+	  	$("#linkcoords").val('<a href="'+link+'">'+link+'</a>');
+	});
+	
+
 });
+
+function clearFields(){
+	$("#name").empty();
+	$("#phone").empty();
+	$("#website").empty();
+	$("#social").empty();
+	$("#opening_hours").empty();
+	$("#category").empty();
+	$("#categoryalt").empty();
+	$("#address").empty();
+	$("#payment").empty();
+}
