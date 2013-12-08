@@ -9,6 +9,10 @@ var	payment_data = [];
 var findme_marker = L.marker([41.69, 12.71], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
+ L.control.locate({
+  follow: true
+}).addTo(findme_map);
+
 
 if (location.hash) location.hash = '';
 
