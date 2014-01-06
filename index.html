@@ -76,7 +76,7 @@
                 <div class='col12'>
                     <div class='clearfix col12'>
                         <label for='category'>Categoria</label>
-                        <input id='category' data-placeholder='Scegli una categoria...' class='col10' />
+                    <input id='category' data-placeholder='Scegli una categoria...' class='col10' />
                     </div>
                     <div class='clearfix col12'>
                         <label for='categoryalt'>Se non trovi una categoria che fa al caso tuo, aggiungi altri dettagli qua sotto</label>
@@ -88,9 +88,18 @@
                         <label for='phone'>Numero di telefono</label>
                         <input id='phone' type='text' placeholder='+39 0123 456789' />
                         <label for='opening_hours'>Orario di apertura</label>
-                        <input id='opening_hours' type='text' placeholder='Lunedì-Venerdì dalle 10:00 alle 19:00' />						
+                        <input id='opening_hours' type='text' placeholder='Lunedì-Venerdì dalle 10:00 alle 19:00' />
+                        <label for='wheel'>Accessibilità in carrozzina</label>
+                        <select id="wheel">
+                            <option value="yes">Accessibile senza problemi</option>                            
+                            <option value="limited">Parzialmente accessibile</option>                            
+                            <option value="no">Non accessibile</option>
+                            <option value="unknown">sconosciuta</option>
+                        </select>
+                        						
                     </div>
                     <div class='col6'>
+                        <div style="height:65px;">&nbsp;</div>
                         <label for='website'>Sito Web</label>
                         <input id='website' type='text' placeholder='http://www.example.com/' />
                         <label for='social'>Social Network</label>

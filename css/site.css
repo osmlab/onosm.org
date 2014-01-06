@@ -2,7 +2,7 @@ a {
     text-decoration:underline;
     color:darkred !important;
 }
-
+.select2-container a span {color:black !important;}
 .fillL {
     background:#f4f4ff;
 }

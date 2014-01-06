@@ -55,6 +55,8 @@ $("#payment").select2({
     }
 });
 
+$("#wheel").select2({placeholder:"Seleziona una opzione"});
+
 /* search action */
 $("#find").submit(function(e) {
     e.preventDefault();
@@ -177,6 +179,7 @@ $("#collect-data-done").click(function() {
         if ($("#website").val()) note_body += "Sito web: " + $("#website").val() + "\n";
         if ($("#social").val()) note_body += "Social Network: " + $("#social").val() + "\n";
         if ($("#opening_hours").val()) note_body += "Orario di apertura: " + $("#opening_hours").val() + "\n";
+        if ($("#wheel").val()) note_body += "Accessibilità in carrozzina: " + $("#wheel").val() + "\n";
         if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
         if ($("#categoryalt").val()) note_body += "Descrizione: " + $("#categoryalt").val() + "\n";
         if ($("#address").val()) note_body += "Indirizzo: " + $("#address").val() + "\n";
@@ -187,14 +190,13 @@ $("#collect-data-done").click(function() {
             lon: latlon.lng,
             text: note_body
         };
-
+        
     $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
 		console.log( data );
 		var noteId=data['properties']['id'];
 		var link='http://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
 	  	$("#linkcoords").val('<a href="'+link+'">'+link+'</a>');
 	});
-	
 
 });
 
@@ -208,4 +210,5 @@ function clearFields(){
 	$("#categoryalt").empty();
 	$("#address").empty();
 	$("#payment").empty();
+	$("#wheel").empty();
 }
