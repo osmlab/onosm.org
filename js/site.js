@@ -179,7 +179,7 @@ $("#collect-data-done").click(function() {
         if ($("#website").val()) note_body += "Sito web: " + $("#website").val() + "\n";
         if ($("#social").val()) note_body += "Social Network: " + $("#social").val() + "\n";
         if ($("#opening_hours").val()) note_body += "Orario di apertura: " + $("#opening_hours").val() + "\n";
-        if ($("#wheel").val()) note_body += "Accessibilità in carrozzina: " + $("#wheel").val() + "\n";
+        if ($("#wheel").val()) note_body += "Accessibilità in sedia a rotelle: " + $("#wheel").val() + "\n";
         if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
         if ($("#categoryalt").val()) note_body += "Descrizione: " + $("#categoryalt").val() + "\n";
         if ($("#address").val()) note_body += "Indirizzo: " + $("#address").val() + "\n";
