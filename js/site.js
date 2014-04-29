@@ -195,7 +195,7 @@ $("#collect-data-done").click(function() {
 		console.log( data );
 		var noteId=data['properties']['id'];
 		var link='http://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
-	  	$("#linkcoords").val('<a href="'+link+'">'+link+'</a>');
+	  	$("#linkcoords").append('<a href="'+link+'">'+link+'</a>');
 	});
 
 });
@@ -211,4 +211,5 @@ function clearFields(){
 	$("#address").empty();
 	$("#payment").empty();
 	$("#wheel").empty();
+	$("#linkcoords").empty();
 }
