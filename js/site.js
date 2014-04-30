@@ -40,16 +40,12 @@ $("#category").select2({
 $("#payment").select2({
     multiple:true,
     query:function(query) {
-        var data={results:[]}, 
-            results=data.results, 
-            t=query.term;
-        if (t!==""&&payment_data.indexOf(t)<0) {
-            results.push({id:t, text:t});
+        var data={results:[]},i;
+        for (i = 0; i < payment_data.length; i++) {
+            if (query.term.length === 0 || payment_data[i].toLowerCase().indexOf(query.term.toLowerCase()) >= 0) {
+                data.results.push({id: payment_data[i], text: payment_data[i]});
+            }
         }
-        
-        $(payment_data)
-         .filter(function() { return t===""||this.indexOf(t)>=0; })
-         .each(function() { results.push({id:this, text:this}); });
 
         query.callback(data);
     }
