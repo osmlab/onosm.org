@@ -51,7 +51,16 @@ $("#payment").select2({
     }
 });
 
-$("#wheel").select2({placeholder:"Seleziona una opzione"});
+$("#wheel").select2({
+    data: [
+        {id: 'yes', text: 'Completamente accessibile'},
+        {id: 'limited', text: 'Parzialmente accessibile'},
+        {id: 'no', text: 'Non accessibile'},
+        {id: 'designated', text: 'Non accessibile, ma in progetto'},
+        {id: 'unknown', text: 'Livello di accessibilità sconosciuto'}
+    ],
+    width: '85%'
+});
 
 /* search action */
 $("#find").submit(function(e) {

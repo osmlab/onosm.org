@@ -8,6 +8,7 @@
         <link rel='stylesheet' type='text/css' href='css/select2.css' />
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
         <link rel="stylesheet" href="css/L.Control.Locate.css" />
+        <link rel="stylesheet" href="css/qtip.css" />
 
         <!--[if lt IE 9]>
          <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.ie.css" />
@@ -16,7 +17,8 @@
 
         <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
         <script src="js/L.Control.Locate.js" ></script>
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>        
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
         <script src="js/select2.min.js"></script>
         <script src="js/select2_locale_it.js"></script>
         
@@ -90,12 +92,12 @@
                         <label for='opening_hours'>Orario di apertura</label>
                         <input id='opening_hours' type='text' placeholder='Lunedì-Venerdì dalle 10:00 alle 19:00' />
                         <label for='wheel'>Accessibilità in sedia a rotelle</label>
-                        <select id="wheel">
-                            <option value="yes">Accessibile senza problemi</option>                            
-                            <option value="limited">Parzialmente accessibile</option>                            
-                            <option value="no">Non accessibile</option>
-                            <option value="unknown">sconosciuta</option>
-                        </select>
+                        <input id='wheel' data-placeholder='Seleziona una opzione' />
+                        <span>
+                            <a class='' href='#details' rel='modal'>
+                                <img src='img/help.png' alt="Maggiori informazioni sull'accessibilità in sedia a rotelle" />
+                            </a>
+                        </span>
                         						
                     </div>
                     <div class='col6'>
@@ -105,9 +107,9 @@
                         <label for='social'>Social Network</label>
                         <input id='social' type='text' placeholder='@OpenStreetMapIt oppure https://www.facebook.com/OpenStreetMap.Italia' />
                         <label for='payment'>Modalità di pagamento accettate</label>
-						<input type='hidden' id='payment'/>
+						<input id='payment' placeholder="Clicca qui per le opzioni"/>
                     </div>
-                    <button class='col12' id='collect-data-done'><h4>Fatto!</h4></button>
+                    <h4><button class='col12' id='collect-data-done'>Fatto!</button></h4>
                 </div>
             </div>
 
@@ -129,5 +131,7 @@
             </div>
         </div>
         <script src='js/site.js'></script>
+        <script src="js/jquery.qtip-1.0.0-rc3.min.js"></script>
+        <script src="js/qtip-wheelchair.js"></script>
     </body>
 </html>
