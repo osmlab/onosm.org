@@ -56,7 +56,6 @@ $("#wheel").select2({
         {id: 'yes', text: 'Completamente accessibile'},
         {id: 'limited', text: 'Parzialmente accessibile'},
         {id: 'no', text: 'Non accessibile'},
-        {id: 'designated', text: 'Non accessibile, ma in progetto'},
         {id: 'unknown', text: 'Livello di accessibilità sconosciuto'}
     ],
     width: '85%'
