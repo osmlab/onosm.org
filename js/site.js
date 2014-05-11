@@ -113,7 +113,7 @@ $("#find").submit(function(e) {
 function nominatim_callback(data){
 	if (data.length > 0) {
             var chosen_place = data[0];
-            console.log(chosen_place);
+           // console.log(chosen_place);
 
             var bounds = new L.LatLngBounds(
                 [+chosen_place.boundingbox[0], +chosen_place.boundingbox[2]],
@@ -124,6 +124,7 @@ function nominatim_callback(data){
             findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
             $('#instructions').html('Trovato! Clicca e trascina l\'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a a <a href="#details">aggiungere dettagli alla tua scheda</a>.');
             $('.step-2 a').attr('href', '#details');
+            $('#addressalt').val(chosen_place.display_name);
     }	else {
             $('#instructions').html('<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.');
         }
@@ -179,7 +180,7 @@ $("#collect-data-done").click(function() {
     location.hash = '#done';
 
     var note_body = "E' stata inviata una nota tramite su.openstreetmap.it:\n";
-		if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
+	if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
         if ($("#phone").val()) note_body += "Telefono: " + $("#phone").val() + "\n";
         if ($("#website").val()) note_body += "Sito web: " + $("#website").val() + "\n";
         if ($("#social").val()) note_body += "Social Network: " + $("#social").val() + "\n";
@@ -187,7 +188,7 @@ $("#collect-data-done").click(function() {
         if ($("#wheel").val()) note_body += "Accessibilità in sedia a rotelle: " + $("#wheel").val() + "\n";
         if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
         if ($("#categoryalt").val()) note_body += "Descrizione: " + $("#categoryalt").val() + "\n";
-        if ($("#address").val()) note_body += "Indirizzo: " + $("#address").val() + "\n";
+        if ($("#addressalt").val()) note_body += "Indirizzo: " + $("#addressalt").val() + "\n";
         if ($("#payment").val()) note_body += "Tipologie di pagamento accettate: " + $("#payment").val() + "\n";
     var latlon = findme_marker.getLatLng();
     var qwarg = {
