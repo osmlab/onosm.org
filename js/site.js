@@ -1,10 +1,28 @@
+/*select language to use*/
+var onOSMlang='it';
+
+var successString,manualPosition,loadingText,modalText;
+
+i18n.init({ lng: onOSMlang, fallbackLng: 'it', postAsync: 'false' }, function() {
+    $("body").i18n();
+
+    successString=i18n.t('messages.success', { escapeInterpolation: false });
+    manualPosition=i18n.t('messages.manualPosition', { escapeInterpolation: false });
+    loadingText=i18n.t('messages.loadingText');
+    modalText={};
+    modalText.text=i18n.t('messages.modalTitle');
+    modalText.button=i18n.t('messages.modalButton');
+  });
+
+/* HERE BE DRAGONS */
 var findme_map = L.map('findme-map')
     .setView([41.69, 12.71], 5),
     osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    osmAttrib = 'Dati © OpenStreetMap contributors',
-    osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: osmAttrib}).addTo(findme_map),
-    category_data = [];
-var	payment_data = [];
+    osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: "Data © OpenStreetMap contributors"}).addTo(findme_map);
+
+var category_data = [];
+var payment_data = [];
+var wheel_data = [];
 
 var findme_marker = L.marker([41.69, 12.71], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
@@ -16,12 +34,16 @@ findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
 
-$.getJSON('./categories.json').success(function(data){
+$.getJSON('./locales/'+onOSMlang+'/categories.json').success(function(data){
     category_data = data;
 });
 
-$.getJSON('./payment.json').success(function(data){
+$.getJSON('./locales/'+onOSMlang+'/payment.json').success(function(data){
     payment_data = data;
+});
+
+$.getJSON('./locales/'+onOSMlang+'/wheelchair.json').success(function(data){
+    wheel_data = data;
 });
 
 
@@ -46,20 +68,18 @@ $("#payment").select2({
                 data.results.push({id: payment_data[i], text: payment_data[i]});
             }
         }
-
         query.callback(data);
     }
 });
 
 $("#wheel").select2({
-    data: [
-        {id: 'yes', text: 'Completamente accessibile'},
-        {id: 'limited', text: 'Parzialmente accessibile'},
-        {id: 'no', text: 'Non accessibile'},
-        {id: 'unknown', text: 'Livello di accessibilità sconosciuto'}
-    ],
-    width: '85%'
+    query: function (query) {
+        var data = {results: []}, i;
+        data.results=wheel_data;
+        query.callback(data);
+    }
 });
+
 
 /* search action */
 $("#find").submit(function(e) {
@@ -74,45 +94,24 @@ $("#find").submit(function(e) {
         q: address_to_find
     };
     var url_nominatim = "http://nominatim.openstreetmap.org/search?" + $.param(qwarg_nominatim);
+
     
-    /* SOLR TEST SERVER */
-    var qwarg_solr = {
-        wt: 'json',
-        indent: 'true',
-        qt: 'italian',
-        q: address_to_find
-    };
-    var url_solr = "http://95.240.35.64:8080/solr-example/collection1/select?" + $.param(qwarg_solr);
-    
-    var instance='nominatim';
-    
-    $("#findme h4").text("Sto cercando...");
+    $("#findme h4").text(loadingText);
     $("#findme").addClass("loading");
-	
-	if (instance=='nominatim')
-	{
-		$.ajax({
-		  'url': url_nominatim,
-		  'success': nominatim_callback,
-		  'dataType': 'jsonp',
-		  'jsonp': 'json_callback'
-		});
-	}
-	else
-	{
-		$.ajax({
-		  'url': url_solr,
-		  'success': solr_callback,
-		  'dataType': 'jsonp',
-		  'jsonp': 'json.wrf'
-		});	
-	}
+    
+
+        $.ajax({
+          'url': url_nominatim,
+          'success': nominatim_callback,
+          'dataType': 'jsonp',
+          'jsonp': 'json_callback'
+        });
+
 });
 
 function nominatim_callback(data){
-	if (data.length > 0) {
+    if (data.length > 0) {
             var chosen_place = data[0];
-           // console.log(chosen_place);
 
             var bounds = new L.LatLngBounds(
                 [+chosen_place.boundingbox[0], +chosen_place.boundingbox[2]],
@@ -121,35 +120,35 @@ function nominatim_callback(data){
             findme_map.fitBounds(bounds);
             findme_marker.setOpacity(1);
             findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
-            $('#instructions').html('Trovato! Clicca e trascina l\'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a a <a href="#details">aggiungere dettagli alla tua scheda</a>.');
+            $('#instructions').html(successString);
             $('.step-2 a').attr('href', '#details');
             $('#addressalt').val(chosen_place.display_name);
-    }	else {
-            $('#instructions').html('<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.');
+    }    else {
+            $("#couldnt-find").show();   
         }
     $("#findme").removeClass("loading");
 }
 
 function solr_callback(data){
-	if (data.response.docs.length > 0) {
-	    var docs=data.response.docs;
-		var coords=docs[0].coordinate.split(',');
+    if (data.response.docs.length > 0) {
+        var docs=data.response.docs;
+        var coords=docs[0].coordinate.split(',');
             findme_marker.setOpacity(1);
             findme_marker.setLatLng([coords[0], coords[1]]);
-			findme_map.setView([coords[0], coords[1]],16);
-            $('#instructions').html('Trovato! Clicca e trascina l\'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a a <a href="#details">aggiungere dettagli alla tua scheda</a>.');
+            findme_map.setView([coords[0], coords[1]],16);
+            $('#instructions').html(successString);
             $('.step-2 a').attr('href', '#details');
     }   else {
-            $('#instructions').html('<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.');
+            $("#couldnt-find").show();
         }
-	$("#findme").removeClass("loading");
+    $("#findme").removeClass("loading");
 }
 
 /* map action */
 findme_map.on('click', function(e){ 
 findme_marker.setOpacity(1);
 findme_marker.setLatLng(e.latlng); 
-$('#instructions').html('Hai attivato l\'indicatore! Cliccalo e trascinalo sulla posizione della tua attività commerciale, così sarai pronto/a a <a href="#details">aggiungere dettagli alla tua scheda</a>.');
+$('#instructions').html(manualPosition);
 $('.step-2 a').attr('href', '#details');
 });
 
@@ -179,42 +178,109 @@ $("#collect-data-done").click(function() {
     location.hash = '#done';
 
     var note_body = "E' stata inviata una nota tramite su.openstreetmap.it:\n";
-	if ($("#name").val()) note_body += "Nome: " + $("#name").val() + "\n";
-        if ($("#phone").val()) note_body += "Telefono: " + $("#phone").val() + "\n";
-        if ($("#website").val()) note_body += "Sito web: " + $("#website").val() + "\n";
-        if ($("#social").val()) note_body += "Social Network: " + $("#social").val() + "\n";
-        if ($("#opening_hours").val()) note_body += "Orario di apertura: " + $("#opening_hours").val() + "\n";
-        if ($("#wheel").val()) note_body += "Accessibilità in sedia a rotelle: " + $("#wheel").val() + "\n";
-        if ($("#category").val()) note_body += "Categoria: " + $("#category").val() + "\n";
-        if ($("#categoryalt").val()) note_body += "Descrizione: " + $("#categoryalt").val() + "\n";
-        if ($("#addressalt").val()) note_body += "Indirizzo: " + $("#addressalt").val() + "\n";
-        if ($("#payment").val()) note_body += "Tipologie di pagamento accettate: " + $("#payment").val() + "\n";
+        if ($("#name").val()) note_body += i18n.t('step2.name')+": " + $("#name").val() + "\n";
+        if ($("#phone").val()) note_body += i18n.t('step2.phone')+": " + $("#phone").val() + "\n";
+        if ($("#website").val()) note_body += i18n.t('step2.website')+": " + $("#website").val() + "\n";
+        if ($("#social").val()) note_body += i18n.t('step2.social')+": " + $("#social").val() + "\n";
+        if ($("#opening_hours").val()) note_body += i18n.t('step2.opening')+": " + $("#opening_hours").val() + "\n";
+        if ($("#wheel").val()) note_body += i18n.t('step2.wheel')+": " + $("#wheel").val() + "\n";
+        if ($("#category").val()) note_body += i18n.t('step2.catlabel')+": " + $("#category").val() + "\n";
+        if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc')+": " + $("#categoryalt").val() + "\n";
+        if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + "\n";
+        if ($("#payment").val()) note_body += i18n.t('step2.payment')+": " + $("#payment").val() + "\n";
     var latlon = findme_marker.getLatLng();
     var qwarg = {
             lat: latlon.lat,
             lon: latlon.lng,
             text: note_body
         };
-        
-    $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
-		console.log( data );
-		var noteId=data['properties']['id'];
-		var link='http://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
-	  	$("#linkcoords").append('<a href="'+link+'">'+link+'</a>');
-	});
 
+    $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
+        console.log( data );
+        var noteId=data['properties']['id'];
+        var link='http://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
+          $("#linkcoords").append('<a href="'+link+'">'+link+'</a>');
+    });
 });
 
 function clearFields(){
-	$("#name").empty();
-	$("#phone").empty();
-	$("#website").empty();
-	$("#social").empty();
-	$("#opening_hours").empty();
-	$("#category").empty();
-	$("#categoryalt").empty();
-	$("#address").empty();
-	$("#payment").empty();
-	$("#wheel").empty();
-	$("#linkcoords").empty();
+    $("#name").empty();
+    $("#phone").empty();
+    $("#website").empty();
+    $("#social").empty();
+    $("#opening_hours").empty();
+    $("#category").empty();
+    $("#categoryalt").empty();
+    $("#address").empty();
+    $("#payment").empty();
+    $("#wheel").empty();
+    $("#linkcoords").empty();
 }
+
+
+/*
+ * WHEELCHAIR
+ * Extended of example from http://craigsworks.com/projects/qtip/demos/effects/modal
+ */
+$(document).ready(function()
+{   
+   $.get('./locales/'+onOSMlang+'/wheelchair.html', function(data) {
+
+      $('a[rel="modal"]:first').qtip(
+      {
+         content: {
+            title: modalText,
+            text: data
+         },
+         position: {
+            target: $(document.body), // Position it via the document body...
+            corner: 'center' // ...at the center of the viewport
+         },
+         show: {
+            when: 'click', // Show it on click
+            solo: true // And hide all other tooltips
+         },
+         hide: false,
+         style: {
+            width: { max: 650 },
+            padding: '14px',
+            border: {
+               width: 9,
+               radius: 9,
+               color: '#666666'
+            },
+            name: 'light'
+         },
+         api: {
+            beforeShow: function()
+            {
+               // Fade in the modal "blanket" using the defined show speed
+               $('#qtip-blanket').fadeIn(this.options.show.effect.length);
+            },
+            beforeHide: function()
+            {
+               // Fade out the modal "blanket" using the defined hide speed
+               $('#qtip-blanket').fadeOut(this.options.hide.effect.length);
+            }
+         }
+      });
+   
+   });
+
+   // Create the modal backdrop on document load so all modal tooltips can use it
+   $('<div id="qtip-blanket">')
+      .css({
+         position: 'absolute',
+         top: $(document).scrollTop(), // Use document scrollTop so it's on-screen even if the window is scrolled
+         left: 0,
+         height: $(document).height(), // Span the full document height...
+         width: '100%', // ...and full width
+
+         opacity: 0.7, // Make it slightly transparent
+         backgroundColor: 'black',
+         zIndex: 5000  // Make sure the zIndex is below 6000 to keep it below tooltips!
+      })
+      .appendTo(document.body) // Append to the document body
+      .hide(); // Hide it initially
+
+});

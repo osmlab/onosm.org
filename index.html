@@ -17,125 +17,112 @@
 
         <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
         <script src="js/L.Control.Locate.js" ></script>
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>        
-        <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script src="js/select2.min.js"></script>
         <script src="js/select2_locale_it.js"></script>
+        <script src="js/i18next-1.7.4.min.js"></script>
         
-	 <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	
-	  ga('create', 'UA-8962766-1', 'openstreetmap.it');
-	  ga('send', 'pageview');
-	</script>
+     <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-8962766-1', 'openstreetmap.it');
+      ga('send', 'pageview');
+    </script>
     </head>
     <body>
         <div class='container pad2 margin2 col8'>
             <div class='pad2'>
                 <img src='img/osm.png' class='fl mr' alt='OpenStreetMap' />
-                <h2>Su OpenStreetMap</h2>
-                <p>OpenStreetMap è una mappa libera e globale usata da persone di tutto il mondo
-		per navigare e cercare attività commerciali del posto. Comparire sulla mappa è facile e gratuito!</p>
+                <h2 data-i18n="app.title"></h2>
+                <p  data-i18n="app.desc"></p>
             </div>
 
             <div class='col12 on-1 steps clearfix'>
                 <div class='col4 center pad1 step-1'>
-                    <a href='#location'>Posizione</a>
+                    <a href='#location' data-i18n="step1.title"></a>
                 </div>
                 <div class='col4 center pad1 step-2'>
-                    <a>Dettagli</a>
+                    <a href='#details' data-i18n="step2.title"></a>
                 </div>
                 <div class='col4 center pad1 step-3'>
-                    <strong>Finito</strong>
+                    <strong data-i18n="step3.title"></strong>
                 </div>
             </div>
 
             <div class='col12' id='address-step'>
                 <div class='center pad2'>
-                    <span id='instructions'>Inizia col dirci dove è posizionata la tua attività commerciale.</span>
+                    <span id='instructions' data-i18n="step1.desc"></span>
+                    <p id="couldnt-find" style='display: none;' data-i18n="[html]step1.fail"></p>
                 </div>
                 <div class='col12'>
                     <div class='pad1'>
                         <form id='find'>
-                            <input class='col8' id='address' placeholder='Viale Brigate Partigiane, Genova' />
-                            <button class='col4' id='findme'>Cercami!</button>
+                            <input class='col8' id='address' placeholder='' data-i18n="[placeholder]step1.addr"/>
+                            <button class='col4' id='findme' data-i18n="step1.button"></button>
                         </form>
                     </div>
                     <br />
                     <br />
                     <div class='col12' id='findme-map'></div>
-                    <p id="couldnt-find" style='display: none;'>
-                        <strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.
-                    </p>
                 </div>
             </div>
 
             <div class='col12 hide' id='collect-data-step'>
-                <p>Abbiamo trovato la tua posizione. Adesso descrivi la tua attività.</p>
+                <p data-i18n="step2.desc"></p>
                 <div class='col12'>
                     <div class='clearfix col12'>
-                        <label for='category'>Categoria</label>
-                    <input id='category' data-placeholder='Scegli una categoria...' class='col10' />
+                        <label for='category' data-i18n="step2.catlabel"></label>
+                    <input id='category' data-placeholder='' class='col10'  data-i18n="[data-placeholder]step2.catplaceholder"/>
                     </div>
                      <div class='col6'>
-                        <label for='categoryalt'>Se non trovi una categoria che fa al caso tuo,<br/>aggiungi altri dettagli qua sotto</label>
-                        <input id='categoryalt' type='text' placeholder='Descrizione tipologia di negozio' class='col12' />
+                        <label for='categoryalt' data-i18n="step2.catalt"></label>
+                        <input id='categoryalt' type='text' placeholder='' class='col12' data-i18n="[placeholder]step2.cataltplaceholder"/>
                     </div>
                     <div class='clearfix col6'>
-                        <label for='addressalt'>Aiutaci compilando l'indirizzo (civico, cap,...)<br/>(o migliorandolo se lo hai inserito precedentemente)</label>
-                        <input id='addressalt' type='text' placeholder='Corso Europa 12013, 16100 Genova (GE)' class='col12' />
+                        <label for='addressalt' data-i18n="step2.addressalt"></label>
+                        <input id='addressalt' type='text' placeholder='' class='col12'  data-i18n="[placeholder]step2.addressaltplaceholder"/>
                     </div>
                     <div class='col6'>
-                        <label for='name'>Nome</label>
-                        <input id='name' type='text' placeholder='Bar Sport' />
-                        <label for='phone'>Numero di telefono</label>
-                        <input id='phone' type='text' placeholder='+39 0123 456789' />
-                        <label for='opening_hours'>Orario di apertura</label>
-                        <input id='opening_hours' type='text' placeholder='Lunedì-Venerdì dalle 10:00 alle 19:00' />
-                        <label for='wheel'>Accessibilità in sedia a rotelle</label>
-                        <input id='wheel' data-placeholder='Seleziona una opzione' />
+                        <label for='name' data-i18n="step2.name"></label>
+                        <input id='name' type='text' placeholder=''  data-i18n="[placeholder]step2.nameplaceholder"/>
+                        <label for='phone' data-i18n="step2.phone"></label>
+                        <input id='phone' type='text' placeholder='' data-i18n="[placeholder]step2.phoneplaceholder"/>
+                        <label for='opening_hours' data-i18n="step2.opening"></label>
+                        <input id='opening_hours' type='text' placeholder=''  data-i18n="[placeholder]step2.openingplaceholder"/>
+                        <label for='wheel' data-i18n="step2.wheel"></label>
+                        <input id='wheel' data-placeholder='' data-i18n="[data-placeholder]step2.wheelplaceholder"/>
                         <span>
                             <a class='' href='#details' rel='modal'>
-                                <img src='img/help.png' alt="Maggiori informazioni sull'accessibilità in sedia a rotelle" />
+                                <img src='img/help.png' alt=""  data-i18n="[alt]step2.imgalt"/>
                             </a>
                         </span>
-                        						
                     </div>
                     <div class='col6'>
                         <div style="height:65px;">&nbsp;</div>
-                        <label for='website'>Sito Web</label>
-                        <input id='website' type='text' placeholder='http://www.example.com/' />
-                        <label for='social'>Social Network</label>
-                        <input id='social' type='text' placeholder='@OpenStreetMapIt oppure https://www.facebook.com/OpenStreetMap.Italia' />
-                        <label for='payment'>Modalità di pagamento accettate</label>
-						<input id='payment' placeholder="Clicca qui per le opzioni"/>
+                        <label for='website' data-i18n="step2.website"></label>
+                        <input id='website' type='text' placeholder='' data-i18n="[placeholder]step2.websiteplaceholder"/>
+                        <label for='social' data-i18n="step2.social"></label>
+                        <input id='social' type='text' placeholder='' data-i18n="[placeholder]step2.socialplaceholder"/>
+                        <label for='payment' data-i18n="step2.payment"></label>
+                        <input id='payment' placeholder="" data-i18n="[placeholder]step2.paymentplaceholder"/>
                     </div>
-                    <h4><button class='col12' id='collect-data-done'>Fatto!</button></h4>
+                    <h4><button class='col12' id='collect-data-done' data-i18n="step2.done"></button></h4>
                 </div>
             </div>
 
             <div class='col12 pad2 hide' id='confirm-step'>
-                <p>
-                    <strong>Grazie!</strong> Un volontario di OpenStreetMap presto aggiungerà i tuoi dati sulla mappa.
-                </p>
-                <p>
-                    Puoi visualizzare la nota e appena creata e seguirne gli sviluppi a questo link: <span id="linkcoords">&nbsp;</span>
-                </p>
-                <p>
-                    Lo sapevi che puoi aggiungere i tuoi dati direttamente sulla mappa senza aspettare?
-                    E' facile iniziare a <a href="http://openstreetmap.org/edit">modificare OSM</a>
-                    nel tuo browser.
-                </p>
-                <p>
-                    Vuoi inserire una nuova nota? <a href="#location" onclick="clearFields()">Torna alla schermata iniziale</a>!
+                <p data-i18n="step3.row1"></p>
+                <p><span data-i18n="step3.row2"></span> <span id='linkcoords'>&nbsp;</span></p>
+                <p data-i18n="[html]step3.row3"></p>
+                <p><span data-i18n="step3.row4"></span> <a href="#location" onclick="clearFields()"  data-i18n="step3.row4a"></a>!
                 </p>
             </div>
         </div>
         <script src='js/site.js'></script>
         <script src="js/jquery.qtip-1.0.0-rc3.min.js"></script>
-        <script src="js/qtip-wheelchair.js"></script>
     </body>
 </html>

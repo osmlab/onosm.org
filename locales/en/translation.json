@@ -1,0 +1,56 @@
+﻿{
+  "app": {
+    "title": "On OpenStreetMap",
+    "desc": "OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses. It's easy and free to get on the map!"
+  },
+  "step1": {
+    "title": "Location",
+    "desc": "Start by telling us where your business is located.",
+    "addr": "Start by telling us where your business is located.",
+    "button": "Find me!",
+    "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address."
+  },
+  "step2": {
+    "title": "Details",
+    "desc": "'We found it! Click and drag the marker to sit on your business, then you are ready to <a href=\"#details\">add details to your business listing</a>.",
+    "catlabel": "Category",
+    "catplaceholder": "Pick a category...",
+    "catalt": "If you don't find a category that suits you, please add further details here.",
+    "cataltplaceholder": "Business type description",
+    "cataltdesc": "Description",
+    "addressalt": "Help us by filling the complete address (housenumber, post code) or improving the previous one",
+    "addressaltplaceholder": "501 West Main Street, Alexandria, VA",
+    "addressaltdesc": "Address",
+    "name": "Name",
+    "nameplaceholder": "Green Cafè",
+    "phone": "Phone number",
+    "phoneplaceholder": "555-555-5555",
+    "opening": "Opening Hours",
+    "openingplaceholder": "Monday-Friday 10am to 8pm",
+    "wheel": "Wheelchair accessibility",
+    "wheelplaceholder": "Choose an option",
+    "imgalt": "Additional information on wheelchair accessibility",
+    "website": "Website",
+    "websiteplaceholder": "http://www.example.com/",
+    "social": "Social Network",
+    "socialplaceholder": "@OpenStreetMap or https://www.facebook.com/OpenStreetMap",
+    "payment": "Accepted payment methods",
+    "paymentplaceholder": "Choose an option",
+    "done": "Done!"
+  },
+  "step3": {
+    "title": "Done",
+    "row1": "<strong>Thanks!</strong> An OpenStreetMap volunteer will add your data to the map soon.",
+    "row2": "You can see the newly created note and watch for updates at this link:",
+    "row3": "Did you know you can add your own data to the map and skip the wait? It's very easy to get started <a href=\"http://openstreetmap.org/edit\">editing OSM</a> in your browser.",
+    "row4": "Do you want to add another note?",
+    "row4a": "Back to initial screen"
+  },
+  "messages": {
+    "success": "Found it! Click and drag the marker on your business place position, so you'll be ready to <a href='#details'>add more details</a>.",
+    "manualPosition": " You have activated the marker! Click and drag it on your business place position, so you'll be ready to <a href='#details'>add more details</a>.",
+    "loadingText": "Searching...",
+    "modalButton": "Close",
+    "modalTitle": "Wheelchair accessibility classification"
+  }
+}
