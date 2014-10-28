@@ -1,0 +1,6 @@
+[
+{"id": "yes", "text": "Unrestricted access"},
+{"id": "limited", "text": "Partial access"},
+{"id": "no", "text": "No unrestricted access"},
+{"id": "unknown", "text": "Unknown access"}
+]

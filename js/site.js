@@ -3,7 +3,7 @@ var onOSMlang='it';
 
 var successString,manualPosition,loadingText,modalText;
 
-i18n.init({ lng: onOSMlang, fallbackLng: 'it', postAsync: 'false' }, function() {
+i18n.init({ fallbackLng: onOSMlang, postAsync: 'false' }, function() {
     $("body").i18n();
 
     successString=i18n.t('messages.success', { escapeInterpolation: false });
@@ -12,6 +12,21 @@ i18n.init({ lng: onOSMlang, fallbackLng: 'it', postAsync: 'false' }, function() 
     modalText={};
     modalText.text=i18n.t('messages.modalTitle');
     modalText.button=i18n.t('messages.modalButton');
+
+	onOSMlang=i18n.lng();
+	$.getJSON('./locales/'+onOSMlang+'/categories.json').success(function(data){
+		category_data = data;
+	});
+
+	$.getJSON('./locales/'+onOSMlang+'/payment.json').success(function(data){
+		payment_data = data;
+	});
+
+	$.getJSON('./locales/'+onOSMlang+'/wheelchair.json').success(function(data){
+		wheel_data = data;
+	});
+	
+	loadWheelchair(onOSMlang);
   });
 
 /* HERE BE DRAGONS */
@@ -34,17 +49,7 @@ findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
 
-$.getJSON('./locales/'+onOSMlang+'/categories.json').success(function(data){
-    category_data = data;
-});
 
-$.getJSON('./locales/'+onOSMlang+'/payment.json').success(function(data){
-    payment_data = data;
-});
-
-$.getJSON('./locales/'+onOSMlang+'/wheelchair.json').success(function(data){
-    wheel_data = data;
-});
 
 
 $("#category").select2({
@@ -222,9 +227,9 @@ function clearFields(){
  * WHEELCHAIR
  * Extended of example from http://craigsworks.com/projects/qtip/demos/effects/modal
  */
-$(document).ready(function()
+function loadWheelchair(lang)
 {   
-   $.get('./locales/'+onOSMlang+'/wheelchair.html', function(data) {
+   $.get('./locales/'+lang+'/wheelchair.html', function(data) {
 
       $('a[rel="modal"]:first').qtip(
       {
@@ -283,4 +288,4 @@ $(document).ready(function()
       .appendTo(document.body) // Append to the document body
       .hide(); // Hide it initially
 
-});
+};

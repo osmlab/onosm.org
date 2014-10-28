@@ -6,13 +6,13 @@
   "step1": {
     "title": "Location",
     "desc": "Start by telling us where your business is located.",
-    "addr": "Start by telling us where your business is located.",
+    "addr": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",
     "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address."
   },
   "step2": {
     "title": "Details",
-    "desc": "'We found it! Click and drag the marker to sit on your business, then you are ready to <a href=\"#details\">add details to your business listing</a>.",
+    "desc": "We found it! Now fill in the details about your business.",
     "catlabel": "Category",
     "catplaceholder": "Pick a category...",
     "catalt": "If you don't find a category that suits you, please add further details here.",
