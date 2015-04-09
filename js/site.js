@@ -1,3 +1,5 @@
+var onOSMlang='en';
+
 var findme_map = L.map('findme-map')
     .setView([37.7, -97.3], 3),
     osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -9,6 +11,21 @@ var findme_marker = L.marker([0,0], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
+
+var successString,loadingText;
+
+i18n.init({ fallbackLng: onOSMlang, postAsync: 'false' }, function() {
+    $("body").i18n();
+
+    successString=i18n.t('messages.success', { escapeInterpolation: false });
+    loadingText=i18n.t('messages.loadingText');
+
+	onOSMlang=i18n.lng();
+	$.getJSON('./locales/'+onOSMlang+'/categories.json').success(function(data){
+		category_data = data;
+	});
+  });
+
 
 $.ajax('./categories.json').success(function(data){
     category_data = data;
@@ -36,7 +53,7 @@ $("#find").submit(function(e) {
         q: address_to_find
     };
     var url = "http://nominatim.openstreetmap.org/search?" + $.param(qwarg);
-    $("#findme h4").text("Searching...");
+    $("#findme h4").text(loadingText);
     $("#findme").addClass("loading");
     $.getJSON(url, function(data) {
         if (data.length > 0) {
@@ -52,10 +69,10 @@ $("#find").submit(function(e) {
             findme_marker.setOpacity(1);
             findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
 
-            $('#instructions').html('We found it! Click and drag the marker to sit on your business, then you are ready to <a href="#details">add details to your business listing</a>.');
+            $('#instructions').html(successString);
             $('.step-2 a').attr('href', '#details');
         } else {
-            $('#instructions').html('<strong>We couldn\'t find your address.</strong> Try searching for your street or city without the address.');
+            $("#couldnt-find").show();
         }
         $("#findme").removeClass("loading");
     });
@@ -103,3 +120,13 @@ $("#collect-data-done").click(function() {
 
     $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg);
 });
+
+function clearFields(){
+    $("#name").val('');
+    $("#phone").val('');
+    $("#website").val('');
+    $("#social").val('');
+    $("#opening_hours").val('');
+    $("#category").val('');
+    $("#address").val('');
+}
