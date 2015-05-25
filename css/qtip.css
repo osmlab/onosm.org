@@ -1,0 +1,25 @@
+.qtip-content * {
+  line-height:1.3em;
+  margin:0px;
+  padding:0px;
+}
+
+.qtip-content h1 {
+  font-size:17px;
+  margin-bottom:3px;
+  margin-top:7px;  
+}
+
+.qtip-content h1:first-of-type {
+  margin-top:0px;
+}
+
+.qtip-content b {
+  font-weight:bold;
+  color:#626262;
+}
+  
+.qtip-content ul {
+  list-style:disc;
+  margin-left:15px;
+}
