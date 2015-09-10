@@ -1,3 +1,3 @@
-# [http://onosm.org/](onosm.org)
+# [onosm.org](http://onosm.org/)
 
 An easy way to get a business on to OpenStreetMap.
