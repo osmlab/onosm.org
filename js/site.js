@@ -1,11 +1,10 @@
 /*select language to use*/
-var onOSMlang='it';
+var onOSMlang='it-IT';
 
 var successString,manualPosition,loadingText,modalText;
 
 i18n.init({ fallbackLng: onOSMlang, postAsync: 'false' }, function() {
     $("body").i18n();
-
     successString=i18n.t('messages.success', { escapeInterpolation: false });
     manualPosition=i18n.t('messages.manualPosition', { escapeInterpolation: false });
     loadingText=i18n.t('messages.loadingText');
