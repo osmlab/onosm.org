@@ -1,6 +1,6 @@
 var findme_map = L.map('findme-map')
     .setView([37.7, -97.3], 3),
-    osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     osmAttrib = 'Map data © OpenStreetMap contributors',
     osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
@@ -35,7 +35,7 @@ $("#find").submit(function(e) {
         format: 'json',
         q: address_to_find
     };
-    var url = "http://nominatim.openstreetmap.org/search?" + $.param(qwarg);
+    var url = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg);
     $("#findme h4").text("Searching...");
     $("#findme").addClass("loading");
     $.getJSON(url, function(data) {
@@ -101,5 +101,5 @@ $("#collect-data-done").click(function() {
             text: note_body
         };
 
-    $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg);
+    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg);
 });
