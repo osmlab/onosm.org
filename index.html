@@ -12,7 +12,7 @@
         <![endif]-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
     </head>
     <body>
         <div class='container pad2 margin2 col8'>
@@ -56,14 +56,14 @@
                 </div>
             </div>
 
-            <div class='col12 hide' id='collect-data-step'>
+            <div class='col12' id='collect-data-step'>
                 <p>We found your location. Now tell us about your business.</p>
                 <div class='col12'>
-                    <div class='clearfix col12'>
+                    <div class='col12'>
                         <label for='category'>Category</label>
-                        <input id='category' data-placeholder='Pick a category...' class='col10' />
+                        <select id='category' data-placeholder='Pick a category...' ></select>
                     </div>
-                    <div class='col6'>
+                    <div>
                         <label for='name'>Name</label>
                         <input id='name' type='text' placeholder='ACME Parts' />
                         <label for='phone'>Phone Number</label>
