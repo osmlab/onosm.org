@@ -36,6 +36,13 @@
                 </div>
             </div>
 
+            <div class='col12' id='upload-step'>
+                <form onsubmit="return false">
+                    <input type="file" id="input" />
+                    <input type='button' onclick="read_local_file(document.getElementById('input').files[0])" value="Upload" />
+                </form>
+            </div>
+
             <div class='col12' id='address-step'>
                 <div class='center pad2'>
                     <span id='instructions'>Start by telling us where your business is located.</span>

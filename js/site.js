@@ -74,9 +74,8 @@ $(window).on('hashchange', function() {
     findme_map.invalidateSize();
 });
 
-$("#collect-data-done").click(function() {
-    location.hash = '#done';
-
+/** @todo Params */
+function submit_note() {
     var note_body = "onosm.org submitted note from a business:\n" +
         "name: " + $("#name").val() + "\n" +
         "phone: " + $("#phone").val() + "\n" +
@@ -92,5 +91,21 @@ $("#collect-data-done").click(function() {
             text: note_body
         };
 
-    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg);
+    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg);  
+}
+$("#collect-data-done").click(function() {
+    location.hash = '#done';
+
+    submit_note();
 });
+
+var locations = [];
+
+function read_local_file(file) {
+    var reader = new FileReader();
+    reader.onload = function () {
+        locations.concat(reader.result.split("\n"));
+    };
+    reader.readAsBinaryString(file);
+}
+
