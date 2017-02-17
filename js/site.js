@@ -118,7 +118,7 @@ function read_next_location() {
   $("#address").val(business_location["Address"]);
 
   $("#name").val(business_location["Location Name"]);
-  $("#phone").val(business_location["Phone"]);
+  $("#phone").val(business_location["Phone Number"]);
   $("#opening_hours").val(business_location["Opening Hours (“Monday to Friday 10am-5pm”)"]);
   $("#website").val(business_location["Website"]);
   $("#twitter").val(business_location["Twitter"]);
