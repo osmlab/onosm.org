@@ -37,12 +37,7 @@
                 </div>
             </div>
 
-            <div class='col12' id='upload-step'>
-                <form onsubmit="return false">
-                    <input type="file" id="input" />
-                    <input type='button' onclick="read_local_file(document.getElementById('input').files[0])" value="Upload" />
-                </form>
-            </div>
+
 
             <div class='col12' id='address-step'>
                 <div class='center pad2'>
@@ -62,6 +57,18 @@
                         <strong>We couldn't find your address.</strong> Try searching for your street or city without the address.
                     </p>
                 </div>
+            </div>
+
+            <div class='col12' id='bulk-upload-count'>
+            </div>
+            <div class='col12' id='upload-step'>
+                <br />
+                <h3>Bulk Upload</h3>
+                <p class="prose">Need to upload multiple locations? Download and complete the <a href="template.csv">template</a>.</p>
+                <form onsubmit="return false">
+                    <input type="file" id="input" />
+                    <input type='button' onclick="read_local_file(document.getElementById('input').files[0])" value="Process" />
+                </form>
             </div>
 
             <div class='col12 hide' id='collect-data-step'>

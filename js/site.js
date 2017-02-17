@@ -110,6 +110,7 @@ var locations = [];
 
 function read_next_location() {
   location.hash = '';
+  $('#bulk-upload-count').text(locations.length + " location(s) remaining to process");
 
   var business_location = locations.pop();
 
