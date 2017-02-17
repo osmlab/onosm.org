@@ -1,5 +1,3 @@
-var onOSMlang='en';
-
 var findme_map = L.map('findme-map')
     .setView([37.7, -97.3], 3),
     osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -14,14 +12,14 @@ if (location.hash) location.hash = '';
 
 var successString,loadingText;
 
-i18n.init({ fallbackLng: onOSMlang, postAsync: 'false' }, function() {
+i18n.init({ fallbackLng: 'en-US', postAsync: 'false' }, function() {
     $("body").i18n();
 
     successString=i18n.t('messages.success', { escapeInterpolation: false });
     loadingText=i18n.t('messages.loadingText');
 
-    onOSMlang=i18n.lng();
-    $.getJSON('./locales/'+onOSMlang+'/categories.json').success(function(data) {
+    var detectedLang = i18n.lng();
+    $.getJSON('./locales/' + detectedLang + '/categories.json').success(function(data) {
     	category_data = data;
     });
 });
