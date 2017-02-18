@@ -39,7 +39,7 @@
     "row4a": "Back to initial screen"
   },
   "messages": {
-    "success": "Found it! Click and drag the marker on your business place position, so you'll be ready to <a href='#details'>add more details</a>.",
+    "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to <a href='#details'>add more details</a>.",
     "loadingText": "Searching..."
   }
 }

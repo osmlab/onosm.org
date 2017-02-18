@@ -59,7 +59,7 @@ $("#use_my_location").click(function (e) {
 
             $('#success').html(successString);
             $('#success').show();
-            window.scrollTo(0, $('#success').position().top - 10);
+            window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
         }, function (error) {
             $("#couldnt-find").show();
@@ -87,7 +87,7 @@ $("#find").submit(function(e) {
 
             $('#success').html(successString);
             $('#success').show();
-            window.scrollTo(0, $('#success').position().top - 10);
+            window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
         } else {
             $("#couldnt-find").show();
