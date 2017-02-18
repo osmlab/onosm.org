@@ -8,7 +8,8 @@
     "desc": "Comece nos dizendo onde o seu negócio está localizado.",
     "addr": "Barra da Tijuca, Rio de Janeiro",
     "button": "Localizar",
-    "fail": "<strong>Não conseguimos encontrar seu endereço.</strong> Experimente pesquisar por sua rua ou cidade escrevendo menos detalhes."
+    "fail": "<strong>Não conseguimos encontrar seu endereço.</strong> Experimente pesquisar por sua rua ou cidade escrevendo menos detalhes.",
+    "use_location": "usar minha localização atual"
   },
   "step2": {
     "title": "Detalhes",
