@@ -2,7 +2,7 @@
   "app": {
     "title": "Su OpenStreetMap",
     "desc": "OpenStreetMap è una mappa libera e globale usata da persone di tutto il mondo per navigare e cercare attività commerciali del posto. Comparire sulla mappa è facile e gratuito!",
-    "footer": "Il codice sorgente disponibile su <a href='https://github.com/osmlab/onosm.org'>Github</p>"
+    "footer": "Il codice sorgente disponibile su <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Posizione",
