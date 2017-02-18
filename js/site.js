@@ -29,9 +29,42 @@ i18n.init({ fallbackLng: 'en-US', postAsync: 'false' }, function() {
     });
 });
 
+function zoom_to_point(chosen_place, map, marker) {
+    console.log(chosen_place);
+
+    marker.setOpacity(1);
+    marker.setLatLng([chosen_place.lat, chosen_place.lon]);
+
+
+    map.setView(chosen_place, 18, {animate: true});
+}
+$("#use_my_location").click(function (e) {
+    $("#couldnt-find").hide();
+    $("#success").hide();
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var point = {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
+            }
+
+            zoom_to_point(point, findme_map, findme_marker);
+
+            $('#success').html(successString);
+            $('#success').show();
+            window.scrollTo(0, $('#address').position().top - 30);
+            $('.step-2 a').attr('href', '#details');
+        }, function (error) {
+            $("#couldnt-find").show();
+        });
+    } else {
+      $("#couldnt-find").show();
+    }
+});
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
+    $("#success").hide();
     var address_to_find = $("#address").val();
     if (address_to_find.length === 0) return;
     var qwarg = {
@@ -43,19 +76,11 @@ $("#find").submit(function(e) {
     $("#findme").addClass("loading");
     $.getJSON(url, function(data) {
         if (data.length > 0) {
-            var chosen_place = data[0];
-            console.log(chosen_place);
+            zoom_to_point(data[0], findme_map, findme_marker);
 
-            var bounds = new L.LatLngBounds(
-                [+chosen_place.boundingbox[0], +chosen_place.boundingbox[2]],
-                [+chosen_place.boundingbox[1], +chosen_place.boundingbox[3]]);
-
-            findme_map.fitBounds(bounds);
-
-            findme_marker.setOpacity(1);
-            findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
-
-            $('#instructions').html(successString);
+            $('#success').html(successString);
+            $('#success').show();
+            window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
         } else {
             $("#couldnt-find").show();
