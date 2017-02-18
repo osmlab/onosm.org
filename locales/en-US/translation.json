@@ -8,7 +8,8 @@
     "desc": "Start by telling us where your business is located.",
     "addr": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",
-    "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address."
+    "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address.",
+    "use_location": "use my current location"
   },
   "step2": {
     "title": "Details",
