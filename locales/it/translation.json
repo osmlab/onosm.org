@@ -8,7 +8,8 @@
     "desc": "Inizia col dirci dove è posizionata la tua attività commerciale.",
     "addr": "Corso Europa, Genova",
     "button": "Cercami!",
-    "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli."
+    "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.",
+    "use_location": "usare mia posizione attuale"
   },
   "step2": {
     "title": "Dettagli",
