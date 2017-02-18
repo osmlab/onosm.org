@@ -38,7 +38,6 @@
             <div class='col12' id='address-step'>
                 <div class='center pad2'>
                     <span id='instructions' data-i18n="step1.desc"></span>
-                    <p id="couldnt-find" style='display: none;' data-i18n="[html]step1.fail"></p>
                 </div>
                 <div class='col12'>
                     <div class='pad1'>
@@ -49,8 +48,13 @@
                             Or <a id="use_my_location" href="#" onclick="return false">use my current location</a>.
                         </form>
                     </div>
-                    <br />
-                    <br />
+                </div>
+
+                <div class='center pad2'>
+                    <p id="couldnt-find" style='display: none;' data-i18n="[html]step1.fail"></p>
+                    <p id="success" style='display: none;'></p>
+                </div>
+                <div class='col12'>
                     <div class='col12' id='findme-map'></div>
                 </div>
             </div>

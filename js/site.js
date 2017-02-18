@@ -46,6 +46,8 @@ function zoom_to_point(chosen_place, map, marker) {
     map.setView(chosen_place, 18, {animate: true});
 }
 $("#use_my_location").click(function (e) {
+    $("#couldnt-find").hide();
+    $("#success").hide();
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var point = {
@@ -55,16 +57,21 @@ $("#use_my_location").click(function (e) {
 
             zoom_to_point(point, findme_map, findme_marker);
 
-            $('#instructions').html(successString);
+            $('#success').html(successString);
+            $('#success').show();
+            window.scrollTo(0, $('#success').position().top - 10);
             $('.step-2 a').attr('href', '#details');
+        }, function (error) {
+            $("#couldnt-find").show();
         });
     } else {
-      /* geolocation IS NOT available */
+      $("#couldnt-find").show();
     }
 });
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
+    $("#success").hide();
     var address_to_find = $("#address").val();
     if (address_to_find.length === 0) return;
     var qwarg = {
@@ -78,7 +85,9 @@ $("#find").submit(function(e) {
         if (data.length > 0) {
             zoom_to_point(data[0], findme_map, findme_marker);
 
-            $('#instructions').html(successString);
+            $('#success').html(successString);
+            $('#success').show();
+            window.scrollTo(0, $('#success').position().top - 10);
             $('.step-2 a').attr('href', '#details');
         } else {
             $("#couldnt-find").show();
