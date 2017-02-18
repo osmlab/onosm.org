@@ -141,3 +141,39 @@ function clearFields() {
     $("#category").val('');
     $("#address").val('');
 }
+
+
+function fetch_facebook_page_url() {
+
+    var page_url = prompt("Copy/paste in your businesses facebook page url; ie: https://www.facebook.com/pages/Adelaide-Hills-Stationery/517688011766722?fref=ts'");
+    var parts = page_url.split("/");
+    var fbid = parts[parts.length-1].split("?")[0];
+
+    FB.api(
+      '/' + fbid + '/',
+      'GET',
+      {"fields":"id,name,about,single_line_address,website,is_always_open,payment_options,hours,location,category,category_list,company_overview,description,general_info,is_permanently_closed,link,parking,phone,place_type,public_transit,store_location_descriptor"},
+      function(response) {
+          $('#address').val(response.single_line_address);
+          $("#find").submit();
+
+          $('#name').val(response.name);
+          $('#phone').val(response.phone);
+          $('#website').val(response.link);
+          $('#opening_hours').val(response.hours);
+      }
+    );
+
+}
+
+$('#fblogin').click(function () {
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+            fetch_facebook_page_url();
+      } else {
+        FB.login(function (response) {
+            fetch_facebook_page_url();
+        });
+      }
+    });
+});

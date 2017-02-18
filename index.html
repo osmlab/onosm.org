@@ -45,7 +45,7 @@
                             <input class='col8' id='address' placeholder='' data-i18n="[placeholder]step1.addr"/>
                             <button class='col4' id='findme' data-i18n="step1.button"></button>
                             <br />
-                            Or <a id="use_my_location" href="#" onclick="return false">use my current location</a>.
+                            Or <a id="use_my_location" href="#" onclick="return false">use my current location</a>, <a id='fblogin' href='#' onclick="return false">sync a facebook business page</a>.
                         </form>
                     </div>
                 </div>
@@ -94,5 +94,23 @@
             </div>
         </div>
         <script src='js/site.js'></script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '230563574073994',
+              xfbml      : false,
+              version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
     </body>
 </html>
