@@ -1,4 +1,4 @@
-﻿{
+{
   "app": {
     "title": "Coloque seu empreendimento no mapa!",
     "desc": "OpenStreetMap é um mapa global de dados abertos, usado por pessoas de todo o mundo para navegar por GPS e achar empresas locais. É fácil e gratuito aparecer no mapa!"
@@ -38,8 +38,8 @@
     "row4":"Quer adicionar um novo registro?",
     "row4a":"Volte à tela inicial"
   },
-  "messages":{
-  "success":"Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href=\"#details\">adicionar à nossa lista os detalhes de sua empresa</a>.",
-  "loadingText":"Localizando..."
+  "messages": {
+    "success":"Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href=\"#details\">adicionar à nossa lista os detalhes de sua empresa</a>.",
+    "loadingText":"Localizando..."
   }
 }
