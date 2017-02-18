@@ -94,5 +94,54 @@
             </div>
         </div>
         <script src='js/site.js'></script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '230563574073994',
+              xfbml      : false,
+              version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <a id='fblogin'>Facebook auth</a>
+        <script>
+        function fetch_facebook_page_url() {
+
+            var page_url = 'https://www.facebook.com/pages/Adelaide-Hills-Stationery/517688011766722?fref=ts';
+            var parts = page_url.split("/");
+            var fbid = parts[parts.length-1].split("?")[0];
+
+            FB.api(
+              '/' + fbid + '/',
+              'GET',
+              {"fields":"id,name,about,single_line_address,website,is_always_open,payment_options,hours,location,category,category_list,company_overview,description,general_info,is_permanently_closed,link,parking,phone,place_type,public_transit,store_location_descriptor"},
+              function(response) {
+                  console.log(response);
+              }
+            );
+
+        }
+
+        $('#fblogin').click(function () {
+            FB.getLoginStatus(function(response) {
+              if (response.status === 'connected') {
+                    fetch_facebook_page_url();
+              } else {
+                FB.login(function (response) {
+                    fetch_facebook_page_url();
+                });
+              }
+            });
+        });
+        </script>
     </body>
 </html>
