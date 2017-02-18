@@ -53,6 +53,22 @@ textarea {
   box-sizing: border-box;
   }
 
+.select2-container--default .select2-selection--multiple {
+  color: #333;
+  max-height: 29px;
+  border-radius: 0px 0px 0px 0px !important;
+
+  border: 1px solid #ccc;
+  -webkit-box-shadow:1px 1px 2px rgba(0,0,0,0.1);
+     -moz-box-shadow:1px 1px 2px rgba(0,0,0,0.1);
+          box-shadow:1px 1px 2px rgba(0,0,0,0.1);
+  -webkit-transition:border linear .2s, box-shadow linear .2s;
+     -moz-transition:border linear .2s, box-shadow linear .2s;
+       -o-transition:border linear .2s, box-shadow linear .2s;
+          transition:border linear .2s, box-shadow linear .2s;
+
+}
+
 h1,
 h2,
 h3,
