@@ -19,7 +19,7 @@ i18n.init({ fallbackLng: 'en-US', postAsync: 'false' }, function() {
     loadingText=i18n.t('messages.loadingText');
 
     var detectedLang = i18n.lng();
-    $.getJSON('./locales/' + detectedLang + '/categories.json').on('success', function(data) {
+    $.getJSON('./locales/' + detectedLang + '/categories.json', function(data) {
     	category_data = data;
     });
 });
