@@ -77,3 +77,8 @@ button {
 .mr {
     margin-right:10px;
 }
+
+footer {
+    margin-top: 10em;
+    font-size: 80%;
+}
