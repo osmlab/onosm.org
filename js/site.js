@@ -10,16 +10,61 @@ findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
 
-$.ajax('./categories.json')
-    .done(function(data){
-        $("#category").select2({
-            data: data
-        });
-    });
+var successString,loadingText;
 
+i18n.init({ fallbackLng: 'en-US', postAsync: 'false' }, function() {
+    $("body").i18n();
+
+    successString=i18n.t('messages.success', { escapeInterpolation: false });
+    loadingText=i18n.t('messages.loadingText');
+
+    var detectedLang = i18n.lng();
+    var buildSelectControl = function(data) {
+        $("#category").select2({data: data});
+    };
+
+    $.getJSON('./locales/' + detectedLang + '/categories.json', buildSelectControl).fail(function () {
+        // 404? Fall back to en-US
+         $.getJSON('./locales/en-US/categories.json', buildSelectControl);
+    });
+});
+
+function zoom_to_point(chosen_place, map, marker) {
+    console.log(chosen_place);
+
+    marker.setOpacity(1);
+    marker.setLatLng([chosen_place.lat, chosen_place.lon]);
+
+
+    map.setView(chosen_place, 18, {animate: true});
+}
+$("#use_my_location").click(function (e) {
+    $("#couldnt-find").hide();
+    $("#success").hide();
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var point = {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
+            }
+
+            zoom_to_point(point, findme_map, findme_marker);
+
+            $('#success').html(successString);
+            $('#success').show();
+            window.scrollTo(0, $('#address').position().top - 30);
+            $('.step-2 a').attr('href', '#details');
+        }, function (error) {
+            $("#couldnt-find").show();
+        });
+    } else {
+      $("#couldnt-find").show();
+    }
+});
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
+    $("#success").hide();
     var address_to_find = $("#address").val();
     if (address_to_find.length === 0) return;
     var qwarg = {
@@ -27,26 +72,18 @@ $("#find").submit(function(e) {
         q: address_to_find
     };
     var url = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg);
-    $("#findme h4").text("Searching...");
+    $("#findme h4").text(loadingText);
     $("#findme").addClass("loading");
     $.getJSON(url, function(data) {
         if (data.length > 0) {
-            var chosen_place = data[0];
-            console.log(chosen_place);
+            zoom_to_point(data[0], findme_map, findme_marker);
 
-            var bounds = new L.LatLngBounds(
-                [+chosen_place.boundingbox[0], +chosen_place.boundingbox[2]],
-                [+chosen_place.boundingbox[1], +chosen_place.boundingbox[3]]);
-
-            findme_map.fitBounds(bounds);
-
-            findme_marker.setOpacity(1);
-            findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
-
-            $('#instructions').html('We found it! Click and drag the marker to sit on your business, then you are ready to <a href="#details">add details to your business listing</a>.');
+            $('#success').html(successString);
+            $('#success').show();
+            window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
         } else {
-            $('#instructions').html('<strong>We couldn\'t find your address.</strong> Try searching for your street or city without the address.');
+            $("#couldnt-find").show();
         }
         $("#findme").removeClass("loading");
     });
@@ -85,7 +122,7 @@ function submit_note() {
         "website: " + $("#website").val() + "\n" +
         "twitter: " + $("#twitter").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
-        "category: " + $("#category").val() + "\n" +
+        "category: " + $("#category").val().join(", ") + "\n" +
         "address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
         qwarg = {
@@ -158,4 +195,12 @@ function read_local_file(file) {
     });
 
 
+function clearFields() {
+    $("#name").val('');
+    $("#phone").val('');
+    $("#website").val('');
+    $("#social").val('');
+    $("#opening_hours").val('');
+    $("#category").val('');
+    $("#address").val('');
 }
