@@ -1,14 +1,16 @@
 ﻿{
   "app": {
     "title": "Su OpenStreetMap",
-    "desc": "OpenStreetMap è una mappa libera e globale usata da persone di tutto il mondo per navigare e cercare attività commerciali del posto. Comparire sulla mappa è facile e gratuito!"
+    "desc": "OpenStreetMap è una mappa libera e globale usata da persone di tutto il mondo per navigare e cercare attività commerciali del posto. Comparire sulla mappa è facile e gratuito!",
+    "footer": "Il codice sorgente disponibile su <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Posizione",
     "desc": "Inizia col dirci dove è posizionata la tua attività commerciale.",
     "addr": "Corso Europa, Genova",
     "button": "Cercami!",
-    "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli."
+    "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.",
+    "use_location": "usare mia posizione attuale"
   },
   "step2": {
     "title": "Dettagli",
