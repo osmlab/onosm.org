@@ -129,7 +129,12 @@ $("#collect-data-done").click(function() {
             text: note_body
         };
 
-    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg);
+    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
+        console.log( data );
+        var noteId=data['properties']['id'];
+        var link='http://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
+        $("#linkcoords").append('<a href="'+link+'">'+link+'</a>');
+    });
 });
 
 function clearFields() {
