@@ -1,0 +1,47 @@
+{
+  "app": {
+    "title": "Coloque seu empreendimento no mapa!",
+    "desc": "OpenStreetMap é um mapa global de dados abertos, usado por pessoas de todo o mundo para navegar por GPS e achar empresas locais. É fácil e gratuito aparecer no mapa!",
+    "footer": "Código-fonte disponível no <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+  },
+  "step1": {
+    "title": "Localização",
+    "desc": "Comece nos dizendo onde o seu negócio está localizado.",
+    "addr": "Barra da Tijuca, Rio de Janeiro",
+    "button": "Localizar",
+    "fail": "<strong>Não conseguimos encontrar seu endereço.</strong> Experimente pesquisar por sua rua ou cidade escrevendo menos detalhes.",
+    "use_location": "usar minha localização atual"
+  },
+  "step2": {
+    "title": "Detalhes",
+    "desc": "Seu negócio está localizado. Agora conte-nos sobre ele.",
+    "catlabel": "Categoria",
+    "catplaceholder": "Escolha uma categoria...",
+    "addressalt": "Aiutaci compilando l'indirizzo (civico, cap,...) o migliorandolo se lo hai inserito precedentemente",
+    "addressaltplaceholder": "Corso Europa 12013, 16100 Genova (GE)",
+    "addressaltdesc": "Endereço",
+    "name": "Nome",
+    "nameplaceholder": "Papelaria Prátika",
+    "phone": "Numero de telefone",
+    "phoneplaceholder": "+55 84 3219 0102",
+    "opening": "Horário de funcionamento",
+    "openingplaceholder": "Segunda a sexta-feira, das 10:00 às 19:00",
+    "website": "Website",
+    "websiteplaceholder": "www.exemplo.com.br/",
+    "social": "Redes sociais",
+    "socialplaceholder": "@OpenStreetMap www.facebook.com/OpenStreetMap",
+    "done": "Gravar"
+  },
+  "step3": {
+    "title": "Conclusão",
+    "row1": "<strong>Obrigado!</strong> Um voluntário do OpenStreetMap adicionará seus dados ao mapa.",
+    "row2": "Você pode ver a nota que acabou de criar e acompanhar o andamento do processo:",
+    "row3": "Sabia que você mesmo pode adicionar informação diretamente no mapa, sem esperar pelo voluntário?<br />É fácil começar a <a href=\"http://openstreetmap.org/edit\">editar o OpenStreetMap</a> usando simplesmente o seu navegador de Internet.",
+    "row4": "Quer adicionar um novo registro?",
+    "row4a": "Volte à tela inicial"
+  },
+  "messages": {
+    "success": "Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href=\"#details\">adicionar à nossa lista os detalhes de sua empresa</a>.",
+    "loadingText": "Localizando..."
+  }
+}

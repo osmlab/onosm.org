@@ -14,84 +14,89 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/1.7.4/i18next.min.js"></script>
     </head>
     <body>
         <div class='container pad2 margin2 col8'>
             <div class='pad2'>
                 <img src='img/osm.png' class='fl mr' alt='OpenStreetMap' />
-                <h2>On OpenStreetMap</h2>
-                <p>OpenStreetMap is an open, global map used by people around the world
+                <h2 data-i18n="app.title">On OpenStreetMap</h2>
+                <p data-i18n="[html]app.desc">OpenStreetMap is an open, global map used by people around the world
                 to navigate and find local businesses.<br />
                 It's easy and free to add your business to the map!</p>
             </div>
 
             <div class='col12 on-1 steps clearfix'>
                 <div class='col4 center pad1 step-1'>
-                    <a href='#location'>Location</a>
+                    <a href='#location' data-i18n="step1.title"></a>
                 </div>
                 <div class='col4 center pad1 step-2'>
-                    <a>Details</a>
+                    <a href='#details' data-i18n="step2.title"></a>
                 </div>
                 <div class='col4 center pad1 step-3'>
-                    <strong>Done</strong>
+                    <strong data-i18n="step3.title"></strong>
                 </div>
             </div>
 
             <div class='col12' id='address-step'>
                 <div class='center pad2'>
-                    <span id='instructions'>Start by telling us where your business is located.</span>
+                    <span id='instructions' data-i18n="step1.desc"></span>
                 </div>
                 <div class='col12'>
                     <div class='pad1'>
                         <form id='find'>
-                            <input class='col8' id='address' placeholder='501 West Main Street, Alexandria, VA' />
-                            <button class='col4' id='findme'>Find Me!</button>
+                            <input class='col8' id='address' placeholder='' data-i18n="[placeholder]step1.addr"/>
+                            <button class='col4' id='findme' data-i18n="step1.button"></button>
+                            <br />
+                            <a id="use_my_location" data-i18n="step1.use_location" href="#" onclick="return false">use my current location</a>.
                         </form>
                     </div>
-                    <br />
-                    <br />
+                </div>
+
+                <div class='center pad2'>
+                    <p id="couldnt-find" style='display: none;' data-i18n="[html]step1.fail"></p>
+                </div>
+                <div class='col12'>
                     <div class='col12' id='findme-map'></div>
-                    <p id="couldnt-find" style='display: none;'>
-                        <strong>We couldn't find your address.</strong> Try searching for your street or city without the address.
-                    </p>
+                    <p id="success" class="center" style='display: none; margin-bottom: 500px;'></p>
+
                 </div>
             </div>
 
             <div class='col12 hide' id='collect-data-step'>
-                <p>We found your location. Now tell us about your business.</p>
+                <p data-i18n="[html]step2.desc"></p>
                 <div class='col12'>
-                    <div class='col12'>
-                        <label for='category'>Category</label>
-                        <select id='category' data-placeholder='Pick a category...' ></select>
+                    <div class='clearfix col12'>
+                        <label for='category' data-i18n="step2.catlabel"></label>
+                        <input style='width: 400px;' id='category' multiple='multiple' data-placeholder='' class='col10' data-i18n="[data-placeholder]step2.catplaceholder"/>
                     </div>
-                    <div>
-                        <label for='name'>Name</label>
-                        <input id='name' type='text' placeholder='ACME Parts' />
-                        <label for='phone'>Phone Number</label>
-                        <input id='phone' type='text' placeholder='414-555-1212' />
+                    <div class='col6'>
+                        <label for='name' data-i18n="step2.name"></label>
+                        <input id='name' type='text' placeholder='' data-i18n="[placeholder]step2.nameplaceholder"/>
+                        <label for='phone' data-i18n="step2.phone"></label>
+                        <input id='phone' type='text' placeholder='' data-i18n="[placeholder]step2.phoneplaceholder"/>
                     </div>
-                    <div>
-                        <label for='website'>Website</label>
-                        <input id='website' type='text' placeholder='http://www.example.com/' />
-                        <label for='twitter'>Twitter</label>
-                        <input id='twitter' type='text' placeholder='@example' />
-                        <label for='opening_hours'>Hours</label>
-                        <input id='opening_hours' type='text' placeholder='Monday-Friday 10am to 8pm' />
+                    <div class='col6'>
+                        <label for='website' data-i18n="step2.website"></label>
+                        <input id='website' type='text' placeholder='' data-i18n="[placeholder]step2.websiteplaceholder"/>
+                        <label for='social' data-i18n="step2.social"></label>
+                        <input id='social' type='text' placeholder='' data-i18n="[placeholder]step2.socialplaceholder"/>
+                        <label for='opening_hours' data-i18n="step2.opening"></label>
+                        <input id='opening_hours' type='text' placeholder='' data-i18n="[placeholder]step2.openingplaceholder"/>
                     </div>
-                    <button class='col12' id='collect-data-done'><h4>Done!</h4></button>
+                    <h4><button class='col12' id='collect-data-done' data-i18n="step2.done"></button></h4>
                 </div>
             </div>
 
             <div class='col12 pad2 hide' id='confirm-step'>
-                <p>
-                    <strong>Thanks!</strong> An OpenStreetMap volunteer will add your data to the map soon.
-                </p>
-                <p>
-                    Did you know you can add your own data to the map and skip the wait?
-                    It's very easy to get started <a href="https://openstreetmap.org/edit">editing OSM</a>
-                    in your browser.
+                <p data-i18n="[html]step3.row1"></p>
+                <p><span data-i18n="step3.row2"></span><span id='linkcoords'>&nbsp;</span></p>
+                <p data-i18n="[html]step3.row3"></p>
+                <p><span data-i18n="step3.row4"></span>&nbsp;<a href="#location" onclick="clearFields()" data-i18n="step3.row4a"></a>!
                 </p>
             </div>
+
+            <footer><p class="center" data-i18n="[html]app.footer">Source code available on <a href="https://github.com/osmlab/onosm.org">Github</p></footer>
         </div>
         <script src='js/site.js'></script>
     </body>
