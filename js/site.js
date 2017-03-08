@@ -120,7 +120,7 @@ $("#collect-data-done").click(function() {
         "website: " + $("#website").val() + "\n" +
         "twitter: " + $("#twitter").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
-        "category: " + $("#category").val().join(", ") + "\n" +
+        "category: " + $("#category").val() + "\n" +
         "address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
         qwarg = {
