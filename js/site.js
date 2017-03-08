@@ -115,13 +115,13 @@ $("#collect-data-done").click(function() {
     location.hash = '#done';
 
     var note_body = "onosm.org submitted note from a business:\n" +
-        "name: " + $("#name").val() + "\n" +
-        "phone: " + $("#phone").val() + "\n" +
-        "website: " + $("#website").val() + "\n" +
-        "twitter: " + $("#twitter").val() + "\n" +
-        "hours: " + $("#opening_hours").val() + "\n" +
-        "category: " + $("#category").val() + "\n" +
-        "address: " + $("#address").val(),
+        "Name: " + $("#name").val() + "\n" +
+        "Phone: " + $("#phone").val() + "\n" +
+        "Website: " + $("#website").val() + "\n" +
+        "Twitter: " + $("#twitter").val() + "\n" +
+        "Hours: " + $("#opening_hours").val() + "\n" +
+        "Category: " + $("#category").val() + "\n" +
+        "Address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
         qwarg = {
             lat: latlon.lat,
