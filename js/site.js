@@ -123,13 +123,22 @@ $("#collect-data-done").click(function() {
         "Category: " + $("#category").val() + "\n" +
         "Address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
-        qwarg = {
+        note_data = {
             lat: latlon.lat,
             lon: latlon.lng,
             text: note_body
         };
 
-    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg);
+    $.post(
+        'https://api.openstreetmap.org/api/0.6/notes.json',
+        note_data,
+        function(result) {
+            var id = result.properties.id;
+            $("#linkcoords").append(
+                '<a href="https://osm.org/note/' + id + '">https://osm.org/note/' + id + '</a>'
+            );
+        }
+    );
 });
 
 function clearFields() {
@@ -140,4 +149,5 @@ function clearFields() {
     $("#opening_hours").val('');
     $("#category").val('');
     $("#address").val('');
+    $("#linkcoords").empty();
 }
