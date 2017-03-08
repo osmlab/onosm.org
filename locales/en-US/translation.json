@@ -42,6 +42,7 @@
   },
   "messages": {
     "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to <a href='#details'>add more details</a>.",
-    "loadingText": "Searching..."
+    "loadingText": "Searching...",
+    "note": "Note __id__"
   }
 }
