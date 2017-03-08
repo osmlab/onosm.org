@@ -136,7 +136,7 @@ function clearFields() {
     $("#name").val('');
     $("#phone").val('');
     $("#website").val('');
-    $("#social").val('');
+    $("#twitter").val('');
     $("#opening_hours").val('');
     $("#category").val('');
     $("#address").val('');
