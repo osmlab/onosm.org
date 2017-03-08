@@ -94,26 +94,28 @@ $(window).on('hashchange', function() {
         $('#collect-data-step').removeClass('hide');
         $('#address-step').addClass('hide');
         $('#confirm-step').addClass('hide');
+        $('#upload-step').addClass('hide');
         $('.steps').addClass('on-2');
         $('.steps').removeClass('on-3');
     } else if (location.hash == '#done') {
         $('#confirm-step').removeClass('hide');
         $('#collect-data-step').addClass('hide');
         $('#address-step').addClass('hide');
+        $('#upload-step').addClass('hide');
         $('.steps').addClass('on-3');
     } else {
         $('#address-step').removeClass('hide');
         $('#collect-data-step').addClass('hide');
         $('#confirm-step').addClass('hide');
+        $('#upload-step').addClass('hide');
         $('.steps').removeClass('on-2');
         $('.steps').removeClass('on-3');
     }
     findme_map.invalidateSize();
 });
 
-$("#collect-data-done").click(function() {
-    location.hash = '#done';
-
+/** @todo Params */
+function submit_note() {
     var note_body = "onosm.org submitted note from a business:\n" +
         "name: " + $("#name").val() + "\n" +
         "phone: " + $("#phone").val() + "\n" +
@@ -129,8 +131,69 @@ $("#collect-data-done").click(function() {
             text: note_body
         };
 
-    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg);
+    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg);  
+}
+$("#collect-data-done").click(function() {
+    location.hash = '#done';
+
+    submit_note();
+
+    if (locations.length > 0) {
+      read_next_location();
+    }
 });
+
+var locations = [];
+
+function read_next_location() {
+  location.hash = '';
+  $('#bulk-upload-count').text(locations.length + " location(s) remaining to process");
+
+  var business_location = locations.pop();
+
+  console.log("Reading", business_location);
+
+  $("#address").val(business_location["Address"]);
+
+  $("#name").val(business_location["Location Name"]);
+  $("#phone").val(business_location["Phone Number"]);
+  $("#opening_hours").val(business_location["Opening Hours (“Monday to Friday 10am-5pm”)"]);
+  $("#website").val(business_location["Website"]);
+  $("#twitter").val(business_location["Twitter"]);
+  $("#category").val(business_location["Category"]);
+
+
+  $('#find').submit();
+}
+
+function read_local_file(file) {
+    locations = Papa.parse(file, {
+      delimiter: "",  // auto-detect
+      newline: "",  // auto-detect
+      quoteChar: '"',
+      header: true,
+      dynamicTyping: false,
+      preview: 0,
+      encoding: "",
+      worker: false,
+      comments: false,
+      step: undefined,
+      complete: function (csv) {
+        locations = csv.data;
+        
+        console.log("Read data", locations);
+
+        read_next_location();
+      },
+      error: undefined,
+      download: false,
+      skipEmptyLines: true,
+      chunk: undefined,
+      fastMode: undefined,
+      beforeFirstChunk: undefined,
+      withCredentials: undefined
+    });
+
 
 function clearFields() {
     $("#name").val('');

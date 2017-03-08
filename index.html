@@ -13,6 +13,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
+        <script src="js/papaparse.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/1.7.4/i18next.min.js"></script>
     </head>
     <body>
@@ -34,6 +35,8 @@
                     <strong data-i18n="step3.title"></strong>
                 </div>
             </div>
+
+
 
             <div class='col12' id='address-step'>
                 <div class='center pad2'>
@@ -58,6 +61,18 @@
                     <p id="success" class="center" style='display: none; margin-bottom: 500px;'></p>
 
                 </div>
+            </div>
+
+            <div class='col12' id='bulk-upload-count'>
+            </div>
+            <div class='col12' id='upload-step'>
+                <br />
+                <h3>Bulk Upload</h3>
+                <p class="prose">Need to upload multiple locations? Download and complete the <a href="template.csv">template</a>.</p>
+                <form onsubmit="return false">
+                    <input type="file" id="input" />
+                    <input type='button' onclick="read_local_file(document.getElementById('input').files[0])" value="Process" />
+                </form>
             </div>
 
             <div class='col12 hide' id='collect-data-step'>
