@@ -1,0 +1,47 @@
+﻿{
+  "app": {
+    "title": "On OpenStreetMap",
+    "desc": "OpenStreetMap ist eine offene, globale Karte, die von Menschen überall auf der Welt zur Navigation und zur suche nach lokalen Firmen genutzt wird. Es ist einfach und kostenlos das eigene Geschäft auf die Karte zu bringen!",
+    "footer": "Quellcode erhältlich auf <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+  },
+  "step1": {
+    "title": "Ort / Adresse",
+    "desc": "Beginnen Sie, indem Sie uns die Adresse Ihres Gechäfts benennen.",
+    "addr": "Hauptstraße 11, 10115 Berlin, Deutschland",
+    "button": "Finde mich!",
+    "fail": "<strong>Wir konnten Ihre Adresse nicht finden.</strong> Versuchen Sie es nur mit ihrer Straße und Stadt, ohne Hausnummer, noch einmal.",
+    "use_location": "Nutze meine aktuelle Position"
+  },
+  "step2": {
+    "title": "Details",
+    "desc": "Wir haben Sie gefunden! Erzählen Sie uns mehr von Ihrer Firma.",
+    "catlabel": "Kategorie",
+    "catplaceholder": "Bitte wählen Sie…",
+    "addressalt": "Helfen Sie uns, indem Sie Ihre komplette Adresse hier angeben (Hausnummer, Postleitzahl) oder verbessern Sie die vorherige",
+    "addressaltplaceholder": "Hauptstraße 11, 10115 Berlin, Deutschland",
+    "addressaltdesc": "Adresse",
+    "name": "Name",
+    "nameplaceholder": "Park Cafè",
+    "phone": "Telefonnummer",
+    "phoneplaceholder": "+49 30 123456-78",
+    "opening": "Öffnungszeiten",
+    "openingplaceholder": "Montag-Freitag 10:00-20:00",
+    "website": "Website",
+    "websiteplaceholder": "http://www.beispiel.de/",
+    "social": "Social Network",
+    "socialplaceholder": "@OpenStreetMap oder https://www.facebook.com/OpenStreetMap",
+    "done": "Fertig!"
+  },
+  "step3": {
+    "title": "Fertig",
+    "row1": "<strong>Vielen Dank!</strong> Ein ehrenamtliches Mitglied von OpenStreetMap wird Ihre Daten demnächst auf der Karte hinzufügen.",
+    "row2": "Sie können Ihre Dateneingabe und weitere Updates über folgenden Link sehen und verfolgen:",
+    "row3": "Wussten Sie, dass Sie Ihre eigenen Daten auf OpenStreetMap eingeben und so die Wartezeit verkürzen können? Es ist sehr einfach mit dem <a href=\"https://openstreetmap.org/edit\">Bearbeiten in OpenStreetMap</a> in Ihrem Browser zu beginnen.",
+    "row4": "Möchten Sie noch etwas zu OpenStreetMap hinzufügen?",
+    "row4a": "Zurück zum Startbildschirm"
+  },
+  "messages": {
+    "success": "<strong>Gefunden!</strong> Verschieben Sie den Marker bis er <strong>exakt am Ort Ihres Geschäfts liegt</strong>.<br />Wenn Sie zufrieden sind, können wir damit beginnen weitere <a href='#details'>Details hinzuzufügen</a>.",
+    "loadingText": "Suche…"
+  }
+}
