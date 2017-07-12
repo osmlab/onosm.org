@@ -10,7 +10,7 @@
     "addr": "Corso Europa, Genova",
     "button": "Cercami!",
     "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.",
-    "use_location": "Usa la mia posizione attuale"
+    "use_location": "usare mia posizione attuale"
   },
   "step2": {
     "title": "Dettagli",
@@ -41,7 +41,7 @@
     "row4a":"Torna alla schermata iniziale"
   },
   "messages":{
-  "success":"Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a a <a href='#details'>aggiungere dettagli alla tua scheda</a>.",
+  "success":"Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a ad <a href='#details'>aggiungere dettagli alla tua scheda</a>.",
   "loadingText":"Sto cercando..."
   }
 }
