@@ -212,6 +212,9 @@ input[type=text] {
   -webkit-border-radius:1px;
           border-radius:1px;
   }
+.select2-search__field {
+  width: 100% !important;
+}
 textarea,
 input[type=text] {
   background-color:#fff;
