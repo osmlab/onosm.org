@@ -2,7 +2,7 @@
   "app": {
     "title": "On OpenStreetMap",
     "desc": "OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses. It's easy and free to get on the map!",
-    "footer": "Source code available on <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+    "footer": "Source code available on <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
     "title": "Location",
@@ -10,7 +10,8 @@
     "addr": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",
     "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address.",
-    "use_location": "use my current location"
+    "use_location": "use my current location",
+    "invalid-location": "The location is currently unset."
   },
   "step2": {
     "title": "Details",
@@ -41,7 +42,7 @@
     "row4a": "Back to initial screen"
   },
   "messages": {
-    "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to <a href='#details'>add more details</a>.",
+    "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to <a href='javascript:check_coordinates()'>add more details</a>.",
     "loadingText": "Searching..."
   }
 }
