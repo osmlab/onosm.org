@@ -154,7 +154,7 @@ function clearFields() {
 }
 
 function check_coordinates() {
-    latlon = findme_marker.getLatLng();
+    var latlon = findme_marker.getLatLng();
 
     if ((latlon.lat != 0) || (latlon.lng != 0)) {
         location.hash = '#details';
