@@ -1,8 +1,8 @@
 ﻿{
   "app": {
     "title": "On OpenStreetMap",
-    "desc": "OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses. It's easy and free to get on the map!",
-    "footer": "Source code available on <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
+    "desc": "OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses.<br/> It's easy and free to add your business to the map!",
+    "footer": "Source code available on <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Location",
