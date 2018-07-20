@@ -64,6 +64,7 @@ $("#use_my_location").click(function (e) {
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
+    $("#invalid-location").hide();
     $("#success").hide();
     var address_to_find = $("#address").val();
     if (address_to_find.length === 0) return;
@@ -115,29 +116,49 @@ $("#collect-data-done").click(function() {
     location.hash = '#done';
 
     var note_body = "onosm.org submitted note from a business:\n" +
-        "name: " + $("#name").val() + "\n" +
-        "phone: " + $("#phone").val() + "\n" +
-        "website: " + $("#website").val() + "\n" +
-        "twitter: " + $("#twitter").val() + "\n" +
-        "hours: " + $("#opening_hours").val() + "\n" +
-        "category: " + $("#category").val().join(", ") + "\n" +
-        "address: " + $("#address").val(),
+        "Name: " + $("#name").val() + "\n" +
+        "Phone: " + $("#phone").val() + "\n" +
+        "Website: " + $("#website").val() + "\n" +
+        "Twitter: " + $("#twitter").val() + "\n" +
+        "Hours: " + $("#opening_hours").val() + "\n" +
+        "Category: " + $("#category").val() + "\n" +
+        "Address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
-        qwarg = {
+        note_data = {
             lat: latlon.lat,
             lon: latlon.lng,
             text: note_body
         };
 
-    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg);
+    $.post(
+        'https://api.openstreetmap.org/api/0.6/notes.json',
+        note_data,
+        function(result) {
+            var id = result.properties.id;
+            $("#linkcoords").append(
+                '<a href="https://osm.org/note/' + id + '">https://osm.org/note/' + id + '</a>'
+            );
+        }
+    );
 });
 
 function clearFields() {
     $("#name").val('');
     $("#phone").val('');
     $("#website").val('');
-    $("#social").val('');
+    $("#twitter").val('');
     $("#opening_hours").val('');
     $("#category").val('');
     $("#address").val('');
+    $("#linkcoords").empty();
+}
+
+function check_coordinates() {
+    var latlon = findme_marker.getLatLng();
+
+    if ((latlon.lat != 0) || (latlon.lng != 0)) {
+        location.hash = '#details';
+    } else {
+        $("#invalid-location").show();
+    }
 }

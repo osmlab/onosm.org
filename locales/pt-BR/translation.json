@@ -2,7 +2,7 @@
   "app": {
     "title": "Coloque seu empreendimento no mapa!",
     "desc": "OpenStreetMap é um mapa global de dados abertos, usado por pessoas de todo o mundo para navegar por GPS e achar empresas locais. É fácil e gratuito aparecer no mapa!",
-    "footer": "Código-fonte disponível no <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+    "footer": "Código-fonte disponível no <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
     "title": "Localização",

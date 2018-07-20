@@ -15,14 +15,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/1.7.4/i18next.min.js"></script>
+
+        <meta id="viewport" name="viewport" content ="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     </head>
     <body>
         <div class='container pad2 margin2 col8'>
-            <div class='pad2'>
-                <img src='img/osm.png' class='fl mr' alt='OpenStreetMap' />
-                <h2 data-i18n="app.title">On OpenStreetMap</h2>
-                <p data-i18n="[html]app.desc">OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses.</p>
-                <p>It's easy and free to add your business to the map!</p>
+            <div class="pad2">
+                <img src="img/osm.png" class="fl mr logo" alt="OpenStreetMap" />
+                <h2 class="app-title" data-i18n="app.title">On OpenStreetMap</h2>
+                <p data-i18n="[html]app.desc">OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses.
+                <br/>It's easy and free to add your business to the map!</p>
             </div>
 
             <div class='col12 on-1 steps clearfix'>
@@ -30,7 +32,7 @@
                     <a href='#location' data-i18n="step1.title"></a>
                 </div>
                 <div class='col4 center pad1 step-2'>
-                    <a href='#details' data-i18n="step2.title"></a>
+                    <strong onclick="check_coordinates()" data-i18n="step2.title"></strong>
                 </div>
                 <div class='col4 center pad1 step-3'>
                     <strong data-i18n="step3.title"></strong>
@@ -54,6 +56,9 @@
 
                 <div class='center pad2'>
                     <p id="couldnt-find" style='display: none;' data-i18n="[html]step1.fail"></p>
+                </div>
+                <div class='center pad2'>
+                    <p id="invalid-location" style='display: none;' data-i18n="[html]step1.invalid-location"></p>
                 </div>
                 <div class='col12'>
                     <div class='col12' id='findme-map'></div>
@@ -95,7 +100,7 @@
                 </p>
             </div>
 
-            <footer><p class="center" data-i18n="[html]app.footer">Source code available on <a href="https://github.com/osmlab/onosm.org">Github</p></footer>
+            <footer><p class="center" data-i18n="[html]app.footer">Source code available on <a href="https://github.com/osmlab/onosm.org">Github</a></p></footer>
         </div>
         <script src='js/site.js'></script>
     </body>

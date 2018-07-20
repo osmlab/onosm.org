@@ -2,7 +2,7 @@
   "app": {
     "title": "Su OpenStreetMap",
     "desc": "OpenStreetMap è una mappa libera e globale usata da persone di tutto il mondo per navigare e cercare attività commerciali del posto. Comparire sulla mappa è facile e gratuito!",
-    "footer": "Il codice sorgente disponibile su <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+    "footer": "Il codice sorgente disponibile su <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
     "title": "Posizione",
@@ -41,7 +41,7 @@
     "row4a":"Torna alla schermata iniziale"
   },
   "messages":{
-  "success":"Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a a <a href='#details'>aggiungere dettagli alla tua scheda</a>.",
+  "success":"Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a ad <a href='#details'>aggiungere dettagli alla tua scheda</a>.",
   "loadingText":"Sto cercando..."
   }
 }

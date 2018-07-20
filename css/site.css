@@ -82,3 +82,14 @@ footer {
     margin-top: 10em;
     font-size: 80%;
 }
+
+@media only screen and (max-width:640px) {
+    .logo {
+        display: block;
+        float: none;
+        margin: auto;
+    }
+    .app-title {
+        text-align: center;
+    }
+}
