@@ -64,6 +64,7 @@ $("#use_my_location").click(function (e) {
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
+    $("#invalid-location").hide();
     $("#success").hide();
     var address_to_find = $("#address").val();
     if (address_to_find.length === 0) return;
@@ -150,4 +151,14 @@ function clearFields() {
     $("#category").val('');
     $("#address").val('');
     $("#linkcoords").empty();
+}
+
+function check_coordinates() {
+    var latlon = findme_marker.getLatLng();
+
+    if ((latlon.lat != 0) || (latlon.lng != 0)) {
+        location.hash = '#details';
+    } else {
+        $("#invalid-location").show();
+    }
 }

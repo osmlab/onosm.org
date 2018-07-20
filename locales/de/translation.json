@@ -2,7 +2,7 @@
   "app": {
     "title": "On OpenStreetMap",
     "desc": "OpenStreetMap ist eine offene, globale Karte, die von Menschen überall auf der Welt zur Navigation und zur suche nach lokalen Firmen genutzt wird. Es ist einfach und kostenlos das eigene Geschäft auf die Karte zu bringen!",
-    "footer": "Quellcode erhältlich auf <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+    "footer": "Quellcode erhältlich auf <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
     "title": "Ort / Adresse",
@@ -10,7 +10,8 @@
     "addr": "Hauptstraße 11, 10115 Berlin, Deutschland",
     "button": "Finde mich!",
     "fail": "<strong>Wir konnten Ihre Adresse nicht finden.</strong> Versuchen Sie es nur mit ihrer Straße und Stadt, ohne Hausnummer, noch einmal.",
-    "use_location": "Nutze meine aktuelle Position"
+    "use_location": "Nutze meine aktuelle Position",
+    "invalid-location": "Sie haben noch keine gültige Position eingegeben."
   },
   "step2": {
     "title": "Details",
@@ -21,7 +22,7 @@
     "addressaltplaceholder": "Hauptstraße 11, 10115 Berlin, Deutschland",
     "addressaltdesc": "Adresse",
     "name": "Name",
-    "nameplaceholder": "Park Cafè",
+    "nameplaceholder": "Park-Cafè",
     "phone": "Telefonnummer",
     "phoneplaceholder": "+49 30 123456-78",
     "opening": "Öffnungszeiten",
@@ -30,6 +31,7 @@
     "websiteplaceholder": "http://www.beispiel.de/",
     "social": "Social Network",
     "socialplaceholder": "@OpenStreetMap oder https://www.facebook.com/OpenStreetMap",
+    "invalid-details": "Ein Name und mindestens eine Kategorie müssen angegeben werden!",
     "done": "Fertig!"
   },
   "step3": {
