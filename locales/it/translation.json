@@ -1,0 +1,47 @@
+﻿{
+  "app": {
+    "title": "Su OpenStreetMap",
+    "desc": "OpenStreetMap è una mappa libera e globale usata da persone di tutto il mondo per navigare e cercare attività commerciali del posto. Comparire sulla mappa è facile e gratuito!",
+    "footer": "Il codice sorgente disponibile su <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
+  },
+  "step1": {
+    "title": "Posizione",
+    "desc": "Inizia col dirci dove è posizionata la tua attività commerciale.",
+    "addr": "Corso Europa, Genova",
+    "button": "Cercami!",
+    "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.",
+    "use_location": "usare mia posizione attuale"
+  },
+  "step2": {
+    "title": "Dettagli",
+    "desc": "Abbiamo trovato la tua posizione. Adesso descrivi la tua attività.",
+    "catlabel": "Categoria",
+    "catplaceholder": "Scegli una categoria...",
+    "addressalt":"Aiutaci compilando l'indirizzo (civico, cap,...) o migliorandolo se lo hai inserito precedentemente",
+    "addressaltplaceholder":"Corso Europa 12013, 16100 Genova (GE)",
+    "addressaltdesc": "Indirizzo",
+    "name": "Nome",
+    "nameplaceholder": "Bar Sport",
+    "phone": "Numero di telefono",
+    "phoneplaceholder": "+39 0123 456789",
+    "opening": "Orario di apertura",
+    "openingplaceholder": "Lunedì-Venerdì dalle 10:00 alle 19:00",
+    "website":"Sito Web",
+    "websiteplaceholder":"http://www.example.com/",
+    "social":"Social Network",
+    "socialplaceholder":"@OpenStreetMapIt oppure https://www.facebook.com/OpenStreetMap.Italia",
+    "done":"Fatto!"
+  },
+  "step3": {
+    "title": "Finito",
+    "row1":"<strong>Grazie!</strong> Un volontario di OpenStreetMap presto aggiungerà i tuoi dati sulla mappa.",
+    "row2":"Puoi visualizzare la nota appena creata e seguirne gli sviluppi a questo link:",
+    "row3":"Lo sapevi che puoi aggiungere i tuoi dati direttamente sulla mappa senza aspettare? E' facile iniziare a <a href='http://openstreetmap.org/edit'>modificare OSM</a> nel tuo browser.",
+    "row4":"Vuoi inserire una nuova nota?",
+    "row4a":"Torna alla schermata iniziale"
+  },
+  "messages":{
+  "success":"Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a ad <a href='#details'>aggiungere dettagli alla tua scheda</a>.",
+  "loadingText":"Sto cercando..."
+  }
+}

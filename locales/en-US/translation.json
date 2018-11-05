@@ -1,0 +1,48 @@
+﻿{
+  "app": {
+    "title": "On OpenStreetMap",
+    "desc": "OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses.<br/> It's easy and free to add your business to the map!",
+    "footer": "Source code available on <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+  },
+  "step1": {
+    "title": "Location",
+    "desc": "Start by telling us where your business is located.",
+    "addr": "501 West Main Street, Alexandria, VA",
+    "button": "Find me!",
+    "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address.",
+    "use_location": "use my current location",
+    "invalid-location": "The location is currently unset."
+  },
+  "step2": {
+    "title": "Details",
+    "desc": "We found it! Now fill in the details about your business.",
+    "catlabel": "Category",
+    "catplaceholder": "Please select...",
+    "addressalt": "Help us by filling the complete address (housenumber, post code) or improving the previous one",
+    "addressaltplaceholder": "501 West Main Street, Alexandria, VA",
+    "addressaltdesc": "Address",
+    "name": "Name",
+    "nameplaceholder": "Green Cafè",
+    "phone": "Phone number",
+    "phoneplaceholder": "555-555-5555",
+    "opening": "Opening Hours",
+    "openingplaceholder": "Monday-Friday 10am to 8pm",
+    "website": "Website",
+    "websiteplaceholder": "http://www.example.com/",
+    "social": "Social Network",
+    "socialplaceholder": "@OpenStreetMap or https://www.facebook.com/OpenStreetMap",
+    "done": "Done!"
+  },
+  "step3": {
+    "title": "Done",
+    "row1": "<strong>Thanks!</strong> An OpenStreetMap volunteer will add your data to the map soon.",
+    "row2": "You can see the newly created note and watch for updates at this link:",
+    "row3": "Did you know you can add your own data to the map and skip the wait? It's very easy to get started <a href=\"http://openstreetmap.org/edit\">editing OpenStreetMap</a> in your browser.",
+    "row4": "Do you want to add another note?",
+    "row4a": "Back to initial screen"
+  },
+  "messages": {
+    "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to <a href='javascript:check_coordinates()'>add more details</a>.",
+    "loadingText": "Searching..."
+  }
+}
