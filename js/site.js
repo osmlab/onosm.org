@@ -5,6 +5,9 @@ var findme_map = L.map('findme-map')
     osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
 
+// Check if user is on business page or home/address page
+var addr = location.pathname.match(/address/) ? true : false;
+
 var findme_marker = L.marker([0,0], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
@@ -115,14 +118,21 @@ $(window).on('hashchange', function() {
 $("#collect-data-done").click(function() {
     location.hash = '#done';
 
-    var note_body = "onosm.org submitted note from a business:\n" +
-        "Name: " + $("#name").val() + "\n" +
-        "Phone: " + $("#phone").val() + "\n" +
-        "Website: " + $("#website").val() + "\n" +
-        "Twitter: " + $("#twitter").val() + "\n" +
-        "Hours: " + $("#opening_hours").val() + "\n" +
-        "Category: " + $("#category").val() + "\n" +
-        "Address: " + $("#address").val(),
+    var note_body = !addr ? 
+        "onosm.org submitted note from a business:\n" +
+        "name: " + $("#name").val() + "\n" +
+        "phone: " + $("#phone").val() + "\n" +
+        "website: " + $("#website").val() + "\n" +
+        "twitter: " + $("#twitter").val() + "\n" +
+        "hours: " + $("#opening_hours").val() + "\n" +
+        "category: " + $("#category").val() + "\n" +
+        "address: " + $("#address").val() 
+        : 
+        "onosm.org submitted note for a home address:\n" + 
+        "number: " + $("#number").val() + "\n" +
+        "street: " + $("#street").val() + "\n" +
+        "city: " + $("#city").val() + "\n" +
+        "postal_code: " + $("#postal_code").val() + "\n",
         latlon = findme_marker.getLatLng(),
         note_data = {
             lat: latlon.lat,
