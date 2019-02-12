@@ -1,0 +1,48 @@
+﻿{
+  "app": {
+    "title": "On OpenStreetMap",
+    "desc": "OpenStreetMap er et åpent, globalt kart brukt av folk over hele verden til å navigere og finne lokale bedrifter.<br/> Det er enkelt og gratis å legge til bedriften din på kartet!",
+    "footer": "Kildekoden er tilgjengelig på <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+  },
+  "step1": {
+    "title": "Plassering",
+    "desc": "Start ved å fortelle oss hvor bedriften din er.",
+    "addr": "Storgata 17, Oslo, Norge",
+    "button": "Finn meg!",
+    "fail": "<strong>Vi kunne ikke finne adressen din.</strong> Prøv å søke etter gaten or byen uten adressen.",
+    "use_location": "pruk posisjonen min",
+    "invalid-location": "Plasseringen er forløpig ikke valgt."
+  },
+  "step2": {
+    "title": "Detaljer",
+    "desc": "Vi fant den! Fortsett ved å fylle inn detaljer om bedriften din.",
+    "catlabel": "Kategori",
+    "catplaceholder": "Vennligst velg...",
+    "addressalt": "Hjelp oss ved å fylle ut den fullsetendige adressen (housenumber, post code) eller ved å forbedre den forrige",
+    "addressaltplaceholder": "Storgata 17, Oslo, Norge",
+    "addressaltdesc": "Adresse",
+    "name": "Navn",
+    "nameplaceholder": "Den Grønne Kafé",
+    "phone": "Telefonnummer",
+    "phoneplaceholder": "111 11 111 eller 11 11 11 11",
+    "opening": "Åpningstider",
+    "openingplaceholder": "Mandag til Fredag 9-18...",
+    "website": "Nettside",
+    "websiteplaceholder": "http://www.eksempel.no/",
+    "social": "Sosiale Medier",
+    "socialplaceholder": "@OpenStreetMap eller https://www.facebook.com/OpenStreetMap",
+    "done": "Ferdig!"
+  },
+  "step3": {
+    "title": "Ferdig",
+    "row1": "<strong>Takk!</strong> En OpenStreetMap frivillig vil legge til bedriften på kartet snart.",
+    "row2": "Du kan se den nye merknaden og følge med på oppdateringer på denne linken:",
+    "row3": "Visste du at man kan legge til data på kartet selv og spare seg for ventetiden? Det er veldig enkelt å komme i gang med å<a href=\"http://openstreetmap.org/edit\">redigere OpenStreetMap</a> i nettleseren din.",
+    "row4": "Vil du legge til en annen merknad?",
+    "row4a": "Tilbake til start"
+  },
+  "messages": {
+    "success": "<strong>Fant den!</strong> Flytt markøren slik at den står<strong>nøyaktig på bedriften din</strong>.<br />Når du er fornøyd, kan vi starte med å <a href='javascript:check_coordinates()'>legge til noen flere detaljer</a>.",
+    "loadingText": "Leter..."
+  }
+}
