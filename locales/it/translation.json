@@ -36,6 +36,8 @@
     "socialplaceholder":"@OpenStreetMapIt oppure https://www.facebook.com/OpenStreetMap.Italia",
     "payment":"Modalità di pagamento accettate",
     "paymentplaceholder":"Clicca qui per le opzioni",
+    "delivery":"Consegna",
+    "deliveryplaceholder":"Si/No/Lunedì-Venerdì dalle 19:00 alle 21:00",
     "done":"Fatto!"
   },
   "step3": {
