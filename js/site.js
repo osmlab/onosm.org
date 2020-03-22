@@ -192,6 +192,7 @@ $("#collect-data-done").click(function() {
         if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc')+": " + $("#categoryalt").val() + "\n";
         if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + "\n";
         if ($("#payment").val()) note_body += i18n.t('step2.payment')+": " + $("#payment").val() + "\n";
+        if ($("#delivery").val()) note_body += i18n.t('step2.delivery')+": " + $("#delivery").val() + "\n";
     var latlon = findme_marker.getLatLng();
     var qwarg = {
             lat: latlon.lat,
@@ -219,6 +220,7 @@ function clearFields(){
     $("#payment").empty();
     $("#wheel").empty();
     $("#linkcoords").empty();
+    $("#delivery").empty();
 }
 
 
