@@ -193,6 +193,7 @@ $("#collect-data-done").click(function() {
         if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + "\n";
         if ($("#payment").val()) note_body += i18n.t('step2.payment')+": " + $("#payment").val() + "\n";
         if ($("#delivery").val()) note_body += i18n.t('step2.delivery')+": " + $("#delivery").val() + "\n";
+        if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
     var latlon = findme_marker.getLatLng();
     var qwarg = {
             lat: latlon.lat,
