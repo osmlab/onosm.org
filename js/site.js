@@ -31,7 +31,7 @@ i18n.init({ fallbackLng: onOSMlang, postAsync: 'false' }, function() {
 /* HERE BE DRAGONS */
 var findme_map = L.map('findme-map')
     .setView([41.69, 12.71], 5),
-    osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: "Data © OpenStreetMap contributors"}).addTo(findme_map);
 
 var category_data = [];
@@ -97,7 +97,7 @@ $("#find").submit(function(e) {
         format: 'json',
         q: address_to_find
     };
-    var url_nominatim = "http://nominatim.openstreetmap.org/search?" + $.param(qwarg_nominatim);
+    var url_nominatim = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg_nominatim);
 
     
     $("#findme h4").text(loadingText);
@@ -201,10 +201,10 @@ $("#collect-data-done").click(function() {
             text: note_body
         };
 
-    $.post('http://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
+    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
         console.log( data );
         var noteId=data['properties']['id'];
-        var link='http://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
+        var link='https://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
           $("#linkcoords").append('<a href="'+link+'">'+link+'</a>');
     });
 });
