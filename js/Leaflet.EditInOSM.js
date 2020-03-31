@@ -39,7 +39,7 @@
 
         _Editors = {
             Id: function (config) {
-                var url = 'http://www.openstreetmap.org/edit?editor=id#map=',
+                var url = 'https://www.openstreetmap.org/edit?editor=id#map=',
                     displayName = "iD",
                     buildUrl = function (map) {
                         return this.url + [
