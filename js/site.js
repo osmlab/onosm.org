@@ -32,7 +32,14 @@ i18n.init({ fallbackLng: onOSMlang, postAsync: 'false' }, function() {
 var findme_map = L.map('findme-map')
     .setView([41.69, 12.71], 5),
     osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: "Data © OpenStreetMap contributors"}).addTo(findme_map);
+    osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: "Data &copy; OpenStreetMap contributors"}).addTo(findme_map),
+    esri = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'});
+
+var baseMaps = {
+    "Mapnik": osm,
+    "Esri WorldImagery": esri
+};
+L.control.layers(baseMaps).addTo(findme_map);
 
 var category_data = [];
 var payment_data = [];
