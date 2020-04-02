@@ -211,7 +211,7 @@ $("#collect-data-done").click(function() {
     $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
         console.log( data );
         var noteId=data['properties']['id'];
-        var link='https://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lon+'&layers=N';
+        var link='https://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lng+'&layers=N';
           $("#linkcoords").append('<a href="'+link+'">'+link+'</a>');
     });
 });
