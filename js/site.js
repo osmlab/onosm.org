@@ -222,11 +222,11 @@ function clearFields(){
     $("#website").empty();
     $("#social").empty();
     $("#opening_hours").empty();
-    $("#category").empty();
+    $("#category").select2("val", "");
     $("#categoryalt").empty();
     $("#address").empty();
-    $("#payment").empty();
-    $("#wheel").empty();
+    $("#payment").select2("val", "");
+    $("#wheel").select2("val", "");
     $("#linkcoords").empty();
     $("#delivery").empty();
 }
