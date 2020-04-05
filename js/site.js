@@ -217,18 +217,19 @@ $("#collect-data-done").click(function() {
 });
 
 function clearFields(){
-    $("#name").empty();
-    $("#phone").empty();
-    $("#website").empty();
-    $("#social").empty();
-    $("#opening_hours").empty();
+    $("#name").val("");
+    $("#phone").val("");
+    $("#website").val("");
+    $("#social").val("");
+    $("#opening_hours").val("");
     $("#category").select2("val", "");
-    $("#categoryalt").empty();
-    $("#address").empty();
+    $("#categoryalt").val("");
+    $("#address").val("");
+    $("#addressalt").val("");
     $("#payment").select2("val", "");
     $("#wheel").select2("val", "");
-    $("#linkcoords").empty();
-    $("#delivery").empty();
+    $("#linkcoords").val("");
+    $("#delivery").val("");
 }
 
 
