@@ -36,6 +36,11 @@
     "socialplaceholder": "@OpenStreetMap or https://www.facebook.com/OpenStreetMap",
     "payment": "Accepted payment methods",
     "paymentplaceholder": "Choose an option",
+    "delivery":"Delivery",
+    "deliveryplaceholder":"Yes/No/Monday-Friday 7pm to 9pm",
+    "delivery_covid":"Is there a delivery service during COVID-19 emergency?",
+    "yes":"Yes",
+    "no":"No",
     "done": "Done!"
   },
   "step3": {

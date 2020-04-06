@@ -36,6 +36,11 @@
     "socialplaceholder":"@OpenStreetMapIt oppure https://www.facebook.com/OpenStreetMap.Italia",
     "payment":"Modalità di pagamento accettate",
     "paymentplaceholder":"Clicca qui per le opzioni",
+    "delivery":"Consegna",
+    "deliveryplaceholder":"Si/No/Lunedì-Venerdì dalle 19:00 alle 21:00",
+    "delivery_covid":"È attivo un servizio di consegna durante l'emergenza COVID-19?",
+    "yes":"Si",
+    "no":"No",
     "done":"Fatto!"
   },
   "step3": {
