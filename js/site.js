@@ -3,7 +3,7 @@ var onOSMlang='it-IT';
 
 var successString,manualPosition,loadingText,modalText;
 
-i18n.init({ fallbackLng: onOSMlang, postAsync: 'false' }, function() {
+i18n.init({ fallbackLng: 'it-IT', lngWhitelist: ['en-GB', 'it-IT'], postAsync: 'false' }, function() {
     $("body").i18n();
     successString=i18n.t('messages.success', { escapeInterpolation: false });
     manualPosition=i18n.t('messages.manualPosition', { escapeInterpolation: false });
