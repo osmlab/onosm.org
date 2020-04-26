@@ -188,19 +188,37 @@ $(window).on('hashchange', function() {
 $("#collect-data-done").click(function() {
     location.hash = '#done';
 
+    var paymentIds = [],
+        paymentTexts = [];
+    $.each($("#payment").select2("data"), function(_, e) {
+        paymentIds.push(e.id);
+        paymentTexts.push(e.text);
+    });
+
     var note_body = "E' stata inviata una nota tramite su.openstreetmap.it:\n";
-        if ($("#name").val()) note_body += i18n.t('step2.name')+": " + $("#name").val() + "\n";
-        if ($("#phone").val()) note_body += i18n.t('step2.phone')+": " + $("#phone").val() + "\n";
-        if ($("#website").val()) note_body += i18n.t('step2.website')+": " + $("#website").val() + "\n";
-        if ($("#social").val()) note_body += i18n.t('step2.social')+": " + $("#social").val() + "\n";
-        if ($("#opening_hours").val()) note_body += i18n.t('step2.opening')+": " + $("#opening_hours").val() + "\n";
-        if ($("#wheel").val()) note_body += i18n.t('step2.wheel')+": " + $("#wheel").val() + "\n";
-        if ($("#category").val()) note_body += i18n.t('step2.catlabel')+": " + $("#category").val() + "\n";
-        if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc')+": " + $("#categoryalt").val() + "\n";
-        if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + "\n";
-        if ($("#payment").val()) note_body += i18n.t('step2.payment')+": " + $("#payment").val() + "\n";
-        if ($("#delivery").val()) note_body += i18n.t('step2.delivery')+": " + $("#delivery").val() + "\n";
-        if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
+    if ($("#name").val()) note_body += i18n.t('step2.name')+": " + $("#name").val() + "\n";
+    if ($("#phone").val()) note_body += i18n.t('step2.phone')+": " + $("#phone").val() + "\n";
+    if ($("#website").val()) note_body += i18n.t('step2.website')+": " + $("#website").val() + "\n";
+    if ($("#social").val()) note_body += i18n.t('step2.social')+": " + $("#social").val() + "\n";
+    if ($("#opening_hours").val()) note_body += i18n.t('step2.opening')+": " + $("#opening_hours").val() + "\n";
+    if ($("#wheel").val()) note_body += i18n.t('step2.wheel')+": " + $("#wheel").val() + "\n";
+    if ($("#category").val()) note_body += i18n.t('step2.catlabel')+": " + $("#category").val() + "\n";
+    if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc')+": " + $("#categoryalt").val() + "\n";
+    if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + "\n";
+    if (paymentTexts) note_body += i18n.t('step2.payment')+": " + paymentTexts.join(",") + "\n";
+    if ($("#delivery").val()) note_body += i18n.t('step2.delivery')+": " + $("#delivery").val() + "\n";
+
+    note_body += "\nTag suggeriti:\n";
+    if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
+    if ($("#phone").val()) note_body += "contact:phone|mobile=" + $("#phone").val() + "\n";
+    if ($("#website").val()) note_body += "contact:website=" + $("#website").val() + "\n";
+    if ($("#social").val()) note_body += "contact:facebook|instagram|other=" + $("#social").val() + "\n";
+    if ($("#opening_hours").val()) note_body += "opening_hours=" + $("#opening_hours").val() + "\n";
+    if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
+    if (paymentIds) note_body += paymentIds.join("\n") + "\n";
+    if ($("#delivery").val()) note_body += "delivery=" + $("#delivery").val() + "\n";
+    if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
+
     var latlon = findme_marker.getLatLng();
     var qwarg = {
             lat: latlon.lat,
