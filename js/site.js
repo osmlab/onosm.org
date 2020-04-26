@@ -73,12 +73,8 @@ $("#category").select2({
 $("#payment").select2({
     multiple:true,
     query:function(query) {
-        var data={results:[]},i;
-        for (i = 0; i < payment_data.length; i++) {
-            if (query.term.length === 0 || payment_data[i].toLowerCase().indexOf(query.term.toLowerCase()) >= 0) {
-                data.results.push({id: payment_data[i], text: payment_data[i]});
-            }
-        }
+        var data={results:[]};
+        data.results=payment_data;
         query.callback(data);
     }
 });
