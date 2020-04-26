@@ -95,6 +95,8 @@
                         </span>
                         <label for='delivery' data-i18n="step2.delivery"></label>
                         <input id='delivery' type='text' placeholder='' data-i18n="[placeholder]step2.deliveryplaceholder"/>
+                        <label for='delivery_description' data-i18n="step2.delivery_description"></label>
+                        <input id='delivery_description' type='text' placeholder='' data-i18n="[placeholder]step2.delivery_descriptionplaceholder"/>
                     </div>
                     <div class='col6'>
                         <div style="height:65px;">&nbsp;</div>
@@ -104,11 +106,15 @@
                         <input id='social' type='text' placeholder='' data-i18n="[placeholder]step2.socialplaceholder"/>
                         <label for='payment' data-i18n="step2.payment"></label>
                         <input id='payment' placeholder="" data-i18n="[placeholder]step2.paymentplaceholder"/>
+                        <!-- delivery_covid -->
                         <label data-i18n="step2.delivery_covid"></label>
                         <span data-i18n="step2.yes"></span>
                         <input name='delivery_covid' type='radio' value='Y' />
                         <span data-i18n="step2.no"></span>
-                        <input name='delivery_covid' type='radio' value='N' checked />
+                        <input name='delivery_covid' type='radio' value='N' />
+                        <!-- /delivery_covid -->
+                        <label for='delivery_covid_description' data-i18n="step2.delivery_covid_description"></label>
+                        <input id='delivery_covid_description' type='text' placeholder='' data-i18n="[placeholder]step2.delivery_covid_descriptionplaceholder"/>
                     </div>
                     <h4><button class='col12' id='collect-data-done' data-i18n="step2.done"></button></h4>
                 </div>

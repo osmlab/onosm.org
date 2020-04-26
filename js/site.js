@@ -202,7 +202,8 @@ $("#collect-data-done").click(function() {
     if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc')+": " + $("#categoryalt").val() + "\n";
     if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + "\n";
     if (paymentTexts) note_body += i18n.t('step2.payment')+": " + paymentTexts.join(",") + "\n";
-    if ($("#delivery").val()) note_body += i18n.t('step2.delivery')+": " + $("#delivery").val() + "\n";
+    if ($("#delivery").val()) note_body += i18n.t('step2.deliverydesc')+": " + $("#delivery").val() + "\n";
+    if ($("#delivery_description").val()) note_body += i18n.t('step2.delivery_descriptiondesc')+": " + $("#delivery_description").val() + "\n";
 
     note_body += "\nTag suggeriti:\n";
     if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
@@ -213,7 +214,9 @@ $("#collect-data-done").click(function() {
     if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
     if (paymentIds) note_body += paymentIds.join("\n") + "\n";
     if ($("#delivery").val()) note_body += "delivery=" + $("#delivery").val() + "\n";
+    if ($("#delivery_description").val()) note_body += "delivery:description=" + $("#delivery_description").val() + "\n";
     if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
+    if ($("#delivery_covid_description").val()) note_body += "description:covid19=" + $("#delivery_description").val() + "\n";
 
     var latlon = findme_marker.getLatLng();
     var qwarg = {
@@ -244,6 +247,9 @@ function clearFields(){
     $("#wheel").select2("val", "");
     $("#linkcoords").val("");
     $("#delivery").val("");
+    $("#delivery_description").val("");
+    $("input[name=delivery_covid]").prop("checked", false);
+    $("#delivery_covid_description").val("");
 }
 
 
