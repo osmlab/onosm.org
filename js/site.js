@@ -181,9 +181,7 @@ $(window).on('hashchange', function() {
     findme_map.invalidateSize();
 });
 
-$("#collect-data-done").click(function() {
-    location.hash = '#done';
-
+function getNoteBody() {
     var paymentIds = [],
         paymentTexts = [];
     $.each($("#payment").select2("data"), function(_, e) {
@@ -201,7 +199,7 @@ $("#collect-data-done").click(function() {
     if ($("#category").val()) note_body += i18n.t('step2.catlabel')+": " + $("#category").val() + "\n";
     if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc')+": " + $("#categoryalt").val() + "\n";
     if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + "\n";
-    if (paymentTexts) note_body += i18n.t('step2.payment')+": " + paymentTexts.join(",") + "\n";
+    if (paymentIds) note_body += i18n.t('step2.payment')+": " + paymentTexts.join(",") + "\n";
     if ($("#delivery").val()) note_body += i18n.t('step2.deliverydesc')+": " + $("#delivery").val() + "\n";
     if ($("#delivery_description").val()) note_body += i18n.t('step2.delivery_descriptiondesc')+": " + $("#delivery_description").val() + "\n";
 
@@ -212,18 +210,24 @@ $("#collect-data-done").click(function() {
     if ($("#social").val()) note_body += "contact:facebook|instagram|other=" + $("#social").val() + "\n";
     if ($("#opening_hours").val()) note_body += "opening_hours=" + $("#opening_hours").val() + "\n";
     if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
+    if ($("#categoryalt").val()) note_body += "description=" + $("#categoryalt").val() + "\n";
     if (paymentIds) note_body += paymentIds.join("\n") + "\n";
     if ($("#delivery").val()) note_body += "delivery=" + $("#delivery").val() + "\n";
     if ($("#delivery_description").val()) note_body += "delivery:description=" + $("#delivery_description").val() + "\n";
     if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
     if ($("#delivery_covid_description").val()) note_body += "description:covid19=" + $("#delivery_covid_description").val() + "\n";
+    return note_body;
+}
 
-    var latlon = findme_marker.getLatLng();
-    var qwarg = {
-            lat: latlon.lat,
-            lon: latlon.lng,
-            text: note_body
-        };
+$("#collect-data-done").click(function() {
+    location.hash = '#done';
+
+    var latlon = findme_marker.getLatLng(),
+        qwarg = {
+        lat: latlon.lat,
+        lon: latlon.lng,
+        text: getNoteBody()
+    };
 
     $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
         console.log( data );
