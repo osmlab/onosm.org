@@ -216,7 +216,7 @@ $("#collect-data-done").click(function() {
     if ($("#delivery").val()) note_body += "delivery=" + $("#delivery").val() + "\n";
     if ($("#delivery_description").val()) note_body += "delivery:description=" + $("#delivery_description").val() + "\n";
     if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
-    if ($("#delivery_covid_description").val()) note_body += "description:covid19=" + $("#delivery_description").val() + "\n";
+    if ($("#delivery_covid_description").val()) note_body += "description:covid19=" + $("#delivery_covid_description").val() + "\n";
 
     var latlon = findme_marker.getLatLng();
     var qwarg = {
