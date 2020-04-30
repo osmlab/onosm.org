@@ -3,13 +3,15 @@
     <head>
         <title>On OpenStreetMap</title>
         <link rel="shortcut icon" href="img/favicon.ico" />
-        <meta http-equiv='content-type' content='text/html; charset=utf-8' />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="UTF-8">
         <link rel='stylesheet' type='text/css' href='css/style.css' />
-        <link rel='stylesheet' type='text/css' href='css/site.css' />
         <link rel='stylesheet' type='text/css' href='css/select2.css' />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.1/dist/leaflet.css" />
         <link rel="stylesheet" href="css/L.Control.Locate.css" />
         <link rel="stylesheet" href="css/qtip.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <!--[if lt IE 9]>
          <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.ie.css" />
@@ -23,112 +25,160 @@
         <script src="js/select2.min.js"></script>
         <script src="js/select2_locale_it.js"></script>
         <script src="js/i18next-1.7.4.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     </head>
     <body>
-        <div class='container pad2 margin2 col8'>
-            <div style="float:right"><a href="https://su.openstreetmap.it/?setLng=it-IT">Italiano</a>&nbsp;&nbsp;<a href="https://su.openstreetmap.it/?setLng=en-GB">English</a></div>
-            <div class='pad2'>
-                <img src='img/osm.png' class='fl mr' alt='OpenStreetMap' />
-                <h2 data-i18n="app.title"></h2>
-                <p  data-i18n="app.desc"></p>
+        <div class="container-sm mt-3 mb-5">
+          <div class="text-right">
+            <a href="https://su.openstreetmap.it/?setLng=it-IT">Italiano</a>&nbsp;&nbsp;<a href="https://su.openstreetmap.it/?setLng=en-GB">English</a>
+          </div>
+            <div class="row">
+            <div class="col">
+                <img src='img/osm.png' alt='OpenStreetMap' class="mx-auto"/>
             </div>
-
-            <div class='col12 on-1 steps clearfix'>
-                <div class='col4 center pad1 step-1'>
-                    <a href='#location' data-i18n="step1.title"></a>
-                </div>
-                <div class='col4 center pad1 step-2'>
-                    <a href='#details' data-i18n="step2.title"></a>
-                </div>
-                <div class='col4 center pad1 step-3'>
-                    <strong data-i18n="step3.title"></strong>
-                </div>
+            <div class="col-10 text-break">
+              <h2 data-i18n="app.title" class="mx-auto text-primary"></h2>
+              <p  data-i18n="app.desc" class="p-2"></p>
             </div>
+          </div>
 
-            <div class='col12' id='address-step'>
+            <nav class="nav nav-pills nav-fill border p-1 rounded">
+              <a class="nav-item nav-link active rounded-0 bg-success" id="step1" href='#location' data-i18n="step1.title"></a>
+              <a class="nav-item nav-link rounded-0" id="step2" href='#details' data-i18n="step2.title"></a>
+              <strong class="nav-item nav-link disabled rounded-0" id="step3" data-i18n="step3.title"></strong>
+            </nav>
+
+            <div class='mt-3' id='address-step'>
                 <div class='center pad2'>
-                    <span id='instructions' data-i18n="step1.desc"></span>
-                    <p id="couldnt-find" style='display: none;' data-i18n="[html]step1.fail"></p>
+                    <span id='instructions' class="h3 text-info" data-i18n="step1.desc"></span>
                 </div>
-                <div class='col12'>
-                    <div class='pad1'>
-                        <form id='find'>
-                            <input class='col8' id='address' placeholder='' data-i18n="[placeholder]step1.addr"/>
-                            <button class='col4' id='findme' data-i18n="step1.button"></button>
+                    <div class='mb-4 mt-3'>
+                        <form id='find' class="input-group">
+                            <input class="form-control" id="address" type="search" placeholder='' data-i18n="[placeholder]step1.addr"/>
+                          <div class="input-group-append">
+                            <button class="cbtn btn-primary px-3" id='findme'><span data-i18n="step1.button"></span><span class="spinner-grow spinner-grow-sm invisible ml-2" role="status" aria-hidden="true"></span></button>
+                          </div>
                         </form>
+                        <p id="couldnt-find" class="alert alert-danger mt-2" role="alert" style='display: none;' data-i18n="[html]step1.fail"></p>
                     </div>
-                    <br />
-                    <br />
-                    <div class='col12' id='findme-map'></div>
-                </div>
+                    <div id='findme-map'></div>
             </div>
 
-            <div class='col12 hide' id='collect-data-step'>
-                <p data-i18n="[html]step2.desc"></p>
+            <div class='mt-3 d-none' id='collect-data-step'>
+                <p data-i18n="[html]step2.desc" class="h3 text-info"></p>
                 <div class='col12'>
-                    <div class='clearfix col12'>
-                        <label for='category' data-i18n="step2.catlabel"></label>
-                    <input id='category' data-placeholder='' class='col10'  data-i18n="[data-placeholder]step2.catplaceholder"/>
+                  <div class="row">
+                    <div class="form-group col">
+                    <label for='category' data-i18n="step2.catlabel"></label>
+                    <input id='category' data-placeholder=''class="w-100" data-i18n="[data-placeholder]step2.catplaceholder"/>
                     </div>
-                     <div class='col6'>
+                     <div class="form-group col-sm-6">
                         <label for='categoryalt' data-i18n="step2.catalt"></label>
-                        <input id='categoryalt' type='text' placeholder='' class='col12' data-i18n="[placeholder]step2.cataltplaceholder"/>
+                        <input id='categoryalt' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.cataltplaceholder"/>
                     </div>
-                    <div class='clearfix col6'>
+                  </div>
+                    <div class="form-group">
                         <label for='addressalt' data-i18n="step2.addressalt"></label>
-                        <input id='addressalt' type='text' placeholder='' class='col12'  data-i18n="[placeholder]step2.addressaltplaceholder"/>
+                        <input id='addressalt' type='text' placeholder='' class="form-control"  data-i18n="[placeholder]step2.addressaltplaceholder"/>
                     </div>
-                    <div class='col6'>
+                    <div class="row">
+                      <div class="form-group col">
                         <label for='name' data-i18n="step2.name"></label>
-                        <input id='name' type='text' placeholder=''  data-i18n="[placeholder]step2.nameplaceholder"/>
+                        <input id='name' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.nameplaceholder"/>
+                      </div>
+                      <div class="form-group col-sm-5">
                         <label for='phone' data-i18n="step2.phone"></label>
-                        <input id='phone' type='text' placeholder='' data-i18n="[placeholder]step2.phoneplaceholder"/>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">📞</span>
+                          </div>
+                        <input id='phone' type="tel" placeholder='' class="form-control" data-i18n="[placeholder]step2.phoneplaceholder"/>
+                    </div>
+                  </div>
+                  </div>
+                    <div class="form-group">
                         <label for='opening_hours' data-i18n="step2.opening"></label>
-                        <input id='opening_hours' type='text' placeholder=''  data-i18n="[placeholder]step2.openingplaceholder"/>
-                        <label for='wheel' data-i18n="step2.wheel"></label>
-                        <input id='wheel' data-placeholder='' data-i18n="[data-placeholder]step2.wheelplaceholder"/>
-                        <span>
-                            <a class='' href='#details' rel='modal'>
-                                <img src='img/help.png' alt=""  data-i18n="[alt]step2.imgalt"/>
+                        <input id='opening_hours' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.openingplaceholder"/>
+                    </div>
+                        <label for='wheel' data-i18n="step2.wheel" class="mt-3"></label>
+                        <a class='' href='#details' rel='modal'>
+                                <img src='img/help.png' alt=""  data-i18n="[alt]step2.imgalt" data-toggle="modal" data-target="#wheelmodal"/>
                             </a>
-                        </span>
+                        <input id='wheel' data-placeholder='' class="w-100" data-i18n="[data-placeholder]step2.wheelplaceholder"/>
+                        <div class="modal fade bd-example-modal-xl" id="wheelmodal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" data-i18n="step2.imgalt"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p data-i18n="[html]step2.wheelmodal"></p>
+      </div>
+    </div>
+  </div>
+</div>
+                      <div class="row mt-5">
+                        <div class="form-group col">
                         <label for='delivery' data-i18n="step2.delivery"></label>
-                        <input id='delivery' type='text' placeholder='' data-i18n="[placeholder]step2.deliveryplaceholder"/>
+                        <input id='delivery' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.deliveryplaceholder"/>
+                      </div>
+                      <div class="form-group col-sm-6">
                         <label for='delivery_description' data-i18n="step2.delivery_description"></label>
-                        <input id='delivery_description' type='text' placeholder='' data-i18n="[placeholder]step2.delivery_descriptionplaceholder"/>
+                        <input id='delivery_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.delivery_descriptionplaceholder"/>
+                      </div>
                     </div>
-                    <div class='col6'>
-                        <div style="height:65px;">&nbsp;</div>
+                    <div class="row">
+                      <div class="form-group col">
                         <label for='website' data-i18n="step2.website"></label>
-                        <input id='website' type='text' placeholder='' data-i18n="[placeholder]step2.websiteplaceholder"/>
+                        <input id='website' type="url" placeholder='' class="form-control" data-i18n="[placeholder]step2.websiteplaceholder"/>
+                      </div>
+                      <div class="form-group col-sm-6">
                         <label for='social' data-i18n="step2.social"></label>
-                        <input id='social' type='text' placeholder='' data-i18n="[placeholder]step2.socialplaceholder"/>
-                        <label for='payment' data-i18n="step2.payment"></label>
-                        <input id='payment' placeholder="" data-i18n="[placeholder]step2.paymentplaceholder"/>
-                        <!-- delivery_covid -->
-                        <label data-i18n="step2.delivery_covid"></label>
-                        <span data-i18n="step2.yes"></span>
-                        <input name='delivery_covid' type='radio' value='Y' />
-                        <span data-i18n="step2.no"></span>
-                        <input name='delivery_covid' type='radio' value='N' />
-                        <!-- /delivery_covid -->
-                        <label for='delivery_covid_description' data-i18n="step2.delivery_covid_description"></label>
-                        <input id='delivery_covid_description' type='text' placeholder='' data-i18n="[placeholder]step2.delivery_covid_descriptionplaceholder"/>
+                        <input id='social' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.socialplaceholder"/>
+                      </div>
                     </div>
-                    <h4><button class='col12' id='collect-data-done' data-i18n="step2.done"></button></h4>
+                        <label for='payment' data-i18n="step2.payment"></label>
+                        <input id='payment' placeholder="" class="w-100" data-i18n="[placeholder]step2.paymentplaceholder"/>
+                        <!-- delivery_covid -->
+                        <div class="row mt-5">
+                        <div class="form-group col">
+                         <span class="badge badge-danger">COVID-19</span> <label data-i18n="step2.delivery_covid"></label>
+                        <div class=" form-check-inline">
+                        <div class="custom-control custom-radio">
+                        <input type="radio" id="yes-covid19" name="delivery_covid" class="custom-control-input form-check-input" value='Y'>
+                        <label class="custom-control-label form-check-label" for="yes-covid19" data-i18n="step2.yes"></label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                        <input type="radio" id="no-covid19" name="delivery_covid" class="custom-control-input form-check-input" value='N'>
+                        <label class="custom-control-label form-check-label" for="no-covid19" data-i18n="step2.no"></label>
+                        </div>
+                      </div>
+                      </div>
+                        <!-- /delivery_covid -->
+                        <div class="form-group col-sm-6">
+                        <span class="badge badge-danger">COVID-19</span> <label for='delivery_covid_description' data-i18n="step2.delivery_covid_description"></label>
+                        <input id='delivery_covid_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.delivery_covid_descriptionplaceholder"/>
+                      </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg w-100" id='collect-data-done' data-i18n="step2.done"></button>
                 </div>
             </div>
 
-            <div class='col12 pad2 hide' id='confirm-step'>
-                <p data-i18n="[html]step3.row1"></p>
-                <p><span data-i18n="step3.row2"></span> <span id='linkcoords'>&nbsp;</span></p>
-                <p data-i18n="[html]step3.row3"></p>
+            <div class='d-none' id='confirm-step'>
+                <p class="h2 text-success mt-3" data-i18n="[html]step3.row1"></p>
+                <p><span class="h4" data-i18n="step3.row2"></span> <span id='linkcoords'>&nbsp;</span></p>
+                <p class="alert alert-info" role="alert" data-i18n="[html]step3.row3"></p>
                 <p><span data-i18n="step3.row4"></span> <a href="#location" onclick="clearFields()"  data-i18n="step3.row4a"></a>!
                 </p>
             </div>
         </div>
         <script src='js/site.js'></script>
-        <script src="js/jquery.qtip-1.0.0-rc3.min.js"></script>
+        <!-- CONFETTI JS - https://github.com/mathusummut/confetti.js -->
+        <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js" async></script>
     </body>
 </html>

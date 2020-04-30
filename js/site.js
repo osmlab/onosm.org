@@ -24,7 +24,7 @@ i18n.init({ fallbackLng: 'it-IT', lngWhitelist: ['en-GB', 'it-IT'], postAsync: '
 	$.getJSON('./locales/'+onOSMlang+'/wheelchair.json').success(function(data){
 		wheel_data = data;
 	});
-	
+
 	loadWheelchair(onOSMlang);
   });
 
@@ -94,7 +94,7 @@ $("#find").submit(function(e) {
     $("#couldnt-find").hide();
     var address_to_find = $("#address").val();
     if (address_to_find.length === 0) return;
-    
+
     /* NOMINATIM PARAM */
     var qwarg_nominatim = {
         format: 'json',
@@ -102,10 +102,10 @@ $("#find").submit(function(e) {
     };
     var url_nominatim = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg_nominatim);
 
-    
+
     $("#findme h4").text(loadingText);
-    $("#findme").addClass("loading");
-    
+    $(".spinner-grow").removeClass("invisible");
+
 
         $.ajax({
           'url': url_nominatim,
@@ -131,9 +131,9 @@ function nominatim_callback(data){
             $('.step-2 a').attr('href', '#details');
             $('#addressalt').val(chosen_place.display_name);
     }    else {
-            $("#couldnt-find").show();   
+            $("#couldnt-find").show();
         }
-    $("#findme").removeClass("loading");
+    $(".spinner-grow").addClass("invisible");
 }
 
 function solr_callback(data){
@@ -152,31 +152,32 @@ function solr_callback(data){
 }
 
 /* map action */
-findme_map.on('click', function(e){ 
+findme_map.on('click', function(e){
 findme_marker.setOpacity(1);
-findme_marker.setLatLng(e.latlng); 
+findme_marker.setLatLng(e.latlng);
 $('#instructions').html(manualPosition);
 $('.step-2 a').attr('href', '#details');
 });
 
 $(window).on('hashchange', function() {
     if (location.hash == '#details') {
-        $('#collect-data-step').removeClass('hide');
-        $('#address-step').addClass('hide');
-        $('#confirm-step').addClass('hide');
-        $('.steps').addClass('on-2');
-        $('.steps').removeClass('on-3');
+        $('#collect-data-step').removeClass('d-none');
+        $('#address-step').addClass('d-none');
+        $('#confirm-step').addClass('d-none');
+        $('#step2').addClass('active bg-success');
+        $('#step3').removeClass('active bg-success');
     } else if (location.hash == '#done') {
-        $('#confirm-step').removeClass('hide');
-        $('#collect-data-step').addClass('hide');
-        $('#address-step').addClass('hide');
-        $('.steps').addClass('on-3');
+        $('#confirm-step').removeClass('d-none');
+        $('#collect-data-step').addClass('d-none');
+        $('#address-step').addClass('d-none');
+        $('#step3').addClass('active bg-success');
+        confetti.start(1000);
     } else {
-        $('#address-step').removeClass('hide');
-        $('#collect-data-step').addClass('hide');
-        $('#confirm-step').addClass('hide');
-        $('.steps').removeClass('on-2');
-        $('.steps').removeClass('on-3');
+        $('#address-step').removeClass('d-none');
+        $('#collect-data-step').addClass('d-none');
+        $('#confirm-step').addClass('d-none');
+        $('#step2').removeClass('active bg-success');
+        $('#step3').removeClass('active bg-success');
     }
     findme_map.invalidateSize();
 });
@@ -262,7 +263,7 @@ function clearFields(){
  * Extended of example from http://craigsworks.com/projects/qtip/demos/effects/modal
  */
 function loadWheelchair(lang)
-{   
+{
    $.get('./locales/'+lang+'/wheelchair.html', function(data) {
 
       $('a[rel="modal"]:first').qtip(
@@ -303,7 +304,7 @@ function loadWheelchair(lang)
             }
          }
       });
-   
+
    });
 
    // Create the modal backdrop on document load so all modal tooltips can use it
