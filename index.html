@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="css/L.Control.Locate.css" />
   <!-- BOOTSTRAP CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- TWEMOJI Amazing -->
+  <link rel="stylesheet" href="css/twemoji.css" />
+
 
   <!--[if lt IE 9]>
          <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.ie.css" />
@@ -88,7 +91,7 @@
             <label for='categoryalt' data-i18n="step2.catalt"></label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">🏪</span>
+                <span class="input-group-text"><i class="twa twa-convenience-store"></i></span>
               </div>
               <input id='categoryalt' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.cataltplaceholder" />
             </div>
@@ -100,7 +103,7 @@
           <label for='addressalt' data-i18n="step2.addressalt"></label>
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text">📍</span>
+              <span class="input-group-text"><i class="twa twa-round-pushpin"></i></span>
             </div>
             <input id='addressalt' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.addressaltplaceholder" />
           </div>
@@ -113,7 +116,7 @@
             <label for='name' data-i18n="step2.name"></label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">📛</span>
+                <span class="input-group-text"><i class="twa twa-name-badge"></i></span>
               </div>
               <input id='name' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.nameplaceholder" />
             </div>
@@ -122,7 +125,7 @@
             <label for='phone' data-i18n="step2.phone"></label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">📞</span>
+                <span class="input-group-text"><i class="twa twa-telephone-receiver"></i></span>
               </div>
               <input id='phone' type="tel" placeholder='' class="form-control" data-i18n="[placeholder]step2.phoneplaceholder" />
             </div>
@@ -135,7 +138,7 @@
             <label for='website' data-i18n="step2.website"></label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">🖥️</span>
+                <span class="input-group-text"><i class="twa twa-desktop-computer"></i></span>
               </div>
               <input id='website' type="url" placeholder='' class="form-control" data-i18n="[placeholder]step2.websiteplaceholder" />
             </div>
@@ -151,7 +154,7 @@
           <label for='opening_hours' data-i18n="step2.opening"></label>
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text">🕘</span>
+              <span class="input-group-text"><i class="twa twa-nine-o-clock"></i></span>
             </div>
             <input id='opening_hours' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.openingplaceholder" />
           </div>
@@ -159,10 +162,14 @@
 
         <!-- accessibility -->
         <label for='wheel' data-i18n="step2.wheel" class="mt-3"></label>
-        <a class='' href='#details' rel='modal'>
-          <img src='img/help.png' alt="" data-i18n="[alt]step2.imgalt" data-toggle="modal" data-target="#wheelmodal" />
-        </a> <!-- modal -->
-        <input id='wheel' data-placeholder='' class="w-100" data-i18n="[data-placeholder]step2.wheelplaceholder" />
+        <i class="twa twa-information" title="" data-i18n="[title]step2.imgalt" data-toggle="modal" data-target="#wheelmodal" style="cursor:pointer"></i>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="twa twa-wheelchair-symbol"></i></span>
+          </div>
+          <input id='wheel' data-placeholder='' class="col" data-i18n="[data-placeholder]step2.wheelplaceholder" />
+        </div>
+        <!-- modal -->
         <div class="modal fade bd-example-modal-xl" id="wheelmodal" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
@@ -181,7 +188,7 @@
 
 
         <!-- payments -->
-        <label for='payment' data-i18n="step2.payment"></label>
+        <label for='payment' data-i18n="step2.payment" class="mt-3"></label>
         <input id='payment' placeholder="" class="w-100" data-i18n="[placeholder]step2.paymentplaceholder" />
 
         <!-- delivery -->
