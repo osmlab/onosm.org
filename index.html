@@ -98,9 +98,12 @@
           </diV>
         </div>
 
-        <!-- address -->
-        <div class="form-group">
-          <label for='addressalt' data-i18n="step2.addressalt"></label>
+<hr>
+    <p data-i18n="step2.addressalt" class="mt-3"></p>
+        <!-- address 1 -->
+        <div class="form-row">
+        <div class="form-group col-md-5">
+          <label for='addressalt' data-i18n="step2.street"></label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="twa twa-round-pushpin"></i></span>
@@ -108,9 +111,39 @@
             <input id='addressalt' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.addressaltplaceholder" />
           </div>
         </div>
+          <div class="form-group col-md-2">
+            <label for="housenumber" data-i18n="step2.housenumber"></label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="twa twa-keycap-10"></i></span>
+              </div>
+            <input type="number" class="form-control" id="housenumber" data-i18n="[placeholder]step2.housenumberplaceholder">
+          </div>
+          </div>
 
+            <div class="form-group col-md-3">
+              <label for="city" data-i18n="step2.city" ></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="twa twa-cityscape"></i></span>
+                </div>
+              <input type="text" class="form-control" id="city" data-i18n="[placeholder]step2.cityplaceholder">
+            </div>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="postcode" data-i18n="step2.postcode"></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="twa twa-input-numbers"></i></span>
+                </div>
+              <input type="number" class="form-control" id="postcode" data-i18n="[placeholder]step2.postcodeplaceholder">
+            </div>
+            </div>
+        </div>
+
+        <hr>
         <!-- name and number -->
-        <div class="row">
+        <div class="row mt-3">
           <div class="form-group col">
 
             <label for='name' data-i18n="step2.name"></label>
@@ -186,14 +219,14 @@
           </div>
         </div>
 
-
         <!-- payments -->
         <label for='payment' data-i18n="step2.payment" class="mt-3"></label>
         <input id='payment' placeholder="" class="w-100" data-i18n="[placeholder]step2.paymentplaceholder" />
 
+<hr class="my-3">
         <!-- delivery -->
 
-        <div class="row mt-5">
+        <div class="row">
           <div class="form-group col">
             <label for='delivery' data-i18n="step2.delivery"></label>
             <input id='delivery' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.deliveryplaceholder" />
@@ -206,7 +239,7 @@
 
 
         <!-- delivery_covid -->
-        <div class="row mt-5">
+        <div class="row mt-2">
           <div class="form-group col">
             <span class="badge badge-danger">COVID-19</span> <label data-i18n="step2.delivery_covid"></label>
             <div class=" form-check-inline">
@@ -220,14 +253,68 @@
               </div>
             </div>
           </div>
-          <!-- /delivery_covid -->
+          <!-- delivery_covid -->
           <div class="form-group col-sm-6">
             <span class="badge badge-danger">COVID-19</span> <label for='delivery_covid_description' data-i18n="step2.delivery_covid_description"></label>
             <input id='delivery_covid_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.delivery_covid_descriptionplaceholder" />
           </div>
         </div>
 
-        <button class="btn btn-primary btn-lg w-100" id='collect-data-done' data-i18n="step2.done"></button>
+        <hr class="my-3">
+                <!-- takeaway -->
+
+                <div class="row">
+                  <div class="form-group col">
+                    <label data-i18n="step2.takeaway"></label>
+                    <div class=" form-check-inline w-100">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="yes-takeaway" name="takeaway" class="custom-control-input form-check-input" value='Y'>
+                        <label class="custom-control-label form-check-label" for="yes-takeaway" data-i18n="step2.yes"></label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="no-takeaway" name="takeaway" class="custom-control-input form-check-input" value='N'>
+                        <label class="custom-control-label form-check-label" for="no-takeaway" data-i18n="step2.no"></label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="only-takeaway" name="takeaway" class="custom-control-input form-check-input" value='O'>
+                        <label class="custom-control-label form-check-label" for="only-takeaway" data-i18n="step2.only_takeaway"></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for='takeaway_description' data-i18n="step2.takeaway_description"></label>
+                    <input id='takeaway_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.takeaway_descriptionplaceholder" />
+                  </div>
+                </div>
+
+
+                <!-- takeaway_covid -->
+                <div class="row mt-2">
+                  <div class="form-group col">
+                    <span class="badge badge-danger">COVID-19</span> <label data-i18n="step2.takeaway_covid"></label>
+                    <div class=" form-check-inline">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="yes-takeaway-covid19" name="takeaway_covid" class="custom-control-input form-check-input" value='Y'>
+                        <label class="custom-control-label form-check-label" for="yes-takeaway-covid19" data-i18n="step2.yes"></label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="no-takeaway-covid19" name="takeaway_covid" class="custom-control-input form-check-input" value='N'>
+                        <label class="custom-control-label form-check-label" for="no-takeaway-covid19" data-i18n="step2.no"></label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="only-takeaway-covid19" name="takeaway_covid" class="custom-control-input form-check-input" value='O'>
+                        <label class="custom-control-label form-check-label" for="only-takeaway-covid19" data-i18n="step2.only_takeaway"></label>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- takeaway_covid -->
+                  <div class="form-group col-sm-6">
+                    <span class="badge badge-danger">COVID-19</span> <label for='takeaway_covid_description' data-i18n="step2.takeaway_covid_description"></label>
+                    <input id='takeaway_covid_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.takeaway_covid_descriptionplaceholder" />
+                  </div>
+                </div>
+
+        <button class="btn btn-primary btn-lg w-100 mt-4" id='collect-data-done' data-i18n="step2.done"></button>
       </div>
     </div>
 

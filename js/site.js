@@ -98,7 +98,9 @@ $("#find").submit(function(e) {
     /* NOMINATIM PARAM */
     var qwarg_nominatim = {
         format: 'json',
-        q: address_to_find
+        q: address_to_find,
+        addressdetails: 1,
+        namedetails: 1
     };
     var url_nominatim = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg_nominatim);
 
@@ -129,7 +131,9 @@ function nominatim_callback(data){
             findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
             $('#instructions').html(successString);
             $('.step-2 a').attr('href', '#details');
-            $('#addressalt').val(chosen_place.display_name);
+            $('#addressalt').val(chosen_place.address.road);
+            $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
+            $('#postcode').val(chosen_place.address.postcode);
     }    else {
             $("#couldnt-find").show();
         }
@@ -203,6 +207,10 @@ function getNoteBody() {
     if (paymentIds) note_body += i18n.t('step2.payment')+": " + paymentTexts.join(",") + "\n";
     if ($("#delivery").val()) note_body += i18n.t('step2.deliverydesc')+": " + $("#delivery").val() + "\n";
     if ($("#delivery_description").val()) note_body += i18n.t('step2.delivery_descriptiondesc')+": " + $("#delivery_description").val() + "\n";
+    if ($("input:checked[name=takeaway]").val() === Y) note_body += i18n.t('step2.takeawaydesc')+": " + i18n.t('step2.yes') + "\n";
+    if ($("input:checked[name=takeaway]").val() === O) note_body += i18n.t('step2.takeawaydesc')+": " + i18n.t('step2.only_takeaway') + "\n";
+    if ($("#takeaway_description").val()) note_body += i18n.t('step2.takeaway_descriptiondesc')+": " + $("#takeaway_description").val() + "\n";
+
 
     note_body += "\nTag suggeriti:\n";
     if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
@@ -256,71 +264,3 @@ function clearFields(){
     $("input[name=delivery_covid]").prop("checked", false);
     $("#delivery_covid_description").val("");
 }
-
-
-/*
- * WHEELCHAIR
- * Extended of example from http://craigsworks.com/projects/qtip/demos/effects/modal
- */
-function loadWheelchair(lang)
-{
-   $.get('./locales/'+lang+'/wheelchair.html', function(data) {
-
-      $('a[rel="modal"]:first').qtip(
-      {
-         content: {
-            title: modalText,
-            text: data
-         },
-         position: {
-            target: $(document.body), // Position it via the document body...
-            corner: 'center' // ...at the center of the viewport
-         },
-         show: {
-            when: 'click', // Show it on click
-            solo: true // And hide all other tooltips
-         },
-         hide: false,
-         style: {
-            width: { max: 650 },
-            padding: '14px',
-            border: {
-               width: 9,
-               radius: 9,
-               color: '#666666'
-            },
-            name: 'light'
-         },
-         api: {
-            beforeShow: function()
-            {
-               // Fade in the modal "blanket" using the defined show speed
-               $('#qtip-blanket').fadeIn(this.options.show.effect.length);
-            },
-            beforeHide: function()
-            {
-               // Fade out the modal "blanket" using the defined hide speed
-               $('#qtip-blanket').fadeOut(this.options.hide.effect.length);
-            }
-         }
-      });
-
-   });
-
-   // Create the modal backdrop on document load so all modal tooltips can use it
-   $('<div id="qtip-blanket">')
-      .css({
-         position: 'absolute',
-         top: $(document).scrollTop(), // Use document scrollTop so it's on-screen even if the window is scrolled
-         left: 0,
-         height: $(document).height(), // Span the full document height...
-         width: '100%', // ...and full width
-
-         opacity: 0.7, // Make it slightly transparent
-         backgroundColor: 'black',
-         zIndex: 5000  // Make sure the zIndex is below 6000 to keep it below tooltips!
-      })
-      .appendTo(document.body) // Append to the document body
-      .hide(); // Hide it initially
-
-};
