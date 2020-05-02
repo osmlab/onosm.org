@@ -8,7 +8,8 @@
     "desc": "Start by telling us where your business is located.",
     "addr": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",
-    "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address."
+    "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address.",
+    "continue": "Continue"
   },
   "step2": {
     "title": "Details",
@@ -36,6 +37,10 @@
     "openingplaceholder": "Monday-Friday 10am to 8pm",
     "wheel": "Wheelchair accessibility",
     "wheelplaceholder": "Choose an option",
+    "wheel_yes": "Unrestricted access",
+    "wheel_limited": "Partial access",
+    "wheel_no": "No unrestricted access",
+    "wheel_unknown": "Unknown access",
     "imgalt": "Additional information on wheelchair accessibility",
     "website": "Website",
     "websiteplaceholder": "https://www.example.com/",
@@ -75,8 +80,8 @@
     "row4a": "Back to initial screen"
   },
   "messages": {
-    "success": "Found it! Click and drag the marker on your business place position, so you'll be ready to <a href='#details'>add more details</a>.",
-    "manualPosition": " You have activated the marker! Click and drag it on your business place position, so you'll be ready to <a href='#details'>add more details</a>.",
+    "success": "Found it! Click and drag the marker on your business place position, so you'll be ready to <a href='#details'>add more details.</a>",
+    "manualPosition": " You have activated the marker! Click and drag it on your business place position, so you'll be ready to <a href='#details'>add more details.</a>",
     "loadingText": "Searching...",
     "modalButton": "Close",
     "modalTitle": "Wheelchair accessibility classification"

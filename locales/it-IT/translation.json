@@ -8,7 +8,8 @@
     "desc": "Inizia col dirci dove è posizionata la tua attività commerciale.",
     "addr": "Corso Europa, Genova",
     "button": "Cercami!",
-    "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli."
+    "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.",
+    "continue": "Prosegui"
   },
   "step2": {
     "title": "Dettagli",
@@ -36,6 +37,10 @@
     "openingplaceholder": "Lunedì-Venerdì dalle 10:00 alle 19:00",
     "wheel": "Accessibilità in sedia a rotelle",
     "wheelplaceholder": "Seleziona una opzione",
+    "wheel_yes": "Completamente accessibile",
+    "wheel_limited": "Parzialmente accessibile",
+    "wheel_no": "Non accessibile",
+    "wheel_unknown": "Livello di accessibilità sconosciuto",
     "imgalt": "Maggiori informazioni sull'accessibilità in sedia a rotelle",
     "website": "Sito Web",
     "websiteplaceholder": "https://www.example.com/",
@@ -44,7 +49,7 @@
     "payment": "Modalità di pagamento accettate",
     "paymentplaceholder": "Clicca qui per le opzioni",
     "delivery": "È attivo un servizio di consegna?",
-    "deliveryplaceholder": "Si/No/Lunedì-Venerdì dalle 19:00 alle 21:00",
+    "deliveryplaceholder": "Sì/No/Lunedì-Venerdì dalle 19:00 alle 21:00",
     "deliverydesc": "Consegna",
     "delivery_description": "Dettagli sul servizio di consegna",
     "delivery_descriptionplaceholder": "Ordine minimo 15€ consegna gratuita",
@@ -61,7 +66,7 @@
     "takeaway_covid_descriptionplaceholder": "Lunedì-Venerdì dalle 19:00 alle 21:00",
     "takeaway_covid_description": "Dettagli sul servizio d'asporto durante l'emergenza COVID-19",
     "only_takeaway": "Solo asporto",
-    "yes": "Si",
+    "yes": "Sì",
     "no": "No",
     "done": "Fatto!",
     "wheelmodal": "<h2>Completamente accessibile</h2><p><ul><li> L'<b>entrata</b> è perfettamente transitabile in sedia a rotelle</li><li> Tutti i <b>locali</b> sono accessibili per chi è in sedia a rotelle</li><li> I <b>bagni</b> (se esistono) sono adattati e sufficentemente ampi per essere utilizzati da persone con disabilità fisiche</li></ul></p><h2>Parzialmente accessibile</h2><p><ul><li> L'<b>entrata</b> ha un gradino che non supera i 7 centimetri</li><li> La maggior parte dei <b>locali</b> è accessibile in sedia a rotelle</li><li> I <b>bagni</b> (se esistono) non posseggono strutture che favoriscono l'accessibilità</li></ul></p><h2>Non accessibile</h2><p><ul><li> L'<b>entrata</b> ha un gradino maggiore di 7 centimetri</li><li> I <b>locali</b> principali non sono accessibili in sedia a rotelle</li><li> I <b>bagni</b> (se esistono) non posseggono strutture che favoriscono l'accessibilità</li></ul></p><h2>Livello di accessibilità sconosciuto</h2><p>Se non hai la certezza o possiedi informazioni, scegli questa opzione.</p>"
@@ -75,8 +80,8 @@
     "row4a": "Torna alla schermata iniziale"
   },
   "messages":{
-  "success": "Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così sarai pronto/a a <a href='#details'>aggiungere dettagli alla tua scheda</a>.",
-  "manualPosition": "Hai attivato l'indicatore! Cliccalo e trascinalo sulla posizione della tua attività commerciale, così sarai pronto/a a <a href='#details'>aggiungere dettagli alla tua scheda</a>.",
+  "success": "Trovato! Clicca e trascina l'indicatore sulla posizione della tua attività commerciale, così potrai iniziare a <a href='#details'>aggiungere dettagli alla tua scheda.</a>",
+  "manualPosition": "Hai attivato l'indicatore! Cliccalo e trascinalo sulla posizione della tua attività commerciale, così potrai iniziare a <a href='#details'>aggiungere dettagli alla tua scheda.</a>",
   "loadingText": "Sto cercando...",
   "modalButton": "Chiudi",
   "modalTitle": "Classificazione dell'accessibilità in sedia a rotelle"

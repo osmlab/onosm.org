@@ -79,14 +79,6 @@ $("#payment").select2({
     }
 });
 
-$("#wheel").select2({
-    query: function (query) {
-        var data = {results: []}, i;
-        data.results=wheel_data;
-        query.callback(data);
-    }
-});
-
 
 /* search action */
 $("#find").submit(function(e) {
@@ -130,6 +122,8 @@ function nominatim_callback(data){
             findme_marker.setOpacity(1);
             findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
             $('#instructions').html(successString);
+            $('#step2').removeClass("disabled");
+            $('#continue').removeClass("disabled");
             $('.step-2 a').attr('href', '#details');
             $('#addressalt').val(chosen_place.address.road);
             $('#housenumber').val(chosen_place.address.house_number);
@@ -149,6 +143,8 @@ function solr_callback(data){
             findme_marker.setLatLng([coords[0], coords[1]]);
             findme_map.setView([coords[0], coords[1]],16);
             $('#instructions').html(successString);
+            $('#step2').removeClass("disabled");
+            $('#continue').removeClass("disabled");
             $('.step-2 a').attr('href', '#details');
     }   else {
             $("#couldnt-find").show();
@@ -162,6 +158,8 @@ findme_marker.setOpacity(1);
 findme_marker.setLatLng(e.latlng);
 $('#instructions').html(manualPosition);
 $('.step-2 a').attr('href', '#details');
+$('#step2').removeClass("disabled");
+$('#continue').removeClass("disabled");
 });
 
 $(window).on('hashchange', function() {
@@ -208,8 +206,8 @@ function getNoteBody() {
     if (paymentIds) note_body += i18n.t('step2.payment')+": " + paymentTexts.join(",") + "\n";
     if ($("#delivery").val()) note_body += i18n.t('step2.deliverydesc')+": " + $("#delivery").val() + "\n";
     if ($("#delivery_description").val()) note_body += i18n.t('step2.delivery_descriptiondesc')+": " + $("#delivery_description").val() + "\n";
-    if ($("input:checked[name=takeaway]").val() === Y) note_body += i18n.t('step2.takeawaydesc')+": " + i18n.t('step2.yes') + "\n";
-    if ($("input:checked[name=takeaway]").val() === O) note_body += i18n.t('step2.takeawaydesc')+": " + i18n.t('step2.only_takeaway') + "\n";
+    if ($("input:checked[name=takeaway]").val() === 'yes') note_body += i18n.t('step2.takeawaydesc')+": " + i18n.t('step2.yes') + "\n";
+    if ($("input:checked[name=takeaway]").val() === 'only') note_body += i18n.t('step2.takeawaydesc')+": " + i18n.t('step2.only_takeaway') + "\n";
     if ($("#takeaway_description").val()) note_body += i18n.t('step2.takeaway_descriptiondesc')+": " + $("#takeaway_description").val() + "\n";
 
 
@@ -228,8 +226,13 @@ function getNoteBody() {
     if (paymentIds) note_body += paymentIds.join("\n") + "\n";
     if ($("#delivery").val()) note_body += "delivery=" + $("#delivery").val() + "\n";
     if ($("#delivery_description").val()) note_body += "delivery:description=" + $("#delivery_description").val() + "\n";
+    if ($("input:checked[name=takeaway]").val() != "") note_body += "takeaway=" + $("input:checked[name=takeaway]").val() + "\n";
+    if ($("#takeaway_description").val()) note_body += "takeaway:description=" + $("#takeaway_description").val() + "\n";
     if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
-    if ($("#delivery_covid_description").val()) note_body += "description:covid19=" + $("#delivery_covid_description").val() + "\n";
+    if ($("input:checked[name=takeaway_covid]").val() != "") note_body += "takeaway:covid19=" + $("input:checked[name=takeaway_covid]").val() + "\n";
+    if ($("#delivery_covid_description").val() || $("#takeaway_covid_description").val()) note_body += "description:covid19=";
+    if ($("#delivery_covid_description").val()) note_body += $("#delivery_covid_description").val();
+    if ($("#takeaway_covid_description").val()) note_body += $("#takeaway_covid_description").val() + "\n";
     return note_body;
 }
 
@@ -242,11 +245,11 @@ $("#collect-data-done").click(function() {
         lon: latlon.lng,
         text: getNoteBody()
     };
-
-    $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
+// 🔴🔴🔴🔴🔴 TODO: CAMBIARE CON https://api.openstreetmap.org/api/0.6/notes.json 🔴🔴🔴🔴🔴
+    $.post('https://api06.dev.openstreetmap.org/api/0.6/notes.json', qwarg, function( data ) {
         console.log( data );
         var noteId=data['properties']['id'];
-        var link='https://www.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lng+'&layers=N';
+        var link='https://api06.dev.openstreetmap.org/?note='+noteId+'#map=19/'+latlon.lat+'/'+latlon.lng+'&layers=N';
           $("#linkcoords").append('<a href="'+link+'">'+link+'</a>');
     });
 });
@@ -262,10 +265,14 @@ function clearFields(){
     $("#address").val("");
     $("#addressalt").val("");
     $("#payment").select2("val", "");
-    $("#wheel").select2("val", "");
+    $("#wheel").val("");
     $("#linkcoords").val("");
     $("#delivery").val("");
     $("#delivery_description").val("");
     $("input[name=delivery_covid]").prop("checked", false);
     $("#delivery_covid_description").val("");
+    $("input[name=takeaway").prop("checked", false);
+    $("#takeaway_description").val("");
+    $("input[name=takeaway_covid]").prop("checked", false);
+    $("#takeaway_covid_description").val("");
 }
