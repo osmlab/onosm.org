@@ -1,16 +1,17 @@
 #map {
-    height:400px;
+  height: 400px;
 }
 
 #findme-map {
-    height:300px;
+  height: 300px;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
+
 input[type=number] {
-    -moz-appearance:textfield;
+  -moz-appearance: textfield;
 }
