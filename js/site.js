@@ -132,6 +132,7 @@ function nominatim_callback(data){
             $('#instructions').html(successString);
             $('.step-2 a').attr('href', '#details');
             $('#addressalt').val(chosen_place.address.road);
+            $('#housenumber').val(chosen_place.address.house_number);
             $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
             $('#postcode').val(chosen_place.address.postcode);
     }    else {
