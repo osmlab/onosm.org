@@ -204,7 +204,7 @@ function getNoteBody() {
     if ($("#wheel").val()) note_body += i18n.t('step2.wheel')+": " + $("#wheel").val() + "\n";
     if ($("#category").val()) note_body += i18n.t('step2.catlabel')+": " + $("#category").val() + "\n";
     if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc')+": " + $("#categoryalt").val() + "\n";
-    if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + "\n";
+    if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc')+": " + $("#addressalt").val() + " " + $("#housenumber").val() + ", " + $("#postcode").val() + " " + $("#city").val() + "\n";
     if (paymentIds) note_body += i18n.t('step2.payment')+": " + paymentTexts.join(",") + "\n";
     if ($("#delivery").val()) note_body += i18n.t('step2.deliverydesc')+": " + $("#delivery").val() + "\n";
     if ($("#delivery_description").val()) note_body += i18n.t('step2.delivery_descriptiondesc')+": " + $("#delivery_description").val() + "\n";
@@ -215,6 +215,10 @@ function getNoteBody() {
 
     note_body += "\nTag suggeriti:\n";
     if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
+    if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
+    if ($("#housenumber").val()) note_body += "addr:housenumber=" + $("#housenumber").val() + "\n";
+    if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
+    if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
     if ($("#phone").val()) note_body += "contact:phone|mobile=" + $("#phone").val() + "\n";
     if ($("#website").val()) note_body += "contact:website=" + $("#website").val() + "\n";
     if ($("#social").val()) note_body += "contact:facebook|instagram|other=" + $("#social").val() + "\n";
