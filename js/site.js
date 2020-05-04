@@ -225,7 +225,7 @@ function getNoteBody() {
   var note_body = "E' stata inviata una nota tramite su.openstreetmap.it:\n";
   if ($("#name").val()) note_body += i18n.t('step2.name') + ": " + $("#name").val() + "\n";
   if ($("#phone").val()) note_body += i18n.t('step2.phone') + ": " + $("#phone").val() + "\n";
-  if ($("#website").val()) note_body += i18n.t('step2.website') + ": " + $("#website").val() + "\n";
+  if ($("#website").val() != "https://") note_body += i18n.t('step2.website') + ": " + $("#website").val() + "\n";
   if ($("#social").val()) note_body += i18n.t('step2.social') + ": " + $("#social").val() + "\n";
   if ($("#opening_hours").val()) note_body += i18n.t('step2.opening') + ": " + $("#opening_hours").val() + "\n";
   if ($("#wheel").val()) note_body += i18n.t('step2.wheel') + ": " + $("#wheel").val() + "\n";
@@ -247,7 +247,7 @@ function getNoteBody() {
   if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
   if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
   if ($("#phone").val()) note_body += "⚠️ contact:phone|mobile=" + $("#phone").val() + "\n";
-  if ($("#website").val()) note_body += "contact:website=" + $("#website").val() + "\n";
+  if ($("#website").val() != "https://") note_body += "contact:website=" + $("#website").val() + "\n";
   if ($("#social").val()) note_body += "⚠️ contact:facebook|instagram|other=" + $("#social").val() + "\n";
   if ($("#opening_hours").val()) note_body += "⚠️ opening_hours=" + $("#opening_hours").val() + "\n";
   if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
@@ -279,7 +279,7 @@ $("#collect-data-done").click(function() {
     console.log(data);
     var noteId = data['properties']['id'];
     var link = 'https://api06.dev.openstreetmap.org/?note=' + noteId + '#map=19/' + latlon.lat + '/' + latlon.lng + '&layers=N';
-    $("#linkcoords").append('<a href="' + link + '">' + link + '</a>');
+    $("#linkcoords").append('<div class="mt-3 h4"><a href="' + link + '">' + link + '</a></div>');
   });
 });
 

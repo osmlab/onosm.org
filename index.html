@@ -256,7 +256,7 @@
      <div class="custom-control custom-checkbox">
   <input type="checkbox" class="custom-control-input" id="delivery-check" name="delivery-check">
 
-       <label for="delivery-check" id="label-delivery-check" class="custom-control-label mb-0 ml-2"></label>
+       <label for="delivery-check" id="label-delivery-check" class="custom-control-label mb-0 ml-2" data-i18n="step2.no"></label>
 </div>
    </div>
  </div>
@@ -351,11 +351,13 @@
     </div>
 
     <div class='d-none' id='confirm-step'>
-      <p class="h2 text-success mt-3" data-i18n="[html]step3.row1"></p>
+      <p class="h2 text-success mt-3 mb-4" data-i18n="[html]step3.row1"></p>
       <p><span class="h4" data-i18n="step3.row2"></span> <span id='linkcoords'>&nbsp;</span></p>
       <p class="alert alert-info" role="alert" data-i18n="[html]step3.row3"></p>
       <p><span data-i18n="step3.row4"></span> <a href="#location" onclick="clearFields()" data-i18n="step3.row4a"></a>!
       </p>
+
+      <div data-i18n="[html]step3.finalmessage"></div>
     </div>
   </div>
   <script src='js/site.js'></script>
