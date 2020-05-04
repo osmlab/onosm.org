@@ -212,7 +212,7 @@ $(window).on('hashchange', function() {
 // Disables the input if delivery is not checked
 $('#delivery-check').prop('indeterminate', true);
 $(function() {deliveryCheck(); $("#delivery-check").click(deliveryCheck);});
-function deliveryCheck() { if (this.checked) $("#delivery").removeAttr("disabled"); else $("#delivery").attr("disabled", true);}
+function deliveryCheck() { if (this.checked){ $("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#label-delivery-check").html(i18n.t('step2.yes'));} else {$("#delivery").attr("disabled", true);$("#delivery_description").attr("disabled", true); $("#label-delivery-check").html(i18n.t('step2.no'));}}
 
 function getNoteBody() {
   var paymentIds = [],
