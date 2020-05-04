@@ -209,6 +209,11 @@ $(window).on('hashchange', function() {
   findme_map.invalidateSize();
 });
 
+// Disables the input if delivery is not checked
+$('#delivery-check').prop('indeterminate', true);
+$(function() {deliveryCheck(); $("#delivery-check").click(deliveryCheck);});
+function deliveryCheck() { if (this.checked) $("#delivery").removeAttr("disabled"); else $("#delivery").attr("disabled", true);}
+
 function getNoteBody() {
   var paymentIds = [],
     paymentTexts = [];
@@ -228,34 +233,34 @@ function getNoteBody() {
   if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc') + ": " + $("#categoryalt").val() + "\n";
   if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc') + ": " + $("#addressalt").val() + " " + $("#housenumber").val() + ", " + $("#postcode").val() + " " + $("#city").val() + "\n";
   if (paymentIds) note_body += i18n.t('step2.payment') + ": " + paymentTexts.join(",") + "\n";
-  if ($("#delivery").val()) note_body += i18n.t('step2.deliverydesc') + ": " + $("#delivery").val() + "\n";
+  if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "") note_body += i18n.t('step2.deliverydesc') + $("#delivery").val() + "\n"; else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "") note_body += i18n.t('step2.deliverydesc') + i18n.t('step2.yes') + "\n"; else if ($('#delivery-check').not(':indeterminate') == true) note_body += i18n.t('step2.deliverydesc') + i18n.t('step2.no') + "\n";
   if ($("#delivery_description").val()) note_body += i18n.t('step2.delivery_descriptiondesc') + ": " + $("#delivery_description").val() + "\n";
   if ($("input:checked[name=takeaway]").val() === 'yes') note_body += i18n.t('step2.takeawaydesc') + ": " + i18n.t('step2.yes') + "\n";
   if ($("input:checked[name=takeaway]").val() === 'only') note_body += i18n.t('step2.takeawaydesc') + ": " + i18n.t('step2.only_takeaway') + "\n";
   if ($("#takeaway_description").val()) note_body += i18n.t('step2.takeaway_descriptiondesc') + ": " + $("#takeaway_description").val() + "\n";
 
 
-  note_body += "\nTag suggeriti:\n";
+  note_body += "\nTag suggeriti: (⚠️ = "+ i18n.t('messages.needsChecking') + ")\n";
   if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
   if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
   if ($("#housenumber").val()) note_body += "addr:housenumber=" + $("#housenumber").val() + "\n";
   if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
   if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
-  if ($("#phone").val()) note_body += "contact:phone|mobile=" + $("#phone").val() + "\n";
+  if ($("#phone").val()) note_body += "⚠️ contact:phone|mobile=" + $("#phone").val() + "\n";
   if ($("#website").val()) note_body += "contact:website=" + $("#website").val() + "\n";
-  if ($("#social").val()) note_body += "contact:facebook|instagram|other=" + $("#social").val() + "\n";
-  if ($("#opening_hours").val()) note_body += "opening_hours=" + $("#opening_hours").val() + "\n";
+  if ($("#social").val()) note_body += "⚠️ contact:facebook|instagram|other=" + $("#social").val() + "\n";
+  if ($("#opening_hours").val()) note_body += "⚠️ opening_hours=" + $("#opening_hours").val() + "\n";
   if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
   if ($("#categoryalt").val()) note_body += "description=" + $("#categoryalt").val() + "\n";
   if (paymentIds) note_body += paymentIds.join("\n") + "\n";
-  if ($("#delivery").val()) note_body += "delivery=" + $("#delivery").val() + "\n";
+  if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "") note_body += "⚠️ delivery=" + $("#delivery").val() + "\n"; else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "") note_body += "delivery=yes" + "\n"; else if($('#delivery-check').not(':indeterminate') == true) note_body += "delivery=no" + "\n";
   if ($("#delivery_description").val()) note_body += "delivery:description=" + $("#delivery_description").val() + "\n";
-  if ($("input:checked[name=takeaway]").val() != "") note_body += "takeaway=" + $("input:checked[name=takeaway]").val() + "\n";
+  if ($("input:checked[name=takeaway]").val() != "undefined") note_body += "takeaway=" + $("input:checked[name=takeaway]").val() + "\n";
   if ($("#takeaway_description").val()) note_body += "takeaway:description=" + $("#takeaway_description").val() + "\n";
   if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
-  if ($("input:checked[name=takeaway_covid]").val() != "") note_body += "takeaway:covid19=" + $("input:checked[name=takeaway_covid]").val() + "\n";
+  if ($("input:checked[name=takeaway_covid]").val() == "yes" || $("input:checked[name=takeaway_covid]").val() == "only") note_body += "takeaway:covid19=" + $("input:checked[name=takeaway_covid]").val() + "\n";
   if ($("#delivery_covid_description").val() || $("#takeaway_covid_description").val()) note_body += "description:covid19=";
-  if ($("#delivery_covid_description").val()) note_body += $("#delivery_covid_description").val();
+  if ($("#delivery_covid_description").val()) note_body += $("#delivery_covid_description").val() + " ";
   if ($("#takeaway_covid_description").val()) note_body += $("#takeaway_covid_description").val() + "\n";
   return note_body;
 }

@@ -34,7 +34,7 @@
     "phone": "Phone number",
     "phoneplaceholder": "555-555-5555",
     "opening": "Opening Hours",
-    "openingplaceholder": "Monday-Friday 10am to 8pm",
+    "openingplaceholder": "Mo-Fr 10am to 8pm",
     "wheel": "Wheelchair accessibility",
     "wheelplaceholder": "Choose an option",
     "wheel_yes": "Unrestricted access",
@@ -49,13 +49,13 @@
     "payment": "Accepted payment methods",
     "paymentplaceholder": "Choose an option",
     "delivery": "Is there a delivery service?",
-    "deliveryplaceholder": "Yes/No/Monday-Friday 7pm to 9pm",
+    "deliveryplaceholder": "Yes/No/Mo-Fr 7pm to 9pm",
     "deliverydesc": "Delivery",
     "delivery_description": "Delivery service details",
     "delivery_descriptionplaceholder": "Minimum order 15$ free shipping",
     "delivery_descriptiondesc": "Delivery description",
     "delivery_covid": "Is there a delivery service during COVID-19 emergency?",
-    "delivery_covid_descriptionplaceholder": "Monday-Friday 7pm to 9pm",
+    "delivery_covid_descriptionplaceholder": "Mo-Fr 7pm to 9pm",
     "delivery_covid_description": "Delivery service details during COVID-19 emergency",
     "takeaway": "Is there a takeaway option?",
     "takeawaydesc": "Takeaway",
@@ -63,7 +63,7 @@
     "takeaway_descriptionplaceholder": "Not available on saturdays nights",
     "takeaway_descriptiondesc": "Takeaway description",
     "takeaway_covid": "Is there a takeaway service during COVID-19 emergency?",
-    "takeaway_covid_descriptionplaceholder": "Monday-Friday 7pm to 9pm",
+    "takeaway_covid_descriptionplaceholder": "Mo-Fr 7pm to 9pm",
     "takeaway_covid_description": "Takeaway service details during COVID-19 emergency",
     "only_takeaway": "Only takeaway",
     "yes": "Yes",
@@ -84,6 +84,7 @@
     "manualPosition": " You have activated the marker! Click and drag it on your business place position, so you'll be ready to <a href='#details'>add more details.</a>",
     "loadingText": "Searching...",
     "modalButton": "Close",
-    "modalTitle": "Wheelchair accessibility classification"
+    "modalTitle": "Wheelchair accessibility classification",
+    "needsChecking": "needs checking"
   }
 }

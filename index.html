@@ -185,7 +185,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="twa twa-desktop-computer"></i></span>
               </div>
-              <input id='website' type="url" placeholder='' class="form-control" data-i18n="[placeholder]step2.websiteplaceholder" />
+              <input id='website' type="url" placeholder='' class="form-control" data-i18n="[placeholder]step2.websiteplaceholder" value="https://" />
             </div>
           </div>
           <div class="form-group col-sm-6">
@@ -250,8 +250,19 @@
         <div class="row">
           <div class="form-group col">
             <label for='delivery' data-i18n="step2.delivery"></label>
+            <div class="input-group">
+            <div class="input-group-prepend">
+   <div class="input-group-text">
+     <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="delivery-check" name="delivery-check">
+
+       <label for="delivery-check" data-i18n="step2.yes" class="custom-control-label mb-0 ml-2"></label>
+</div>
+   </div>
+ </div>
             <input id='delivery' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.deliveryplaceholder" />
           </div>
+        </div>
           <div class="form-group col-sm-6">
             <label for='delivery_description' data-i18n="step2.delivery_description"></label>
             <input id='delivery_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.delivery_descriptionplaceholder" />

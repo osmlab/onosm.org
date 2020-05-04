@@ -34,7 +34,7 @@
     "phone": "Numero di telefono",
     "phoneplaceholder": "+39 0123 456789",
     "opening": "Orario di apertura",
-    "openingplaceholder": "Lunedì-Venerdì dalle 10:00 alle 19:00",
+    "openingplaceholder": "Lu-Ve dalle 10:00 alle 19:00",
     "wheel": "Accessibilità in sedia a rotelle",
     "wheelplaceholder": "Seleziona una opzione",
     "wheel_yes": "Completamente accessibile",
@@ -49,13 +49,13 @@
     "payment": "Modalità di pagamento accettate",
     "paymentplaceholder": "Clicca qui per le opzioni",
     "delivery": "È attivo un servizio di consegna?",
-    "deliveryplaceholder": "Sì/No/Lunedì-Venerdì dalle 19:00 alle 21:00",
+    "deliveryplaceholder": "Lu-Ve dalle 19:00 alle 21:00",
     "deliverydesc": "Consegna",
     "delivery_description": "Dettagli sul servizio di consegna",
     "delivery_descriptionplaceholder": "Ordine minimo 15€ consegna gratuita",
     "delivery_descriptiondesc": "Descrizione consegna",
     "delivery_covid": "È attivo un servizio di consegna durante l'emergenza COVID-19?",
-    "delivery_covid_descriptionplaceholder": "Lunedì-Venerdì dalle 19:00 alle 21:00",
+    "delivery_covid_descriptionplaceholder": "Lu-Ve dalle 19:00 alle 21:00",
     "delivery_covid_description": "Dettagli sul servizio di consegna durante l'emergenza COVID-19",
     "takeaway": "È possibile ordinare d'asporto?",
     "takeawaydesc": "Asporto",
@@ -63,7 +63,7 @@
     "takeaway_descriptionplaceholder": "Tutti i giorni tranne il sabato sera",
     "takeaway_descriptiondesc": "Descrizione asporto",
     "takeaway_covid": "È possibile ordinare d'asporto durante l'emergenza COVID-19?",
-    "takeaway_covid_descriptionplaceholder": "Lunedì-Venerdì dalle 19:00 alle 21:00",
+    "takeaway_covid_descriptionplaceholder": "Lu-Ve dalle 19:00 alle 21:00",
     "takeaway_covid_description": "Dettagli sul servizio d'asporto durante l'emergenza COVID-19",
     "only_takeaway": "Solo asporto",
     "yes": "Sì",
@@ -84,6 +84,7 @@
   "manualPosition": "Hai attivato l'indicatore! Cliccalo e trascinalo sulla posizione della tua attività commerciale, così potrai iniziare a <a href='#details'>aggiungere dettagli alla tua scheda.</a>",
   "loadingText": "Sto cercando...",
   "modalButton": "Chiudi",
-  "modalTitle": "Classificazione dell'accessibilità in sedia a rotelle"
+  "modalTitle": "Classificazione dell'accessibilità in sedia a rotelle",
+  "needsChecking": "richiede controllo"
   }
 }
