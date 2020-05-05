@@ -1,6 +1,0 @@
-[
-{"id": "yes", "text": "Completamente accessibile"},
-{"id": "limited", "text": "Parzialmente accessibile"},
-{"id": "no", "text": "Non accessibile"},
-{"id": "unknown", "text": "Livello di accessibilità sconosciuto"}
-]
