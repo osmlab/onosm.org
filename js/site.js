@@ -278,28 +278,8 @@ $("#collect-data-done").click(function() {
 });
 
 function clearFields() {
-  $("#name").val("");
-  $("#phone").val("");
-  $("#website").val("");
-  $("#social").val("");
-  $("#opening_hours").val("");
+  $("#form")[0].reset();
   $("#category").select2("val", "");
-  $("#categoryalt").val("");
-  $("#address").val("");
-  $("#addressalt").val("");
-  $("#hnumberalt").val("");
-  $("#city").val("");
-  $("#postcode").val("");
-  $("#delivery-check:checked").click();
   $("#payment").select2("val", "");
-  $("#wheel").val("");
-  $("#linkcoords").val("");
-  $("#delivery").val("");
-  $("#delivery_description").val("");
-  $("input[name=delivery_covid]").prop("checked", false);
-  $("#delivery_covid_description").val("");
-  $("input[name=takeaway").prop("checked", false);
-  $("#takeaway_description").val("");
-  $("input[name=takeaway_covid]").prop("checked", false);
-  $("#takeaway_covid_description").val("");
+  $('#delivery-check').prop('indeterminate', true);
 }
