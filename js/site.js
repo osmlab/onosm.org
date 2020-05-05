@@ -29,11 +29,6 @@ i18n.init({
     payment_data = data;
   });
 
-  $.getJSON('./locales/' + onOSMlang + '/wheelchair.json').success(function(data) {
-    wheel_data = data;
-  });
-
-  loadWheelchair(onOSMlang);
 });
 
 /* HERE BE DRAGONS */
@@ -57,7 +52,6 @@ L.control.layers(baseMaps).addTo(findme_map);
 
 var category_data = [];
 var payment_data = [];
-var wheel_data = [];
 
 var findme_marker = L.marker([41.69, 12.71], {
   draggable: true
@@ -150,7 +144,7 @@ function nominatim_callback(data) {
     $('#continue').removeClass("disabled");
     $('.step-2 a').attr('href', '#details');
     $('#addressalt').val(chosen_place.address.road);
-    $('#housenumber').val(chosen_place.address.house_number);
+    $('#hnumberalt').val(chosen_place.address.house_number);
     $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
     $('#postcode').val(chosen_place.address.postcode);
   } else {
@@ -231,7 +225,7 @@ function getNoteBody() {
   if ($("#wheel").val()) note_body += i18n.t('step2.wheel') + ": " + $("#wheel").val() + "\n";
   if ($("#category").val()) note_body += i18n.t('step2.catlabel') + ": " + $("#category").val() + "\n";
   if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc') + ": " + $("#categoryalt").val() + "\n";
-  if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc') + ": " + $("#addressalt").val() + " " + $("#housenumber").val() + ", " + $("#postcode").val() + " " + $("#city").val() + "\n";
+  if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc') + ": " + $("#addressalt").val() + " " + $("#hnumberalt").val() + ", " + $("#postcode").val() + " " + $("#city").val() + "\n";
   if (paymentIds) note_body += i18n.t('step2.payment') + ": " + paymentTexts.join(",") + "\n";
   if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "") note_body += i18n.t('step2.deliverydesc') + $("#delivery").val() + "\n"; else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "") note_body += i18n.t('step2.deliverydesc') + i18n.t('step2.yes') + "\n"; else if ($('#delivery-check').not(':indeterminate') == true) note_body += i18n.t('step2.deliverydesc') + i18n.t('step2.no') + "\n";
   if ($("#delivery_description").val()) note_body += i18n.t('step2.delivery_descriptiondesc') + ": " + $("#delivery_description").val() + "\n";
@@ -243,7 +237,7 @@ function getNoteBody() {
   note_body += "\nTag suggeriti: (⚠️ = "+ i18n.t('messages.needsChecking') + ")\n";
   if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
   if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
-  if ($("#housenumber").val()) note_body += "addr:housenumber=" + $("#housenumber").val() + "\n";
+  if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
   if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
   if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
   if ($("#phone").val()) note_body += "⚠️ contact:phone|mobile=" + $("#phone").val() + "\n";
@@ -274,11 +268,11 @@ $("#collect-data-done").click(function() {
       lon: latlon.lng,
       text: getNoteBody()
     };
-  // 🔴🔴🔴🔴🔴 TODO: CAMBIARE CON https://api.openstreetmap.org/api/0.6/notes.json 🔴🔴🔴🔴🔴
-  $.post('https://api06.dev.openstreetmap.org/api/0.6/notes.json', qwarg, function(data) {
-    console.log(data);
+
+  $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function(data) {
+    // console.log(data);
     var noteId = data['properties']['id'];
-    var link = 'https://api06.dev.openstreetmap.org/?note=' + noteId + '#map=19/' + latlon.lat + '/' + latlon.lng + '&layers=N';
+    var link = 'https://openstreetmap.org/?note=' + noteId + '#map=19/' + latlon.lat + '/' + latlon.lng + '&layers=N';
     $("#linkcoords").append('<div class="mt-3 h4"><a href="' + link + '">' + link + '</a></div>');
   });
 });

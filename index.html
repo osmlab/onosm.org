@@ -42,8 +42,8 @@
   <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-migrate-3.2.0.min.js" integrity="sha256-t+8cuBH4205MYRAyzzsk0sEla/l5QSO0GuTeozHrVNY=" crossorigin="anonymous"></script>
   <!-- SELECT 2  JS-->
-  <script src="js/select2.min.js"></script>
-  <script src="js/select2_locale_it.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2_locale_it.min.js"></script>
   <!-- TRADUZIONI -->
   <script src="js/i18next-1.7.4.min.js"></script>
   <!-- BOOTSTRAP JS -->
@@ -120,16 +120,16 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="twa twa-round-pushpin"></i></span>
               </div>
-              <input id='addressalt' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.addressaltplaceholder" />
+              <input id='addressalt' autocomplete="street-address" type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.addressaltplaceholder" />
             </div>
           </div>
           <div class="form-group col-md-2">
-            <label for="housenumber" data-i18n="step2.housenumber"></label>
+            <label for="hnumberalt" data-i18n="step2.housenumber"></label>
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="twa twa-keycap-10"></i></span>
               </div>
-              <input type="number" class="form-control" id="housenumber" data-i18n="[placeholder]step2.housenumberplaceholder">
+              <input type="text" class="form-control" id="hnumberalt" data-i18n="[placeholder]step2.housenumberplaceholder">
             </div>
           </div>
 
@@ -146,7 +146,7 @@
             <label for="postcode" data-i18n="step2.postcode"></label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="twa twa-input-numbers"></i></span>
+                <span class="input-group-text"><i class="twa twa-postbox"></i></span>
               </div>
               <input type="number" class="form-control" id="postcode" data-i18n="[placeholder]step2.postcodeplaceholder">
             </div>
@@ -183,14 +183,19 @@
             <label for='website' data-i18n="step2.website"></label>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="twa twa-desktop-computer"></i></span>
+                <span class="input-group-text"><i class="twa twa-globe-with-meridians"></i></span>
               </div>
               <input id='website' type="url" placeholder='' class="form-control" data-i18n="[placeholder]step2.websiteplaceholder" value="https://" />
             </div>
           </div>
           <div class="form-group col-sm-6">
             <label for='social' data-i18n="step2.social"></label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="twa twa-speech-balloon"></i></span>
+              </div>
             <input id='social' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.socialplaceholder" />
+          </div>
           </div>
         </div>
 
