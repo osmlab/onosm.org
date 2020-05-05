@@ -287,6 +287,10 @@ function clearFields() {
   $("#categoryalt").val("");
   $("#address").val("");
   $("#addressalt").val("");
+  $("#hnumberalt").val("");
+  $("#city").val("");
+  $("#postcode").val("");
+  $("#delivery-check:checked").click();
   $("#payment").select2("val", "");
   $("#wheel").val("");
   $("#linkcoords").val("");
