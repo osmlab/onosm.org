@@ -116,7 +116,7 @@ $("#find").submit(function(e) {
 
 
   $("#findme h4").text(loadingText);
-  $(".spinner-grow").removeClass("invisible");
+  $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
 
 
   $.ajax({
@@ -150,7 +150,7 @@ function nominatim_callback(data) {
   } else {
     $("#couldnt-find").show();
   }
-  $(".spinner-grow").addClass("invisible");
+  $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
 }
 
 function solr_callback(data) {
