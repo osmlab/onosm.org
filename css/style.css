@@ -15,3 +15,12 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.select2-container .select2-choice {
+  height: 38px;
+}
+
+.select2-container .select2-choice .select2-arrow b,
+.select2-container .select2-choice span.select2-chosen {
+  margin-top: 5px;
+}
