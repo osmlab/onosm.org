@@ -151,7 +151,7 @@ function nominatim_callback(data) {
     $("#map-information").show();
   $("#address").addClass("is-valid");
   $("#address").removeClass("is-invalid");
-    if (chosen_place.address.postcode.length > 0)
+    if (!chosen_place.address.hasOwnProperty('house_number'))
       $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
   } else {
     $("#couldnt-find").show();
