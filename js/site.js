@@ -291,6 +291,7 @@ $("#collect-data-done").click(function() {
 
 function clearFields() {
   $("#form")[0].reset();
+  $("#address").val("");
   $("#category").select2("val", "");
   $("#payment").select2("val", "");
   $('#delivery-check').prop('indeterminate', true);
