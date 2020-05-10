@@ -9,6 +9,7 @@
     "addr": "Corso Europa, Genova",
     "button": "Cercami!",
     "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.",
+    "nohousenumber": "Attenzione: non è stato possibile trovare il numero civico. La posizione sulla mappa non è corretta, trascina l' indicatore sulla posizione esatta. Se non riesci a vedere gli edifici, puoi cambiare la visualizzazione in satellite utilizzando il pulsante in alto a destra della mappa.",
     "continue": "Prosegui"
   },
   "step2": {

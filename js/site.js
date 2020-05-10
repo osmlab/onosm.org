@@ -139,7 +139,6 @@ function nominatim_callback(data) {
     findme_map.fitBounds(bounds);
     findme_marker.setOpacity(1);
     findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
-    $('#instructions').html(successString);
     $('#step2').removeClass("disabled");
     $('#continue').removeClass("disabled");
     $('.step-2 a').attr('href', '#details');
@@ -147,8 +146,18 @@ function nominatim_callback(data) {
     $('#hnumberalt').val(chosen_place.address.house_number);
     $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
     $('#postcode').val(chosen_place.address.postcode);
+    $("#address").val(chosen_place.display_name);
+    $("#map-information").html(successString);
+    $("#map-information").show();
+  $("#address").addClass("is-valid");
+  $("#address").removeClass("is-invalid");
+    if (chosen_place.address.postcode.length > 0)
+      $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
   } else {
     $("#couldnt-find").show();
+    $("#map-information").hide();
+    $("#address").addClass("is-invalid");
+    $("#address").removeClass("is-valid");
   }
   $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
 }
@@ -160,12 +169,14 @@ function solr_callback(data) {
     findme_marker.setOpacity(1);
     findme_marker.setLatLng([coords[0], coords[1]]);
     findme_map.setView([coords[0], coords[1]], 16);
-    $('#instructions').html(successString);
+    $("#map-information").html(successString);
+    $("#map-information").show();
     $('#step2').removeClass("disabled");
     $('#continue').removeClass("disabled");
     $('.step-2 a').attr('href', '#details');
   } else {
     $("#couldnt-find").show();
+    $("#map-information").hide();
   }
   $("#findme").removeClass("loading");
 }
@@ -174,7 +185,8 @@ function solr_callback(data) {
 findme_map.on('click', function(e) {
   findme_marker.setOpacity(1);
   findme_marker.setLatLng(e.latlng);
-  $('#instructions').html(manualPosition);
+  $("#map-information").html(manualPosition);
+  $("#map-information").show();
   $('.step-2 a').attr('href', '#details');
   $('#step2').removeClass("disabled");
   $('#continue').removeClass("disabled");

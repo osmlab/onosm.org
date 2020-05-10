@@ -9,6 +9,7 @@
     "addr": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",
     "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address.",
+    "nohousenumber": "Warning: we were unable to find the building number. The position on the map in not correct, please drag the marker on the exact position of the business. If the buildings are not visible on the map, change the map view to satellite by using the button on the top right of the map.",
     "continue": "Continue"
   },
   "step2": {
