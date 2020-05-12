@@ -151,7 +151,7 @@ function nominatim_callback(data) {
     $("#map-information").show();
   $("#address").addClass("is-valid");
   $("#address").removeClass("is-invalid");
-  if (!chosen_place.address.house_number) {
+  if (!chosen_place.address.house_number)
     $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
   } else {
     $("#couldnt-find").show();
@@ -160,7 +160,6 @@ function nominatim_callback(data) {
     $("#address").removeClass("is-valid");
   }
   $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
-}
 }
 
 function solr_callback(data) {
