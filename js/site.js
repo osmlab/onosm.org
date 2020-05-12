@@ -151,8 +151,8 @@ function nominatim_callback(data) {
     $("#map-information").show();
   $("#address").addClass("is-valid");
   $("#address").removeClass("is-invalid");
-    if (!chosen_place.address.hasOwnProperty('house_number'))
-      $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
+  if (!chosen_place.address.house_number) {
+    $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
   } else {
     $("#couldnt-find").show();
     $("#map-information").hide();
@@ -160,6 +160,7 @@ function nominatim_callback(data) {
     $("#address").removeClass("is-valid");
   }
   $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
+}
 }
 
 function solr_callback(data) {
@@ -218,7 +219,10 @@ $(window).on('hashchange', function() {
 // Disables the input if delivery is not checked
 $('#delivery-check').prop('indeterminate', true);
 $(function() {deliveryCheck(); $("#delivery-check").click(deliveryCheck);});
-function deliveryCheck() { if (this.checked){ $("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#label-delivery-check").html(i18n.t('step2.yes'));} else {$("#delivery").attr("disabled", true);$("#delivery_description").attr("disabled", true); $("#label-delivery-check").html(i18n.t('step2.no'));}}
+function deliveryCheck() { if (this.checked) {enableDelivery(); } else { disableDelivery(); }}
+
+function disableDelivery(){$("#delivery").attr("disabled", true);$("#delivery_description").attr("disabled", true); $("#label-delivery-check").html(i18n.t('step2.no'));}
+function enableDelivery(){$("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#label-delivery-check").html(i18n.t('step2.yes'));}
 
 function getNoteBody() {
   var paymentIds = [],
@@ -294,5 +298,7 @@ function clearFields() {
   $("#address").val("");
   $("#category").select2("val", "");
   $("#payment").select2("val", "");
+  $('#delivery-check').val("");
   $('#delivery-check').prop('indeterminate', true);
+  disableDelivery();
 }
