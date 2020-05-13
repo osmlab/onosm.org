@@ -149,10 +149,11 @@ function nominatim_callback(data) {
     $("#address").val(chosen_place.display_name);
     $("#map-information").html(successString);
     $("#map-information").show();
-  $("#address").addClass("is-valid");
-  $("#address").removeClass("is-invalid");
-  if (!chosen_place.address.house_number)
-    $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
+    if (!chosen_place.address.house_number) {
+      $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
+    }
+    $("#address").addClass("is-valid");
+    $("#address").removeClass("is-invalid");
   } else {
     $("#couldnt-find").show();
     $("#map-information").hide();
