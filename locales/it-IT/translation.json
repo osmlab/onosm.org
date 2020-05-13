@@ -9,6 +9,7 @@
     "addr": "Corso Europa, Genova",
     "button": "Cercami!",
     "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.",
+    "nohousenumber": "Attenzione: non è stato possibile rilevare il numero civico. La posizione sulla mappa non è accurata, trascina l'indicatore sulla posizione esatta. Se gli edifici non sono ancora presenti, puoi cambiare la visualizzazione in 'satellite' utilizzando il pulsante in alto a destra sulla mappa.",
     "continue": "Prosegui"
   },
   "step2": {
@@ -86,6 +87,7 @@
   "loadingText": "Sto cercando...",
   "modalButton": "Chiudi",
   "modalTitle": "Classificazione dell'accessibilità in sedia a rotelle",
-  "needsChecking": "richiede controllo"
+  "needsChecking": "richiede controllo",
+  "credits": "Un progetto open source sviluppato dalla comunità mondiale di <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridians\"></i>. Contribuisci a questo progetto su <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHub</a>."
   }
 }

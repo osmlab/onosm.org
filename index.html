@@ -85,6 +85,7 @@
           </div>
         </form>
         <p id="couldnt-find" class="alert alert-danger mt-2" role="alert" style='display: none;' data-i18n="[html]step1.fail"></p>
+        <p id="map-information" class="alert alert-warning mt-2" role="alert" style='display: none;'></p>
       </div>
       <div id='findme-map'></div>
       <a class="btn btn-primary btn-lg text-white w-100 mt-3 text-uppercase disabled" id="continue" href="#details" data-i18n="step1.continue"></a>
@@ -93,7 +94,7 @@
     <!-- step 2 -->
     <div class='mt-3 d-none' id='collect-data-step'>
       <p data-i18n="[html]step2.desc" class="h3 text-info"></p>
-      <div>
+      <form id="form">
         <!-- categories -->
         <div class="row">
           <div class="form-group col">
@@ -353,7 +354,7 @@
         </div>
 
         <button class="btn btn-primary btn-lg w-100 mt-4 text-uppercase" id='collect-data-done' data-i18n="step2.done"></button>
-      </div>
+      </form>
     </div>
 
     <div class='d-none' id='confirm-step'>
@@ -365,6 +366,7 @@
 
       <div data-i18n="[html]step3.finalmessage"></div>
     </div>
+    <p class="font-weight-light small text-muted mt-4" data-i18n="[html]messages.credits"></p>
   </div>
   <script src='js/site.js'></script>
   <!-- CONFETTI JS - https://github.com/mathusummut/confetti.js -->

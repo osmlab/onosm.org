@@ -9,6 +9,7 @@
     "addr": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",
     "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address.",
+    "nohousenumber": "Warning: we were unable to find your house number. The position on the map could be inaccurate, please drag the marker on the exact position of your business. If the buildings are not currently shown on the map, you could switch to the 'satellite' view using the button at the top right corner of the map.",
     "continue": "Continue"
   },
   "step2": {
@@ -85,6 +86,7 @@
     "loadingText": "Searching...",
     "modalButton": "Close",
     "modalTitle": "Wheelchair accessibility classification",
-    "needsChecking": "needs checking"
+    "needsChecking": "needs checking",
+    "credits": "A open source project developed by the worldwide <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> community <i class=\"twa twa-globe-with-meridians\"></i>. Contribute to this project on <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHub</a>."
   }
 }

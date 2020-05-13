@@ -139,7 +139,6 @@ function nominatim_callback(data) {
     findme_map.fitBounds(bounds);
     findme_marker.setOpacity(1);
     findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
-    $('#instructions').html(successString);
     $('#step2').removeClass("disabled");
     $('#continue').removeClass("disabled");
     $('.step-2 a').attr('href', '#details');
@@ -147,8 +146,19 @@ function nominatim_callback(data) {
     $('#hnumberalt').val(chosen_place.address.house_number);
     $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
     $('#postcode').val(chosen_place.address.postcode);
+    $("#address").val(chosen_place.display_name);
+    $("#map-information").html(successString);
+    $("#map-information").show();
+    if (!chosen_place.address.house_number) {
+      $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
+    }
+    $("#address").addClass("is-valid");
+    $("#address").removeClass("is-invalid");
   } else {
     $("#couldnt-find").show();
+    $("#map-information").hide();
+    $("#address").addClass("is-invalid");
+    $("#address").removeClass("is-valid");
   }
   $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
 }
@@ -160,12 +170,14 @@ function solr_callback(data) {
     findme_marker.setOpacity(1);
     findme_marker.setLatLng([coords[0], coords[1]]);
     findme_map.setView([coords[0], coords[1]], 16);
-    $('#instructions').html(successString);
+    $("#map-information").html(successString);
+    $("#map-information").show();
     $('#step2').removeClass("disabled");
     $('#continue').removeClass("disabled");
     $('.step-2 a').attr('href', '#details');
   } else {
     $("#couldnt-find").show();
+    $("#map-information").hide();
   }
   $("#findme").removeClass("loading");
 }
@@ -174,7 +186,8 @@ function solr_callback(data) {
 findme_map.on('click', function(e) {
   findme_marker.setOpacity(1);
   findme_marker.setLatLng(e.latlng);
-  $('#instructions').html(manualPosition);
+  $("#map-information").html(manualPosition);
+  $("#map-information").show();
   $('.step-2 a').attr('href', '#details');
   $('#step2').removeClass("disabled");
   $('#continue').removeClass("disabled");
@@ -206,7 +219,10 @@ $(window).on('hashchange', function() {
 // Disables the input if delivery is not checked
 $('#delivery-check').prop('indeterminate', true);
 $(function() {deliveryCheck(); $("#delivery-check").click(deliveryCheck);});
-function deliveryCheck() { if (this.checked){ $("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#label-delivery-check").html(i18n.t('step2.yes'));} else {$("#delivery").attr("disabled", true);$("#delivery_description").attr("disabled", true); $("#label-delivery-check").html(i18n.t('step2.no'));}}
+function deliveryCheck() { if (this.checked) {enableDelivery(); } else { disableDelivery(); }}
+
+function disableDelivery(){$("#delivery").attr("disabled", true);$("#delivery_description").attr("disabled", true); $("#label-delivery-check").html(i18n.t('step2.no'));}
+function enableDelivery(){$("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#label-delivery-check").html(i18n.t('step2.yes'));}
 
 function getNoteBody() {
   var paymentIds = [],
@@ -278,28 +294,11 @@ $("#collect-data-done").click(function() {
 });
 
 function clearFields() {
-  $("#name").val("");
-  $("#phone").val("");
-  $("#website").val("");
-  $("#social").val("");
-  $("#opening_hours").val("");
-  $("#category").select2("val", "");
-  $("#categoryalt").val("");
+  $("#form")[0].reset();
   $("#address").val("");
-  $("#addressalt").val("");
-  $("#hnumberalt").val("");
-  $("#city").val("");
-  $("#postcode").val("");
-  $("#delivery-check:checked").click();
+  $("#category").select2("val", "");
   $("#payment").select2("val", "");
-  $("#wheel").val("");
-  $("#linkcoords").val("");
-  $("#delivery").val("");
-  $("#delivery_description").val("");
-  $("input[name=delivery_covid]").prop("checked", false);
-  $("#delivery_covid_description").val("");
-  $("input[name=takeaway").prop("checked", false);
-  $("#takeaway_description").val("");
-  $("input[name=takeaway_covid]").prop("checked", false);
-  $("#takeaway_covid_description").val("");
+  $('#delivery-check').val("");
+  $('#delivery-check').prop('indeterminate', true);
+  disableDelivery();
 }
