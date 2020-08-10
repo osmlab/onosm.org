@@ -2,6 +2,8 @@
 
 An easy way to get a business on to OpenStreetMap.
 
+It helps business owners provide structured data about their shop. The result is written to an [OpenStreetMap Note](https://wiki.openstreetmap.org/wiki/Notes). More general info about [onosm.org on the OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/Onosm.org).
+
 
 ## Contributing
 General notes
