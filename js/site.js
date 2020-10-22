@@ -5,9 +5,6 @@ var findme_map = L.map('findme-map')
     osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
 
-// Check if user is on business page or home/address page
-var addr = location.pathname.match(/address/) ? true : false;
-
 var findme_marker = L.marker([0,0], {draggable:true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
