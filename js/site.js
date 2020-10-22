@@ -20,7 +20,11 @@ i18n.init({ fallbackLng: 'en-US', postAsync: 'false' }, function() {
 
     var detectedLang = i18n.lng();
     var buildSelectControl = function(data) {
-        $("#category").select2({data: data});
+        $("#category").select2({
+            placeholder: "Select categories",
+            multiple: true,
+            data: data,
+        });
     };
 
     $.getJSON('./locales/' + detectedLang + '/categories.json', buildSelectControl).fail(function () {
@@ -115,21 +119,15 @@ $(window).on('hashchange', function() {
 $("#collect-data-done").click(function() {
     location.hash = '#done';
 
-    var note_body = !addr ? 
+    var note_body =
         "onosm.org submitted note from a business:\n" +
         "name: " + $("#name").val() + "\n" +
         "phone: " + $("#phone").val() + "\n" +
         "website: " + $("#website").val() + "\n" +
-        "twitter: " + $("#twitter").val() + "\n" +
+        "social media: " + $("#social").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
         "category: " + $("#category").val() + "\n" +
-        "address: " + $("#address").val() 
-        : 
-        "onosm.org submitted note for a home address:\n" + 
-        "number: " + $("#number").val() + "\n" +
-        "street: " + $("#street").val() + "\n" +
-        "city: " + $("#city").val() + "\n" +
-        "postal_code: " + $("#postal_code").val() + "\n",
+        "address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
         note_data = {
             lat: latlon.lat,
