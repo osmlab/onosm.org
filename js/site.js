@@ -10,18 +10,12 @@ findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
 
-var successString,loadingText;
-
 i18n.init({ fallbackLng: 'en-US', postAsync: 'false' }, function() {
     $("body").i18n();
-
-    successString=i18n.t('messages.success', { escapeInterpolation: false });
-    loadingText=i18n.t('messages.loadingText');
 
     var detectedLang = i18n.lng();
     var buildSelectControl = function(data) {
         $("#category").select2({
-            placeholder: "Select categories",
             multiple: true,
             data: data,
         });
@@ -54,7 +48,7 @@ $("#use_my_location").click(function (e) {
 
             zoom_to_point(point, findme_map, findme_marker);
 
-            $('#success').html(successString);
+            $('#success').html(i18n.t('messages.success', { escapeInterpolation: false }));
             $('#success').show();
             window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
@@ -77,13 +71,13 @@ $("#find").submit(function(e) {
         q: address_to_find
     };
     var url = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg);
-    $("#findme h4").text(loadingText);
+    $("#findme h4").text(i18n.t('messages.loadingText'));
     $("#findme").addClass("loading");
     $.getJSON(url, function(data) {
         if (data.length > 0) {
             zoom_to_point(data[0], findme_map, findme_marker);
 
-            $('#success').html(successString);
+            $('#success').html(i18n.t('messages.success', { escapeInterpolation: false }));
             $('#success').show();
             window.scrollTo(0, $('#address').position().top - 30);
             $('.step-2 a').attr('href', '#details');
