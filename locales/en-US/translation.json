@@ -44,5 +44,10 @@
   "messages": {
     "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to <a href='javascript:check_coordinates()'>add more details</a>.",
     "loadingText": "Searching..."
+  },
+  "validation": {
+    "missingCategory": "Please select at least one category.",
+    "missingName": "Please enter a name.",
+    "missingPhoneOrWebsite": "Please enter a valid website or phone number."
   }
 }

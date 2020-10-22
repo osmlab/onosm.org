@@ -45,5 +45,10 @@
   "messages": {
     "success": "<strong>Gefunden!</strong> Verschieben Sie den Marker bis er <strong>exakt am Ort Ihres Geschäfts liegt</strong>.<br />Wenn Sie zufrieden sind, können wir damit beginnen weitere <a href='#details'>Details hinzuzufügen</a>.",
     "loadingText": "Suche…"
+  },
+  "validation": {
+    "missingCategory": "Bitte wählen Sie mindestens eine Kategorie aus.",
+    "missingName": "Bitte geben Sie einen Namen ein.",
+    "missingPhoneOrWebsite": "Bitte geben Sie eine gültige Website oder Telefonnummer ein."
   }
 }

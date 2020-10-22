@@ -72,7 +72,8 @@
                 <div class='col12'>
                     <div class='clearfix col12'>
                         <label for='category' data-i18n="step2.catlabel"></label>
-                        <input style='width: 400px;' id='category' multiple='multiple' data-placeholder='' class='col10' data-i18n="[data-placeholder]step2.catplaceholder"/>
+                        <select style='width: 400px;' id='category' multiple='multiple' data-placeholder='' class='col10' data-i18n="[data-placeholder]step2.catplaceholder">
+                        </select>
                     </div>
                     <div class='col6'>
                         <label for='name' data-i18n="step2.name"></label>
@@ -88,7 +89,10 @@
                         <label for='opening_hours' data-i18n="step2.opening"></label>
                         <input id='opening_hours' type='text' placeholder='' data-i18n="[placeholder]step2.openingplaceholder"/>
                     </div>
-                    <h4><button class='col12' id='collect-data-done' data-i18n="step2.done"></button></h4>
+                    <div class='clearfix col12'>
+                        <h5><p class='col12' id="form-invalid"></p></h5>
+                        <h4><button class='col12' id='collect-data-done' data-i18n="step2.done"></button></h4>
+                    </div>
                 </div>
             </div>
 

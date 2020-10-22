@@ -43,5 +43,10 @@
   "messages": {
     "success": "Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href=\"#details\">adicionar à nossa lista os detalhes de sua empresa</a>.",
     "loadingText": "Localizando..."
+  },
+  "validation": {
+    "missingCategory": "Selecione pelo menos uma categoria.",
+    "missingName": "Por favor insira um nome.",
+    "missingPhoneOrWebsite": "Insira um site ou número de telefone válido."
   }
 }

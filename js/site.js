@@ -117,6 +117,20 @@ $(window).on('hashchange', function() {
 });
 
 $("#collect-data-done").click(function() {
+    // Basic form validation
+    if ($("#category").val().length == 0) {
+        $("#form-invalid").text(i18n.t('validation.missingCategory'));
+        return false;
+    } else if ($("#name").val().length < 3) {
+        $("#form-invalid").text(i18n.t('validation.missingName'));
+        return false;
+    } else if ($("#phone").val().length < 5 || $("#website").length < 10) {
+        $("#form-invalid").text(i18n.t('validation.missingPhoneOrWebsite'));
+        return false;
+    } else {
+        $("#form-invalid").text("");
+    }
+
     location.hash = '#done';
 
     var note_body =
@@ -126,7 +140,7 @@ $("#collect-data-done").click(function() {
         "website: " + $("#website").val() + "\n" +
         "social media: " + $("#social").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
-        "category: " + $("#category").val() + "\n" +
+        "category: " + $("#category").val().join(", ") + "\n" +
         "address: " + $("#address").val(),
         latlon = findme_marker.getLatLng(),
         note_data = {
