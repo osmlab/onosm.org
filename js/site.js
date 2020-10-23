@@ -118,7 +118,7 @@ $("#collect-data-done").click(function() {
     } else if ($("#name").val().length < 3) {
         $("#form-invalid").text(i18n.t('validation.missingName'));
         return false;
-    } else if ($("#phone").val().length < 5 || $("#website").length < 10) {
+    } else if ($("#phone").val().length < 5 && $("#website").length < 10) {
         $("#form-invalid").text(i18n.t('validation.missingPhoneOrWebsite'));
         return false;
     } else {
