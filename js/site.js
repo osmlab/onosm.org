@@ -132,7 +132,9 @@ $("#collect-data-done").click(function() {
         "name: " + $("#name").val() + "\n" +
         "phone: " + $("#phone").val() + "\n" +
         "website: " + $("#website").val() + "\n" +
-        "social media: " + $("#social").val() + "\n" +
+        "twitter: " + $("#twitter").val() + "\n" +
+        "facebook: " + $("#facebook").val() + "\n" +
+        "email: " + $("#email").val() + "\n" +
         "hours: " + $("#opening_hours").val() + "\n" +
         "category: " + $("#category").val().join(", ") + "\n" +
         "address: " + $("#address").val(),

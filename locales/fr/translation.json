@@ -28,8 +28,12 @@
     "openingplaceholder": "Lundi-Vendredi 10:00-19:00",
     "website": "Site internet",
     "websiteplaceholder": "http://www.example.org/",
-    "social": "Réseaux sociaux",
-    "socialplaceholder": "@OpenStreetMap or https://www.facebook.com/OpenStreetMap",
+    "email": "Email",
+    "emailplaceholder": "contact@example.com",
+    "twitter": "Twitter",
+    "twitterplaceholder": "@OpenStreetMap",
+    "facebook": "Facebook",
+    "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
     "done": "Terminé&nbsp!"
   },
   "step3": {

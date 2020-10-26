@@ -28,8 +28,12 @@
     "openingplaceholder": "Пн-Пт с 10:00 до 20:00",
     "website": "Сайт",
     "websiteplaceholder": "https://www.example.ru/",
-    "social": "Социальные сети",
-    "socialplaceholder": "@OpenStreetMap или https://www.facebook.com/OpenStreetMap",
+    "email": "электронная почта",
+    "emailplaceholder": "contact@example.com",
+    "twitter": "Twitter",
+    "twitterplaceholder": "@OpenStreetMap",
+    "facebook": "Facebook",
+    "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
     "done": "Готово!"
   },
   "step3": {
