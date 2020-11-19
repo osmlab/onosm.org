@@ -1,0 +1,57 @@
+﻿{
+  "app": {
+    "title": "En OpenStreetMap",
+    "desc": "OpenStreetMap es un mapa mundial abierto utilizado por personas de todo el mundo para navegar y encontrar negocios locales.<br/>¡Es fácil y gratuito añadir su negocio al mapa!",
+    "footer": "Código fuente disponible en <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+  },
+  "step1": {
+    "title": "Ubicación",
+    "desc": "Empiece por decirnos dónde se encuentra su negocio.",
+    "addr": "Avenida América, España",
+    "button": "Buscar esta dirección",
+    "fail": "<strong>No pudimos encontrar su dirección.</strong> Intente buscar su calle o ciudad sin la dirección.",
+    "use_location": "usar mi ubicación actual",
+    "invalid-location": "La ubicación actualmente no está definida."
+  },
+  "step2": {
+    "title": "Detalles",
+    "desc": "¡Lo encontramos! Ahora complete los detalles sobre su negocio.",
+    "catlabel": "Categoría",
+    "catplaceholder": "Escoja una categoría...",
+    "addressalt": "Ayúdenos rellenando la dirección completa (número de casa, código postal) o mejorando la anterior",
+    "addressaltplaceholder": "Avenida América, España",
+    "addressaltdesc": "Dirección",
+    "name": "Nombre",
+    "nameplaceholder": "Café Libertadores",
+    "phone": "Número de teléfono",
+    "phoneplaceholder": "12-345-678",
+    "opening": "Horario de apertura",
+    "openingplaceholder": "Lunes-Viernes 10am a 8pm",
+    "website": "Sitio web",
+    "websiteplaceholder": "http://www.example.com/",
+    "email": "Correo electrónico",
+    "emailplaceholder": "contact@example.com",
+    "twitter": "Twitter",
+    "twitterplaceholder": "@OpenStreetMap",
+    "facebook": "Facebook",
+    "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
+    "done": "Guardar"
+  },
+  "step3": {
+    "title": "Terminar",
+    "row1": "<strong>¡Gracias!</strong> Un voluntario de OpenStreetMap agregará sus datos al mapa pronto.",
+    "row2": "Puede ver la nota recién creada y estar atento a las actualizaciones en este enlace:",
+    "row3": "¿Sabía que puede agregar sus propios datos al mapa y saltarte la espera? Es muy fácil comenzar <a href=\"http://openstreetmap.org/edit\">editando OpenStreetMap</a> en su navegador.",
+    "row4": "¿Quiere agregar otra nota?",
+    "row4a": "Volver a la pantalla inicial"
+  },
+  "messages": {
+    "success": "<strong>¡Le encontramos!</strong> Mueva el marcador hasta que esté <strong>exactamente en su empresa</strong>.<br />Cuando esté satisfecho, podemos comenzar a <a href='javascript:check_coordinates()'>agregar más detalles</a>.",
+    "loadingText": "Buscando..."
+  },
+  "validation": {
+    "missingCategory": "Seleccione al menos una categoría.",
+    "missingName": "Ingrese un nombre",
+    "missingPhoneOrWebsite": "Ingrese un sitio web o número de teléfono válido."
+  }
+}
