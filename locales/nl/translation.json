@@ -1,0 +1,57 @@
+{
+  "app": {
+    "title": "On OpenStreetMap",
+    "desc": "OpenStreetMap is een open wereldkaart gebruikt door mensen wereldwijd om te navigeren en lokale bedrijven te vinden.<br/> Het is makkelijk en gratis om jouw bedrijf aan de kaart toe te voegen!",
+    "footer": "Broncode is beschikbaar op <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+  },
+  "step1": {
+    "title": "Locatie",
+    "desc": "Begin door ons te zeggen waar je bedrijf gevestigd is.",
+    "addr": "Singel 1, Baarle-Nassau",
+    "button": "Vind me!",
+    "fail": "<strong>We konden je adres niet vinden.</strong> Probeer te zoeken naar je straat of plaats.",
+    "use_location": "gebruik mijn huidige locatie",
+    "invalid-location": "De locatie is momenteel niet bekend."
+  },
+  "step2": {
+    "title": "Details",
+    "desc": "We hebben het gevonden! Vul nu de details in over je bedrijf.",
+    "catlabel": "Categorie",
+    "catplaceholder": "Please select...",
+    "addressalt": "Help ons door het volledige adres in te vullen (huisnummer, postcode) of de vorige te verbeteren",
+    "addressaltplaceholder": "Singel 1, Baarle-Nassua",
+    "addressaltdesc": "Adres",
+    "name": "Naam",
+    "nameplaceholder": "Green Café",
+    "phone": "Telefoonnummer",
+    "phoneplaceholder": "06-12345678",
+    "opening": "Openingstijden",
+    "openingplaceholder": "maandag-vrijdag 10:00-20:00",
+    "website": "Website",
+    "websiteplaceholder": "http://www.example.com/",
+    "email": "Email",
+    "emailplaceholder": "contact@example.com",
+    "twitter": "Twitter",
+    "twitterplaceholder": "@OpenStreetMap",
+    "facebook": "Facebook",
+    "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
+    "done": "Klaar!"
+  },
+  "step3": {
+    "title": "Klaar",
+    "row1": "<strong>Bedankt!</strong> Een OpenStreetMap vrijwilliger zal je data gaan verwerken op de kaart.",
+    "row2": "Je kunt de aangemaakte opmerking en updates hier zien:",
+    "row3": "Wist je dat je zelf je data aan de kaart kunt toevoegen en het wachten overslaan? Het is erg makkelijk om te beginnen <a href=\"http://openstreetmap.org/edit\">OpenStreetMap te wijzigen</a> in je browser.",
+    "row4": "Wil je een andere opmerking toevoegen?",
+    "row4a": "Terug naar beginscherm"
+  },
+  "messages": {
+    "success": "<strong>Gevonden!</strong> Verplaats de marker zodat hij <strong>precies op je bedrijf</strong> staat.<br />Als je tevreden bent kunnen we beginnen met het <a href='javascript:check_coordinates()'>toevoegen van meer details</a>.",
+    "loadingText": "Zoeken..."
+  },
+  "validation": {
+    "missingCategory": "Kies tenminste één categorie.",
+    "missingName": "Vul svp een naam in.",
+    "missingPhoneOrWebsite": "Vul een geldige website of telefoonnummer in."
+  }
+}
