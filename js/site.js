@@ -2,7 +2,7 @@ var findme_map = L.map('findme-map')
     .setView([37.7, -97.3], 3),
     osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     osmAttrib = 'Map data © OpenStreetMap contributors',
-    osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 18, attribution: osmAttrib}).addTo(findme_map),
+    osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 19, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
 
 var findme_marker = L.marker([0,0], {draggable:true}).addTo(findme_map);
