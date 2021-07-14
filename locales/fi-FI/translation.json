@@ -1,0 +1,57 @@
+﻿{
+  "app": {
+    "title": "On OpenStreetMap",
+    "desc": "OpenStreetMap on avoin maailmanlaajuinen kartta jota käytetään navigoinnissa ja paikallisten palvelujen löytämisessä.<br/> Liiketoimintasi lisääminen kartalle on helppoa ja ilmaista!",
+    "footer": "Lähdekoodi on <a href='https://github.com/osmlab/onosm.org'>GitHubissa</p>"
+  },
+  "step1": {
+    "title": "Sijainti",
+    "desc": "Missä liikkeesi sijaitsee.",
+    "addr": "Kaivokatu 1, 00100 Helsinki",
+    "button": "Etsi osoite!",
+    "fail": "<strong>Osoitettasi ei löytynyt.</strong> Yritä hakea ilman talon numeroa.",
+    "use_location": "käytä sijaintiani",
+    "invalid-location": "Sijaintia ei ole asetettu."
+  },
+  "step2": {
+    "title": "Tiedot",
+    "desc": "Löytyi! Täytä seuraavaksi nämä tiedot.",
+    "catlabel": "Luokitus",
+    "catplaceholder": "valitse...",
+    "addressalt": "Täydennä osoitetta lisäämällä esim. talon numero ja postinumero",
+    "addressaltplaceholder": "Kaivokatu 1, 00100 Helsinki",
+    "addressaltdesc": "Osoite",
+    "name": "Nimi",
+    "nameplaceholder": "Kahvila Viherä",
+    "phone": "Puhelin",
+    "phoneplaceholder": "358 50-12345678",
+    "opening": "Avoinna",
+    "openingplaceholder": "ma-pe 10-18",
+    "website": "Nettisivu",
+    "websiteplaceholder": "http://www.example.com/",
+    "email": "Sähköposti",
+    "emailplaceholder": "contact@example.com",
+    "twitter": "Twitter",
+    "twitterplaceholder": "@OpenStreetMap",
+    "facebook": "Facebook",
+    "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
+    "done": "Valmis!"
+  },
+  "step3": {
+    "title": "Valmis",
+    "row1": "<strong>Kiitos!</strong> Joku OpenStreetMap:n käyttäjistä lisännee tietosi kartalle piakkoin.",
+    "row2": "Näet luodun ilmoituksen ja voit seurata päivityksiä siihen tästä linkistä:",
+    "row3": "Voit myös lisätä itse tietoja <a href=\"http://openstreetmap.org/edit\">muokkaamalla OpenStreetMap:n karttaa</a> suoraan selaimessa.",
+    "row4": "Haluatko lisätä toisen ilmoituksen?",
+    "row4a": "Takaisin aloitusnäyttöön"
+  },
+  "messages": {
+    "success": "<strong>Löytyi!</strong> Siirrä merkkiä kunnes se on <strong>tarkasti liikkeesi kohdalla</strong>.<br />Kun olet valmis, voit <a href='javascript:check_coordinates()'>lisätä tiedot</a>.",
+    "loadingText": "Haetaan..."
+  },
+  "validation": {
+    "missingCategory": "Valitse vähintään yksi luokitus.",
+    "missingName": "Syötä nimi.",
+    "missingPhoneOrWebsite": "Syötä nettisivu tai puhelinnumero oikein."
+  }
+}
