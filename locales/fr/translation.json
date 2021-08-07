@@ -1,22 +1,22 @@
 {
   "app": {
     "title": "Sur OpenStreetMap",
-    "desc": "OpenStreetMap produit une carte libre, ouverte et mondiale. Elle permet à quiconque de se guider et de trouver des commerces et entreprises près de chez soi. C'est facile et gratuit de se placer sur la carte!",
+    "desc": "OpenStreetMap produit une carte libre, ouverte et mondiale. Elle permet à quiconque de se guider et de trouver des commerces et entreprises près de chez soi. C'est facile et gratuit de se placer sur la carte !",
     "footer": "Le code source est disponible sur <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Emplacement",
-    "desc": "Pour démarrer, où est situé votre commerce ou entreprise?",
+    "desc": "Pour commencer, où se trouve votre commerce ou entreprise ?",
     "addr": "123 rue du Boulevard de l'Avenue, Beau Village, Pays",
     "button": "Chercher cette adresse",
-    "fail": "<strong>L'adresse exacte n'a pas été trouvée.</strong> Veuillez essayer en indiquant seulement la rue ou la ville.",
-    "use_location": "Trouvez votre position actuelle!"
+    "fail": "<strong>L'adresse exacte n'a pas été trouvée.</strong> Veuillez réessayer en indiquant seulement la rue ou la ville.",
+    "use_location": "Trouvez votre position actuelle !"
   },
   "step2": {
     "title": "Détails",
     "desc": "La position de votre établissement est marquée ajoutons plus de détails.",
     "catlabel": "Catégorie",
-    "catplaceholder": "Veuillez choisir...",
+    "catplaceholder": "Veuillez choisir…",
     "addressalt": "Précisez l'adresse complète (numéro, code postal)",
     "addressaltplaceholder": "123 rue du Boulevard de l'Avenue, Beau Village, Pays",
     "addressaltdesc": "Adresse",
@@ -27,25 +27,30 @@
     "opening": "Heures d'ouverture",
     "openingplaceholder": "Lundi-Vendredi 10:00-19:00",
     "website": "Site internet",
-    "websiteplaceholder": "http://www.example.org/",
+    "websiteplaceholder": "https://www.exemple.org/",
     "email": "Email",
-    "emailplaceholder": "contact@example.com",
+    "emailplaceholder": "contact@exemple.com",
     "twitter": "Twitter",
     "twitterplaceholder": "@OpenStreetMap",
     "facebook": "Facebook",
     "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
-    "done": "Terminé!"
+    "done": "Terminé !"
   },
   "step3": {
     "title": "Terminé",
-    "row1": "<strong>Merci!</strong> Les informations sont enregistrées et un bénévole OpenStreetMap ajoutera les données correspondantes sur la carte prochainement.",
-    "row2": "Vous pouvez voir la note fraîchement générée et d'éventuelles réponses à ce lien:",
-    "row3": "Savez-vous que vous pouvez également ajouter vous-même les données, sans attendre l'intervention d'un bénévole? Vous pouvez <a href=\"http://openstreetmap.org/edit\">éditer OpenStreetMap</a> simplement, directement dans votre navigateur.",
-    "row4": "Voulez-vous ajouter une autre note pour un nouvel établissement?",
+    "row1": "<strong>Merci !</strong> Les informations sont enregistrées et un bénévole OpenStreetMap ajoutera les données correspondantes sur la carte prochainement.",
+    "row2": "Vous pouvez voir la note fraîchement générée et d'éventuelles réponses à ce lien : ",
+    "row3": "Savez-vous que vous pouvez également ajouter vous-même les données, sans attendre l'intervention d'un bénévole ? Vous pouvez <a href=\"http://openstreetmap.org/edit\">éditer OpenStreetMap</a> simplement, directement depuis votre navigateur.",
+    "row4": "Voulez-vous ajouter une autre note pour un nouvel établissement ?",
     "row4a": "Retourner à l'écran d'accueil"
   },
   "messages": {
-    "success": "<strong>Trouvé!</strong> Déplacez le marqueur jusqu'à l'emplacement précis de votre établissement</strong>.<br />Puis, <a href='#details'>ajoutons plus de détails</a>.",
-    "loadingText": "Recherche en cours..."
+    "success": "<strong>Trouvé !</strong> Déplacez le marqueur jusqu'à l'emplacement précis de votre établissement</strong>.<br />Puis, <a href='#details'>ajoutons plus de détails</a>.",
+    "loadingText": "Recherche en cours…"
+  }
+    "validation": {
+    "missingCategory": "Merci de sélectionner au moins une catégorie.",
+    "missingName": "Veuillez entrer un nom.",
+    "missingPhoneOrWebsite": "Merci d’entrer une adresse internet ou un numéro de téléphone valide."
   }
 }
