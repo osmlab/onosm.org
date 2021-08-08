@@ -47,7 +47,7 @@
   "messages": {
     "success": "<strong>Trouvé!</strong> Déplacez le marqueur jusqu'à l'emplacement précis de votre établissement</strong>.<br />Puis, <a href='#details'>ajoutons plus de détails</a>.",
     "loadingText": "Recherche en cours…"
-  }
+  },
   "validation": {
     "missingCategory": "Merci de sélectionner au moins une catégorie.",
     "missingName": "Veuillez entrer un nom.",
