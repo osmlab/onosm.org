@@ -128,16 +128,17 @@ $("#collect-data-done").click(function() {
     location.hash = '#done';
 
     var note_body =
-        "onosm.org submitted note from a business:\n" +
-        "name: " + $("#name").val() + "\n" +
-        "phone: " + $("#phone").val() + "\n" +
-        "website: " + $("#website").val() + "\n" +
-        "twitter: " + $("#twitter").val() + "\n" +
-        "facebook: " + $("#facebook").val() + "\n" +
-        "email: " + $("#email").val() + "\n" +
-        "hours: " + $("#opening_hours").val() + "\n" +
-        "category: " + $("#category").val().join(", ") + "\n" +
-        "address: " + $("#address").val(),
+        "onosm.org submitted note from a business:\n\n" +
+        "name=" + $("#name").val() + "\n" +
+        "website=" + $("#website").val() + "\n" +
+        "phone=" + $("#phone").val() + "\n" +
+        "twitter=" + $("#twitter").val() + "\n" +
+        "facebook=" + $("#facebook").val() + "\n\n" +
+        "Other info (Needs to be adapted to OSM tagging standards):\n" +
+        "  Address: " + $("#address").val() + "\n" +
+        "  Hours: " + $("#opening_hours").val() + "\n" +
+        "  Category: " + $("#category").val().join(", ") + "\n" +
+        "  Email: " + $("#email").val(),
         latlon = findme_marker.getLatLng(),
         note_data = {
             lat: latlon.lat,
