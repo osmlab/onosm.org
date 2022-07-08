@@ -23,15 +23,14 @@ function loadCategory(language) {
     });
 };
 
-i18next
-    .use(i18nextBrowserLanguageDetector)
-    .init({ fallbackLng: 'en-US', postAsync: 'false' }, function () {
-        $("body").i18n();
+// i18n
+//     .init({ fallbackLng: 'en-US', postAsync: 'false' }, function () {
+//         $("body").i18n();
 
-        var detectedLang = i18n.lng();
-        loadCategory(detectedLang);
+//         var detectedLang = i18n.lng();
+//         loadCategory(detectedLang);
 
-    });
+//     });
 
 
 function zoom_to_point(chosen_place, map, marker) {
@@ -192,9 +191,4 @@ $("#langSelect").on("change", function () {
     var language = $(this).val();
     loadCategory(language);
     $("html").attr("lang", language);
-    //var selectedLang = $(this).attr("lang")
-    // var language = $(this).val().toLowerCase();
-    // if (dictionary.hasOwnProperty(language)) {
-    //     set_lang(dictionary[language]);
-    // }
 });
