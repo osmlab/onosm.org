@@ -2,7 +2,7 @@
 const lngs = {
     en: { nativeName: 'English' },
     de: { nativeName: 'German' },
-    pt: { nativeName: 'Portuguese' }
+    es: { nativeName: 'Español' }
 };
 
 const rerender = () => {
@@ -11,15 +11,15 @@ const rerender = () => {
 
     $('body').localize();
 
-    $('title').text($.t('head.title'))
-    $('meta[name=description]').attr('content', $.t('head.description'))
+    //$('title').text($.t('head.title'))
+    //$('meta[name=description]').attr('content', $.t('head.description'))
 }
 
 $(function () {
     // use plugins and options as needed, for options, detail see
     // https://www.i18next.com
-    i18next
-        //.use(i18nextHttpBackend)
+    i18next.use(i18nextHttpBackend)
+        //.use(i18next-fs-backend)
         // detect user language
         // learn more: https://github.com/i18next/i18next-browser-languageDetector
         .use(i18nextBrowserLanguageDetector)
@@ -27,25 +27,24 @@ $(function () {
         // for all options read: https://www.i18next.com/overview/configuration-options
         .init({
             debug: true,
-            fallbackLng: 'en' ,
-            resources: {
-                en: {
-                    translation: {
-                        app: {
-                            title: 'Landing Page',
-                            desc: 'Some subtitle'
-                        }
-                    }
-                },
-                de: {
-                    translation: {
-                        app: {
-                            title: 'Webseite',
-                            desc: 'Ein Untertitel'
-                        }
-                    }
-                }
+            fallbackLng: 'en',
+            preload: ['en', 'de'],
+            ns: ['translation'],
+            defaultNS: 'translation',
+            backend: {
+                loadPath: 'locales/{{lng}}/{{ns}}.json'
             }
+            // resources: {
+            //     "backend": {
+            //         "loadPath": "./locales/{{lng}}/{{ns}}.json"
+            //     }
+            //     // en: {
+            //     //     translation: './locales/en/translation.json'
+            //     // },
+            //     // de: {
+            //     //     translation: './locales/de/translation.json'
+            //     // }
+            // }
         }, (err, t) => {
             if (err) return console.error(err);
 
@@ -70,4 +69,13 @@ $(function () {
 
             rerender();
         });
+
+    // i18next().load({
+    //     en: {
+    //         translation: './locales/en/translation.json'
+    //     },
+    //     de: {
+    //         translation: './locales/de/translation.json'
+    //     }
+    // })
 });
