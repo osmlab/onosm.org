@@ -186,9 +186,9 @@ function check_coordinates() {
 
 
 
-// Swap languages when menu changes
-$("#langSelect").on("change", function () {
-    var language = $(this).val();
-    loadCategory(language);
-    $("html").attr("lang", language);
-});
+// // Swap languages when menu changes
+// $("#langSelect").on("change", function () {
+//     var language = $(this).val();
+//     loadCategory(language);
+//     $("html").attr("lang", language);
+// });

@@ -1,14 +1,21 @@
 
 const lngs = {
-    en: { nativeName: 'English' },
+    'en-US': { nativeName: 'English' },
     de: { nativeName: 'German' },
-    es: { nativeName: 'Español' }
+    es: { nativeName: 'Español' },
+    'fi-FI': { nativeName: 'Suorittaa loppuun (FI)' },
+    it: { nativeName: 'Italiano' },
+    fr: { nativeName: 'Français' },
+    'nb-no': { nativeName: 'Norvégien (NO)' },
+    'pt-BR': { nativeName: 'Português (BR)' },
+    'ru-RU': { nativeName: 'русский язык (RU)' }
 };
 
 const rerender = () => {
     // start localizing, details:
     // https://github.com/i18next/jquery-i18next#usage-of-selector-function
-
+   
+    loadCategory(i18next.resolvedLanguage);
     $('body').localize();
 
     //$('title').text($.t('head.title'))
@@ -27,30 +34,20 @@ $(function () {
         // for all options read: https://www.i18next.com/overview/configuration-options
         .init({
             debug: true,
+            useLocalStorage: true,
+            localStorageExpirationTime: 86400000, // in ms, default 1 week
             fallbackLng: 'en',
-            preload: ['en', 'de'],
+            preload: ['en'],
             ns: ['translation'],
             defaultNS: 'translation',
             backend: {
                 loadPath: 'locales/{{lng}}/{{ns}}.json'
             }
-            // resources: {
-            //     "backend": {
-            //         "loadPath": "./locales/{{lng}}/{{ns}}.json"
-            //     }
-            //     // en: {
-            //     //     translation: './locales/en/translation.json'
-            //     // },
-            //     // de: {
-            //     //     translation: './locales/de/translation.json'
-            //     // }
-            // }
         }, (err, t) => {
-            if (err) return console.error(err);
 
             // for options see
             // https://github.com/i18next/jquery-i18next#initialize-the-plugin
-            jqueryI18next.init(i18next, $, { useOptionsAttr: true });
+            jqueryI18next.init(i18next, $);
 
             // fill language switcher
             Object.keys(lngs).map((lng) => {
@@ -63,19 +60,13 @@ $(function () {
             $('#languageSwitcher').change((a, b, c) => {
                 const chosenLng = $(this).find("option:selected").attr('value');
                 i18next.changeLanguage(chosenLng, () => {
-                    rerender();
+                    rerender(chosenLng);
                 });
             });
 
             rerender();
+            if (err) return console.error(err);
         });
 
-    // i18next().load({
-    //     en: {
-    //         translation: './locales/en/translation.json'
-    //     },
-    //     de: {
-    //         translation: './locales/de/translation.json'
-    //     }
-    // })
+   
 });
