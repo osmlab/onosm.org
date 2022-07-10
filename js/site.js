@@ -11,6 +11,9 @@ findme_marker.setOpacity(0);
 if (location.hash) location.hash = '';
 
 function loadCategory(language) {
+    
+    $('#category').children().remove().end()
+
     var buildSelectControl = function (data) {
         $("#category").select2({
             multiple: true,
