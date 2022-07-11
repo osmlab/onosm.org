@@ -34,14 +34,14 @@ $(function () {
         // for all options read: https://www.i18next.com/overview/configuration-options
         .init({
             debug: true,
-            useLocalStorage: true,
-            localStorageExpirationTime: 86400000, // in ms, default 1 week
-            fallbackLng: 'en',
-            preload: ['en'],
-            ns: ['translation'],
-            defaultNS: 'translation',
+            // useLocalStorage: true,
+            // localStorageExpirationTime: 86400000, // in ms, default 1 week
+            fallbackLng: 'en-US',
+            preload: ['en-US'],
+            // ns: ['translation'],
+            // defaultNS: 'translation',
             backend: {
-                loadPath: 'locales/{{lng}}/{{ns}}.json'
+                loadPath: 'locales/{{lng}}/translation.json'
             }
         }, (err, t) => {
 

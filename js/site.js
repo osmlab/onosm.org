@@ -26,15 +26,6 @@ function loadCategory(language) {
     });
 };
 
-// i18n
-//     .init({ fallbackLng: 'en-US', postAsync: 'false' }, function () {
-//         $("body").i18n();
-
-//         var detectedLang = i18n.lng();
-//         loadCategory(detectedLang);
-
-//     });
-
 
 function zoom_to_point(chosen_place, map, marker) {
     console.log(chosen_place);
