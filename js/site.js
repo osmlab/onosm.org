@@ -1,3 +1,6 @@
+//jquery version exposes i18next object for translations
+var i18n = i18next;
+
 var findme_map = L.map('findme-map')
     .setView([37.7, -97.3], 3),
     osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -177,12 +180,3 @@ function check_coordinates() {
         $("#invalid-location").show();
     }
 };
-
-
-
-// // Swap languages when menu changes
-// $("#langSelect").on("change", function () {
-//     var language = $(this).val();
-//     loadCategory(language);
-//     $("html").attr("lang", language);
-// });
