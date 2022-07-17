@@ -39,71 +39,71 @@
 
             <div class='col12 on-1 steps clearfix'>
                 <div class='col4 center pad1 step-1'>
-                    <a href='#location' data-i18n='step1.title'></a>
+                    <a href='#location' data-i18n="step1.title"></a>
                 </div>
                 <div class='col4 center pad1 step-2'>
-                    <strong onclick='check_coordinates()' data-i18n='step2.title'></strong>
+                    <strong onclick="check_coordinates()" data-i18n="step2.title"></strong>
                 </div>
                 <div class='col4 center pad1 step-3'>
-                    <strong data-i18n='step3.title'></strong>
+                    <strong data-i18n="step3.title"></strong>
                 </div>
             </div>
 
             <div class='col12' id='address-step'>
                 <div class='center pad2'>
-                    <span id='instructions' data-i18n='step1.desc'></span>
+                    <span id='instructions' data-i18n="step1.desc"></span>
                 </div>
                 <div class='col12'>
                     <div class='pad1'>
                         <form id='find'>
-                            <input class='col8' id='address' placeholder='' data-i18n='[placeholder]step1.addr' />
-                            <button class='col4' id='findme' data-i18n='step1.button'></button>
+                            <input class='col8' id='address' placeholder='' data-i18n="[placeholder]step1.addr"/>
+                            <button class='col4' id='findme' data-i18n="step1.button"></button>
                             <br />
-                            <a id='use_my_location' data-i18n='step1.use_location' href='#' onclick='return false'>use my current location</a>.
+                            <a id="use_my_location" data-i18n="step1.use_location" href="#" onclick="return false">use my current location</a>.
                         </form>
                     </div>
                 </div>
 
                 <div class='center pad2'>
-                    <p id='couldnt-find' style='display: none' data-i18n='[html]step1.fail'></p>
+                    <p id="couldnt-find" style='display: none;' data-i18n="[html]step1.fail"></p>
                 </div>
                 <div class='center pad2'>
-                    <p id='invalid-location' style='display: none' data-i18n='[html]step1.invalid-location'></p>
+                    <p id="invalid-location" style='display: none;' data-i18n="[html]step1.invalid-location"></p>
                 </div>
                 <div class='col12'>
                     <div class='col12' id='findme-map'></div>
-                    <p id='success' class='center' style='display: none; margin-bottom: 500px'></p>
+                    <p id="success" class="center" style='display: none; margin-bottom: 500px'></p>
                 </div>
             </div>
 
             <div class='col12 hide' id='collect-data-step'>
-                <p data-i18n='[html]step2.desc'></p>
+                <p data-i18n="[html]step2.desc"></p>
                 <div class='col12'>
                     <div class='clearfix col12'>
-                        <label for='category' data-i18n='step2.catlabel'></label>
-                        <select style='width: 400px' id='category' multiple='multiple' data-placeholder='' class='col10' data-i18n='[data-placeholder]step2.catplaceholder'>
+                        <label for='category' data-i18n="step2.catlabel"></label>
+                        <select style='width: 400px' id='category' multiple='multiple' data-placeholder='' class='col10' data-i18n="[data-placeholder]step2.catplaceholder">
                         </select>
                     </div>
                     <div class='col6'>
-                        <label for='name' data-i18n='step2.name'></label>
-                        <input id='name' type='text' placeholder='' data-i18n='[placeholder]step2.nameplaceholder' />
+                        <label for='name' data-i18n="step2.name"></label>
+                        <input id='name' type='text' placeholder='' data-i18n="[placeholder]step2.nameplaceholder" />
                         <label for='phone' data-i18n="step2.phone"></label>
-                        <input id='phone' type='text' placeholder='' data-i18n='[placeholder]step2.phoneplaceholder' />
+                        <input id='phone' type='text' placeholder='' data-i18n="[placeholder]step2.phoneplaceholder" />
                         <label for='website' data-i18n='step2.website'></label>
-                        <input id='website' type='text' placeholder='' data-i18n='[placeholder]step2.websiteplaceholder'/>
+                        <input id='website' type='text' placeholder='' data-i18n="[placeholder]step2.websiteplaceholder"/>
                         <label for='opening_hours' data-i18n='step2.opening'></label>
-                        <input id='opening_hours' type='text' placeholder='' data-i18n='[placeholder]step2.openingplaceholder'/>
+                        <input id='opening_hours' type='text' placeholder='' data-i18n="[placeholder]step2.openingplaceholder"/>
                     </div>
                     <div class='col6'>
-                        <label for='email' data-i18n='step2.email'></label>
-                        <input id='email' type='text' placeholder='' data-i18n='[placeholder]step2.emailplaceholder'/>
-                        <label for='twitter' data-i18n='step2.twitter'></label>
-                        <input id='twitter' type='text' placeholder='' data-i18n='[placeholder]step2.twitterplaceholder'/>
-                        <label for='facebook' data-i18n='step2.facebook'></label>
-                        <input id='facebook' type='text' placeholder='' data-i18n='[placeholder]step2.facebookplaceholder'/>
+                        <label for='email' data-i18n="step2.email"></label>
+                        <input id='email' type='text' placeholder='' data-i18n="[placeholder]step2.emailplaceholder"/>
+                        <label for='twitter' data-i18n="step2.twitter"></label>
+                        <input id='twitter' type='text' placeholder='' data-i18n="[placeholder]step2.twitterplaceholder"/>
+                        <label for='facebook' data-i18n="step2.facebook"></label>
+                        <input id='facebook' type='text' placeholder='' data-i18n="[placeholder]step2.facebookplaceholder"/>
                     </div>
                     <div class='clearfix col12'>
-                        <h5><p class='col12' id='form-invalid'></p></h5>
+                        <h5><p class='col12' id="form-invalid"></p></h5>
                         <h4><button class='col12' id='collect-data-done' data-i18n='step2.done'></button></h4>
                     </div>
                 </div>
