@@ -6,8 +6,8 @@
 		<meta http-equiv='content-type' content='text/html; charset=utf-8' />
 		<link rel='stylesheet' type='text/css' href='css/style.css' />
 		<link rel='stylesheet' type='text/css' href='css/site.css' />
-		<link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css'/>
-		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.css' />
+		<link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css' />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.css" />
 		<!--[if lte IE 8]>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.ie.css" />
         <![endif]-->
@@ -73,6 +73,7 @@
                 <div class='col12'>
                     <div class='col12' id='findme-map'></div>
                     <p id="success" class="center" style='display: none; margin-bottom: 500px'></p>
+
                 </div>
             </div>
 
@@ -81,17 +82,17 @@
                 <div class='col12'>
                     <div class='clearfix col12'>
                         <label for='category' data-i18n="step2.catlabel"></label>
-                        <select style='width: 400px' id='category' multiple='multiple' data-placeholder='' class='col10' data-i18n="[data-placeholder]step2.catplaceholder">
+                        <select style='width: 400px;' id='category' multiple='multiple' data-placeholder='' class='col10' data-i18n="[data-placeholder]step2.catplaceholder">
                         </select>
                     </div>
                     <div class='col6'>
                         <label for='name' data-i18n="step2.name"></label>
-                        <input id='name' type='text' placeholder='' data-i18n="[placeholder]step2.nameplaceholder" />
+                        <input id='name' type='text' placeholder='' data-i18n="[placeholder]step2.nameplaceholder"/>
                         <label for='phone' data-i18n="step2.phone"></label>
                         <input id='phone' type='text' placeholder='' data-i18n="[placeholder]step2.phoneplaceholder" />
-                        <label for='website' data-i18n='step2.website'></label>
+                        <label for='website' data-i18n="step2.website"></label>
                         <input id='website' type='text' placeholder='' data-i18n="[placeholder]step2.websiteplaceholder"/>
-                        <label for='opening_hours' data-i18n='step2.opening'></label>
+                        <label for='opening_hours' data-i18n="step2.opening"></label>
                         <input id='opening_hours' type='text' placeholder='' data-i18n="[placeholder]step2.openingplaceholder"/>
                     </div>
                     <div class='col6'>
@@ -104,7 +105,7 @@
                     </div>
                     <div class='clearfix col12'>
                         <h5><p class='col12' id="form-invalid"></p></h5>
-                        <h4><button class='col12' id='collect-data-done' data-i18n='step2.done'></button></h4>
+                        <h4><button class='col12' id='collect-data-done' data-i18n="step2.done"></button></h4>
                     </div>
                 </div>
             </div>
