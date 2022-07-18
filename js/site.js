@@ -29,7 +29,6 @@ function loadCategory(language) {
     });
 };
 
-
 function zoom_to_point(chosen_place, map, marker) {
     console.log(chosen_place);
 
@@ -39,6 +38,7 @@ function zoom_to_point(chosen_place, map, marker) {
 
     map.setView(chosen_place, 18, {animate: true});
 }
+
 $("#use_my_location").click(function (e) {
     $("#couldnt-find").hide();
     $("#success").hide();
@@ -62,6 +62,7 @@ $("#use_my_location").click(function (e) {
         $("#couldnt-find").show();
     }
 });
+
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
