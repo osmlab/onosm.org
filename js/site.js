@@ -1,3 +1,6 @@
+//jquery version exposes i18next object for translations
+var i18n = i18next;
+
 var findme_map = L.map('findme-map')
     .setView([37.7, -97.3], 3),
     osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -5,27 +8,26 @@ var findme_map = L.map('findme-map')
     osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 19, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
 
-var findme_marker = L.marker([0,0], {draggable:true}).addTo(findme_map);
+var findme_marker = L.marker([0,0], {draggable: true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
 
-i18n.init({ fallbackLng: 'en-US', postAsync: 'false' }, function() {
-    $("body").i18n();
+function loadCategory(language) {
+    
+    $('#category').children().remove().end()
 
-    var detectedLang = i18n.lng();
     var buildSelectControl = function(data) {
         $("#category").select2({
             multiple: true,
             data: data,
         });
     };
-
-    $.getJSON('./locales/' + detectedLang + '/categories.json', buildSelectControl).fail(function () {
+    $.getJSON('./locales/' + language + '/categories.json', buildSelectControl).fail(function () {
         // 404? Fall back to en-US
          $.getJSON('./locales/en-US/categories.json', buildSelectControl);
     });
-});
+};
 
 function zoom_to_point(chosen_place, map, marker) {
     console.log(chosen_place);
@@ -36,6 +38,7 @@ function zoom_to_point(chosen_place, map, marker) {
 
     map.setView(chosen_place, 18, {animate: true});
 }
+
 $("#use_my_location").click(function (e) {
     $("#couldnt-find").hide();
     $("#success").hide();
@@ -56,9 +59,10 @@ $("#use_my_location").click(function (e) {
             $("#couldnt-find").show();
         });
     } else {
-      $("#couldnt-find").show();
+        $("#couldnt-find").show();
     }
 });
+
 $("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
