@@ -5,10 +5,10 @@ var findme_map = L.map('findme-map')
     .setView([37.7, -97.3], 3),
     osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     osmAttrib = 'Map data © OpenStreetMap contributors',
-    osm = L.tileLayer(osmUrl, { minZoom: 2, maxZoom: 19, attribution: osmAttrib }).addTo(findme_map),
+    osm = L.tileLayer(osmUrl, {minZoom: 2, maxZoom: 19, attribution: osmAttrib}).addTo(findme_map),
     category_data = [];
 
-var findme_marker = L.marker([0, 0], { draggable: true }).addTo(findme_map);
+var findme_marker = L.marker([0,0], {draggable: true}).addTo(findme_map);
 findme_marker.setOpacity(0);
 
 if (location.hash) location.hash = '';
@@ -17,7 +17,7 @@ function loadCategory(language) {
 
     $('#category').children().remove().end()
 
-    var buildSelectControl = function (data) {
+    var buildSelectControl = function(data) {
         $("#category").select2({
             multiple: true,
             data: data,
@@ -25,7 +25,7 @@ function loadCategory(language) {
     };
     $.getJSON('./locales/' + language + '/categories.json', buildSelectControl).fail(function () {
         // 404? Fall back to en-US
-        $.getJSON('./locales/en-US/categories.json', buildSelectControl);
+         $.getJSON('./locales/en-US/categories.json', buildSelectControl);
     });
 };
 
@@ -36,14 +36,14 @@ function zoom_to_point(chosen_place, map, marker) {
     marker.setLatLng([chosen_place.lat, chosen_place.lon]);
 
 
-    map.setView(chosen_place, 18, { animate: true });
+    map.setView(chosen_place, 18, {animate: true});
 }
 
 $("#use_my_location").click(function (e) {
     $("#couldnt-find").hide();
     $("#success").hide();
     if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition(function(position) {
             var point = {
                 lat: position.coords.latitude,
                 lon: position.coords.longitude
@@ -63,7 +63,7 @@ $("#use_my_location").click(function (e) {
     }
 });
 
-$("#find").submit(function (e) {
+$("#find").submit(function(e) {
     e.preventDefault();
     $("#couldnt-find").hide();
     $("#invalid-location").hide();
@@ -77,7 +77,7 @@ $("#find").submit(function (e) {
     var url = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg);
     $("#findme h4").text(i18n.t('messages.loadingText'));
     $("#findme").addClass("loading");
-    $.getJSON(url, function (data) {
+    $.getJSON(url, function(data) {
         if (data.length > 0) {
             zoom_to_point(data[0], findme_map, findme_marker);
 
@@ -92,7 +92,7 @@ $("#find").submit(function (e) {
     });
 });
 
-$(window).on('hashchange', function () {
+$(window).on('hashchange', function() {
     if (location.hash == '#details') {
         $('#collect-data-step').removeClass('hide');
         $('#address-step').addClass('hide');
@@ -114,7 +114,7 @@ $(window).on('hashchange', function () {
     findme_map.invalidateSize();
 });
 
-$("#collect-data-done").click(function () {
+$("#collect-data-done").click(function() {
     // Basic form validation
     if ($("#category").val().length == 0) {
         $("#form-invalid").text(i18n.t('validation.missingCategory'));
@@ -129,7 +129,7 @@ $("#collect-data-done").click(function () {
         $("#form-invalid").text("");
     }
 
-    //location.hash = '#done';
+
 
     $("#collect-data-done").addClass("loading");
     $("#collect-data-done").attr('disabled','disabled');
@@ -152,11 +152,10 @@ $("#collect-data-done").click(function () {
             text: note_body
         };
 
-        
     $.post(
         'https://api.openstreetmap.org/api/0.6/notes.json',
         note_data,
-        function (result) {
+        function(result) {
             var id = result.properties.id;
             $("#linkcoords").append(
                 '<a href="https://osm.org/note/' + id + '">https://osm.org/note/' + id + '</a>'
@@ -171,8 +170,6 @@ $("#collect-data-done").click(function () {
             $("#collect-data-done").removeClass("loading");
             $("#collect-data-done").removeAttr('disabled');
             alert("Unable to add note");
-        })
-        .always(function(){
         })
 }
 );
