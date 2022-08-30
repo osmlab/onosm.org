@@ -14,7 +14,7 @@ findme_marker.setOpacity(0);
 if (location.hash) location.hash = '';
 
 function loadCategory(language) {
-    
+
     $('#category').children().remove().end()
 
     var buildSelectControl = function(data) {
@@ -129,7 +129,10 @@ $("#collect-data-done").click(function() {
         $("#form-invalid").text("");
     }
 
-    location.hash = '#done';
+
+
+    $("#collect-data-done").addClass("loading");
+    $("#collect-data-done").attr('disabled','disabled');
 
     var note_body =
         "onosm.org submitted note from a business:\n" +
@@ -157,9 +160,19 @@ $("#collect-data-done").click(function() {
             $("#linkcoords").append(
                 '<a href="https://osm.org/note/' + id + '">https://osm.org/note/' + id + '</a>'
             );
-        }
-    );
-});
+        }) 
+        .done(function (){
+            $("#collect-data-done").removeClass("loading");
+            $("#collect-data-done").removeAttr('disabled');
+            location.hash = '#done';
+        })     
+        .fail(function () {
+            $("#collect-data-done").removeClass("loading");
+            $("#collect-data-done").removeAttr('disabled');
+            alert("Unable to add note");
+        })
+}
+);
 
 function clearFields() {
     $("#name").val('');
