@@ -1,11 +1,10 @@
-
-
 const lngs = {
-    'en-US': { nativeName: 'English' },
+    'en-GB': { nativeName: 'British English' },
+    'en-US': { nativeName: 'American English' },
     de: { nativeName: 'German' },
     es: { nativeName: 'Español' },
     'fi-FI': { nativeName: 'Suorittaa loppuun (FI)' },
-    it: { nativeName: 'Italiano' },
+    'it-IT': { nativeName: 'Italiano' },
     fr: { nativeName: 'Français' },
     'nb-no': { nativeName: 'Norvégien (NO)' },
     'pt-BR': { nativeName: 'Português (BR)' },
@@ -16,9 +15,10 @@ const rerender = () => {
     // start localizing, details:
     // https://github.com/i18next/jquery-i18next#usage-of-selector-function
 
-    loadCategory(i18next.resolvedLanguage);
+    // may have to fix this??
+    reloadLists(i18next.resolvedLanguage);
     $('body').localize();
-}
+};
 
 $(function () {
     // use plugins and options as needed, for options, detail see

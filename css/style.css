@@ -1,80 +1,26 @@
-/*  Reset ♥
-    http://meyerweb.com/eric/tools/css/reset/
-    v2.0 | 20110126
-    License: none (public domain)
-------------------------------------------------------- */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin:0;
-  padding:0;
-  border:0;
-  font-size:100%;
-  font:inherit;
-  vertical-align:baseline;
-  }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display:block;
-  }
-body { line-height:1; }
-ol, ul { list-style:none;  }
-blockquote, q { quotes:none; }
-blockquote:before, blockquote:after,
-q:before, q:after { content:''; content:none; }
-/* tables still need 'cellspacing="0"' in the markup */
-table { border-collapse: collapse; border-spacing:0; }
-/* remember to define focus styles. Hee Haw */
-:focus { outline:0; }
+#map {
+  height: 400px;
+}
 
-/* Inline Elements & Typography
-------------------------------------------------------- */
-body,
-input,
-textarea {
-  color:#333;
-  font:15px/1.67 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing:antialiased;
-  }
-*, *:after, *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  }
+#findme-map {
+  height: 300px;
+}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin:0;
-  font-weight:bold;
-  }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-h1 {
-  font-size:32px;
-  margin-bottom:20px;
-  line-height:1em;
-  }
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
-h2 {
-  font-size:28px;
-  margin-bottom:20px;
-  line-height:1.25em;
-  }
+.select2-container .select2-choice {
+  height: 38px;
+}
 
+/* <<<<<<< HEAD
 h3 {
   font-size:20px;
   margin-bottom:20px;
@@ -90,10 +36,10 @@ h4, h5 {
 p {
   margin:0 0 20px;
   }
-  p:last-child { margin-bottom:0;}
+  p:last-child { margin-bottom:0;} */
 
 /* Links */
-a {
+/* a {
   color:#77c453;
   text-decoration:none;
   }
@@ -122,10 +68,10 @@ hr {
   border:0;
   height:1px;
   background:#f8f8f8;
-  }
+  } */
 
 /* Block Quotes */
-blockquote,
+/* blockquote,
 q {
   quotes:none;
   font-style:italic;
@@ -138,10 +84,10 @@ blockquote:after,
 q:before,
 q:after {
   content:'';
-  }
+  } */
 
 /* Code Blocks & Pre */
-code,
+/* code,
 pre {
   padding:5px;
   font-family:Menlo, Bitstream Vera Sans Mono, Monaco, Consolas, monospace;
@@ -175,10 +121,10 @@ pre {
 .pre-scrollable {
   max-height:300px;
   overflow-y:scroll;
-  }
+  } */
 
 /* sub/superscripts */
-sup,
+/* sup,
 sub {
   height:0;
   line-height:1;
@@ -190,9 +136,9 @@ sub {
 sup {
   top:.5em;
   bottom:1em;
-  }
+  } */
 
-label {
+/* label {
   display:block;
   }
 select,
@@ -211,10 +157,10 @@ input[type=text] {
   padding:4px 6px;
   -webkit-border-radius:1px;
           border-radius:1px;
-  }
-.select2-search__field {
+  } */
+/* .select2-search__field {
   width: 100% !important;
-}
+} */
 textarea,
 input[type=text] {
   background-color:#fff;
@@ -235,7 +181,7 @@ input[type=text] {
     border-width:1px;
     }
 
-textarea {
+/* textarea {
   height:200px;
   max-width:none;
   }
@@ -281,10 +227,10 @@ table {
   thead th {
     vertical-align:bottom;
     color:#57594D;
-    }
+    } */
 
 /* Read content styling */
-.prose ul {
+/* .prose ul {
   list-style:disc;
   margin-left:40px;
   }
@@ -301,19 +247,19 @@ table {
   width:30px;
   height:30px;
   text-indent:-999em;
-  }
+  } */
 
 /* Layout
 ------------------------------------------------------- */
-.container {
+/* .container {
   max-width:1600px;
   margin:0 auto;
   overflow:hidden;
-  }
+  } */
 
 /* Columns
 ------------------------------------------------------- */
-.col0    { float:left; width:04.1666%; }
+/* .col0    { float:left; width:04.1666%; }
 .col1    { float:left; width:08.3333%; }
 .col2    { float:left; width:16.6666%; }
 .col3    { float:left; width:25.0000%; }
@@ -338,22 +284,22 @@ table {
 .margin9  { margin-left:75.0000%; }
 .margin10 { margin-left:83.3333%; }
 .margin11 { margin-left:91.6666%; }
-.margin12 { margin-left:100.0000%; }
+.margin12 { margin-left:100.0000%; } */
 
 /* Padding
 ------------------------------------------------------- */
-.pad1    { padding:10px; }
+/* .pad1    { padding:10px; }
 .pad2    { padding:20px; }
 .pad21h  { padding:10px 20px; }
 .pad2h   { padding:0 20px; }
 .pad4    { padding:40px; }
 .pad4h   { padding-left:40px; padding-right:40px; }
 .pad8    { padding:80px 40px; }
-.pad4c   { padding:40px; }
+.pad4c   { padding:40px; } */
 
 /* Additional Utility Classes
 ------------------------------------------------------- */
-.fr           { float:right; }
+/* .fr           { float:right; }
 .fl           { float:left; }
 .show         { display:block; }
 .hide         { display:none; }
@@ -379,31 +325,31 @@ table {
     }
   .tip-right:after {
     border-width:5px 0 5px 5px;
-    }
+    } */
 
 /* Markup free clearing
 Details: http://www.positioniseverything.net/easyclearing.html
 ------------------------------------------------------- */
-.clearfix:after {
+/* .clearfix:after {
   content:'.';
   display:block;
   height:0;
   clear:both;
   visibility:hidden;
-  }
+  } */
 
-.clearfix { display:inline-block; }
+/* .clearfix { display:inline-block; } */
 
 /* Tablet Layout
 ------------------------------------------------------- */
-@media only screen and (max-width:770px) {
+/* @media only screen and (max-width:770px) {
   .hide-tablet { display:none; }
   .show-tablet { display:block; }
-  }
+  } */
 
 /* Mobile Layout
 ------------------------------------------------------- */
-@media only screen and (max-width:640px) {
+/* @media only screen and (max-width:640px) {
   .col1,
   .col2,
   .col3,
@@ -439,4 +385,9 @@ Details: http://www.positioniseverything.net/easyclearing.html
     background-image:url(img/sprite@2x.png);
     background-size:240px 240px;
     }
-  }
+  } */
+/* ======= */
+.select2-container .select2-choice .select2-arrow b,
+.select2-container .select2-choice span.select2-chosen {
+  margin-top: 5px;
+}
