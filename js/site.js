@@ -12,7 +12,10 @@ function reloadLists(language) {
     })
     .fail(function () {
       // 404? Fall back to en-US
-      $.getJSON('./locales/en-US/categories.json');
+      $.getJSON('./locales/en-US/categories.json')
+      .success(function (data) {
+        category_data = data;
+      });
     });
 
   $.getJSON('./locales/' + language + '/payment.json').success(function (data) {

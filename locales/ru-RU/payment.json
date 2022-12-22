@@ -1,0 +1,17 @@
+[
+{"id": "payment:cash=yes", "text": "Денежные средства"},
+{"id": "payment:cheque=yes", "text": "Проверять"},
+{"id": "payment:wire_transfer=yes", "text": "Телеграфный перевод"},
+{"id": "payment:bancomat=yes", "text": "банковская карта"},
+{"id": "payment:american_express=yes", "text": "American Express"},
+{"id": "payment:mastercard=yes", "text": "Мастеркард"},
+{"id": "payment:visa=yes", "text": "Виза"},
+{"id": "payment:sms=yes", "text": "SMS"},
+{"id": "payment:mobile_phone=yes", "text": "Мобильный телефон"},
+{"id": "payment:bitcoin=yes", "text": "Биткойн"},
+{"id": "payment:apple_pay=yes", "text": "Apple Pay"},
+{"id": "payment:google_pay=yes", "text": "Google Pay"},
+{"id": "payment:samsung_pay=yes", "text": "Samsung Pay"},
+{"id": "payment:satispay=yes", "text": "Satispay"},
+{"id": "payment:meal_voucher=yes", "text": "Ваучер на питание"}
+]

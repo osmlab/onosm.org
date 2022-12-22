@@ -1,12 +1,13 @@
 const lngs = {
-    'en-GB': { nativeName: 'British English' },
-    'en-US': { nativeName: 'American English' },
-    de: { nativeName: 'German' },
+    'en-GB': { nativeName: 'English (GB)' },
+    'en-US': { nativeName: 'English (US)' },
+    de: { nativeName: 'Deutsch' },
     es: { nativeName: 'Español' },
     'fi-FI': { nativeName: 'Suorittaa loppuun (FI)' },
-    'it-IT': { nativeName: 'Italiano' },
+    'it-IT': { nativeName: 'Italiano (IT)' },
     fr: { nativeName: 'Français' },
-    'nb-no': { nativeName: 'Norvégien (NO)' },
+    'nb-NO': { nativeName: 'Norsk (NO)' },
+    nl: { nativeName: 'Nederlandse Standaard (NL)' },
     'pt-BR': { nativeName: 'Português (BR)' },
     'ru-RU': { nativeName: 'русский язык (RU)' }
 };

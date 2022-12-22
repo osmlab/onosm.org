@@ -1,7 +1,7 @@
 [
 {"id": "payment:cash=yes", "text": "Cash"},
-{"id": "payment:cheque=yes", "text": "Tarkistaa"},
-{"id": "payment:wire_transfer=yes", "text": "Pankkisiirto"},
+{"id": "payment:cheque=yes", "text": "Cheque"},
+{"id": "payment:wire_transfer=yes", "text": "Wire transfer"},
 {"id": "payment:bancomat=yes", "text": "Bank card"},
 {"id": "payment:american_express=yes", "text": "American Express"},
 {"id": "payment:mastercard=yes", "text": "Mastercard"},

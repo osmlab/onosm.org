@@ -51,16 +51,16 @@
 </head>
 
 <body>
-    <div class='container-sm mt-3 mb-5' style='display: inline-block'>
-        <select name='language' id='languageSwitcher'></select>
-    </div>
+  <div class='container-sm mt-3 mb-5' style='display: inline-block'>
+      <select name='language' id='languageSwitcher'></select>
+  </div>
   <div class="container-sm mt-3 mb-5">    
     <div class="row">
       <div class="col">
         <img src='img/osm.png' alt="OpenStreetMap logo" class="mx-auto" />
       </div>
       <div class="col-10 text-break">
-        <h2 data-i18n="app.title" class="mx-auto text-primary"></h2>
+        <h1 data-i18n="app.title" class="mx-auto text-primary">On OpenStreetMap</h1>
         <p data-i18n="app.desc" class="p-2"></p>
       </div>
     </div>
@@ -96,8 +96,8 @@
         <!-- categories -->
         <div class="row">
           <div class="form-group col">
-            <label for='category' data-i18n="step2.catlabel"></label>
-            <input id='category' data-placeholder='' class="w-100" data-i18n="[data-placeholder]step2.catplaceholder" />
+            <label for="category" data-i18n="step2.catlabel" ></label>
+            <input id="category" data-i18n="[data-placeholder]step2.catplaceholder" class="w-100"  />
           </div>
           <div class="form-group col-sm-7">
             <label for='categoryalt' data-i18n="step2.catalt"></label>
@@ -218,7 +218,7 @@
             <span class="input-group-text"><i class="twa twa-wheelchair-symbol"></i></span>
           </div>
           <select class="custom-select" id="wheel">
-            <option selected data-i18n="step2.wheelplaceholder" value=""></option>
+            <option selected data-i18n="step2.wheelplaceholder" hidden="yes" value=""></option>
             <option value="yes" data-i18n="step2.wheel_yes"></option>
             <option value="limited" data-i18n="step2.wheel_limited"></option>
             <option value="no" data-i18n="step2.wheel_no"></option>
