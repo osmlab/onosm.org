@@ -54,34 +54,6 @@ function reloadLists(language) {
   });
 }
 
-// i18n.init({
-//   fallbackLng: 'it-IT',
-//   lngWhitelist: ['en-GB', 'it-IT'],
-//   postAsync: 'false'
-// }, function() {
-//   $("body").i18n();
-//   successString = i18n.t('messages.success', {
-//     escapeInterpolation: false
-//   });
-//   manualPosition = i18n.t('messages.manualPosition', {
-//     escapeInterpolation: false
-//   });
-//   loadingText = i18n.t('messages.loadingText');
-//   modalText = {};
-//   modalText.text = i18n.t('messages.modalTitle');
-//   modalText.button = i18n.t('messages.modalButton');
-
-//   onOSMlang = i18n.lng();
-//   $.getJSON('./locales/' + onOSMlang + '/categories.json').success(function(data) {
-//     category_data = data;
-//   });
-
-//   $.getJSON('./locales/' + onOSMlang + '/payment.json').success(function(data) {
-//     payment_data = data;
-//   });
-
-// });
-
 /* HERE BE DRAGONS */
 var findme_map = L.map('findme-map')
   .setView([41.69, 12.71], 5),
