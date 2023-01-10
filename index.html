@@ -41,12 +41,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2_locale_it.min.js"></script>
   <!-- BOOTSTRAP JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+  <!-- i18next -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.6.10/i18next.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/1.3.1/i18nextHttpBackend.min.js"></script>
 
+  <!-- Twemoji -->
+  https://cdn.jsdelivr.net/gh/SebastianAigner/twemoji-amazing@1.1.0/twemoji-amazing.css
+  
+  <!-- CONFETTI JS - https://github.com/mathusummut/confetti.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.min.js" integrity="sha512-n4mkhsTTwnEox+TGRnxJmtvrU+Rgec7NUjrHmZE7RlYOim+XLwgMMe1/jovYl/Eh24hvPLKgX0QGdPfATAphqQ==" crossorigin="anonymous"></script>
   
 </head>
 
@@ -66,8 +71,8 @@
     </div>
 
     <nav class="nav nav-pills nav-fill border p-1 rounded">
-      <a class="nav-item nav-link active rounded-0 bg-success" id="step1" href="#location" data-i18n="step1.title"></a>
-      <a class="nav-item nav-link rounded-0 disabled" id="step2" href="#details" data-i18n="step2.title"></a>
+      <a class="nav-item nav-link active rounded-0 bg-success" id="step1" href="#location" data-i18n="step1.title">Location</a>
+      <a class="nav-item nav-link rounded-0 disabled" id="step2" href="#details" data-i18n="step2.title">Details</a>
       <strong class="nav-item nav-link disabled rounded-0" id="step3" data-i18n="step3.title"></strong>
     </nav>
 
@@ -79,14 +84,16 @@
         <form id='find' class="input-group  border border-primary shadow-sm rounded">
           <input class="form-control" id="address" type="search" placeholder='' data-i18n="[placeholder]step1.addr" />
           <div class="input-group-append">
-            <button class="cbtn btn-primary px-3" id='findme'><span data-i18n="step1.button"></span></button>
+            <button class="cbtn btn-primary px-3" id='findme' aria-label="search for address"><span data-i18n="step1.button"></span></button>
           </div>
         </form>
         <p id="couldnt-find" class="alert alert-danger mt-2" role="alert" style='display: none;' data-i18n="[html]step1.fail"></p>
         <p id="map-information" class="alert alert-warning mt-2" role="alert" style='display: none;'></p>
       </div>
       <div id='findme-map'></div>
-      <a class="btn btn-primary btn-lg text-white w-100 mt-3 text-uppercase disabled" id="continue" href="#details" data-i18n="step1.continue"></a>
+      <a class="btn btn-primary btn-lg text-white w-100 mt-3 text-uppercase disabled" id="continue" href="#details" data-i18n="step1.continue">
+        Move to next step
+      </a>
     </div>
 
     <!-- step 2 -->
@@ -368,8 +375,5 @@
   </div>
   <script src="js/i18n.js"></script>
   <script src='js/site.js'></script>
-  <!-- CONFETTI JS - https://github.com/mathusummut/confetti.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.min.js" integrity="sha512-n4mkhsTTwnEox+TGRnxJmtvrU+Rgec7NUjrHmZE7RlYOim+XLwgMMe1/jovYl/Eh24hvPLKgX0QGdPfATAphqQ==" crossorigin="anonymous"></script>
-  
 </body>
 </html>
