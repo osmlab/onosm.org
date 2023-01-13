@@ -196,7 +196,7 @@ $(window).on('hashchange', function () {
     $('#collect-data-step').addClass('d-none');
     $('#address-step').addClass('d-none');
     $('#step3').addClass('active bg-success');
-    confetti.start(1000);
+    //confetti.start(1000);
   } else {
     $('#address-step').removeClass('d-none');
     $('#collect-data-step').addClass('d-none');
@@ -223,43 +223,33 @@ function getNoteBody() {
     paymentTexts.push(e.text);
   });
 
-  var note_body = "E' stata inviata una nota tramite su.openstreetmap.it:\n";
+
+  // add back translation of note header
+  
+  var note_body = "onosm.org submitted note from a business:\n";
   if ($("#name").val()) note_body += i18n.t('step2.name') + ": " + $("#name").val() + "\n";
+  if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
+  if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
+  if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
+  if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
   if ($("#phone").val()) note_body += i18n.t('step2.phone') + ": " + $("#phone").val() + "\n";
-  if ($("#website").val() != "https://") note_body += i18n.t('step2.website') + ": " + $("#website").val() + "\n";
+  // fixme - this should be default to an empty string or be escaped
+  if ($("#website").val()) note_body += i18n.t('step2.website') + ": " + $("#website").val() + "\n";
   if ($("#social").val()) note_body += i18n.t('step2.social') + ": " + $("#social").val() + "\n";
   if ($("#opening_hours").val()) note_body += i18n.t('step2.opening') + ": " + $("#opening_hours").val() + "\n";
   if ($("#wheel").val()) note_body += i18n.t('step2.wheel') + ": " + $("#wheel").val() + "\n";
   if ($("#category").val()) note_body += i18n.t('step2.catlabel') + ": " + $("#category").val() + "\n";
   if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc') + ": " + $("#categoryalt").val() + "\n";
-  if ($("#addressalt").val()) note_body += i18n.t('step2.addressaltdesc') + ": " + $("#addressalt").val() + " " + $("#hnumberalt").val() + ", " + $("#postcode").val() + " " + $("#city").val() + "\n";
   if (paymentIds) note_body += i18n.t('step2.payment') + ": " + paymentTexts.join(",") + "\n";
-  if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "") note_body += i18n.t('step2.deliverydesc') + $("#delivery").val() + "\n"; else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "") note_body += i18n.t('step2.deliverydesc') + i18n.t('step2.yes') + "\n"; else if ($('#delivery-check').not(':indeterminate') == true) note_body += i18n.t('step2.deliverydesc') + i18n.t('step2.no') + "\n";
-  if ($("#delivery_description").val()) note_body += i18n.t('step2.delivery_descriptiondesc') + ": " + $("#delivery_description").val() + "\n";
-  if ($("input:checked[name=takeaway]").val() === 'yes') note_body += i18n.t('step2.takeawaydesc') + ": " + i18n.t('step2.yes') + "\n";
-  if ($("input:checked[name=takeaway]").val() === 'only') note_body += i18n.t('step2.takeawaydesc') + ": " + i18n.t('step2.only_takeaway') + "\n";
-  if ($("#takeaway_description").val()) note_body += i18n.t('step2.takeaway_descriptiondesc') + ": " + $("#takeaway_description").val() + "\n";
-
-
-  note_body += "\nTag suggeriti: (⚠️ = " + i18n.t('messages.needsChecking') + ")\n";
-  if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
-  if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
-  if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
-  if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
-  if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
-  if ($("#phone").val()) note_body += "⚠️ contact:phone|mobile=" + $("#phone").val() + "\n";
-  if ($("#website").val() != "https://") note_body += "contact:website=" + $("#website").val() + "\n";
-  if ($("#social").val()) note_body += "⚠️ contact:facebook|instagram|other=" + $("#social").val() + "\n";
-  if ($("#opening_hours").val()) note_body += "⚠️ opening_hours=" + $("#opening_hours").val() + "\n";
-  if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
-  if ($("#categoryalt").val()) note_body += "description=" + $("#categoryalt").val() + "\n";
-  if (paymentIds) note_body += paymentIds.join("\n") + "\n";
-  if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "") note_body += "⚠️ delivery=" + $("#delivery").val() + "\n"; else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "") note_body += "delivery=yes" + "\n"; else if ($('#delivery-check').not(':indeterminate') == true) note_body += "delivery=no" + "\n";
+ 
+  if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "") note_body += " delivery=" + $("#delivery").val() + "\n"; else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "") note_body += "delivery=yes" + "\n"; else if ($('#delivery-check').not(':indeterminate') == true) note_body += "delivery=no" + "\n";
   if ($("#delivery_description").val()) note_body += "delivery:description=" + $("#delivery_description").val() + "\n";
+ 
   if ($("input:checked[name=takeaway]").val() != "undefined") note_body += "takeaway=" + $("input:checked[name=takeaway]").val() + "\n";
   if ($("#takeaway_description").val()) note_body += "takeaway:description=" + $("#takeaway_description").val() + "\n";
-  if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
   if ($("input:checked[name=takeaway_covid]").val() == "yes" || $("input:checked[name=takeaway_covid]").val() == "only") note_body += "takeaway:covid19=" + $("input:checked[name=takeaway_covid]").val() + "\n";
+ 
+  if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
   if ($("#delivery_covid_description").val() || $("#takeaway_covid_description").val()) note_body += "description:covid19=";
   if ($("#delivery_covid_description").val()) note_body += $("#delivery_covid_description").val() + " ";
   if ($("#takeaway_covid_description").val()) note_body += $("#takeaway_covid_description").val() + "\n";
@@ -279,7 +269,7 @@ $("#collect-data-done").click(function () {
 
   $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function (data) {
     // console.log(data);
-    var noteId = data['properties']['id'];
+    var noteId = data.properties.id;
     var link = 'https://openstreetmap.org/?note=' + noteId + '#map=19/' + latlon.lat + '/' + latlon.lng + '&layers=N';
     $("#linkcoords").append('<div class="mt-3 h4"><a href="' + link + '">' + link + '</a></div>');
   });
