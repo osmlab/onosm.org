@@ -1,0 +1,17 @@
+[
+{"id": "payment:cash=yes", "text": "Dinero"},
+{"id": "payment:cheque=yes", "text": "Controlar"},
+{"id": "payment:wire_transfer=yes", "text": "Transferencia bancaria"},
+{"id": "payment:bancomat=yes", "text": "Tarjeta bancaria"},
+{"id": "payment:american_express=yes", "text": "American Express"},
+{"id": "payment:mastercard=yes", "text": "Tarjeta MasterCard"},
+{"id": "payment:visa=yes", "text": "Visa"},
+{"id": "payment:sms=yes", "text": "SMS"},
+{"id": "payment:mobile_phone=yes", "text": "Teléfono móvil"},
+{"id": "payment:bitcoin=yes", "text": "Bitcoin"},
+{"id": "payment:apple_pay=yes", "text": "Apple Pay"},
+{"id": "payment:google_pay=yes", "text": "Google Pay"},
+{"id": "payment:samsung_pay=yes", "text": "Samsung Pay"},
+{"id": "payment:satispay=yes", "text": "Satispay"},
+{"id": "payment:meal_voucher=yes", "text": "Cupon de comida"}
+]

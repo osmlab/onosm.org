@@ -1,0 +1,17 @@
+[
+{"id": "payment:cash=yes", "text": "Käteinen raha"},
+{"id": "payment:cheque=yes", "text": "Tarkistaa"},
+{"id": "payment:wire_transfer=yes", "text": "Pankkisiirto"},
+{"id": "payment:bancomat=yes", "text": "Pankkisiirto"},
+{"id": "payment:american_express=yes", "text": "American Express"},
+{"id": "payment:mastercard=yes", "text": "Mastercard"},
+{"id": "payment:visa=yes", "text": "Visa"},
+{"id": "payment:sms=yes", "text": "SMS"},
+{"id": "payment:mobile_phone=yes", "text": "Kännykkä"},
+{"id": "payment:bitcoin=yes", "text": "Bitcoin"},
+{"id": "payment:apple_pay=yes", "text": "Apple Pay"},
+{"id": "payment:google_pay=yes", "text": "Google Pay"},
+{"id": "payment:samsung_pay=yes", "text": "Samsung Pay"},
+{"id": "payment:satispay=yes", "text": "Satispay"},
+{"id": "payment:meal_voucher=yes", "text": "Ateriakuponki"}
+]

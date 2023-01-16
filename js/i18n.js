@@ -1,13 +1,13 @@
-
-
 const lngs = {
-    'en-US': { nativeName: 'English' },
-    de: { nativeName: 'German' },
+    'en-GB': { nativeName: 'English (GB)' },
+    'en-US': { nativeName: 'English (US)' },
+    de: { nativeName: 'Deutsch' },
     es: { nativeName: 'Español' },
     'fi-FI': { nativeName: 'Suorittaa loppuun (FI)' },
-    it: { nativeName: 'Italiano' },
+    'it-IT': { nativeName: 'Italiano (IT)' },
     fr: { nativeName: 'Français' },
-    'nb-no': { nativeName: 'Norvégien (NO)' },
+    'nb-NO': { nativeName: 'Norsk (NO)' },
+    nl: { nativeName: 'Nederlandse Standaard (NL)' },
     'pt-BR': { nativeName: 'Português (BR)' },
     'ru-RU': { nativeName: 'русский язык (RU)' }
 };
@@ -16,9 +16,23 @@ const rerender = () => {
     // start localizing, details:
     // https://github.com/i18next/jquery-i18next#usage-of-selector-function
 
-    loadCategory(i18next.resolvedLanguage);
+    // may have to fix this??
+    reloadLists(i18next.resolvedLanguage);
+
+    // these translations won't get re-copied to their current controls 
+    successString = i18n.t('messages.success', {
+        escapeInterpolation: false
+    });
+    manualPosition = i18n.t('messages.manualPosition', {
+        escapeInterpolation: false
+    });
+    loadingText = i18n.t('messages.loadingText');
+    modalText = {};
+    modalText.text = i18n.t('messages.modalTitle');
+    modalText.button = i18n.t('messages.modalButton');
+
     $('body').localize();
-}
+};
 
 $(function () {
     // use plugins and options as needed, for options, detail see
