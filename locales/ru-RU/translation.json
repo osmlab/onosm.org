@@ -88,11 +88,11 @@
   },
   "messages": {
     "success": "<strong>Найдено!</strong> Передвиньте маркер, чтобы он находился <strong>точно на вашей организации</strong>.<br />Сделав это, можно приступить к <a href='#details'>указанию подробностей</a>.",
-    "loadingText": "Идёт поиск...",    
-    "manualPosition": "Вы активировали маркер! Нажмите и перетащите его на позицию своего офиса, чтобы быть готовым к <a href='#details'>добавлению дополнительных сведений</a>.",    
+    "loadingText": "Идёт поиск...",
+    "manualPosition": "Вы активировали маркер! Нажмите и перетащите его на позицию своего офиса, чтобы быть готовым к <a href='#details'>добавлению дополнительных сведений</a>.",
     "modalButton": "Закрывать",
     "modalTitle": "Классификация доступности для инвалидных колясок",
     "needsChecking": "needs checking",
-    "credits": "Проект с открытым исходным кодом, разработанный международным сообществом <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridian\"></i>. Внесите свой вклад в этот проект на <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Проект с открытым исходным кодом, разработанный международным сообществом <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridian\"></i>. Внесите свой вклад в этот проект на <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
   }
 }

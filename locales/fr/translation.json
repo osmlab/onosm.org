@@ -18,7 +18,7 @@
     "title": "Détails",
     "desc": "La position de votre établissement est marquée ajoutons plus de détails.",
     "catlabel": "Catégorie",
-    "catplaceholder": "Veuillez choisir…",    
+    "catplaceholder": "Veuillez choisir…",
     "catalt": "Si vous ne trouvez pas une catégorie qui vous convient, veuillez ajouter plus de détails ici.",
     "cataltplaceholder": "Description du type d'entreprise",
     "cataltdesc": "Description",
@@ -78,7 +78,7 @@
     "facebook": "Facebook",
     "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
     "done": "Terminé!",
-    "wheelmodal": "<h2>Accès illimité</h2><p><ul><li> L'<b>entrée</b> est sans marche</li><li> Toutes les <b>pièces</b> sont sans marche</ li><li> La <b>salle de bain</b> (le cas échéant) est accessible et la cabine est suffisamment large pour accueillir un fauteuil roulant à côté des toilettes</li></ul></p><h2>Accès partiel </h2><p><ul><li> L'<b>entrée</b> a une marche mais pas plus haute que 7 cm / 3 pouces ('largeur d'une main')</li><li> La les <b>chambres</b> les plus importantes sont accessibles en fauteuil roulant</li><li> La <b>salle de bain</b> (le cas échéant) n'est pas accessible</li></ul></p>< h2>Pas d'accès illimité</h2><p><ul><li> L'<b>entrée</b> a une marche supérieure à 7 cm / 3 pouces</li><li> Les <b>pièces importantes </b> ne sont pas accessibles</li><li> La <b>salle de bain</b> (le cas échéant) n'est pas accessible</li></ul></p><h2>Accès inconnu</h2 ><p>Si vous n'êtes pas sûr ou n'avez pas d'informations, choisissez cette option.</p>"    
+    "wheelmodal": "<h2>Accès illimité</h2><p><ul><li> L'<b>entrée</b> est sans marche</li><li> Toutes les <b>pièces</b> sont sans marche</ li><li> La <b>salle de bain</b> (le cas échéant) est accessible et la cabine est suffisamment large pour accueillir un fauteuil roulant à côté des toilettes</li></ul></p><h2>Accès partiel </h2><p><ul><li> L'<b>entrée</b> a une marche mais pas plus haute que 7 cm / 3 pouces ('largeur d'une main')</li><li> La les <b>chambres</b> les plus importantes sont accessibles en fauteuil roulant</li><li> La <b>salle de bain</b> (le cas échéant) n'est pas accessible</li></ul></p>< h2>Pas d'accès illimité</h2><p><ul><li> L'<b>entrée</b> a une marche supérieure à 7 cm / 3 pouces</li><li> Les <b>pièces importantes </b> ne sont pas accessibles</li><li> La <b>salle de bain</b> (le cas échéant) n'est pas accessible</li></ul></p><h2>Accès inconnu</h2 ><p>Si vous n'êtes pas sûr ou n'avez pas d'informations, choisissez cette option.</p>"
   },
   "step3": {
     "title": "Terminé",
@@ -91,11 +91,11 @@
   "messages": {
     "success": "<strong>Trouvé!</strong> Déplacez le marqueur jusqu'à l'emplacement précis de votre établissement</strong>.<br />Puis, <a href='#details'>ajoutons plus de détails</a>.",
     "loadingText": "Recherche en cours…",
-    "manualPosition": " Vous avez activé le marqueur ! Cliquez dessus et faites-le glisser sur votre emplacement commercial pour être prêt à <a href='#details'>ajouter plus de détails.</a>",    
+    "manualPosition": " Vous avez activé le marqueur ! Cliquez dessus et faites-le glisser sur votre emplacement commercial pour être prêt à <a href='#details'>ajouter plus de détails.</a>",
     "modalButton": "Proche",
     "modalTitle": "Classification d'accessibilité en fauteuil roulant",
     "needsChecking": "doit être vérifié",
-    "credits": "Un projet open source développé par la communauté mondiale <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridians\"></i>. Contribuez à ce projet sur <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Un projet open source développé par la communauté mondiale <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridians\"></i>. Contribuez à ce projet sur <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Merci de sélectionner au moins une catégorie.",

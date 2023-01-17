@@ -1,7 +1,7 @@
 ﻿{
   "app": {
     "title": "En OpenStreetMap",
-    "desc": "OpenStreetMap es un mapa global abierto utilizado por personas de todo el mundo para navegar y encontrar negocios locales. ¡Es fácil y gratis entrar en el mapa!"    
+    "desc": "OpenStreetMap es un mapa global abierto utilizado por personas de todo el mundo para navegar y encontrar negocios locales. ¡Es fácil y gratis entrar en el mapa!"
   },
   "step1": {
     "title": "Ubicación",
@@ -28,7 +28,7 @@
     "addressaltplaceholder": "Avenida América, España",
     "housenumberplaceholder": "501",
     "cityplaceholder": "Alexandria",
-    "postcodeplaceholder": "50023", 
+    "postcodeplaceholder": "50023",
     "addressaltdesc": "Dirección",
     "name": "Nombre",
     "nameplaceholder": "Café Libertadores",
@@ -88,11 +88,11 @@
   "messages": {
     "success": "<strong>¡Le encontramos!</strong> Mueva el marcador hasta que esté <strong>exactamente en su empresa</strong>.<br />Cuando esté satisfecho, podemos comenzar a <a href='javascript:check_coordinates()'>agregar más detalles</a>.",
     "loadingText": "Buscando...",
-    "manualPosition": " ¡Has activado el marcador! Haz clic y arrástralo a la posición de tu lugar de negocios, así estarás listo para <a href='#details'>agregar más detalles.</a>",    
+    "manualPosition": " ¡Has activado el marcador! Haz clic y arrástralo a la posición de tu lugar de negocios, así estarás listo para <a href='#details'>agregar más detalles.</a>",
     "modalButton": "Cerrar",
     "modalTitle": "Clasificación de accesibilidad para sillas de ruedas",
     "needsChecking": "necesita comprobar",
-    "credits": "Un proyecto de código abierto desarrollado por el <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> comunidad <i class=\"twa twa-globe-with-meridians\"></i>. Contribute to this project on <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Un proyecto de código abierto desarrollado por el <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> comunidad <i class=\"twa twa-globe-with-meridians\"></i>. Contribute to this project on <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Seleccione al menos una categoría.",
