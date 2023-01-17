@@ -38,7 +38,7 @@
     "phone": "Telefonnummer",
     "phoneplaceholder": "111 11 111 eller 11 11 11 11",
     "opening": "Åpningstider",
-    "openingplaceholder": "Mandag til Fredag 9-18...",   
+    "openingplaceholder": "Mandag til Fredag 9-18...",
     "wheel": "Tilgjengelighet for rullestolbrukere",
     "wheelplaceholder": "Velg et alternativ",
     "wheel_yes": "Ubegrenset tilgang",
@@ -92,10 +92,10 @@
   "messages": {
     "success": "<strong>Fant den!</strong> Flytt markøren slik at den står<strong>nøyaktig på bedriften din</strong>.<br />Når du er fornøyd, kan vi starte med å <a href='javascript:check_coordinates()'>legge til noen flere detaljer</a>.",
     "loadingText": "Leter...",
-    "manualPosition": " Du har aktivert markøren! Klikk og dra den til bedriftens plassering, slik at du er klar til å <a href='#details'>legge til flere detaljer.</a>",    
+    "manualPosition": " Du har aktivert markøren! Klikk og dra den til bedriftens plassering, slik at du er klar til å <a href='#details'>legge til flere detaljer.</a>",
     "modalButton": "Lukk",
     "modalTitle": "Klassifisering for rullestoltilgjengelighet",
     "needsChecking": "må sjekkes",
-    "credits": "Et åpen kildekode-prosjekt utviklet av det verdensomspennende <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-fellesskapet <i class=\"twa twa-globe-med-meridianer\"></i>. Bidra til dette prosjektet på <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Et åpen kildekode-prosjekt utviklet av det verdensomspennende <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-fellesskapet <i class=\"twa twa-globe-med-meridianer\"></i>. Bidra til dette prosjektet på <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
   }
 }

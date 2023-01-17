@@ -37,7 +37,7 @@
     "phone": "Numero de telefone",
     "phoneplaceholder": "+55 84 3219 0102",
     "opening": "Horário de funcionamento",
-    "openingplaceholder": "Segunda a sexta-feira, das 10:00 às 19:00", 
+    "openingplaceholder": "Segunda a sexta-feira, das 10:00 às 19:00",
     "wheel": "Acessibilidade para cadeira de rodas",
     "wheelplaceholder": "Escolha uma opção",
     "wheel_yes": "Acesso irrestrito",
@@ -91,11 +91,11 @@
   "messages": {
     "success": "Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href=\"#details\">adicionar à nossa lista os detalhes de sua empresa</a>.",
     "loadingText": "Localizando...",
-    "manualPosition": " Você ativou o marcador! Clique e arraste-o para a posição do seu local de negócios, assim você estará pronto para <a href='#details'>adicionar mais detalhes.</a>",    
+    "manualPosition": " Você ativou o marcador! Clique e arraste-o para a posição do seu local de negócios, assim você estará pronto para <a href='#details'>adicionar mais detalhes.</a>",
     "modalButton": "Perto",
     "modalTitle": "Classificação de acessibilidade para cadeiras de rodas",
     "needsChecking": "precisa de verificação",
-    "credits": "Um projeto de código aberto desenvolvido pela comunidade mundial <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globo-com-meridianos\"></i>. Contribua com este projeto no <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Um projeto de código aberto desenvolvido pela comunidade mundial <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globo-com-meridianos\"></i>. Contribua com este projeto no <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Selecione pelo menos uma categoria.",

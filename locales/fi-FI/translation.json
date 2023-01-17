@@ -91,11 +91,11 @@
   },
   "messages": {
     "success": "<strong>Löytyi!</strong> Siirrä merkkiä kunnes se on <strong>tarkasti liikkeesi kohdalla</strong>.<br />Kun olet valmis, voit <a href='javascript:check_coordinates()'>lisätä tiedot</a>.",
-    "loadingText": "Haetaan...","manualPosition": " You have activated the marker! Click and drag it on your business place position, so you'll be ready to <a href='#details'>add more details.</a>",    
+    "loadingText": "Haetaan...","manualPosition": " You have activated the marker! Click and drag it on your business place position, so you'll be ready to <a href='#details'>add more details.</a>",
     "modalButton": "Kiinni",
     "modalTitle": "Esteettömyysluokitus pyörätuolilla",
     "needsChecking": "tarvitsee tarkistuksen",
-    "credits": "Maailmanlaajuisen <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-yhteisön <i class=\"twa twa-globe-with-meridiaans\"></i>. Osallistu tähän projektiin <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHubissa</a>."
+    "credits": "Maailmanlaajuisen <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-yhteisön <i class=\"twa twa-globe-with-meridiaans\"></i>. Osallistu tähän projektiin <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHubissa</a>."
   },
   "validation": {
     "missingCategory": "Valitse vähintään yksi luokitus.",

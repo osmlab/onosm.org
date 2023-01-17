@@ -20,7 +20,7 @@
     "desc": "We hebben het gevonden! Vul nu de details in over je bedrijf.",
     "catlabel": "Categorie",
     "catplaceholder": "Selecteer alstublieft...",
-    "addressalt": "Help ons door het volledige adres in te vullen (huisnummer, postcode) of de vorige te verbeteren", 
+    "addressalt": "Help ons door het volledige adres in te vullen (huisnummer, postcode) of de vorige te verbeteren",
     "cataltdesc": "Beschrijving",
     "street": "Straat",
     "housenumber": "Huisnummer",
@@ -89,12 +89,12 @@
   },
   "messages": {
     "success": "<strong>Gevonden!</strong> Verplaats de marker zodat hij <strong>precies op je bedrijf</strong> staat.<br />Als je tevreden bent kunnen we beginnen met het <a href='javascript:check_coordinates()'>toevoegen van meer details</a>.",
-    "loadingText": "Zoeken...",    
+    "loadingText": "Zoeken...",
     "manualPosition": " Je hebt de marker geactiveerd! Klik en sleep het naar de positie van uw bedrijfsplaats, zodat u klaar bent om <a href='#details'>meer details toe te voegen.</a>",
     "modalButton": "Close",
     "modalTitle": "Classificatie rolstoeltoegankelijkheid",
     "needsChecking": "moet worden gecontroleerd",
-    "credits": "Een open source project ontwikkeld door de wereldwijde <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> gemeenschap <i class=\"twa twee-globe-met-meridianen\"></i>. Draag bij aan dit project op <a href=\"https://github.com/sabas/suosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Een open source project ontwikkeld door de wereldwijde <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> gemeenschap <i class=\"twa twee-globe-met-meridianen\"></i>. Draag bij aan dit project op <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Kies tenminste één categorie.",
