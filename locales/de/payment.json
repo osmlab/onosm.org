@@ -1,6 +1,6 @@
 [
-{"id": "payment:cash=yes", "text": "Kasse"},
-{"id": "payment:cheque=yes", "text": "Prüfen"},
+{"id": "payment:cash=yes", "text": "Bargeld"},
+{"id": "payment:cheque=yes", "text": "Scheck"},
 {"id": "payment:wire_transfer=yes", "text": "Banküberweisung"},
 {"id": "payment:bancomat=yes", "text": "Bankkarte"},
 {"id": "payment:american_express=yes", "text": "American Express"},
