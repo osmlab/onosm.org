@@ -88,6 +88,6 @@
     "modalButton": "Close",
     "modalTitle": "Wheelchair accessibility classification",
     "needsChecking": "needs checking",
-    "credits": "A open source project developed by the worldwide <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> community <i class=\"twa twa-globe-with-meridians\"></i>. Contribute to this project on <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "A open source project developed by the worldwide <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> community <i class=\"twa twa-globe-with-meridians\"></i>. Contribute to this project on <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   }
 }

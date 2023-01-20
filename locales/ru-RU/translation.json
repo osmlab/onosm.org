@@ -93,6 +93,6 @@
     "modalButton": "Закрывать",
     "modalTitle": "Классификация доступности для инвалидных колясок",
     "needsChecking": "needs checking",
-    "credits": "Проект с открытым исходным кодом, разработанный международным сообществом <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridian\"></i>. Внесите свой вклад в этот проект на <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Проект с открытым исходным кодом, разработанный международным сообществом <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridian\"></i>. Внесите свой вклад в этот проект на <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   }
 }

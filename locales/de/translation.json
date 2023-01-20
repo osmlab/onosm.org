@@ -97,7 +97,7 @@
     "modalButton": "Schließen",
     "modalTitle": "Klassifizierung für Rollstuhlgängigkeit",
     "needsChecking": "muss überprüft werden",
-    "credits": "Ein Open-Source-Projekt, das von der weltweiten <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-Community <i class=\"twa entwickelt wurde zwei-globus-mit-meridianen\"></i>. Unterstützen Sie dieses Projekt auf <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Ein Open-Source-Projekt, das von der weltweiten <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-Community <i class=\"twa entwickelt wurde zwei-globus-mit-meridianen\"></i>. Unterstützen Sie dieses Projekt auf <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Bitte wählen Sie mindestens eine Kategorie aus.",

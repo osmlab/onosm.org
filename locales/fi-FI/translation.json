@@ -95,7 +95,7 @@
     "modalButton": "Kiinni",
     "modalTitle": "Esteettömyysluokitus pyörätuolilla",
     "needsChecking": "tarvitsee tarkistuksen",
-    "credits": "Maailmanlaajuisen <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-yhteisön <i class=\"twa twa-globe-with-meridiaans\"></i>. Osallistu tähän projektiin <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHubissa</a>."
+    "credits": "Maailmanlaajuisen <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-yhteisön <i class=\"twa twa-globe-with-meridiaans\"></i>. Osallistu tähän projektiin <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHubissa</a>."
   },
   "validation": {
     "missingCategory": "Valitse vähintään yksi luokitus.",
