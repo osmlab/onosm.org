@@ -94,7 +94,7 @@
     "modalButton": "Close",
     "modalTitle": "Classificatie rolstoeltoegankelijkheid",
     "needsChecking": "moet worden gecontroleerd",
-    "credits": "Een open source project ontwikkeld door de wereldwijde <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> gemeenschap <i class=\"twa twee-globe-met-meridianen\"></i>. Draag bij aan dit project op <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Een open source project ontwikkeld door de wereldwijde <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> gemeenschap <i class=\"twa twee-globe-met-meridianen\"></i>. Draag bij aan dit project op <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Kies tenminste één categorie.",

@@ -92,7 +92,7 @@
     "modalButton": "Cerrar",
     "modalTitle": "Clasificación de accesibilidad para sillas de ruedas",
     "needsChecking": "necesita comprobar",
-    "credits": "Un proyecto de código abierto desarrollado por el <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> comunidad <i class=\"twa twa-globe-with-meridians\"></i>. Contribute to this project on <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Un proyecto de código abierto desarrollado por el <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> comunidad <i class=\"twa twa-globe-with-meridians\"></i>. Contribute to this project on <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Seleccione al menos una categoría.",

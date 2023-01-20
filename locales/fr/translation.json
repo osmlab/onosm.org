@@ -95,7 +95,7 @@
     "modalButton": "Proche",
     "modalTitle": "Classification d'accessibilité en fauteuil roulant",
     "needsChecking": "doit être vérifié",
-    "credits": "Un projet open source développé par la communauté mondiale <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridians\"></i>. Contribuez à ce projet sur <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Un projet open source développé par la communauté mondiale <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridians\"></i>. Contribuez à ce projet sur <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Merci de sélectionner au moins une catégorie.",

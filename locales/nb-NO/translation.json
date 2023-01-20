@@ -96,6 +96,6 @@
     "modalButton": "Lukk",
     "modalTitle": "Klassifisering for rullestoltilgjengelighet",
     "needsChecking": "må sjekkes",
-    "credits": "Et åpen kildekode-prosjekt utviklet av det verdensomspennende <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-fellesskapet <i class=\"twa twa-globe-med-meridianer\"></i>. Bidra til dette prosjektet på <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Et åpen kildekode-prosjekt utviklet av det verdensomspennende <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-fellesskapet <i class=\"twa twa-globe-med-meridianer\"></i>. Bidra til dette prosjektet på <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   }
 }

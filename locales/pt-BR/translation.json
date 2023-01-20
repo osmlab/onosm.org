@@ -95,7 +95,7 @@
     "modalButton": "Perto",
     "modalTitle": "Classificação de acessibilidade para cadeiras de rodas",
     "needsChecking": "precisa de verificação",
-    "credits": "Um projeto de código aberto desenvolvido pela comunidade mundial <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globo-com-meridianos\"></i>. Contribua com este projeto no <a href=\"https://github.com/osmlab/onosm\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Um projeto de código aberto desenvolvido pela comunidade mundial <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globo-com-meridianos\"></i>. Contribua com este projeto no <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Selecione pelo menos uma categoria.",
