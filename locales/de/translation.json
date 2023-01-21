@@ -1,7 +1,7 @@
 ﻿{
   "app": {
     "title": "On OpenStreetMap",
-    "desc": "OpenStreetMap ist eine offene, globale Karte, die von Menschen überall auf der Welt zur Navigation und zur Suche nach lokalen Geschäften genutzt wird. Es ist einfach und kostenlos das eigene Geschäft auf die Karte zu bringen!",
+    "desc": "OpenStreetMap ist eine offene, globale Karte, die von Menschen überall auf der Welt zur Navigation und zur Suche nach lokalen Geschäften genutzt wird. Es ist einfach und kostenlos, dass eigene Geschäft auf die Karte zu bringen!",
     "footer": "Quellcode erhältlich auf <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
@@ -10,9 +10,9 @@
     "addr": "Hauptstraße 11, 10115 Berlin, Deutschland",
     "button": "Finden!",
     "fail": "<strong>Wir konnten Ihre Adresse nicht finden.</strong> Versuchen Sie es nur mit ihrer Straße und Stadt, ohne Hausnummer, noch einmal.",
-    "nohousenumber": "Achtung: Wir konnten Ihre Hausnummer nicht finden. Die Position auf der Karte kann ungenau sein, bitte ziehen Sie die Markierung auf die genaue Position Ihres Unternehmens. Wenn die Gebäude derzeit nicht auf der Karte angezeigt werden, können Sie mit der Schaltfläche in der oberen rechten Ecke der Karte zur Satellitenansicht wechseln.",
+    "nohousenumber": "Achtung: Wir konnten Ihre Hausnummer nicht finden. Die Position auf der Karte kann ungenau sein, bitte ziehen Sie die Markierung auf die genaue Position Ihres Unternehmens. Wenn die Gebäude nicht auf der Karte angezeigt werden, können Sie mit der Schaltfläche in der oberen rechten Ecke der Karte zur Satellitenansicht wechseln.",
     "continue": "Fortsetzen",
-    "use_location": "meine aktuelle Position nutzen",
+    "use_location": "Meine aktuelle Position nutzen",
     "invalid-location": "Sie haben noch keine gültige Position eingegeben."
   },
   "step2": {
@@ -20,13 +20,13 @@
     "desc": "Wir haben Sie gefunden! Erzählen Sie uns mehr von Ihrem Geschäft.",
     "catlabel": "Kategorie",
     "catplaceholder": "Bitte wählen Sie…",
-    "catalt": "Wenn Sie keine Kategorie finden, die zu Ihrem Geschäft passt, fügen Sie bitte hier weitere Details hinzu.",
-    "cataltplaceholder": "Beschreibung des Geschäftstyps",
+    "catalt": "Wenn Sie keine passende Kategorie finden, fügen Sie bitte eine passende Beschreibung hinzu.",
+    "cataltplaceholder": "Beschreibung des Geschäfts",
     "cataltdesc": "Beschreibung",
-    "addressalt": "Helfen Sie uns, indem Sie Ihre komplette Adresse hier angeben oder ergänzen",
+    "addressalt": "Helfen Sie mit, indem Sie Ihre komplette Adresse angeben oder ergänzen.",
     "street": "Straße",
     "housenumber": "Hausnummer",
-    "city": "Stadt",
+    "city": "Ort",
     "postcode": "Postleitzahl",
     "addressaltplaceholder": "Hauptstraße 11, 10115 Berlin, Deutschland",
     "housenumberplaceholder": "11",
@@ -38,7 +38,7 @@
     "phone": "Telefonnummer",
     "phoneplaceholder": "+49 30 123456 78",
     "opening": "Öffnungszeiten",
-    "openingplaceholder": "Montag-Freitag 10:00-20:00",
+    "openingplaceholder": "Mo-Fr 10:00-20:00; Sa 12:00-18:00",
     "wheel": "Rollstuhlzugang",
     "wheelplaceholder": "Wählen Sie eine Option",
     "wheel_yes": "Rollstuhlzugang uneingeschränkt möglich",
@@ -49,24 +49,24 @@
     "website": "Webseite",
     "websiteplaceholder": "https://www.beispiel.de/",
     "social": "Soziales Netzwerk",
-    "socialplaceholder": "@OpenStreetMap or https://www.facebook.com/OpenStreetMap",
+    "socialplaceholder": "@OpenStreetMap oder https://www.facebook.com/OpenStreetMap",
     "payment": "Akzeptierte Zahlungsmethoden",
     "paymentplaceholder": "Wählen Sie eine Option",
     "delivery": "Gibt es einen Lieferservice?",
-    "deliveryplaceholder": "Ja/Nein/Mo-Fr 19:00 bis 21:00 Uhr",
+    "deliveryplaceholder": "Ja/Nein/Mo-Fr 19:00-21:00",
     "deliverydesc": "Lieferservice",
     "delivery_description": "Einzelheiten zum Lieferservice",
     "delivery_descriptionplaceholder": "Mindestbestellwert 15€ versandkostenfrei",
     "delivery_descriptiondesc": "Lieferbeschreibung",
     "delivery_covid": "Gibt es einen Lieferservice während der COVID-19-Pandemie?",
-    "delivery_covid_descriptionplaceholder": "Mo-Fr 19:00 bis 21:00 Uhr",
+    "delivery_covid_descriptionplaceholder": "Mo-Fr 19:00-21:00",
     "delivery_covid_description": "Einzelheiten zum Lieferservice während der COVID-19-Pandemie",
     "takeaway": "Gibt es einen Mitnahmeservice?",
     "takeawaydesc": "Mitnahme",
     "takeaway_description": "Einzelheiten zum Mitnahmeservice",
     "takeaway_descriptionplaceholder": "Nicht verfügbar an Samstagabenden",
     "takeaway_descriptiondesc": "Beschreibung zum Mitnehmen",
-    "takeaway_covid": "Gibt es während der COVID-19-Pandemie einen Takeaway-Service?",
+    "takeaway_covid": "Gibt es einen Mitnahmeservice während der COVID-19-Pandemie?",
     "takeaway_covid_descriptionplaceholder": "Mo-Fr 19:00 bis 21:00 Uhr",
     "takeaway_covid_description": "Einzelheiten zum Mitnahmeservice während der COVID-19-Pandemie",
     "only_takeaway": "Nur zum Mitnehmen",
@@ -78,7 +78,7 @@
     "twitterplaceholder": "@OpenStreetMap",
     "facebook": "Facebook",
     "facebookplaceholder": "https://www.facebook.com/OpenStreetMap",
-    "invalid-details": "Ein Name und mindestens eine Kategorie müssen angegeben werden!",
+    "invalid-details": "Bitte geben Sie den Namen und mindestens eine Kategorie an!",
     "done": "Fertig",
     "wheelmodal": "<h2>Rollstuhlzugang uneingeschränkt möglich</h2><p><ul><li> Der <b>Eingang</b> ist stufenlos</li><li> Alle <b>Räume</b> sind rollstuhlzugänglich</li><li> Die <b>Toilette</b> (wenn vorhanden) ist barrierefrei und die Kabine ist breit genug, um neben der Toilette einen Rollstuhl unterzubringen</li></ul></p><h2>Rollstuhlzugang eingeschränkt möglich</h2><p><ul><li> Der <b>Eingang</b> hat eine Stufe, jedoch nicht höher als 7 cm.</li><li> Die wichtigsten <b>Räume</b> sind rollstuhlzugänglich</li><li> Die <b>Toilette</b> (wenn vorhanden) ist nicht rollstuhlzugänglich</li></ul></p><h2>Rollstuhlzugang nicht möglich</h2><p><ul><li> Der <b>Eingang</b> hat eine Stufe, die höher ist als 7 cm</li><li> Wichtige <b>Räume</b> sind nicht zugänglich</li><li> Die <b>Toilette</b> (wenn vorhanden) ist nicht rollstuhlzugänglich</li></ul></p><h2>Rollstuhlzugang umbekannt</h2><p>Wenn Sie sich nicht sicher sind oder keine Informationen haben, wählen Sie diese Option.</p>"
   },
@@ -91,17 +91,17 @@
     "row4a": "Zurück zum Startbildschirm"
   },
   "messages": {
-    "success": "<strong>Gefunden!</strong> Verschieben Sie den Marker bis er <strong>exakt am Ort Ihres Geschäfts liegt</strong>.<br />Wenn Sie zufrieden sind, können wir damit beginnen weitere <a href='#details'>Details hinzuzufügen</a>.",
+    "success": "<strong>Gefunden!</strong> Verschieben Sie die Markierung bis sie <strong>exakt an der Position Ihres Geschäfts liegt</strong>.<br />Wenn Sie zufrieden sind, können wir damit beginnen weitere <a href='#details'>Details hinzuzufügen</a>.",
     "loadingText": "Suche…",
-    "manualPosition": " Sie haben die Markierung aktiviert! Klicken Sie darauf und ziehen Sie es auf die Position Ihres Geschäftsorts, sodass Sie bereit sind, <a href='#details'>weitere Details hinzuzufügen.</a>",
+    "manualPosition": " Sie haben die Markierung aktiviert! Klicken Sie darauf und ziehen Sie es auf die Position Ihres Geschäfts, sodass Sie bereit sind, <a href='#details'>weitere Details hinzuzufügen.</a>",
     "modalButton": "Schließen",
     "modalTitle": "Klassifizierung für Rollstuhlgängigkeit",
     "needsChecking": "muss überprüft werden",
-    "credits": "Ein Open-Source-Projekt, das von der weltweiten <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-Community <i class=\"twa entwickelt wurde zwei-globus-mit-meridianen\"></i>. Unterstützen Sie dieses Projekt auf <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Ein Open-Source-Projekt der weltweiten <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-Community <i class=\"twa twa-globe-with-meridians\"></i>. Unterstützen Sie das Projekt auf <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."    
   },
   "validation": {
     "missingCategory": "Bitte wählen Sie mindestens eine Kategorie aus.",
     "missingName": "Bitte geben Sie einen Namen ein.",
-    "missingPhoneOrWebsite": "Bitte geben Sie eine gültige Website oder Telefonnummer ein."
+    "missingPhoneOrWebsite": "Bitte geben Sie eine gültige Webseite oder Telefonnummer ein."
   }
 }
