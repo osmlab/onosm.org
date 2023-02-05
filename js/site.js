@@ -4,6 +4,8 @@ var i18n = i18next;
 
 var successString, manualPosition, loadingText, modalText;
 
+
+
 function reloadLists(language) {
 
   $.getJSON('./locales/' + language + '/categories.json')
@@ -89,47 +91,32 @@ L.control.locate({
 
 if (location.hash) location.hash = '';
 
-/* search action */
+/* user search: action */
 $("#find").submit(function (e) {
   e.preventDefault();
   $("#couldnt-find").hide();
+
+  // show loading indicator if user input is not empty
   var address_to_find = $("#address").val();
   if (address_to_find.length === 0) return;
-
-  /* NOMINATIM PARAM */
-  var qwarg_nominatim = {
-    format: 'json',
-    q: address_to_find,
-    addressdetails: 1,
-    namedetails: 1
-  };
-  var url_nominatim = "https://nominatim.openstreetmap.org/search?" + $.param(qwarg_nominatim);
-
 
   $("#findme h4").text(loadingText);
   $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
 
-
-  $.ajax({
-    'url': url_nominatim,
-    'success': nominatim_callback,
-    'dataType': 'jsonp',
-    'jsonp': 'json_callback'
-  });
-
-});
-
-function nominatim_callback(data) {
-  if (data.length > 0) {
-    var chosen_place = data[0];
-
+  searchAddress(address_to_find)
+  .then(foundAddress => {
+    var chosen_place = foundAddress;
+   
     var bounds = new L.LatLngBounds(
       [+chosen_place.boundingbox[0], +chosen_place.boundingbox[2]],
       [+chosen_place.boundingbox[1], +chosen_place.boundingbox[3]]);
 
+    // Place marker at found address
     findme_map.fitBounds(bounds);
     findme_marker.setOpacity(1);
     findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
+
+    // Update rest of the site with address data
     $('#step2').removeClass("disabled");
     $('#continue').removeClass("disabled");
     $('.step-2 a').attr('href', '#details');
@@ -145,14 +132,34 @@ function nominatim_callback(data) {
     }
     $("#address").addClass("is-valid");
     $("#address").removeClass("is-invalid");
-  } else {
+  })
+  .catch(e => {
     $("#couldnt-find").show();
     $("#map-information").hide();
     $("#address").addClass("is-invalid");
     $("#address").removeClass("is-valid");
-  }
-  $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
-}
+  })
+  .finally(() => {
+    // stop loading animation
+    $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
+  }); 
+});
+
+
+/* user move map marker: action */
+findme_map.on('click', function (e) {
+  findme_marker.setOpacity(1);
+  findme_marker.setLatLng(e.latlng);
+
+  // validate new marker location
+  //searchReverseLookup()
+
+  $("#map-information").html(manualPosition);
+  $("#map-information").show();
+  $('.step-2 a').attr('href', '#details');
+  $('#step2').removeClass("disabled");
+  $('#continue').removeClass("disabled");
+});
 
 function solr_callback(data) {
   if (data.response.docs.length > 0) {
@@ -173,16 +180,115 @@ function solr_callback(data) {
   $("#findme").removeClass("loading");
 }
 
-/* map action */
-findme_map.on('click', function (e) {
-  findme_marker.setOpacity(1);
-  findme_marker.setLatLng(e.latlng);
-  $("#map-information").html(manualPosition);
-  $("#map-information").show();
-  $('.step-2 a').attr('href', '#details');
-  $('#step2').removeClass("disabled");
-  $('#continue').removeClass("disabled");
-});
+function searchAddress(address_to_find) {
+
+  // setup callback
+  const qwArgNominatim = {
+      format: 'json',
+      q: address_to_find,
+      addressdetails: 1,
+      namedetails: 1
+  };
+
+  var addressSearchUrl = "https://nominatim.openstreetmap.org/search?" + $.param(qwArgNominatim);
+
+  // handle request - should include a timeout 
+  return new Promise((resolve, reject) => {
+      $.ajax({
+          'url': addressSearchUrl,
+          'success': function (data) {
+
+              // address not found
+              if (data.length < 1)
+                  return reject({});
+
+              // found the address
+              resolve(parseData(data));
+          },
+          'error': function (error) {
+              reject(error);
+          },
+          'dataType': 'jsonp',
+          'jsonp': 'json_callback'
+      });
+  });
+}
+
+// lookup functionality (promise containing the results)
+function searchReverseLookup(position) {
+  let latitude = 0;
+  let longitude = 0;
+
+  // browser navigator 
+  if (position.coords !== undefined ) {
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
+  } else {
+      // leaflet
+      latitude = position.lat;
+      longitude = position.lon;
+  }
+
+  /* NOMINATIM PARAM */
+  const qwArgNominatim = {
+      format: 'json',
+      lat: latitude,
+      lon: longitude,
+      addressdetails: 1,
+      namedetails: 1
+  };
+
+  var reverseSearchUrl = "https://nominatim.openstreetmap.org/reverse?" + $.param(qwArgNominatim);
+
+
+  return new Promise((resolve, reject) => {
+      $.ajax({
+          'url': reverseSearchUrl,
+          'success': function (data) {
+              // Nominatim returns no data when address not found
+              if (data == null) {
+                  return reject({});
+              }
+
+              resolve(parseData(data));
+          },
+          'error': function (error) {
+              reject(error);
+          },
+          'dataType': 'jsonp',
+          'jsonp': 'json_callback'
+      });
+  });
+}
+
+// Create a copy of the nominatim data
+function parseData(data) {
+
+  // throw out any type of null values
+  if (data == null) return null;
+  if (Array.isArray(data) && data.length < 1) return null;
+  
+  // Nominatim returns an array of possible matchess or single object
+  const nominatimObject = Array.isArray(data) ? data[0] : data;
+
+  const nominatimAddress = {};
+  nominatimAddress.lon = nominatimObject.lon;
+  nominatimAddress.lat = nominatimObject.lat;
+
+  nominatimAddress.boundingbox = [
+      nominatimObject.boundingbox[0],
+      nominatimObject.boundingbox[1],
+      nominatimObject.boundingbox[2],
+      nominatimObject.boundingbox[3]
+  ];
+
+  nominatimAddress.address = nominatimObject.address;
+  nominatimAddress.display_name = nominatimObject.display_name;
+  return nominatimAddress;
+}
+
+
+// Step change
 
 $(window).on('hashchange', function () {
   if (location.hash == '#details') {
