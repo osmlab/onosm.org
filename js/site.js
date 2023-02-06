@@ -4,7 +4,9 @@ var i18n = i18next;
 
 var successString, manualPosition, loadingText, modalText;
 
+let lastSearchAddress = null;
 
+let pullValue = 0.1;
 
 function reloadLists(language) {
 
@@ -104,34 +106,24 @@ $("#find").submit(function (e) {
   $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
 
   searchAddress(address_to_find)
-  .then(foundAddress => {
-    var chosen_place = foundAddress;
+  .then(foundAddress => {    
    
+    // save returned address
+    lastSearchAddress = foundAddress;
+
+    // Update rest of the site with address data
+    updateAddressInfo(lastSearchAddress);
+
+    const chosen_place = lastSearchAddress.boundingbox;
     var bounds = new L.LatLngBounds(
-      [+chosen_place.boundingbox[0], +chosen_place.boundingbox[2]],
-      [+chosen_place.boundingbox[1], +chosen_place.boundingbox[3]]);
+      [+chosen_place[0], +chosen_place[2]],
+      [+chosen_place[1], +chosen_place[3]]);
 
     // Place marker at found address
     findme_map.fitBounds(bounds);
     findme_marker.setOpacity(1);
-    findme_marker.setLatLng([chosen_place.lat, chosen_place.lon]);
+    findme_marker.setLatLng([lastSearchAddress.lat, lastSearchAddress.lon]);
 
-    // Update rest of the site with address data
-    $('#step2').removeClass("disabled");
-    $('#continue').removeClass("disabled");
-    $('.step-2 a').attr('href', '#details');
-    $('#addressalt').val(chosen_place.address.road);
-    $('#hnumberalt').val(chosen_place.address.house_number);
-    $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
-    $('#postcode').val(chosen_place.address.postcode);
-    $("#address").val(chosen_place.display_name);
-    $("#map-information").html(successString);
-    $("#map-information").show();
-    if (!chosen_place.address.house_number) {
-      $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
-    }
-    $("#address").addClass("is-valid");
-    $("#address").removeClass("is-invalid");
   })
   .catch(e => {
     $("#couldnt-find").show();
@@ -147,37 +139,125 @@ $("#find").submit(function (e) {
 
 
 /* user move map marker: action */
-findme_map.on('click', function (e) {
-  findme_marker.setOpacity(1);
-  findme_marker.setLatLng(e.latlng);
+findme_marker.on('dragend', function (e) {
+  // nominatim returns coordinates with 7: lake, 8: river significant digits when geocoding a lake
+  const nominatim_water_digits = 8;
+
+  // marker position after drag event 
+  let event_cordinate = e.target._latlng;
+  const user_coordinates = {
+    lat: round(event_cordinate.lat, 8),
+    lon: round(event_cordinate.lng, 8)
+  };
 
   // validate new marker location
-  //searchReverseLookup()
+  searchReverseLookup(user_coordinates)
+    .then(foundAddress => {
 
-  $("#map-information").html(manualPosition);
-  $("#map-information").show();
+      const nominatim_cooridantes = {
+        lat: foundAddress.lat,
+        lon: foundAddress.lon
+      };
+
+      let adjusted_LatLng = {}; 
+
+      const nominatim_signiftDigits = sigDigits(nominatim_cooridantes.lat);
+
+      // lake check: 
+      if (nominatim_signiftDigits <= nominatim_water_digits){
+
+        adjusted_LatLng = ([
+          (foundAddress.lat),
+          (foundAddress.lon)
+        ]);
+      } else {
+
+        const offset_coordinates = {
+          lat: nominatim_cooridantes.lat - user_coordinates.lat,
+          lon: nominatim_cooridantes.lon - user_coordinates.lon
+        };
+
+        adjusted_LatLng = ([
+          (user_coordinates.lat - (offset_coordinates.lat * pullValue)),
+          (user_coordinates.lon - (offset_coordinates.lon * pullValue))
+        ]);
+      }
+
+      findme_marker.setLatLng(adjusted_LatLng);
+      findme_map.setView(adjusted_LatLng, 16);
+
+      $("#map-information").html(manualPosition);
+      $("#map-information").show();
+      $('.step-2 a').attr('href', '#details');
+      $('#step2').removeClass("disabled");
+      $('#continue').removeClass("disabled");
+    })
+    .catch(err => {
+      if (err){
+        if (err.error){
+          console.log(err.error);
+        }
+      }
+      else {
+        $("#couldnt-find").show();
+        $("#map-information").hide();
+      }
+      const org_LatLng = ([
+        (lastSearchAddress.lat),
+        (lastSearchAddress.lon)
+      ]);
+
+      // return marker to initial position
+      findme_marker.setLatLng(org_LatLng);
+      findme_map.setView(org_LatLng, 16);
+    })
+    .finally(() => {
+      
+      $("#findme").removeClass("loading");
+    });
+
+  
+});
+
+// function solr_callback(data) {
+//   if (data.response.docs.length > 0) {
+//     var docs = data.response.docs;
+//     var coords = docs[0].coordinate.split(',');
+//     findme_marker.setOpacity(1);
+//     findme_marker.setLatLng([coords[0], coords[1]]);
+//     findme_map.setView([coords[0], coords[1]], 16);
+//     $("#map-information").html(successString);
+//     $("#map-information").show();
+
+//     $('.step-2 a').attr('href', '#details');
+//     $('#step2').removeClass("disabled");
+//     $('#continue').removeClass("disabled");
+//   } else {
+//     $("#couldnt-find").show();
+//     $("#map-information").hide();
+//   }
+//   $("#findme").removeClass("loading");
+// }
+
+function updateAddressInfo(chosen_place) {
+
   $('.step-2 a').attr('href', '#details');
   $('#step2').removeClass("disabled");
   $('#continue').removeClass("disabled");
-});
-
-function solr_callback(data) {
-  if (data.response.docs.length > 0) {
-    var docs = data.response.docs;
-    var coords = docs[0].coordinate.split(',');
-    findme_marker.setOpacity(1);
-    findme_marker.setLatLng([coords[0], coords[1]]);
-    findme_map.setView([coords[0], coords[1]], 16);
-    $("#map-information").html(successString);
-    $("#map-information").show();
-    $('#step2').removeClass("disabled");
-    $('#continue').removeClass("disabled");
-    $('.step-2 a').attr('href', '#details');
-  } else {
-    $("#couldnt-find").show();
-    $("#map-information").hide();
+  
+  $('#addressalt').val(chosen_place.address.road);
+  $('#hnumberalt').val(chosen_place.address.house_number);
+  $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
+  $('#postcode').val(chosen_place.address.postcode);
+  $("#address").val(chosen_place.display_name);
+  $("#map-information").html(successString);
+  $("#map-information").show();
+  if (!chosen_place.address.house_number) {
+    $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
   }
-  $("#findme").removeClass("loading");
+
+  $("#address").addClass("is-valid");
+  $("#address").removeClass("is-invalid");
 }
 
 function searchAddress(address_to_find) {
@@ -250,6 +330,12 @@ function searchReverseLookup(position) {
                   return reject({});
               }
 
+              let dataError = data.error;
+              // geocode error
+              if (dataError !== undefined) {
+                return reject(data);
+              }
+
               resolve(parseData(data));
           },
           'error': function (error) {
@@ -275,11 +361,15 @@ function parseData(data) {
   nominatimAddress.lon = nominatimObject.lon;
   nominatimAddress.lat = nominatimObject.lat;
 
+  nominatimAddress.getLatLng = () => {
+    return getLatLng(nominatimAddress.lat, nominatimObject.lon);
+  };
+
   nominatimAddress.boundingbox = [
-      nominatimObject.boundingbox[0],
-      nominatimObject.boundingbox[1],
-      nominatimObject.boundingbox[2],
-      nominatimObject.boundingbox[3]
+    Number(nominatimObject.boundingbox[0]),
+    Number(nominatimObject.boundingbox[1]),
+    Number(nominatimObject.boundingbox[2]),
+    Number(nominatimObject.boundingbox[3])
   ];
 
   nominatimAddress.address = nominatimObject.address;
@@ -287,6 +377,33 @@ function parseData(data) {
   return nominatimAddress;
 }
 
+function getLatLng(lat, lon) {
+  return [lat, lon];
+}
+
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
+function sigDigits(numb) {
+  if (Number.isInteger(numb)) {
+     return 0;
+  } else {
+     return numb.toString().split('.')[1].length;
+  }
+}
+
+// function outsideBBox(p){
+//   if (!lastSearchAddress){
+//     return false;
+//   }
+
+//   return [p.lat, p.lon];
+// }
+
+// function inRange(min, max, value){
+//   return value === Math.max( Math.min( [min, max, value]), value );
+// }
 
 // Step change
 
