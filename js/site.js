@@ -152,7 +152,7 @@ $("#find").submit(function (e) {
 
 // toggle circle color when marker leaves the circle
 findme_marker.on('drag', function(e) {
-  var inside = isInsideCircle(e);
+  var inside = isInsideCircle(e.latlng);
 
   // let's manifest this by toggling the color
   findme_circle.setStyle({
@@ -163,33 +163,42 @@ findme_marker.on('drag', function(e) {
 /* user moved map marker: action */
 findme_marker.on('dragend', function (e) {
 
+  // orginal marker position (from search results)
+  const searchPositionLatLong = {
+    lat: lastSearchAddress.lat,
+    lng: lastSearchAddress.lon
+  };
+
   // marker position after drag event 
-  let event_cordinate = e.target._latlng;
-  let maker_coordinates = event_cordinate;
+  let markerEventLatLng = e.target._latlng;
 
-  if (!isInsideCircle(event_cordinate)) {
+  // convert marker position from Leaflet to Nominatim
+  const user_coordinates = {
+    lat: markerEventLatLng.lat,
+    lon: markerEventLatLng.lng
+  };
 
-    // validate new marker location
-    const user_coordinates = {
-      lat: event_cordinate.lat,
-      lon: event_cordinate.lng
-    };
+  let finalMarkerPositionLatLng = markerEventLatLng;
+
+  if (!isInsideCircle(markerEventLatLng)) {
+   
     
     // show loading animation
     $("#findme h4").text(loadingText);
     $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
 
+    // search for valid marker location using a Nominatim point
     searchReverseLookup(user_coordinates)
       .then(foundAddress => {
-
       
-        const nominatim_cooridantes = {
+        // convert Nominatim found position to Leaflet
+        const nominatimLatLong = {
           lat: foundAddress.lat,
-          lon: foundAddress.lon
+          lng: foundAddress.lon
         };
 
-        if (!pointsWithinCircleDiameter(event_cordinate, nominatim_cooridantes)) {        
-          maker_coordinates = nominatim_cooridantes;
+        if (!pointsWithinCircleDiameter(markerEventLatLng, nominatimLatLong)) {        
+          finalMarkerPositionLatLng = Object.assign({}, nominatimLatLong);
         }
 
         $("#map-information").html(manualPosition);
@@ -212,10 +221,8 @@ findme_marker.on('dragend', function (e) {
         }
 
         // assume error is due to an invalid location (marker is in the ocean, etc)
-        maker_coordinates = ([
-          (lastSearchAddress.lat),
-          (lastSearchAddress.lon)
-        ]);
+        
+        finalMarkerPositionLatLng = Object.assign({}, searchPositionLatLong);
 
       })
       .finally(() => {
@@ -225,18 +232,23 @@ findme_marker.on('dragend', function (e) {
     }
 
     // place marker to initial position
-    findme_marker.setLatLng(maker_coordinates).addTo(findme_map);
+    findme_marker.setLatLng(finalMarkerPositionLatLng);
+
+    mapLatLng = ([
+      (lastSearchAddress.lat),
+      (lastSearchAddress.lon)
+    ]);
 
     // recenter map on orginial search location to deter user drifting
-    findme_map.setView(lastSearchAddress.getLatLng, 16);
+    findme_map.setView(mapLatLng, 16);
   });
 
-function isInsideCircle(e) {
+function isInsideCircle(LatLng) {
   var isInside = true;
 
   if (findme_circle !== null) {
     // distance between the current position of the marker and the center of the circle
-    const markerDistance = findme_map.distance(e.latlng, findme_circle.getLatLng());
+    const markerDistance = findme_map.distance(LatLng, findme_circle.getLatLng());
 
     // the marker is inside the circle when the distance is inferior to the radius
     isInside = markerDistance < findme_circle.getRadius();
@@ -244,13 +256,13 @@ function isInsideCircle(e) {
   return isInside;
 }
 
-function pointsWithinCircleDiameter(point1LatLng, point2LatLng) {
+function pointsWithinCircleDiameter(LatLng1, LatLng2) {
   var withinDiameter = true;
 
   if (findme_circle !== null) {
     // distance between the current position of the marker and the center of the circle
-    const pointsDistance = findme_map.distance(point1LatLng, point2LatLng);
-    const circleDiameter = findme_circle.getRadius() * 2
+    const pointsDistance = findme_map.distance(LatLng1, LatLng2);
+    const circleDiameter = findme_circle.getRadius() * 2;
 
     // the marker is inside the circle when the distance is inferior to the radius
     withinDiameter = pointsDistance < circleDiameter;
