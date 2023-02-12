@@ -5,8 +5,9 @@ var i18n = i18next;
 var successString, manualPosition, loadingText, modalText;
 
 let lastSearchAddress = null;
+let lastMarkerLatLng = null;
 
-let pullValue = 0.1;
+const maxMeters = 1000;
 
 function reloadLists(language) {
 
@@ -83,6 +84,7 @@ var payment_data = [];
 var findme_marker = L.marker([41.69, 12.71], {
   draggable: true
 }).addTo(findme_map);
+lastMarkerLatLng = findme_marker.getLatLng();
 
 findme_marker.setOpacity(0);
 
@@ -90,7 +92,9 @@ L.control.locate({
   follow: true
 }).addTo(findme_map);
 
-findme_circle = null;
+var findme_circle = null;
+var findme_bbox = null;
+
 
 
 if (location.hash) location.hash = '';
@@ -127,16 +131,21 @@ $("#find").submit(function (e) {
     ]);
       
     // recenter map on found address
+    findme_map.setView(mapLatLng);
     findme_map.fitBounds(bounds);
-    findme_map.setView(mapLatLng, 16);
 
     // Place marker at found address
     findme_marker.setOpacity(1);
     findme_marker.setLatLng(mapLatLng);
+    lastMarkerLatLng = findme_marker.getLatLng();
+
+    findme_bbox = L.rectangle(bounds)
+          .addTo(findme_map);
 
     // create the "adjusment" circle around marker based on house number
     const circleRadius = !lastSearchAddress.address.house ? 50 : 25;
-    findme_circle = L.circle(mapLatLng, circleRadius).addTo(findme_map);
+    findme_circle = L.circle(mapLatLng, circleRadius)
+    .addTo(findme_map);
   })
   .catch(e => {
     $("#couldnt-find").show();
@@ -158,6 +167,17 @@ findme_marker.on('drag', function(e) {
   findme_circle.setStyle({
     fillColor: inside ? 'green' : '#f03'
   });
+
+  // orginal marker position (from search results)
+  const searchPositionLatLong = {
+    lat: lastSearchAddress.lat,
+    lng: lastSearchAddress.lon
+  };
+
+  // reset marker to previous position upon leaving the bbox
+  if (!inside && !findme_bbox._bounds.contains(e.latlng)){
+      findme_marker.setLatLng(lastMarkerLatLng);
+  }
 });
 
 /* user moved map marker: action */
@@ -223,8 +243,8 @@ findme_marker.on('dragend', function (e) {
         // assume error is due to an invalid location (marker is in the ocean, etc)
         
         finalMarkerPositionLatLng = Object.assign({}, searchPositionLatLong);
-
       })
+      
       .finally(() => {
         // stop loading animation
         $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
@@ -233,6 +253,7 @@ findme_marker.on('dragend', function (e) {
 
     // place marker to initial position
     findme_marker.setLatLng(finalMarkerPositionLatLng);
+    lastMarkerLatLng = findme_marker.getLatLng();
 
     mapLatLng = ([
       (lastSearchAddress.lat),
@@ -270,25 +291,32 @@ function pointsWithinCircleDiameter(LatLng1, LatLng2) {
   return withinDiameter;
 }
 
-// function solr_callback(data) {
-//   if (data.response.docs.length > 0) {
-//     var docs = data.response.docs;
-//     var coords = docs[0].coordinate.split(',');
-//     findme_marker.setOpacity(1);
-//     findme_marker.setLatLng([coords[0], coords[1]]);
-//     findme_map.setView([coords[0], coords[1]], 16);
-//     $("#map-information").html(successString);
-//     $("#map-information").show();
+function pointsWithinCircleRadius(LatLng1, LatLng2) {
+  var withinDiameter = true;
 
-//     $('.step-2 a').attr('href', '#details');
-//     $('#step2').removeClass("disabled");
-//     $('#continue').removeClass("disabled");
-//   } else {
-//     $("#couldnt-find").show();
-//     $("#map-information").hide();
-//   }
-//   $("#findme").removeClass("loading");
-// }
+  if (findme_circle !== null) {
+    // distance between the current position of the marker and the center of the circle
+    const pointsDistance = findme_map.distance(LatLng1, LatLng2);
+    const circleDiameter = findme_circle.getRadius();
+
+    // the marker is inside the circle when the distance is inferior to the radius
+    withinDiameter = pointsDistance < circleDiameter;
+  }
+  return withinDiameter;
+}
+
+function pointsWithinMaxDistance(LatLng1, LatLng2, meters) {
+  var withinDiameter = true;
+
+  if (findme_map !== null) {
+    // distance between the current position of the marker and the center of the circle
+    const pointsDistance = findme_map.distance(LatLng1, LatLng2);
+
+    // the marker is inside the circle when the distance is inferior to the radius
+    withinDiameter = pointsDistance < meters;
+  }
+  return withinDiameter;
+}
 
 function updateAddressInfo(chosen_place) {
 
@@ -439,38 +467,6 @@ function getLatLng(locationLatLng) {
   }
   return leaftletAddress;
 }
-
-// function getLatLng(lat, lng) {
-//   return [Number(lat), Number(lng)];
-// }
-
-// // Nominatim uses {lat,lon}; LeaftLet use {lat,lng}
-// function nominatimToLeaflet(lat, lon){
-//   return L.getLatLng({lat: lat, lng: lon});
-// }
-// function round(value, decimals) {
-//   return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-// }
-
-// function sigDigits(numb) {
-//   if (Number.isInteger(numb)) {
-//      return 0;
-//   } else {
-//      return numb.toString().split('.')[1].length;
-//   }
-// }
-
-// function outsideBBox(p){
-//   if (!lastSearchAddress){
-//     return false;
-//   }
-
-//   return [p.lat, p.lon];
-// }
-
-// function inRange(min, max, value){
-//   return value === Math.max( Math.min( [min, max, value]), value );
-// }
 
 // Step change
 
