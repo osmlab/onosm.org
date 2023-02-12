@@ -197,72 +197,82 @@ findme_marker.on('dragend', function (e) {
     lat: markerEventLatLng.lat,
     lon: markerEventLatLng.lng
   };
-
+  
   let finalMarkerPositionLatLng = markerEventLatLng;
 
-  if (!isInsideCircle(markerEventLatLng)) {
-   
-    
-    // show loading animation
-    $("#findme h4").text(loadingText);
-    $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
+  // show loading animation
+  $("#findme h4").text(loadingText);
+  $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
 
-    // search for valid marker location using a Nominatim point
-    searchReverseLookup(user_coordinates)
-      .then(foundAddress => {
-      
+  // search for valid marker location using a Nominatim point
+  searchReverseLookup(user_coordinates)
+    .then(foundAddress => {
+
+      if (!isInsideCircle(markerEventLatLng)) {
+
         // convert Nominatim found position to Leaflet
         const nominatimLatLong = {
           lat: foundAddress.lat,
           lng: foundAddress.lon
         };
 
-        if (!pointsWithinCircleDiameter(markerEventLatLng, nominatimLatLong)) {        
+        const nominatim_bbox = foundAddress.boundingbox;
+        const foundBounds = new L.LatLngBounds(
+          [+nominatim_bbox[0], +nominatim_bbox[2]],
+          [+nominatim_bbox[1], +nominatim_bbox[3]]);
+        var vaild_bbox = new L.rectangle(foundBounds);
+
+
+        if (!vaild_bbox._bounds.contains(markerEventLatLng) && 
+        vaild_bbox._bounds.contains(nominatimLatLong)) {
           finalMarkerPositionLatLng = Object.assign({}, nominatimLatLong);
         }
+        // if (!pointsWithinCircleDiameter(markerEventLatLng, nominatimLatLong)) {        
+        //   finalMarkerPositionLatLng = Object.assign({}, nominatimLatLong);
+        // }
+      }
 
-        $("#map-information").html(manualPosition);
-        $("#map-information").show();
-        $('.step-2 a').attr('href', '#details');
-        $('#step2').removeClass("disabled");
-        $('#continue').removeClass("disabled");
-      })
+      $("#map-information").html(manualPosition);
+      $("#map-information").show();
+      $('.step-2 a').attr('href', '#details');
+      $('#step2').removeClass("disabled");
+      $('#continue').removeClass("disabled");
+    })
 
-      .catch(err => {
+    .catch(err => {
 
-        if (err) {
-          if (err.error) {
-            console.log(err.error);
-          }
+      if (err) {
+        if (err.error) {
+          console.log(err.error);
         }
-        else {
-          $("#couldnt-find").show();
-          $("#map-information").hide();
-        }
+      }
+      else {
+        $("#couldnt-find").show();
+        $("#map-information").hide();
+      }
 
-        // assume error is due to an invalid location (marker is in the ocean, etc)
-        
-        finalMarkerPositionLatLng = Object.assign({}, searchPositionLatLong);
-      })
-      
-      .finally(() => {
-        // stop loading animation
-        $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
-      });
-    }
+      // assume error is due to an invalid location (marker is in the ocean, etc)
 
-    // place marker to initial position
-    findme_marker.setLatLng(finalMarkerPositionLatLng);
-    lastMarkerLatLng = findme_marker.getLatLng();
+      finalMarkerPositionLatLng = Object.assign({}, searchPositionLatLong);
+    })
 
-    mapLatLng = ([
-      (lastSearchAddress.lat),
-      (lastSearchAddress.lon)
-    ]);
+    .finally(() => {
+      // stop loading animation
+      $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
 
-    // recenter map on orginial search location to deter user drifting
-    findme_map.setView(mapLatLng, 16);
-  });
+      // place marker to initial position
+      findme_marker.setLatLng(finalMarkerPositionLatLng);
+      lastMarkerLatLng = findme_marker.getLatLng();
+
+      const mapLatLng = ([
+        (lastSearchAddress.lat),
+        (lastSearchAddress.lon)
+      ]);
+
+      // recenter map on orginial search location to deter user drifting
+      findme_map.panTo(mapLatLng);
+    });
+});
 
 function isInsideCircle(LatLng) {
   var isInside = true;
