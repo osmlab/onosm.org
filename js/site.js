@@ -183,55 +183,65 @@ findme_marker.on('drag', function(e) {
 /* user moved map marker: action */
 findme_marker.on('dragend', function (e) {
 
+  // marker position after drag event 
+  let markerEventLatLng = e.target._latlng;
+
+  // cancel event when no movement happend
+  if (lastMarkerLatLng === markerEventLatLng) {
+    return;
+  }
+
   // orginal marker position (from search results)
   const searchPositionLatLong = {
     lat: lastSearchAddress.lat,
     lng: lastSearchAddress.lon
   };
 
-  // marker position after drag event 
-  let markerEventLatLng = e.target._latlng;
+  // show loading animation
+  $("#findme h4").text(loadingText);
+  $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
 
   // convert marker position from Leaflet to Nominatim
   const user_coordinates = {
     lat: markerEventLatLng.lat,
     lon: markerEventLatLng.lng
   };
-  
+
+  if (isInsideCircle(markerEventLatLng)) {
+    // place marker to initial position
+    findme_marker.setLatLng(user_coordinates);
+    lastMarkerLatLng = findme_marker.getLatLng();
+
+    // recenter map on orginial search location to deter user drifting
+    findme_map.panTo(searchPositionLatLong);
+
+    return;
+  }
+   
   let finalMarkerPositionLatLng = markerEventLatLng;
-
-  // show loading animation
-  $("#findme h4").text(loadingText);
-  $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
-
+  
   // search for valid marker location using a Nominatim point
   searchReverseLookup(user_coordinates)
     .then(foundAddress => {
 
-      if (!isInsideCircle(markerEventLatLng)) {
+      // convert Nominatim found position to Leaflet
+      const nominatimLatLong = {
+        lat: foundAddress.lat,
+        lng: foundAddress.lon
+      };
 
-        // convert Nominatim found position to Leaflet
-        const nominatimLatLong = {
-          lat: foundAddress.lat,
-          lng: foundAddress.lon
-        };
-
-        const nominatim_bbox = foundAddress.boundingbox;
-        const foundBounds = new L.LatLngBounds(
-          [+nominatim_bbox[0], +nominatim_bbox[2]],
-          [+nominatim_bbox[1], +nominatim_bbox[3]]);
-        var vaild_bbox = new L.rectangle(foundBounds);
+      const nominatim_bbox = foundAddress.boundingbox;
+      const foundBounds = new L.LatLngBounds(
+        [+nominatim_bbox[0], +nominatim_bbox[2]],
+        [+nominatim_bbox[1], +nominatim_bbox[3]]);
+      var vaild_bbox = new L.rectangle(foundBounds);
 
 
-        if (!vaild_bbox._bounds.contains(markerEventLatLng) && 
+      if (!vaild_bbox._bounds.contains(markerEventLatLng) &&
         vaild_bbox._bounds.contains(nominatimLatLong)) {
-          finalMarkerPositionLatLng = Object.assign({}, nominatimLatLong);
-        }
-        // if (!pointsWithinCircleDiameter(markerEventLatLng, nominatimLatLong)) {        
-        //   finalMarkerPositionLatLng = Object.assign({}, nominatimLatLong);
-        // }
+        finalMarkerPositionLatLng = Object.assign({}, nominatimLatLong);
       }
-
+      
       $("#map-information").html(manualPosition);
       $("#map-information").show();
       $('.step-2 a').attr('href', '#details');
@@ -264,15 +274,11 @@ findme_marker.on('dragend', function (e) {
       findme_marker.setLatLng(finalMarkerPositionLatLng);
       lastMarkerLatLng = findme_marker.getLatLng();
 
-      const mapLatLng = ([
-        (lastSearchAddress.lat),
-        (lastSearchAddress.lon)
-      ]);
-
       // recenter map on orginial search location to deter user drifting
-      findme_map.panTo(mapLatLng);
+      findme_map.panTo(searchPositionLatLong);
     });
 });
+
 
 function isInsideCircle(LatLng) {
   var isInside = true;
