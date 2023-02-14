@@ -99,9 +99,9 @@ findme_circle.setStyle({opacity: 0});
 
 // Bounding box around map
 let markerBoundsVisible = false;
-var findme_bbox = L.rectangle(findme_map.getBounds())
-  .addTo(findme_map);
-findme_bbox.setStyle({opacity: 0});
+// var findme_bbox = L.rectangle(findme_map.getBounds())
+//   .addTo(findme_map);
+// findme_bbox.setStyle({opacity: 0});
 
 if (location.hash) location.hash = '';
 
@@ -148,10 +148,21 @@ $("#find").submit(function (e) {
     findme_circle.setRadius(circleRadius);
     findme_circle.setStyle({opacity: 1});
 
-    findme_bbox.setBounds(bounds);    
-    markerBoundsVisible = bounds.contains(findme_circle.getBounds());
-    const opacityValue = markerBoundsVisible ? 1 : 0
-    findme_bbox.setStyle({opacity: opacityValue});
+    const hasLargeBBox = bounds.contains(findme_circle.getBounds());
+    
+    if (markerBoundsVisible){
+      findme_bbox.remove();
+      findme_bbox = null;
+      markerBoundsVisible = false;
+    }
+
+    if (hasLargeBBox){
+      findme_bbox = new L.rectangle(bounds).addTo(findme_map);    
+      markerBoundsVisible = true;
+    // const opacityValue = markerBoundsVisible ? 1 : 0
+    // findme_bbox.setStyle({fill: false, opacity: opacityValue});
+    // findme_bbox.redraw();
+    }
     
     // recenter map on found address
     //findme_map.setView(mapLatLng);
