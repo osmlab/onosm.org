@@ -99,9 +99,6 @@ findme_circle.setStyle({opacity: 0});
 
 // Bounding box around map
 let markerBoundsVisible = false;
-// var findme_bbox = L.rectangle(findme_map.getBounds())
-//   .addTo(findme_map);
-// findme_bbox.setStyle({opacity: 0});
 
 if (location.hash) location.hash = '';
 
@@ -139,6 +136,7 @@ $("#find").submit(function (e) {
     // Place marker at found address
     findme_marker.setOpacity(1);
     findme_marker.setLatLng(mapLatLng);
+
     // start saving previous marker location
     lastMarkerLatLng = findme_marker.getLatLng();
     
@@ -159,9 +157,6 @@ $("#find").submit(function (e) {
     if (hasLargeBBox){
       findme_bbox = new L.rectangle(bounds).addTo(findme_map);    
       markerBoundsVisible = true;
-    // const opacityValue = markerBoundsVisible ? 1 : 0
-    // findme_bbox.setStyle({fill: false, opacity: opacityValue});
-    // findme_bbox.redraw();
     }
     
     // recenter map on found address
@@ -316,47 +311,6 @@ function isInsideCircle(LatLng) {
     isInside = markerDistance < findme_circle.getRadius();
   }
   return isInside;
-}
-
-function pointsWithinCircleDiameter(LatLng1, LatLng2) {
-  var withinDiameter = true;
-
-  if (findme_circle !== null) {
-    // distance between the current position of the marker and the center of the circle
-    const pointsDistance = findme_map.distance(LatLng1, LatLng2);
-    const circleDiameter = findme_circle.getRadius() * 2;
-
-    // the marker is inside the circle when the distance is inferior to the radius
-    withinDiameter = pointsDistance < circleDiameter;
-  }
-  return withinDiameter;
-}
-
-function pointsWithinCircleRadius(LatLng1, LatLng2) {
-  var withinDiameter = true;
-
-  if (findme_circle !== null) {
-    // distance between the current position of the marker and the center of the circle
-    const pointsDistance = findme_map.distance(LatLng1, LatLng2);
-    const circleDiameter = findme_circle.getRadius();
-
-    // the marker is inside the circle when the distance is inferior to the radius
-    withinDiameter = pointsDistance < circleDiameter;
-  }
-  return withinDiameter;
-}
-
-function pointsWithinMaxDistance(LatLng1, LatLng2, meters) {
-  var withinDiameter = true;
-
-  if (findme_map !== null) {
-    // distance between the current position of the marker and the center of the circle
-    const pointsDistance = findme_map.distance(LatLng1, LatLng2);
-
-    // the marker is inside the circle when the distance is inferior to the radius
-    withinDiameter = pointsDistance < meters;
-  }
-  return withinDiameter;
 }
 
 function updateAddressInfo(chosen_place) {
