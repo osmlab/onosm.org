@@ -92,10 +92,16 @@ L.control.locate({
   follow: true
 }).addTo(findme_map);
 
-var findme_circle = null;
-var findme_bbox = null;
+// create and hide circle
+let findme_circle = L.circle(lastMarkerLatLng)
+  .addTo(findme_map);
+findme_circle.setStyle({opacity: 0});
 
-
+// Bounding box around map
+let markerBoundsVisible = false;
+var findme_bbox = L.rectangle(findme_map.getBounds())
+  .addTo(findme_map);
+findme_bbox.setStyle({opacity: 0});
 
 if (location.hash) location.hash = '';
 
@@ -129,23 +135,27 @@ $("#find").submit(function (e) {
       (lastSearchAddress.lat),
       (lastSearchAddress.lon)
     ]);
-      
-    // recenter map on found address
-    findme_map.setView(mapLatLng);
-    findme_map.fitBounds(bounds);
-
+    
     // Place marker at found address
     findme_marker.setOpacity(1);
     findme_marker.setLatLng(mapLatLng);
+    // start saving previous marker location
     lastMarkerLatLng = findme_marker.getLatLng();
-
-    findme_bbox = L.rectangle(bounds)
-          .addTo(findme_map);
-
-    // create the "adjusment" circle around marker based on house number
+    
+    // show adjusmented circle radius based on house number and center on marker 
     const circleRadius = !lastSearchAddress.address.house ? 50 : 25;
-    findme_circle = L.circle(mapLatLng, circleRadius)
-    .addTo(findme_map);
+    findme_circle.setLatLng(lastSearchAddress);
+    findme_circle.setRadius(circleRadius);
+    findme_circle.setStyle({opacity: 1});
+
+    findme_bbox.setBounds(bounds);    
+    markerBoundsVisible = bounds.contains(findme_circle.getBounds());
+    const opacityValue = markerBoundsVisible ? 1 : 0
+    findme_bbox.setStyle({opacity: opacityValue});
+    
+    // recenter map on found address
+    //findme_map.setView(mapLatLng);
+    findme_map.fitBounds(bounds);    
   })
   .catch(e => {
     $("#couldnt-find").show();
@@ -159,25 +169,25 @@ $("#find").submit(function (e) {
   }); 
 });
 
-// toggle circle color when marker leaves the circle
+
 findme_marker.on('drag', function(e) {
-  var inside = isInsideCircle(e.latlng);
+  // check if marker is outside the circle
+  let inside = isInsideCircle(e.latlng);
+ 
+  // toggle circle color when marker leaves the circle
+  if (markerBoundsVisible) {
+    findme_circle.setStyle({
+      fillColor: inside ? 'green' : '#f03'
+    });
 
-  // let's manifest this by toggling the color
-  findme_circle.setStyle({
-    fillColor: inside ? 'green' : '#f03'
-  });
-
-  // orginal marker position (from search results)
-  const searchPositionLatLong = {
-    lat: lastSearchAddress.lat,
-    lng: lastSearchAddress.lon
-  };
-
-  // reset marker to previous position upon leaving the bbox
-  if (!inside && !findme_bbox._bounds.contains(e.latlng)){
-      findme_marker.setLatLng(lastMarkerLatLng);
+    // check if marker is inside the larger bounding box (if is exists)
+    inside = findme_bbox._bounds.contains(e.latlng);
   }
+    
+  // reset marker to previous position upon leaving the bbox
+  if (!inside){
+    findme_marker.setLatLng(lastMarkerLatLng);
+  } 
 });
 
 /* user moved map marker: action */
@@ -197,18 +207,16 @@ findme_marker.on('dragend', function (e) {
     lng: lastSearchAddress.lon
   };
 
-  // show loading animation
-  $("#findme h4").text(loadingText);
-  $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
+  
 
-  // convert marker position from Leaflet to Nominatim
+  // convert marker position from Leaflet to Nominatim format for lookup
   const user_coordinates = {
     lat: markerEventLatLng.lat,
     lon: markerEventLatLng.lng
   };
 
+  // Use raw marker position when inside circle
   if (isInsideCircle(markerEventLatLng)) {
-    // place marker to initial position
     findme_marker.setLatLng(user_coordinates);
     lastMarkerLatLng = findme_marker.getLatLng();
 
@@ -217,7 +225,11 @@ findme_marker.on('dragend', function (e) {
 
     return;
   }
-   
+  
+  // show loading animation
+  $("#findme h4").text(loadingText);
+  $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
+
   let finalMarkerPositionLatLng = markerEventLatLng;
   
   // search for valid marker location using a Nominatim point
@@ -234,11 +246,14 @@ findme_marker.on('dragend', function (e) {
       const foundBounds = new L.LatLngBounds(
         [+nominatim_bbox[0], +nominatim_bbox[2]],
         [+nominatim_bbox[1], +nominatim_bbox[3]]);
+
+      // create "safe area" for maker based on bounding box returned with lookup
       var vaild_bbox = new L.rectangle(foundBounds);
 
 
       if (!vaild_bbox._bounds.contains(markerEventLatLng) &&
         vaild_bbox._bounds.contains(nominatimLatLong)) {
+
         finalMarkerPositionLatLng = Object.assign({}, nominatimLatLong);
       }
       
@@ -262,7 +277,6 @@ findme_marker.on('dragend', function (e) {
       }
 
       // assume error is due to an invalid location (marker is in the ocean, etc)
-
       finalMarkerPositionLatLng = Object.assign({}, searchPositionLatLong);
     })
 
@@ -274,7 +288,7 @@ findme_marker.on('dragend', function (e) {
       findme_marker.setLatLng(finalMarkerPositionLatLng);
       lastMarkerLatLng = findme_marker.getLatLng();
 
-      // recenter map on orginial search location to deter user drifting
+      // recenter map on orginial search location to deter map drifting too much
       findme_map.panTo(searchPositionLatLong);
     });
 });
