@@ -7,7 +7,7 @@ var successString, manualPosition, loadingText, modalText;
 let lastSearchAddress = null;
 let lastMarkerLatLng = null;
 
-const maxMeters = 1000;
+const circleRadiusMeters = 50;
 
 function reloadLists(language) {
 
@@ -122,8 +122,8 @@ $("#find").submit(function (e) {
 
     // Update rest of the site with address data
     updateAddressInfo(lastSearchAddress);
-
-    const chosen_place = lastSearchAddress.boundingbox;
+    
+    const chosen_place = lastSearchAddress.boundingBox;
     var bounds = new L.LatLngBounds(
       [+chosen_place[0], +chosen_place[2]],
       [+chosen_place[1], +chosen_place[3]]);
@@ -140,7 +140,7 @@ $("#find").submit(function (e) {
     // start saving previous marker location
     lastMarkerLatLng = findme_marker.getLatLng();
     
-    // show adjusmented circle radius based on house number and center on marker 
+    // show adjusted circle radius based on house number and center on marker 
     const circleRadius = !lastSearchAddress.address.house ? 50 : 25;
     findme_circle.setLatLng(lastSearchAddress);
     findme_circle.setRadius(circleRadius);
@@ -190,7 +190,7 @@ findme_marker.on('drag', function(e) {
     inside = findme_bbox._bounds.contains(e.latlng);
   }
     
-  // reset marker to previous position upon leaving the bbox
+  // reset marker to previous position upon leaving the bounding box
   if (!inside){
     findme_marker.setLatLng(lastMarkerLatLng);
   } 
@@ -202,12 +202,12 @@ findme_marker.on('dragend', function (e) {
   // marker position after drag event 
   let markerEventLatLng = e.target._latlng;
 
-  // cancel event when no movement happend
+  // cancel event when no movement happened
   if (lastMarkerLatLng === markerEventLatLng) {
     return;
   }
 
-  // orginal marker position (from search results)
+  // original marker position (from search results)
   const searchPositionLatLong = {
     lat: lastSearchAddress.lat,
     lng: lastSearchAddress.lon
@@ -226,7 +226,7 @@ findme_marker.on('dragend', function (e) {
     findme_marker.setLatLng(user_coordinates);
     lastMarkerLatLng = findme_marker.getLatLng();
 
-    // recenter map on orginial search location to deter user drifting
+    // recenter map on original search location to deter user drifting
     findme_map.panTo(searchPositionLatLong);
 
     return;
@@ -248,17 +248,17 @@ findme_marker.on('dragend', function (e) {
         lng: foundAddress.lon
       };
 
-      const nominatim_bbox = foundAddress.boundingbox;
+      const nominatim_boundingBox = foundAddress.boundingBox;
       const foundBounds = new L.LatLngBounds(
-        [+nominatim_bbox[0], +nominatim_bbox[2]],
-        [+nominatim_bbox[1], +nominatim_bbox[3]]);
+        [+nominatim_boundingBox[0], +nominatim_boundingBox[2]],
+        [+nominatim_boundingBox[1], +nominatim_boundingBox[3]]);
 
       // create "safe area" for maker based on bounding box returned with lookup
-      var vaild_bbox = new L.rectangle(foundBounds);
+      var valid_boundingBox = new L.rectangle(foundBounds);
 
 
-      if (!vaild_bbox._bounds.contains(markerEventLatLng) &&
-        vaild_bbox._bounds.contains(nominatimLatLong)) {
+      if (!valid_boundingBox._bounds.contains(markerEventLatLng) &&
+        valid_boundingBox._bounds.contains(nominatimLatLong)) {
 
         finalMarkerPositionLatLng = Object.assign({}, nominatimLatLong);
       }
@@ -294,7 +294,7 @@ findme_marker.on('dragend', function (e) {
       findme_marker.setLatLng(finalMarkerPositionLatLng);
       lastMarkerLatLng = findme_marker.getLatLng();
 
-      // recenter map on orginial search location to deter map drifting too much
+      // recenter map on original search location to deter map drifting too much
       findme_map.panTo(searchPositionLatLong);
     });
 });
@@ -334,6 +334,10 @@ function updateAddressInfo(chosen_place) {
   $("#address").removeClass("is-invalid");
 }
 
+/**
+ * @param {String[]} address string array
+ * @returns {Promise<NominatimAddress>}
+ */
 function searchAddress(address_to_find) {
 
   // setup callback
@@ -421,15 +425,36 @@ function searchReverseLookup(position) {
   });
 }
 
-// Create a copy of the nominatim data
-function parseData(data) {
+/**
+ * List of string values describing an address
+ * @typedef {string[]} display_name i.e. 1313, Mockingbird Lane, Mockingbird Heights
+ */
+
+/**
+ * Nominatim address 
+ * 
+ * @typedef {object} NominatimAddress
+ * @property {string} lon Longitude
+ * @property {string} lat Latitude
+ * @property {number[]} boundingBox  Array of bounding points
+ * @property {string{}} address      Map of OSM address key:values
+ * @property {display_name} display_name Array of OSM address vales
+*/
+
+/**
+ * Create a JS object of Nominatim JSON object
+ * 
+ * @param {object} nominatimData nominatim data
+ * @returns {NominatimAddress} object initialized with Nominatim data
+ */
+function parseData(nominatimData) {
 
   // throw out any type of null values
-  if (data == null) return null;
-  if (Array.isArray(data) && data.length < 1) return null;
+  if (nominatimData == null) return null;
+  if (Array.isArray(nominatimData) && nominatimData.length < 1) return null;
   
   // Nominatim returns an array of possible matchess or single object
-  const nominatimObject = Array.isArray(data) ? data[0] : data;
+  const nominatimObject = Array.isArray(nominatimData) ? nominatimData[0] : nominatimData;
 
   const nominatimAddress = {};
   nominatimAddress.lon = nominatimObject.lon;
@@ -439,7 +464,7 @@ function parseData(data) {
     return getLatLng(nominatimAddress);
   };
 
-  nominatimAddress.boundingbox = [
+  nominatimAddress.boundingBox = [
     Number(nominatimObject.boundingbox[0]),
     Number(nominatimObject.boundingbox[1]),
     Number(nominatimObject.boundingbox[2]),
@@ -451,16 +476,22 @@ function parseData(data) {
   return nominatimAddress;
 }
 
+/**
+ * Convert [lat, lon|lng] to leaflet [lat, lng]
+ * 
+ * @param {Number[]} locationLatLng Map of [lat, lon|lng]
+ * @return {Number[]} Map of [lat, lng]
+ */
 function getLatLng(locationLatLng) {
-  let leaftletAddress = {lat: 0, lng: 0}; 
+  let leafLetAddress = {lat: 0, lng: 0}; 
   let parameterType = typeof(locationLatLng);
   if (parameterType == "object") {    
-     leaftletAddress = {
+     leafLetAddress = {
       lat: Number(locationLatLng.lat),
       lng: !locationLatLng.lon ? Number(locationLatLng.lng) : Number(locationLatLng.lon)  
     };
   }
-  return leaftletAddress;
+  return leafLetAddress;
 }
 
 // Step change
