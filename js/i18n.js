@@ -3,7 +3,7 @@ const lngs = {
     'en-US': { nativeName: 'English (US)' },
     de: { nativeName: 'Deutsch' },
     es: { nativeName: 'Español' },
-    'fi-FI': { nativeName: 'Suorittaa loppuun (FI)' },
+    'fi-FI': { nativeName: 'Suomi' },
     'it-IT': { nativeName: 'Italiano (IT)' },
     fr: { nativeName: 'Français' },
     'nb-NO': { nativeName: 'Norsk (NO)' },
