@@ -104,7 +104,7 @@ if (location.hash) location.hash = '';
 /**
  * user search event: action
  * @param {Object} submit event object
- * 
+ *
  * Use content of address_to_find input element as search terms
  */
 $("#find").submit(function (e) {
@@ -119,14 +119,14 @@ $("#find").submit(function (e) {
   $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
 
   searchAddress(address_to_find)
-  .then(foundAddress => {    
-   
+  .then(foundAddress => {
+
     // save returned address
     activeSearchAddress = foundAddress;
 
     // Update rest of the site with address data
     updateAddressInfo(activeSearchAddress);
-    
+
     const chosen_place = activeSearchAddress.boundingBox;
     const bounds = new L.LatLngBounds(
     [+chosen_place[0], +chosen_place[2]],
@@ -136,19 +136,19 @@ $("#find").submit(function (e) {
       (activeSearchAddress.lat),
       (activeSearchAddress.lon)
     ]);
-    
+
     // Show marker at returned address
     findme_marker.setOpacity(1);
     findme_marker.setLatLng(mapLatLng);
 
     // start saving previous marker location
     activeMarkerLatLng = findme_marker.getLatLng();
-         
+
     // delete previously created geo-fencing regions
     if (findme_boundingBox != null) {
       findme_boundingBox.remove();
       findme_boundingBox = null;
-    } 
+    }
     else if (findme_circle != null) {
       findme_circle.remove();
       findme_circle = null;
@@ -162,20 +162,20 @@ $("#find").submit(function (e) {
 
     // compare default circle to returned bounding box
     circleBoundsVisible =  !bounds.contains(findme_circle.getBounds());
-    
+
     if (circleBoundsVisible) {
       // show circle bounding box on map
       findme_circle.setStyle({ opacity: 1 });
-      
-    } else {      
+
+    } else {
       // add initial bounding box to map
       findme_boundingBox = new L.rectangle(bounds)
         .addTo(findme_map);
     }
-    
+
     // recenter map on found address
     //findme_map.setView(mapLatLng);
-    findme_map.fitBounds(bounds);        
+    findme_map.fitBounds(bounds);
   })
   .catch(e => {
     $("#couldnt-find").show();
@@ -186,7 +186,7 @@ $("#find").submit(function (e) {
   .finally(() => {
     // stop loading animation
     $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
-  }); 
+  });
 });
 
 
@@ -197,22 +197,22 @@ $("#find").submit(function (e) {
 findme_marker.on('drag', function(drag_event) {
 
   const dragMarkerLocation = drag_event.latlng
-  let isInsideRegion = false 
+  let isInsideRegion = false
 
   // check if marker is outside the circle
- 
+
   if (!circleBoundsVisible) {
-    // check if marker is inside the bounding box     
+    // check if marker is inside the bounding box
     isInsideRegion = findme_boundingBox._bounds.contains(dragMarkerLocation);
   } else {
-    // check if marker is inside the circle 
+    // check if marker is inside the circle
     isInsideRegion = isInsideCircle(dragMarkerLocation);
   }
 
   // reset marker to previous position when dragged outside the active bounding box
   if (!isInsideRegion){
     findme_marker.setLatLng(activeMarkerLatLng);
-  } 
+  }
 });
 
 /**
@@ -221,7 +221,7 @@ findme_marker.on('drag', function(drag_event) {
  */
 findme_marker.on('dragend', function (dragged_event) {
 
-  // update marker position after drag event 
+  // update marker position after drag event
   const eventMarkerLocation = dragged_event.target._latlng;
 
   // cancel event when no movement happened (drag event cancelled)
@@ -241,13 +241,13 @@ findme_marker.on('dragend', function (dragged_event) {
     lon: eventMarkerLocation.lng
   };
 
-  
+
   if (circleBoundsVisible) {
     // Use raw marker position when the circle region is active (skip lookup)
-    
+
     if (!findme_circle) {
       // prevent null reference to circle region
-      console.error("unable to check bounds due to missing circle region")      
+      console.error("unable to check bounds due to missing circle region")
     }
     else if (isInsideCircle(eventMarkerLocation)) {
       // save new valid marker position
@@ -257,13 +257,13 @@ findme_marker.on('dragend', function (dragged_event) {
 
     return;
   }
-  
+
   // show loading animation
   $("#findme h4").text(loadingText);
   $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
 
   let finalMarkerPositionLatLng = eventMarkerLocation;
-  
+
   // search for valid marker location using a Nominatim point
   searchReverseLookup(userEventCoordinates)
     .then(foundAddress => {
@@ -286,7 +286,7 @@ findme_marker.on('dragend', function (dragged_event) {
           // use the Nominatim supplied point since the user one is outside the Nominatim bounding box
           finalMarkerPositionLatLng = Object.assign({}, nominatimNearbyPosition);
 
-        } else {       
+        } else {
           // revert the "drag" since both locations are out of bounds
           finalMarkerPositionLatLng = Object.assign({}, activeMarkerLatLng);
         }
@@ -330,12 +330,12 @@ findme_marker.on('dragend', function (dragged_event) {
 
 /**
  * Is a point inside the circle region
- * 
- * @param {string{}} LatLngPoint 
- * @returns boolean 
+ *
+ * @param {string{}} LatLngPoint
+ * @returns boolean
  */
 function isInsideCircle(LatLngPoint) {
-  
+
   if (!findme_circle) {return false}
 
   // distance between the current position of the marker and the center of the circle
@@ -347,14 +347,14 @@ function isInsideCircle(LatLngPoint) {
 
 /**
  * Update address related HTML input fields
- * @param {NominatimAddress} chosen_place 
+ * @param {NominatimAddress} chosen_place
  */
 function updateAddressInfo(chosen_place) {
 
   $('.step-2 a').attr('href', '#details');
   $('#step2').removeClass("disabled");
   $('#continue').removeClass("disabled");
-  
+
   $('#addressalt').val(chosen_place.address.road);
   $('#hnumberalt').val(chosen_place.address.house_number);
   $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
@@ -386,7 +386,7 @@ function searchAddress(address_to_find) {
 
   var addressSearchUrl = "https://nominatim.openstreetmap.org/search?" + $.param(qwArgNominatim);
 
-  // handle request - should include a timeout 
+  // handle request - should include a timeout
   return new Promise((resolve, reject) => {
       $.ajax({
           'url': addressSearchUrl,
@@ -408,9 +408,9 @@ function searchAddress(address_to_find) {
   });
 }
 
-/** 
+/**
  * Reverse lookup functionality (promise containing the results)
- * @param {string{}} position 
+ * @param {string{}} position
  * @returns {Promise<NominatimAddress>}
  */
 function searchReverseLookup(position) {
@@ -421,9 +421,9 @@ function searchReverseLookup(position) {
       // leaflet
       latitude = position.lat;
       longitude = position.lon;
-      
+
   } else {
-      // browser (location) navigator 
+      // browser (location) navigator
       latitude = position.coords.latitude;
       longitude = position.coords.longitude;
   }
@@ -472,10 +472,10 @@ function searchReverseLookup(position) {
  */
 
 /**
- * Nominatim address 
- * 
+ * Nominatim address
+ *
  * https://nominatim.org/release-docs/develop/api/Output/#json
- * 
+ *
  * @typedef {object} NominatimAddress
  * @property {string} lon Longitude
  * @property {string} lat Latitude
@@ -486,7 +486,7 @@ function searchReverseLookup(position) {
 
 /**
  * Create a JS object from Nominatim JSON object
- * 
+ *
  * @param {object} nominatimData nominatim data
  * @returns {NominatimAddress} object initialized with Nominatim data
  */
@@ -495,7 +495,7 @@ function parseData(nominatimData) {
   // throw out any type of null values
   if (nominatimData == null) return null;
   if (Array.isArray(nominatimData) && nominatimData.length < 1) return null;
-  
+
   // Nominatim returns an array of possible matches or single object
   const nominatimObject = Array.isArray(nominatimData) ? nominatimData[0] : nominatimData;
 
@@ -522,7 +522,7 @@ function parseData(nominatimData) {
 
 /**
  * Convert [lat, lon|lng] to leaflet [lat, lng]
- * 
+ *
  * @param {Number[]} locationLatLng Map of [lat, lon|lng]
  * @return {Number[]} Map of [lat, lng]
  */
@@ -579,7 +579,7 @@ function getNoteBody() {
 
 
   // add back translation of note header
-  
+
   var note_body = "onosm.org submitted note from a business:\n";
   if ($("#name").val()) note_body += i18n.t('step2.name') + ": " + $("#name").val() + "\n";
   if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
@@ -595,14 +595,14 @@ function getNoteBody() {
   if ($("#category").val()) note_body += i18n.t('step2.catlabel') + ": " + $("#category").val() + "\n";
   if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc') + ": " + $("#categoryalt").val() + "\n";
   if (paymentIds) note_body += i18n.t('step2.payment') + ": " + paymentTexts.join(",") + "\n";
- 
+
   if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "") note_body += " delivery=" + $("#delivery").val() + "\n"; else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "") note_body += "delivery=yes" + "\n"; else if ($('#delivery-check').not(':indeterminate') == true) note_body += "delivery=no" + "\n";
   if ($("#delivery_description").val()) note_body += "delivery:description=" + $("#delivery_description").val() + "\n";
- 
+
   if ($("input:checked[name=takeaway]").val() != "undefined") note_body += "takeaway=" + $("input:checked[name=takeaway]").val() + "\n";
   if ($("#takeaway_description").val()) note_body += "takeaway:description=" + $("#takeaway_description").val() + "\n";
   if ($("input:checked[name=takeaway_covid]").val() == "yes" || $("input:checked[name=takeaway_covid]").val() == "only") note_body += "takeaway:covid19=" + $("input:checked[name=takeaway_covid]").val() + "\n";
- 
+
   if ($("input:checked[name=delivery_covid]").val() === 'Y') note_body += "delivery:covid19=yes\n";
   if ($("#delivery_covid_description").val() || $("#takeaway_covid_description").val()) note_body += "description:covid19=";
   if ($("#delivery_covid_description").val()) note_body += $("#delivery_covid_description").val() + " ";
