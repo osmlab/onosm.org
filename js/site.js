@@ -541,12 +541,21 @@ function getLatLng(locationLatLng) {
 
 $(window).on('hashchange', function () {
   if (location.hash == '#details') {
+    // check if marker location was set
+    if (activeMarkerLatLng == null){
+      location.hash = '';
+    }
+
     $('#collect-data-step').removeClass('d-none');
     $('#address-step').addClass('d-none');
     $('#confirm-step').addClass('d-none');
     $('#step2').addClass('active bg-success');
     $('#step3').removeClass('active bg-success');
   } else if (location.hash == '#done') {
+    // clear global location variables to prevent duplicates
+    activeMarkerLatLng = null
+    activeSearchAddress = null
+
     $('#confirm-step').removeClass('d-none');
     $('#collect-data-step').addClass('d-none');
     $('#address-step').addClass('d-none');
