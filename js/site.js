@@ -1,8 +1,11 @@
 
 //jquery version exposes i18next object for translations
-var i18n = i18next;
+const i18n = i18next;
 
-var successString, manualPosition, loadingText, modalText;
+let successString;
+let manualPosition;
+let loadingText;
+let modalText;
 
 let activeSearchAddress = null;
 let activeMarkerLatLng = null;
@@ -60,14 +63,14 @@ function reloadLists(language) {
 }
 
 /* HERE BE DRAGONS */
-const findme_map = L.map('findme-map')
+const findMe_map = L.map('findme-map')
   .setView([41.69, 12.71], 5),
   osmUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
   osm = L.tileLayer(osmUrl, {
     minZoom: 2,
     maxZoom: 18,
     attribution: "Data &copy; OpenStreetMap contributors"
-  }).addTo(findme_map),
+  }).addTo(findMe_map),
   esri = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   });
@@ -77,19 +80,19 @@ const baseMaps = {
   "Esri WorldImagery": esri
 };
 
-L.control.layers(baseMaps).addTo(findme_map);
+L.control.layers(baseMaps).addTo(findMe_map);
 
 var category_data = [];
 var payment_data = [];
 
-let findme_marker = null;
+let findMe_marker = null;
 
 L.control.locate({
   follow: true
-}).addTo(findme_map);
+}).addTo(findMe_map);
 
-let findme_circle = null;
-let findme_boundingBox = null;
+let findMe_circle = null;
+let findMe_boundingBox = null;
 
 // Bounding box around map
 let circleBoundsVisible = true;
@@ -133,16 +136,16 @@ $("#find").submit(function (e) {
     ]);
 
     // Show marker at returned address
-    if (findme_marker === null) {
-      findme_marker = L.marker(mapLatLng, {
+    if (findMe_marker === null) {
+      findMe_marker = L.marker(mapLatLng, {
         draggable: true
-      }).addTo(findme_map);
+      }).addTo(findMe_map);
 
       /**
        * Geo-fence marker to the bounded region (Marker "drag" event)
        * @param {Object} drag_event
        */
-      findme_marker.on('drag', function(drag_event) {
+      findMe_marker.on('drag', function(drag_event) {
 
         const dragMarkerLocation = drag_event.latlng
         let isInsideRegion = false
@@ -151,7 +154,7 @@ $("#find").submit(function (e) {
 
         if (!circleBoundsVisible) {
           // check if marker is inside the bounding box
-          isInsideRegion = findme_boundingBox._bounds.contains(dragMarkerLocation);
+          isInsideRegion = findMe_boundingBox._bounds.contains(dragMarkerLocation);
         } else {
           // check if marker is inside the circle
           isInsideRegion = isInsideCircle(dragMarkerLocation);
@@ -159,7 +162,7 @@ $("#find").submit(function (e) {
 
         // reset marker to previous position when dragged outside the active bounding box
         if (!isInsideRegion){
-          findme_marker.setLatLng(activeMarkerLatLng);
+          findMe_marker.setLatLng(activeMarkerLatLng);
         }
       });
 
@@ -167,7 +170,7 @@ $("#find").submit(function (e) {
        * Validate new marker location (Marker "drag ended" event)
        * @param {Object} dragged_event
        */
-      findme_marker.on('dragend', function (dragged_event) {
+      findMe_marker.on('dragend', function (dragged_event) {
 
         // update marker position after drag event
         const eventMarkerLocation = dragged_event.target._latlng;
@@ -193,14 +196,14 @@ $("#find").submit(function (e) {
         if (circleBoundsVisible) {
           // Use raw marker position when the circle region is active (skip lookup)
 
-          if (!findme_circle) {
+          if (!findMe_circle) {
             // prevent null reference to circle region
             console.error("unable to check bounds due to missing circle region")
           }
           else if (isInsideCircle(eventMarkerLocation)) {
             // save new valid marker position
-            findme_marker.setLatLng(userEventCoordinates);
-            activeMarkerLatLng = findme_marker.getLatLng();
+            findMe_marker.setLatLng(userEventCoordinates);
+            activeMarkerLatLng = findMe_marker.getLatLng();
           }
 
           return;
@@ -230,7 +233,7 @@ $("#find").submit(function (e) {
               // user location is outside nominatim's bounding box (in a lake or some other bad business location)
               if (!nominatimBounds._bounds.contains(eventMarkerLocation)) {
 
-                if (findme_boundingBox._bounds.contains(nominatimNearbyPosition)) {
+                if (findMe_boundingBox._bounds.contains(nominatimNearbyPosition)) {
                   // use the Nominatim supplied point since the user one is outside the Nominatim bounding box
                   finalMarkerPositionLatLng = Object.assign({}, nominatimNearbyPosition);
 
@@ -268,54 +271,54 @@ $("#find").submit(function (e) {
               $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
 
               // place marker to initial position
-              findme_marker.setLatLng(finalMarkerPositionLatLng);
-              activeMarkerLatLng = findme_marker.getLatLng();
+              findMe_marker.setLatLng(finalMarkerPositionLatLng);
+              activeMarkerLatLng = findMe_marker.getLatLng();
 
               // recenter map on original search location to deter map drifting too much
-              findme_map.panTo(activeMarkerLatLng);
+              findMe_map.panTo(activeMarkerLatLng);
             });
       });
     }
-    activeMarkerLatLng = findme_marker.getLatLng();
+    activeMarkerLatLng = findMe_marker.getLatLng();
 
-    findme_marker.setOpacity(1);
-    findme_marker.setLatLng(mapLatLng);
+    findMe_marker.setOpacity(1);
+    findMe_marker.setLatLng(mapLatLng);
 
     // start saving previous marker location
-    activeMarkerLatLng = findme_marker.getLatLng();
+    activeMarkerLatLng = findMe_marker.getLatLng();
 
     // delete previously created geo-fencing regions
-    if (findme_boundingBox != null) {
-      findme_boundingBox.remove();
-      findme_boundingBox = null;
+    if (findMe_boundingBox != null) {
+      findMe_boundingBox.remove();
+      findMe_boundingBox = null;
     }
-    else if (findme_circle != null) {
-      findme_circle.remove();
-      findme_circle = null;
+    else if (findMe_circle != null) {
+      findMe_circle.remove();
+      findMe_circle = null;
     }
 
     // adjusted circle center to match search results
-    findme_circle = new L.circle(activeMarkerLatLng)
-    .addTo(findme_map)
+    findMe_circle = new L.circle(activeMarkerLatLng)
+    .addTo(findMe_map)
     .setRadius(circleRadiusMeters)
     .setStyle({ opacity: 0 });
 
     // compare default circle to returned bounding box
-    circleBoundsVisible =  !bounds.contains(findme_circle.getBounds());
+    circleBoundsVisible =  !bounds.contains(findMe_circle.getBounds());
 
     if (circleBoundsVisible) {
       // show circle bounding box on map
-      findme_circle.setStyle({ opacity: 1 });
+      findMe_circle.setStyle({ opacity: 1 });
 
     } else {
       // add initial bounding box to map
-      findme_boundingBox = new L.rectangle(bounds)
-        .addTo(findme_map);
+      findMe_boundingBox = new L.rectangle(bounds)
+        .addTo(findMe_map);
     }
 
     // recenter map on found address
     //findme_map.setView(mapLatLng);
-    findme_map.fitBounds(bounds);
+    findMe_map.fitBounds(bounds);
   })
   .catch(e => {
     $("#couldnt-find").show();
@@ -337,13 +340,13 @@ $("#find").submit(function (e) {
  */
 function isInsideCircle(LatLngPoint) {
 
-  if (!findme_circle) {return false}
+  if (!findMe_circle) {return false}
 
   // distance between the current position of the marker and the center of the circle
-  const markerDistance = findme_map.distance(LatLngPoint, findme_circle.getLatLng());
+  const markerDistance = findMe_map.distance(LatLngPoint, findMe_circle.getLatLng());
 
   // the marker is inside the circle when the distance is inferior to the radius
-  return markerDistance < findme_circle.getRadius();
+  return markerDistance < findMe_circle.getRadius();
 }
 
 /**
@@ -559,7 +562,7 @@ $(window).on('hashchange', function () {
     $('#step2').removeClass('active bg-success');
     $('#step3').removeClass('active bg-success');
   }
-  findme_map.invalidateSize();
+  findMe_map.invalidateSize();
 });
 
 // Disables the input if delivery is not checked
@@ -615,7 +618,7 @@ $("#collect-data-done").click(function () {
 
   location.hash = '#done';
 
-  var latlon = findme_marker.getLatLng(),
+  var latlon = findMe_marker.getLatLng(),
     qwarg = {
       lat: latlon.lat,
       lon: latlon.lng,
