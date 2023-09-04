@@ -82,12 +82,7 @@ L.control.layers(baseMaps).addTo(findme_map);
 var category_data = [];
 var payment_data = [];
 
-const findme_marker = L.marker([41.69, 12.71], {
-  draggable: true
-}).addTo(findme_map);
-activeMarkerLatLng = findme_marker.getLatLng();
-
-findme_marker.setOpacity(0);
+let findme_marker = null;
 
 L.control.locate({
   follow: true
@@ -138,6 +133,13 @@ $("#find").submit(function (e) {
     ]);
 
     // Show marker at returned address
+    if (findme_marker === null) {
+      findme_marker = L.marker(mapLatLng, {
+        draggable: true
+      }).addTo(findme_map);
+    }
+    activeMarkerLatLng = findme_marker.getLatLng();
+
     findme_marker.setOpacity(1);
     findme_marker.setLatLng(mapLatLng);
 
