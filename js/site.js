@@ -62,7 +62,7 @@ function reloadLists(language) {
 /* HERE BE DRAGONS */
 const findme_map = L.map('findme-map')
   .setView([41.69, 12.71], 5),
-  osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  osmUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
   osm = L.tileLayer(osmUrl, {
     minZoom: 2,
     maxZoom: 18,
