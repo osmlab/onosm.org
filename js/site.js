@@ -623,21 +623,23 @@ function getNoteBody() {
   return note_body;
 }
 
-$("#collect-data-done").click(function () {
+$("#collect-data-done").click(function (event) {
+  // https://stackoverflow.com/questions/18274383/ajax-post-working-in-chrome-but-not-in-firefox
+  event.preventDefault();
 
   location.hash = '#done';
 
-  var latlon = findMe_marker.getLatLng(),
-    qwarg = {
-      lat: latlon.lat,
-      lon: latlon.lng,
-      text: getNoteBody()
-    };
+  const latLon = findMe_marker.getLatLng();
+  const qwArg = {
+    lat: latLon.lat,
+    lon: latLon.lng,
+    text: getNoteBody()
+  };
 
-  $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function (data) {
+  $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwArg, function (data) {
     // console.log(data);
-    var noteId = data.properties.id;
-    var link = 'https://openstreetmap.org/?note=' + noteId + '#map=19/' + latlon.lat + '/' + latlon.lng + '&layers=N';
+    const noteId = data.properties.id;
+    const link = 'https://openstreetmap.org/?note=' + noteId + '#map=19/' + latLon.lat + '/' + latLon.lng + '&layers=N';
     $("#linkcoords").append('<div class="mt-3 h4"><a href="' + link + '">' + link + '</a></div>');
   });
 });
