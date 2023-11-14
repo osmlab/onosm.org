@@ -54,7 +54,8 @@
 
 <body>
   <div class='container-sm mt-3 mb-5' style='display: inline-block'>
-      <select name='language' id='languageSwitcher'></select>
+    <label for="languageSwitcher" data-i18n="app.languageswitch">select language</label>
+    <select name='language' id='languageSwitcher'></select>
   </div>
   <div class="container-sm mt-3 mb-5">    
     <div class="row">
@@ -79,10 +80,14 @@
         <span id='instructions' class="text-info" for="address" style="font-size: x-large;" data-i18n="step1.desc"></span>
       </div>
       <div class='mb-4 mt-3'>
-        <form id='find' class="input-group  border border-primary shadow-sm rounded">
-          <input class="form-control" id="address" type="search" placeholder='' data-i18n="[placeholder]step1.addr" />
-          <div class="input-group-append">
-            <button class="cbtn btn-primary px-3" id='findme' aria-label="search for address"><span data-i18n="step1.button"></span></button>
+        <form id='find'>
+          <label for="address" data-i18n="step1.addr">look up address</label>
+          <div class="input-group  border border-primary shadow-sm rounded">
+            <input class="form-control" id="address" type="search" placeholder='' data-i18n="[placeholder]step1.addrplaceholder" />
+            <div class="input-group-append">
+              <button class="cbtn btn-primary px-3" id='findme' aria-label="search for address"><span
+                  data-i18n="step1.button"></span></button>
+            </div>
           </div>
         </form>
         <p id="couldnt-find" class="alert alert-danger mt-2" role="alert" style='display: none;' data-i18n="[html]step1.fail"></p>

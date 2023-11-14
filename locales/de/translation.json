@@ -1,13 +1,15 @@
 ﻿{
   "app": {
     "title": "On OpenStreetMap",
+    "languageswitch": "Sprache auswählen: ",
     "desc": "OpenStreetMap ist eine offene, globale Karte, die von Menschen überall auf der Welt zur Navigation und zur Suche nach lokalen Geschäften genutzt wird. Es ist einfach und kostenlos, dass eigene Geschäft auf die Karte zu bringen!",
     "footer": "Quellcode erhältlich auf <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
     "title": "Ort / Adresse",
     "desc": "Beginnen Sie, indem Sie uns die Adresse Ihres Geschäftes nennen.",
-    "addr": "Hauptstraße 11, 10115 Berlin, Deutschland",
+    "addr": "Suchbegriff für Adressen:",
+    "addrplaceholder": "Hauptstraße 11, 10115 Berlin, Deutschland",
     "button": "Finden!",
     "fail": "<strong>Wir konnten Ihre Adresse nicht finden.</strong> Versuchen Sie es nur mit ihrer Straße und Stadt, ohne Hausnummer, noch einmal.",
     "nohousenumber": "Achtung: Wir konnten Ihre Hausnummer nicht finden. Die Position auf der Karte kann ungenau sein, bitte ziehen Sie die Markierung auf die genaue Position Ihres Unternehmens. Wenn die Gebäude nicht auf der Karte angezeigt werden, können Sie mit der Schaltfläche in der oberen rechten Ecke der Karte zur Satellitenansicht wechseln.",
