@@ -2,7 +2,7 @@
   "app": {
     "title": "На карте OpenStreetMap",
     "languageswitch": "Выбрать язык: ",
-    "desc": "OpenStreetMap - это открытая глобальная карта, которой пользуются люди во всём мире для навигации и поска организаций. Попасть на карту можно легко и бесплатно!",
+    "desc": "OpenStreetMap — это открытая глобальная карта, которой пользуются люди во всём мире для навигации и поиска организаций. Попасть на карту можно легко и бесплатно!",
     "footer": "Исходный код доступен на <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
@@ -13,7 +13,7 @@
     "button": "Найти меня!",
     "fail": "<strong>Мы не смогли найти этот адрес.</strong> Попробуйте поискать вашу улицу или город без указания полного адреса.",
     "nohousenumber": "на точное положение вашего предприятия. Если здания в данный момент не отображаются на карте, вы можете переключиться на вид «спутник» с помощью кнопки в правом верхнем углу карты.",
-    "continue": "Продолжать",
+    "continue": "Далее",
     "use_location": "использовать моё текущее положение"
   },
   "step2": {
@@ -89,6 +89,6 @@
     "modalButton": "Закрывать",
     "modalTitle": "Классификация доступности для инвалидных колясок",
     "needsChecking": "needs checking",
-    "credits": "Проект с открытым исходным кодом, разработанный международным сообществом <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridian\"></i>. Внесите свой вклад в этот проект на <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
+    "credits": "Данный проект разработан международным <i class=\"twa twa-globe-with-meridians\"></i> сообществом <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> и имеет открытый исходный код. Внести свой вклад в проект можно на <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   }
 }
