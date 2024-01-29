@@ -122,7 +122,7 @@ $("#find").submit(function (e) {
       updateAddressInfo(activeSearchAddress);
 
       const chosen_place = activeSearchAddress.boundingBox;
-      const bounds = new L.LatLngBounds(
+      let bounds = new L.LatLngBounds(
         [+chosen_place[0], +chosen_place[2]],
         [+chosen_place[1], +chosen_place[3]]);
 
@@ -300,17 +300,21 @@ $("#find").submit(function (e) {
         .setStyle({ opacity: 0 });
 
       // compare default circle to returned bounding box
-      circleBoundsVisible = !bounds.contains(findme_circle.getBounds());
+      circleBoundsVisible = !bounds.intersects(findme_circle.getBounds());
 
       if (circleBoundsVisible) {
         // show circle bounding box on map
         findme_circle.setStyle({ opacity: 1 });
 
-      } else {
-        // add initial bounding box to map
-        findme_boundingBox = new L.rectangle(bounds)
-          .addTo(findme_map);
       }
+      // If the bounds is very small (< 1km on the diagonal), pad the bounds to make it visible
+      if (bounds.getNorthEast().distanceTo(bounds.getSouthWest()) < 1000) {
+        bounds = bounds.pad(0.5);
+      }
+
+      // add initial bounding box to map
+      findme_boundingBox = new L.rectangle(bounds)
+        .addTo(findme_map);
 
       // recenter map on found address
       findme_map.setView(mapLatLng, 14);
