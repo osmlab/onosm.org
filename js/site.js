@@ -591,6 +591,7 @@ function getNoteBody() {
   if ($("#name").val()) note_body += i18n.t('step2.name') + ": " + $("#name").val() + "\n";
   if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
   if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
+  if ($("#placenamealt").val()) note_body += "addr:place=" + $("#placenamealt").val() + "\n";
   if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
   if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
   if ($("#phone").val()) note_body += i18n.t('step2.phone') + ": " + $("#phone").val() + "\n";
