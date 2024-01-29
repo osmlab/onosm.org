@@ -48,6 +48,7 @@ const rerender = () => {
     } else {
         // All other languages should show street before house number
         parent.append(street);
+        parent.append(placename);
         parent.append(hnumber);
         parent.append(city);
         parent.append(postcode);
