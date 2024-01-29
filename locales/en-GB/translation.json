@@ -25,7 +25,7 @@
     "street": "Street",
     "housenumber": "Housenumber",
     "city": "City",
-    "postcode": "Zip",
+    "postcode": "Postcode",
     "addressaltplaceholder": "West Main Street",
     "housenumberplaceholder": "501",
     "cityplaceholder": "Alexandria",
