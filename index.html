@@ -114,7 +114,8 @@
         <p data-i18n="step2.addressalt" class="mt-3"></p>
         <!-- address 1 -->
         <div class="form-row">
-          <div class="form-group col-md-5">
+          <!-- Street -->
+          <div id="streetgroup" class="form-group col-md-5">
             <label for='addressalt' data-i18n="step2.street"></label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -123,7 +124,8 @@
               <input id='addressalt' autocomplete="street-address" type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.addressaltplaceholder" />
             </div>
           </div>
-          <div class="form-group col-md-2">
+          <!-- House number -->
+          <div id="hnumbergroup" class="form-group col-md-2">
             <label for="hnumberalt" data-i18n="step2.housenumber"></label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -132,8 +134,18 @@
               <input type="text" class="form-control" id="hnumberalt" data-i18n="[placeholder]step2.housenumberplaceholder">
             </div>
           </div>
-
-          <div class="form-group col-md-3">
+          <!-- Place name -->
+          <div id="placenamegroup" class="form-group col-md-5">
+            <label for="placenamealt" data-i18n="step2.placename"></label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="twa twa-cityscape"></i></span>
+              </div>
+              <input type="text" class="form-control" id="placenamealt" data-i18n="[placeholder]step2.placenameplaceholder">
+            </div>
+          </div>
+          <!-- City -->
+          <div id="citygroup" class="form-group col-md-3">
             <label for="city" data-i18n="step2.city"></label>
             <div class="input-group">
               <div class="input-group-prepend">
@@ -142,7 +154,8 @@
               <input type="text" class="form-control" id="city" data-i18n="[placeholder]step2.cityplaceholder">
             </div>
           </div>
-          <div class="form-group col-md-2">
+          <!-- Postcode -->
+          <div id="postcodegroup" class="form-group col-md-2">
             <label for="postcode" data-i18n="step2.postcode"></label>
             <div class="input-group">
               <div class="input-group-prepend">
