@@ -82,9 +82,9 @@
     "row4a": "Terug naar beginscherm"
   },
   "messages": {
-    "success": "<strong>Gevonden!</strong> Verplaats de marker zodat hij <strong>precies op je bedrijf</strong> staat.<br />Als je tevreden bent kunnen we beginnen met het <a href='javascript:check_coordinates()'>toevoegen van meer details</a>.",
+    "success": "<strong>Gevonden!</strong> Verplaats de marker zodat hij <strong>precies op je bedrijf</strong> staat.<br />Als je tevreden bent kunnen we beginnen met het toevoegen van meer details.",
     "loadingText": "Zoeken...",
-    "manualPosition": " Je hebt de marker geactiveerd! Klik en sleep het naar de positie van uw bedrijfsplaats, zodat u klaar bent om <a href='#details'>meer details toe te voegen.</a>",
+    "manualPosition": " Je hebt de marker geactiveerd! Klik en sleep het naar de positie van uw bedrijfsplaats, zodat u klaar bent om meer details toe te voegen.",
     "modalButton": "Close",
     "modalTitle": "Classificatie rolstoeltoegankelijkheid",
     "needsChecking": "moet worden gecontroleerd",

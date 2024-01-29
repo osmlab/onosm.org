@@ -1,5 +1,5 @@
 <!DOCTYPE html>
- 
+
 <html lang="en-US">
 
 <head>
@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta charset="UTF-8">
- 
+
   <!-- SELECT 2  CSS-->
   <link rel='stylesheet' type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css" />
   <!-- LEAFLET  CSS-->
@@ -46,17 +46,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/1.3.1/i18nextHttpBackend.min.js"></script>
-
-  <!-- CONFETTI JS -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  
 </head>
 
 <body>
   <div class='container-sm mt-3 mb-5' style='display: inline-block'>
       <select name='language' id='languageSwitcher'></select>
   </div>
-  <div class="container-sm mt-3 mb-5">    
+  <div class="container-sm mt-3 mb-5">
     <div class="row">
       <div class="col">
         <img src='img/osm.png' alt="OpenStreetMap logo" class="mx-auto" />
@@ -260,23 +256,22 @@
           <div class="form-group col">
             <label for='delivery' data-i18n="step2.delivery"></label>
             <div class="input-group">
-            <div class="input-group-prepend">
-   <div class="input-group-text">
-     <div class="custom-control custom-checkbox">
-  <input type="checkbox" class="custom-control-input" id="delivery-check" name="delivery-check">
-
-       <label for="delivery-check" id="label-delivery-check" class="custom-control-label mb-0 ml-2" data-i18n="step2.no"></label>
-</div>
-   </div>
- </div>
-            <input id='delivery' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.deliveryplaceholder" />
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="delivery-check" name="delivery-check">
+                    <label for="delivery-check" id="label-delivery-check" class="custom-control-label mb-0 ml-2" data-i18n="step2.no"></label>
+                  </div>
+                </div>
+              </div>
+              <input id='delivery' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.deliveryplaceholder" />
+            </div>
           </div>
-        </div>
           <div class="form-group col-sm-6">
             <label for='delivery_description' data-i18n="step2.delivery_description"></label>
             <input id='delivery_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.delivery_descriptionplaceholder" />
           </div>
-        </div>        
+        </div>
 
         <hr class="my-3">
         <!-- takeaway -->
@@ -303,7 +298,13 @@
             <label for='takeaway_description' data-i18n="step2.takeaway_description"></label>
             <input id='takeaway_description' type='text' placeholder='' class="form-control" data-i18n="[placeholder]step2.takeaway_descriptionplaceholder" />
           </div>
-        </div>        
+        </div>
+
+        <div class="row">
+          <div class="col">
+              <p id="required_info_alert" class="alert alert-info" role="alert" data-i18n="step2.required"></p>
+          </div>
+        </div>
 
         <button class="btn btn-primary btn-lg w-100 mt-4 text-uppercase" id='collect-data-done' data-i18n="step2.done"></button>
       </form>
@@ -313,8 +314,7 @@
       <p class="h2 text-success mt-3 mb-4" data-i18n="[html]step3.row1"></p>
       <p><span class="h4" data-i18n="step3.row2"></span> <span id='linkcoords'>&nbsp;</span></p>
       <p class="alert alert-info" role="alert" data-i18n="[html]step3.row3"></p>
-      <p><span data-i18n="step3.row4"></span> <a href="#location" onclick="clearFields()" data-i18n="step3.row4a"></a>!
-      </p>
+      <p><span data-i18n="step3.row4"></span> <a href="#location" onclick="clearFields()" data-i18n="step3.row4a"></a>!</p>
 
       <div data-i18n="[html]step3.finalmessage"></div>
     </div>

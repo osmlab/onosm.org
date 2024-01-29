@@ -59,7 +59,6 @@ function reloadLists(language) {
   });
 }
 
-/* HERE BE DRAGONS */
 const findme_map = L.map('findme-map')
   .setView([41.69, 12.71], 5),
   osmUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -79,8 +78,8 @@ const baseMaps = {
 
 L.control.layers(baseMaps).addTo(findme_map);
 
-var category_data = [];
-var payment_data = [];
+let category_data = [];
+let payment_data = [];
 
 let findme_marker = null;
 
@@ -107,7 +106,7 @@ $("#find").submit(function (e) {
   $("#couldnt-find").hide();
 
   // show loading indicator if user input is not empty
-  var address_to_find = $("#address").val();
+  let address_to_find = $("#address").val();
   if (address_to_find.length === 0) return;
 
   $("#findme h4").text(loadingText);
@@ -151,7 +150,7 @@ $("#find").submit(function (e) {
 
           if (!circleBoundsVisible) {
             // check if marker is inside the bounding box
-            isInsideRegion = findme_boundingBox._bounds.contains(dragMarkerLocation);
+            isInsideRegion = findme_boundingBox.getBounds().contains(dragMarkerLocation);
           } else {
             // check if marker is inside the circle
             isInsideRegion = isInsideCircle(dragMarkerLocation);
@@ -228,9 +227,9 @@ $("#find").submit(function (e) {
                 [+nominatim_boundingBox[1], +nominatim_boundingBox[3]]);
 
               // user location is outside nominatim's bounding box (in a lake or some other bad business location)
-              if (!nominatimBounds._bounds.contains(eventMarkerLocation)) {
+              if (!nominatimBounds.contains(eventMarkerLocation)) {
 
-                if (findme_boundingBox._bounds.contains(nominatimNearbyPosition)) {
+                if (findme_boundingBox.getBounds().contains(nominatimNearbyPosition)) {
                   // use the Nominatim supplied point since the user one is outside the Nominatim bounding box
                   finalMarkerPositionLatLng = Object.assign({}, nominatimNearbyPosition);
 
@@ -314,8 +313,7 @@ $("#find").submit(function (e) {
       }
 
       // recenter map on found address
-      //findme_map.setView(mapLatLng);
-      findme_map.fitBounds(bounds);
+      findme_map.setView(mapLatLng, 14);
     })
     .catch(e => {
       $("#couldnt-find").show();
@@ -352,23 +350,24 @@ function isInsideCircle(LatLngPoint) {
  */
 function updateAddressInfo(chosen_place) {
 
-  $('.step-2 a').attr('href', '#details');
-  $('#step2').removeClass("disabled");
-  $('#continue').removeClass("disabled");
+  $("#map-information").html(successString);
+  $("#map-information").show();
 
   $('#addressalt').val(chosen_place.address.road);
   $('#hnumberalt').val(chosen_place.address.house_number);
   $('#city').val(chosen_place.address.village || chosen_place.address.town || chosen_place.address.city);
   $('#postcode').val(chosen_place.address.postcode);
   $("#address").val(chosen_place.display_name);
-  $("#map-information").html(successString);
-  $("#map-information").show();
   if (!chosen_place.address.house_number) {
     $("#map-information").append('<hr> <i class="twa twa-warning"></i> ' + i18n.t('step1.nohousenumber'));
+  } else {
+    $('#step2').removeClass("disabled");
+    $('.step-2 a').attr('href', '#details');
+    $('#continue').removeClass("disabled");
+    $("#address").addClass("is-valid");
+    $("#address").removeClass("is-invalid");
   }
 
-  $("#address").addClass("is-valid");
-  $("#address").removeClass("is-invalid");
 }
 
 /**
@@ -556,11 +555,12 @@ $(window).on('hashchange', function () {
     activeMarkerLatLng = null
     activeSearchAddress = null
 
+    clearFields();
     $('#confirm-step').removeClass('d-none');
     $('#collect-data-step').addClass('d-none');
     $('#address-step').addClass('d-none');
     $('#step3').addClass('active bg-success');
-    //confetti.start(1000);
+    $('#required_info_alert').addClass('alert-info').removeClass('alert-danger');
   } else {
     $('#address-step').removeClass('d-none');
     $('#collect-data-step').addClass('d-none');
@@ -587,9 +587,6 @@ function getNoteBody() {
     paymentTexts.push(e.text);
   });
 
-
-  // add back translation of note header
-
   var note_body = "onosm.org submitted note from a business:\n";
   if ($("#name").val()) note_body += i18n.t('step2.name') + ": " + $("#name").val() + "\n";
   if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
@@ -607,28 +604,42 @@ function getNoteBody() {
   if (paymentIds) note_body += i18n.t('step2.payment') + ": " + paymentTexts.join(",") + "\n";
 
   // delivery
-  if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "") 
-    note_body += `delivery=${$("#delivery").val()}\n`; 
-  else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "") 
-    note_body += "delivery=yes\n"; 
-  else if ($('#delivery-check').not(':indeterminate') == true) 
+  if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "")
+    note_body += `delivery=${$("#delivery").val()}\n`;
+  else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "")
+    note_body += "delivery=yes\n";
+  else if ($('#delivery-check').not(':indeterminate') == true)
     note_body += "delivery=no\n";
 
   if ($("#delivery_description").val()) note_body += `delivery:description=${$("#delivery_description").val()}\n`;
 
   // take-away
-  if ($("input:checked[name=takeaway]").val() != "undefined") 
+  if ($("input:checked[name=takeaway]").val())
     note_body += `takeaway=${$("input:checked[name=takeaway]").val()}\n`;
-  if ($("#takeaway_description").val()) 
+  if ($("#takeaway_description").val())
     note_body += `takeaway:description=${$("#takeaway_description").val()}\n`;
 
   return note_body;
 }
 
+// hasMinimumData returns true if the form has the minimum data required to create a note.
+// We want to see at least a name, a city, and a category/description.
+function hasMinimumData() {
+  return $("#name").val() && $("#city").val() && ($("#category").val() || $("#categoryalt").val());
+}
+
 $("#collect-data-done").click(function (event) {
   // https://stackoverflow.com/questions/18274383/ajax-post-working-in-chrome-but-not-in-firefox
   event.preventDefault();
-  
+
+  // Don't submit if the form is invalid
+  if (!hasMinimumData()) {
+    event.stopPropagation();
+    $("#required_info_alert").removeClass("alert-info");
+    $("#required_info_alert").addClass("alert-danger");
+    return;
+  }
+
   location.hash = '#done';
 
   var latlon = findme_marker.getLatLng(),
