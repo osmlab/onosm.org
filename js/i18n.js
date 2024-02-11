@@ -9,7 +9,9 @@ const lngs = {
     'nb-NO': { nativeName: 'Norsk (NO)' },
     nl: { nativeName: 'Nederlandse Standaard (NL)' },
     'pt-BR': { nativeName: 'Português (BR)' },
-    'ru-RU': { nativeName: 'русский язык (RU)' }
+    'ru-RU': { nativeName: 'русский язык (RU)' },
+    'fa-IR': { nativeName: 'فارسی (FA)' }
+
 };
 
 const rerender = () => {

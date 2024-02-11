@@ -1,0 +1,8 @@
+[
+  { "id": "payment:cash=yes", "text": "نقد" },
+  { "id": "payment:cheque=yes", "text": "چک" },
+  { "id": "payment:wire_transfer=yes", "text": "کارت به کارت" },
+  { "id": "payment:sms=yes", "text": "اس‌ام‌اس" },
+  { "id": "payment:mobile_phone=yes", "text": "همراه بانک" },
+  { "id": "payment:bitcoin=yes", "text": "بیت‌کوین" }
+]
