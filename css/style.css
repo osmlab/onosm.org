@@ -20,6 +20,10 @@ input[type=number] {
   height: 38px;
 }
 
+* {
+  text-align: start;
+}
+
 /* <<<<<<< HEAD
 h3 {
   font-size:20px;
