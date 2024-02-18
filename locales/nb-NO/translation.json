@@ -86,9 +86,9 @@
     "row4a": "Tilbake til start"
   },
   "messages": {
-    "success": "<strong>Fant den!</strong> Flytt markøren slik at den står<strong>nøyaktig på bedriften din</strong>.<br />Når du er fornøyd, kan vi starte med å <a href='javascript:check_coordinates()'>legge til noen flere detaljer</a>.",
+    "success": "<strong>Fant den!</strong> Flytt markøren slik at den står<strong>nøyaktig på bedriften din</strong>.<br />Når du er fornøyd, kan vi starte med å legge til noen flere detaljer.",
     "loadingText": "Leter...",
-    "manualPosition": " Du har aktivert markøren! Klikk og dra den til bedriftens plassering, slik at du er klar til å <a href='#details'>legge til flere detaljer.</a>",
+    "manualPosition": " Du har aktivert markøren! Klikk og dra den til bedriftens plassering, slik at du er klar til å legge til flere detaljer.",
     "modalButton": "Lukk",
     "modalTitle": "Klassifisering for rullestoltilgjengelighet",
     "needsChecking": "må sjekkes",

@@ -93,13 +93,13 @@
     "row4a": "Zurück zum Startbildschirm"
   },
   "messages": {
-    "success": "<strong>Gefunden!</strong> Verschieben Sie die Markierung bis sie <strong>exakt an der Position Ihres Geschäfts liegt</strong>.<br />Wenn Sie zufrieden sind, können wir damit beginnen weitere <a href='#details'>Details hinzuzufügen</a>.",
+    "success": "<strong>Gefunden!</strong> Verschieben Sie die Markierung bis sie <strong>exakt an der Position Ihres Geschäfts liegt</strong>.<br />Wenn Sie zufrieden sind, können wir damit beginnen weitere Details hinzuzufügen.",
     "loadingText": "Suche…",
-    "manualPosition": " Sie haben die Markierung aktiviert! Klicken Sie darauf und ziehen Sie es auf die Position Ihres Geschäfts, sodass Sie bereit sind, <a href='#details'>weitere Details hinzuzufügen.</a>",
+    "manualPosition": " Sie haben die Markierung aktiviert! Klicken Sie darauf und ziehen Sie es auf die Position Ihres Geschäfts, sodass Sie bereit sind, weitere Details hinzuzufügen.",
     "modalButton": "Schließen",
     "modalTitle": "Klassifizierung für Rollstuhlgängigkeit",
     "needsChecking": "muss überprüft werden",
-    "credits": "Ein Open-Source-Projekt der weltweiten <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-Community <i class=\"twa twa-globe-with-meridians\"></i>. Unterstützen Sie das Projekt auf <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."    
+    "credits": "Ein Open-Source-Projekt der weltweiten <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a>-Community <i class=\"twa twa-globe-with-meridians\"></i>. Unterstützen Sie das Projekt auf <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
   },
   "validation": {
     "missingCategory": "Bitte wählen Sie mindestens eine Kategorie aus.",

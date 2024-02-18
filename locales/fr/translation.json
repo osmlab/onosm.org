@@ -85,9 +85,9 @@
     "row4a": "Retourner à l'écran d'accueil"
   },
   "messages": {
-    "success": "<strong>Trouvé!</strong> Déplacez le marqueur jusqu'à l'emplacement précis de votre établissement</strong>.<br />Puis, <a href='#details'>ajoutons plus de détails</a>.",
+    "success": "<strong>Trouvé!</strong> Déplacez le marqueur jusqu'à l'emplacement précis de votre établissement</strong>.<br />Puis, ajoutons plus de détails.",
     "loadingText": "Recherche en cours…",
-    "manualPosition": " Vous avez activé le marqueur ! Cliquez dessus et faites-le glisser sur votre emplacement commercial pour être prêt à <a href='#details'>ajouter plus de détails.</a>",
+    "manualPosition": " Vous avez activé le marqueur ! Cliquez dessus et faites-le glisser sur votre emplacement commercial pour être prêt à ajouter plus de détails.",
     "modalButton": "Proche",
     "modalTitle": "Classification d'accessibilité en fauteuil roulant",
     "needsChecking": "doit être vérifié",

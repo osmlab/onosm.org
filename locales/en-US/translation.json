@@ -11,12 +11,13 @@
     "addrplaceholder": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",
     "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address.",
-    "nohousenumber": "Warning: we were unable to find your house number. The position on the map could be inaccurate, please drag the marker on the exact position of your business. If the buildings are not currently shown on the map, you could switch to the 'satellite' view using the button at the top right corner of the map.",
+    "nohousenumber": "Warning: we were unable to find your house number. The position on the map could be inaccurate, please zoom in and drag the marker on the exact position of your business. If the buildings are not currently shown on the map, you could switch to the 'satellite' view using the button at the top right corner of the map.",
     "continue": "Continue"
   },
   "step2": {
     "title": "Details",
     "desc": "We found it! Now fill in the details about your business.",
+    "required": "We require at least a name, category, and address to add your business to the map.",
     "catlabel": "Category",
     "catplaceholder": "Pick a category...",
     "catalt": "If you don't find a category that suits you, please add further details here.",
@@ -24,10 +25,12 @@
     "cataltdesc": "Description",
     "addressalt": "Help us by filling the complete address (housenumber, post code) or improving the previous one",
     "street": "Street",
+    "placename": "Place Name",
     "housenumber": "Housenumber",
     "city": "City",
-    "postcode": "Zip",
+    "postcode": "Zipcode",
     "addressaltplaceholder": "West Main Street",
+    "placenameplaceholder": "Woods Village",
     "housenumberplaceholder": "501",
     "cityplaceholder": "Alexandria",
     "postcodeplaceholder": "50023",
@@ -77,7 +80,7 @@
     "row4a": "Back to initial screen"
   },
   "messages": {
-    "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to <a href='javascript:check_coordinates()'>add more details</a>.",
+    "success": "<strong>Found it!</strong> Move the marker until it is <strong>exactly on your business</strong>.<br />When you are happy, we can start to add more details.",
     "loadingText": "Searching..."
   },
   "validation": {

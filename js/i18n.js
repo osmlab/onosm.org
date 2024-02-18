@@ -9,7 +9,9 @@ const lngs = {
     'nb-NO': { nativeName: 'Norsk (NO)' },
     nl: { nativeName: 'Nederlandse Standaard (NL)' },
     'pt-BR': { nativeName: 'Português (BR)' },
-    'ru-RU': { nativeName: 'русский язык (RU)' }
+    'ru-RU': { nativeName: 'русский язык (RU)' },
+    'fa-IR': { nativeName: 'فارسی (FA)' }
+
 };
 
 const rerender = () => {
@@ -19,7 +21,7 @@ const rerender = () => {
     // may have to fix this??
     reloadLists(i18next.resolvedLanguage);
 
-    // these translations won't get re-copied to their current controls 
+    // these translations won't get re-copied to their current controls
     successString = i18n.t('messages.success', {
         escapeInterpolation: false
     });
@@ -30,6 +32,29 @@ const rerender = () => {
     modalText = {};
     modalText.text = i18n.t('messages.modalTitle');
     modalText.button = i18n.t('messages.modalButton');
+
+    // Move the address fields around to match the localization
+    let parent = $('#hnumbergroup').parent();
+    let hnumber = $('#hnumbergroup').clone();
+    let street = $('#streetgroup').clone();
+    let placename = $('#placenamegroup').clone();
+    let city = $('#citygroup').clone();
+    let postcode = $('#postcodegroup').clone();
+    parent.empty()
+    if (i18next.resolvedLanguage === 'en-US') {
+        // US English should show house number before street name and hide place name
+        parent.append(hnumber);
+        parent.append(street);
+        parent.append(city);
+        parent.append(postcode);
+    } else {
+        // All other languages should show street before house number
+        parent.append(street);
+        parent.append(placename);
+        parent.append(hnumber);
+        parent.append(city);
+        parent.append(postcode);
+    }
 
     $('body').localize();
 };
@@ -74,5 +99,5 @@ $(function () {
 
             rerender();
             if (err) return console.error(err);
-        });   
-});   
+        });
+});

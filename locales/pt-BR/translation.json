@@ -85,9 +85,9 @@
     "row4a": "Volte à tela inicial"
   },
   "messages": {
-    "success": "Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para <a href=\"#details\">adicionar à nossa lista os detalhes de sua empresa</a>.",
+    "success": "Encontramos! Clique e arraste o marcador para o local do seu negócio, então você estará pronto para adicionar à nossa lista os detalhes de sua empresa.",
     "loadingText": "Localizando...",
-    "manualPosition": " Você ativou o marcador! Clique e arraste-o para a posição do seu local de negócios, assim você estará pronto para <a href='#details'>adicionar mais detalhes.</a>",
+    "manualPosition": " Você ativou o marcador! Clique e arraste-o para a posição do seu local de negócios, assim você estará pronto para adicionar mais detalhes.",
     "modalButton": "Perto",
     "modalTitle": "Classificação de acessibilidade para cadeiras de rodas",
     "needsChecking": "precisa de verificação",
