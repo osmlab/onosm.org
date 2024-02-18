@@ -1,13 +1,15 @@
 ﻿{
   "app": {
     "title": "On OpenStreetMap",
+    "languageswitch": "Select language: ",
     "desc": "OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses.<br/> It's easy and free to add your business to the map!",
     "footer": "Source code available on <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Location",
     "desc": "Start by telling us where your business is located.",
-    "addr": "501 West Main Street, Alexandria, VA",
+    "addr": "Address search string:",
+    "addrplaceholder": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",
     "fail": "<strong>We couldn't find your address.</strong> Try searching for your street or city without the address.",
     "nohousenumber": "Warning: we were unable to find your house number. The position on the map could be inaccurate, please zoom in and drag the marker on the exact position of your business. If the buildings are not currently shown on the map, you could switch to the 'satellite' view using the button at the top right corner of the map.",

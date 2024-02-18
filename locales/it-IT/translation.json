@@ -1,12 +1,14 @@
 ﻿{
   "app": {
     "title": "Su OpenStreetMap",
+    "languageswitch": "Seleziona lingua: ",
     "desc": "OpenStreetMap è una mappa libera e globale usata ogni giorno da milioni di persone in tutto il mondo per navigare e cercare attività commerciali del posto. La mappa è usata e mostrata anche da alcuni dei più importanti siti e servizi web come Facebook, Apple, Amazon, Microsoft, Kamoot, Tripadvisor, Foursquare, Wikipedia ecc; non lasciarti quindi sfuggire l'occasione di mostrare a tutto il mondo la tua attività; L'inserimento della tua attività sulla mappa è semplicissimo ed è completamente gratuito! Perchè non approfittare?"
   },
   "step1": {
     "title": "Posizione",
     "desc": "Inizia col dirci dove è posizionata la tua attività commerciale.",
-    "addr": "Corso Europa, Genova",
+    "addr": "Stringa di ricerca dell'indirizzo:",
+    "addrplaceholder": "Corso Europa, Genova",
     "button": "Cercami!",
     "fail": "<strong>Non siamo riusciti a trovare il tuo indirizzo.</strong> Prova a cercare la tua strada o città con meno dettagli.",
     "nohousenumber": "Attenzione: non è stato possibile rilevare il numero civico. La posizione sulla mappa non è accurata, trascina l'indicatore sulla posizione esatta. Se gli edifici non sono ancora presenti, puoi cambiare la visualizzazione in 'satellite' utilizzando il pulsante in alto a destra sulla mappa.",

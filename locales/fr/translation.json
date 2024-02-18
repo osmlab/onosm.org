@@ -1,13 +1,15 @@
 {
   "app": {
     "title": "Sur OpenStreetMap",
+    "languageswitch": "Sélectionner une langue:",
     "desc": "OpenStreetMap produit une carte libre, ouverte et mondiale. Elle permet à quiconque de se guider et de trouver des commerces et entreprises près de chez soi. C'est facile et gratuit de se placer sur la carte!",
     "footer": "Le code source est disponible sur <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Emplacement",
     "desc": "Pour commencer, où se trouve votre commerce ou entreprise?",
-    "addr": "123 rue du Boulevard de l'Avenue, Beau Village, Pays",
+    "addr": "Osoitteen hakumerkkijono:",
+    "addrplaceholder": "123 rue du Boulevard de l'Avenue, Beau Village, Pays",
     "button": "Chercher cette adresse",
     "fail": "<strong>L'adresse exacte n'a pas été trouvée.</strong> Veuillez réessayer en indiquant seulement la rue ou la ville.",
     "use_location": "Trouvez votre position actuelle!",

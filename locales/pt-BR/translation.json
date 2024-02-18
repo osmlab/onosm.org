@@ -1,13 +1,15 @@
 {
   "app": {
     "title": "Coloque seu empreendimento no mapa!",
+    "languageswitch": "Selecionar idioma: ",
     "desc": "OpenStreetMap é um mapa global de dados abertos, usado por pessoas de todo o mundo para navegar por GPS e achar empresas locais. É fácil e gratuito aparecer no mapa!",
     "footer": "Código-fonte disponível no <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
     "title": "Localização",
     "desc": "Comece nos dizendo onde o seu negócio está localizado.",
-    "addr": "Barra da Tijuca, Rio de Janeiro",
+    "addr": "Cadeia de pesquisa de endereço:",
+    "addrplaceholder": "Barra da Tijuca, Rio de Janeiro",
     "button": "Localizar",
     "fail": "<strong>Não conseguimos encontrar seu endereço.</strong> Experimente pesquisar por sua rua ou cidade escrevendo menos detalhes.",
     "nohousenumber": "Aviso: não foi possível encontrar o número da sua casa. A posição no mapa pode ser imprecisa, por favor, arraste o marcador na posição exata da sua empresa. Se os prédios não estiverem sendo exibidos no mapa, você pode alternar para a visualização 'satélite' usando o botão no canto superior direito do mapa.",

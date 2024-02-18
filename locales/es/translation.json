@@ -1,12 +1,14 @@
 ﻿{
   "app": {
+    "languageswitch": "Seleccionar idioma: ",
     "title": "En OpenStreetMap",
     "desc": "OpenStreetMap es un mapa global abierto utilizado por personas de todo el mundo para navegar y encontrar negocios locales. ¡Es fácil y gratis entrar en el mapa!"
   },
   "step1": {
     "title": "Ubicación",
     "desc": "Empiece por decirnos dónde se encuentra su negocio.",
-    "addr": "Avenida América, España",
+    "addr": "Cadena de búsqueda de direcciones:",
+    "addrplaceholder": "Avenida América, España",
     "button": "Buscar esta dirección",
     "fail": "<strong>No pudimos encontrar su dirección.</strong> Intente buscar su calle o ciudad sin la dirección.",
     "nohousenumber": "Advertencia: no pudimos encontrar el número de su casa. La posición en el mapa podría ser inexacta, arrastre el marcador a la posición exacta de su empresa. Si los edificios no se muestran actualmente en el mapa, puede cambiar a la vista 'satélite' usando el botón en la esquina superior derecha del mapa.",

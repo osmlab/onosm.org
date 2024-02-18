@@ -1,13 +1,15 @@
 {
   "app": {
     "title": "Op OpenStreetMap",
+    "languageswitch": "Taal selecteren: ",
     "desc": "OpenStreetMap is een open wereldkaart gebruikt door mensen wereldwijd om te navigeren en lokale bedrijven te vinden.<br/> Het is makkelijk en gratis om jouw bedrijf aan de kaart toe te voegen!",
     "footer": "Broncode is beschikbaar op <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Locatie",
     "desc": "Begin door ons te zeggen waar je bedrijf gevestigd is.",
-    "addr": "Singel 1, Baarle-Nassau",
+    "addr": "Zoekreeks voor adressen:",
+    "addrplaceholder": "Singel 1, Baarle-Nassau",
     "button": "Vind me!",
     "fail": "<strong>We konden je adres niet vinden.</strong> Probeer te zoeken naar je straat of plaats.",
     "nohousenumber": "Waarschuwing: we konden uw huisnummer niet vinden. De positie op de kaart kan onnauwkeurig zijn. Sleep de markering naar de exacte positie van uw bedrijf. Als de gebouwen momenteel niet op de kaart worden weergegeven, kunt u overschakelen naar de 'satelliet'-weergave met behulp van de knop in de rechterbovenhoek van de kaart.",
