@@ -8,6 +8,7 @@ const lngs = {
     fr: { nativeName: 'Français' },
     'nb-NO': { nativeName: 'Norsk (NO)' },
     nl: { nativeName: 'Nederlandse Standaard (NL)' },
+    pl: { nativeName: 'polski (PL)' },
     'pt-BR': { nativeName: 'Português (BR)' },
     'ru-RU': { nativeName: 'русский язык (RU)' },
     'fa-IR': { nativeName: 'فارسی (FA)' }
