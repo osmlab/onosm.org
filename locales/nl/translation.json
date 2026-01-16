@@ -23,6 +23,7 @@
     "addressalt": "Help ons door het volledige adres in te vullen (huisnummer, postcode) of de vorige te verbeteren",
     "cataltdesc": "Beschrijving",
     "street": "Straat",
+    "placename": "plaatsnaam",
     "housenumber": "Huisnummer",
     "city": "Stad",
     "postcode": "Postcode",
@@ -46,11 +47,11 @@
     "imgalt": "Aanvullende informatie over rolstoeltoegankelijkheid",
     "website": "Website",
     "websiteplaceholder": "https://www.voorbeeld.nl/",
-    "social": "Social Network",
+    "social": "Sociale media",
     "socialplaceholder": "@OpenStreetMap or https://www.facebook.com/OpenStreetMap",
-    "payment": "Accepted payment methods",
+    "payment": "betaalmogelijkheden",
     "paymentplaceholder": "Kies een optie",
-    "delivery": "Is there a delivery service?",
+    "delivery": "Is er een bezorgservice?",
     "deliveryplaceholder": "Ja/Nee/ma-vr 19.00 tot 21.00 uur",
     "deliverydesc": "Levering",
     "delivery_description": "Gegevens bezorgservice",
@@ -71,7 +72,7 @@
     "yes": "Ja",
     "no": "Nee",
     "done": "Klaar!",
-    "wheelmodal": "<h2>Onbeperkte toegang</h2><p><ul><li>De <b>ingang</b> is traploos</li><li> Alle <b>kamers</b> zijn traploos</b> li><li> De <b>badkamer</b> (indien van toepassing) is toegankelijk en cabine is breed genoeg voor een rolstoel naast het toilet</li></ul></p><h2>Gedeeltelijke toegang </h2><p><ul><li>De <b>ingang</b> heeft een trede maar niet hoger dan 7 cm / 3 inch ('handbreedte')</li><li> De belangrijkste <b>kamers</b> zijn rolstoeltoegankelijk</li><li> De <b>badkamer</b> (indien van toepassing) is niet toegankelijk</li></ul></p>< h2>Geen onbeperkte toegang</h2><p><ul><li>De <b>entree</b> heeft een trede hoger dan 7 cm</li><li> De belangrijke <b>kamers </b> zijn niet toegankelijk</li><li> De <b>badkamer</b> (indien van toepassing) is niet toegankelijk</li></ul></p><h2>Onbekende toegang</h2 ><p>Kies deze optie als u het niet zeker weet of geen informatie heeft.</p>"
+    "wheelmodal": "<h2>Onbeperkte toegang</h2><p><ul><li>De <b>ingang</b> is traploos</li><li> Alle <b>kamers</b> zijn traploos</li><li> De <b>badkamer</b> (indien van toepassing) is toegankelijk en cabine is breed genoeg voor een rolstoel naast het toilet</li></ul></p><h2>Gedeeltelijke toegang </h2><p><ul><li>De <b>ingang</b> heeft een trede maar niet hoger dan 7 cm / 3 inch ('handbreedte')</li><li> De belangrijkste <b>kamers</b> zijn rolstoeltoegankelijk</li><li> De <b>badkamer</b> (indien van toepassing) is niet toegankelijk</li></ul></p><h2>Geen onbeperkte toegang</h2><p><ul><li>De <b>entree</b> heeft een trede hoger dan 7 cm</li><li> De belangrijke <b>kamers </b> zijn niet toegankelijk</li><li> De <b>badkamer</b> (indien van toepassing) is niet toegankelijk</li></ul></p><h2>Onbekende toegang</h2 ><p>Kies deze optie als u het niet zeker weet of geen informatie heeft.</p>"
   },
   "step3": {
     "title": "Klaar",
@@ -85,7 +86,7 @@
     "success": "<strong>Gevonden!</strong> Verplaats de marker zodat hij <strong>precies op je bedrijf</strong> staat.<br />Als je tevreden bent kunnen we beginnen met het toevoegen van meer details.",
     "loadingText": "Zoeken...",
     "manualPosition": " Je hebt de marker geactiveerd! Klik en sleep het naar de positie van uw bedrijfsplaats, zodat u klaar bent om meer details toe te voegen.",
-    "modalButton": "Close",
+    "modalButton": "Sluiten",
     "modalTitle": "Classificatie rolstoeltoegankelijkheid",
     "needsChecking": "moet worden gecontroleerd",
     "credits": "Een open source project ontwikkeld door de wereldwijde <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> gemeenschap <i class=\"twa twee-globe-met-meridianen\"></i>. Draag bij aan dit project op <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
