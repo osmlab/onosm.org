@@ -2,7 +2,7 @@
 {"id": "payment:cash=yes", "text": "Penger"},
 {"id": "payment:cheque=yes", "text": "Kryss av"},
 {"id": "payment:wire_transfer=yes", "text": "Bankoverføring"},
-{"id": "payment:bancomat=yes", "text": "bankkort"},
+{"id": "payment:debit_cards=yes", "text": "bankkort"},
 {"id": "payment:american_express=yes", "text": "American Express"},
 {"id": "payment:mastercard=yes", "text": "Mastercard"},
 {"id": "payment:visa=yes", "text": "Visum"},

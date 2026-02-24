@@ -2,7 +2,7 @@
 {"id": "payment:cash=yes", "text": "En espèces"},
 {"id": "payment:cheque=yes", "text": "Chèque"},
 {"id": "payment:wire_transfer=yes", "text": "Virement bancaire"},
-{"id": "payment:bancomat=yes", "text": "carte bancaire"},
+{"id": "payment:debit_cards=yes", "text": "carte bancaire"},
 {"id": "payment:american_express=yes", "text": "American Express"},
 {"id": "payment:mastercard=yes", "text": "MasterCard"},
 {"id": "payment:visa=yes", "text": "Visa"},

@@ -2,7 +2,7 @@
 {"id": "payment:cash=yes", "text": "Contant geld"},
 {"id": "payment:cheque=yes", "text": "Controleren"},
 {"id": "payment:wire_transfer=yes", "text": "Overschrijving"},
-{"id": "payment:bancomat=yes", "text": "bankpas"},
+{"id": "payment:debit_cards=yes", "text": "bankpas"},
 {"id": "payment:american_express=yes", "text": "American Express"},
 {"id": "payment:mastercard=yes", "text": "MasterCard"},
 {"id": "payment:visa=yes", "text": "Visa"},
