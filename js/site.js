@@ -592,21 +592,17 @@ function getNoteBody() {
   });
 
   var note_body = "onosm.org submitted note from a business:\n";
-  if ($("#name").val()) note_body += i18n.t('step2.name') + ": " + $("#name").val() + "\n";
+  if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
   if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
   if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
   if ($("#placenamealt").val()) note_body += "addr:place=" + $("#placenamealt").val() + "\n";
   if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
   if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
-  if ($("#phone").val()) note_body += i18n.t('step2.phone') + ": " + $("#phone").val() + "\n";
+  if ($("#phone").val()) note_body += "phone=" + $("#phone").val() + "\n";
   // fixme - this should be default to an empty string or be escaped
-  if ($("#website").val()) note_body += i18n.t('step2.website') + ": " + $("#website").val() + "\n";
-  if ($("#social").val()) note_body += i18n.t('step2.social') + ": " + $("#social").val() + "\n";
-  if ($("#opening_hours").val()) note_body += i18n.t('step2.opening') + ": " + $("#opening_hours").val() + "\n";
-  if ($("#wheel").val()) note_body += i18n.t('step2.wheel') + ": " + $("#wheel").val() + "\n";
-  if ($("#category").val()) note_body += i18n.t('step2.catlabel') + ": " + $("#category").val() + "\n";
-  if ($("#categoryalt").val()) note_body += i18n.t('step2.cataltdesc') + ": " + $("#categoryalt").val() + "\n";
-  if (paymentIds) note_body += i18n.t('step2.payment') + ": " + paymentTexts.join(",") + "\n";
+  if ($("#website").val()) note_body += "website=" + $("#website").val() + "\n";
+  if ($("#opening_hours").val()) note_body += "opening_hours=" + $("#opening_hours").val() + "\n";
+  if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
 
   // delivery
   if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "")
