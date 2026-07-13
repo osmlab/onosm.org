@@ -1,11 +1,13 @@
 ﻿{
   "app": {
     "title": "På OpenStreetMap",
+    "languageswitch": "Velg språk: ",
     "desc": "OpenStreetMap er et åpent, globalt kart brukt av folk over hele verden til å navigere og finne lokale bedrifter.<br/> Det er enkelt og gratis å legge til bedriften din på kartet!",
     "footer": "Kildekoden er tilgjengelig på <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Plassering",
+    "addrlabel": "Adresse",
     "desc": "Start ved å fortelle oss hvor bedriften din er.",
     "addr": "Storgata 17, Oslo, Norge",
     "button": "Finn meg!",

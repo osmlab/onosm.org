@@ -1,11 +1,13 @@
 ﻿{
   "app": {
     "title": "Na OpenStreetMap",
+    "languageswitch": "Wybierz język: ",
     "desc": "OpenStreetMap to otwarta, globalna mapa używana przez ludzi dookoła świata do nawigacji i szukania lokalnych biznesów. Dodanie swojej firmy do mapy jest proste i bezpłatne!",
     "footer": "Kod źródłowy strony jest dostępny w serwisie <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
     "title": "Lokalizacja",
+    "addrlabel": "Adres",
     "desc": "Zacznij od wskazania nam gdzie znajduje się twój biznes.",
     "addr": "Plac Defilad 1, 00-110 Warszawa",
     "button": "Znajdź mnie!",

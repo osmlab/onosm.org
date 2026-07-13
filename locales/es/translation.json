@@ -1,10 +1,12 @@
 ﻿{
   "app": {
     "title": "En OpenStreetMap",
+    "languageswitch": "Seleccionar idioma: ",
     "desc": "OpenStreetMap es un mapa global abierto utilizado por personas de todo el mundo para navegar y encontrar negocios locales. ¡Es fácil y gratis entrar en el mapa!"
   },
   "step1": {
     "title": "Ubicación",
+    "addrlabel": "Dirección",
     "desc": "Empiece por decirnos dónde se encuentra su negocio.",
     "addr": "Avenida América, España",
     "button": "Buscar esta dirección",
