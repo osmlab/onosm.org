@@ -12,18 +12,18 @@ const circleRadiusMeters = 50;
 function reloadLists(language) {
 
   $.getJSON('./locales/' + language + '/categories.json')
-    .success(function (data) {
+    .done(function (data) {
       category_data = data;
     })
     .fail(function () {
       // 404? Fall back to en-US
       $.getJSON('./locales/en-US/categories.json')
-        .success(function (data) {
+        .done(function (data) {
           category_data = data;
         });
     });
 
-  $.getJSON('./locales/' + language + '/payment.json').success(function (data) {
+  $.getJSON('./locales/' + language + '/payment.json').done(function (data) {
     payment_data = data;
   });
 
@@ -390,7 +390,6 @@ function searchAddress(address_to_find) {
 
   var addressSearchUrl = "https://nominatim.openstreetmap.org/search?" + $.param(qwArgNominatim);
 
-  // handle request - should include a timeout
   return new Promise((resolve, reject) => {
     $.ajax({
       'url': addressSearchUrl,
@@ -406,8 +405,8 @@ function searchAddress(address_to_find) {
       'error': function (error) {
         reject(error);
       },
-      'dataType': 'jsonp',
-      'jsonp': 'json_callback'
+      'dataType': 'json',
+      'timeout': 10000
     });
   });
 }
@@ -464,8 +463,8 @@ function searchReverseLookup(position) {
       'error': function (error) {
         reject(error);
       },
-      'dataType': 'jsonp',
-      'jsonp': 'json_callback'
+      'dataType': 'json',
+      'timeout': 10000
     });
   });
 }
@@ -583,6 +582,13 @@ function deliveryCheck() { if (this.checked) { enableDelivery(); } else { disabl
 function disableDelivery() { $("#delivery").attr("disabled", true); $("#delivery_description").attr("disabled", true); $("#label-delivery-check").html(i18n.t('step2.no')); }
 function enableDelivery() { $("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#label-delivery-check").html(i18n.t('step2.yes')); }
 
+// fieldValue returns the trimmed value of the given input with any line
+// breaks collapsed to spaces, so a multi-line value can't masquerade as
+// additional key=value lines in the note body.
+function fieldValue(selector) {
+  return ($(selector).val() || "").replace(/\s*[\r\n]+\s*/g, " ").trim();
+}
+
 function getNoteBody() {
   var paymentIds = [];
   $.each($("#payment").select2("data"), function (_, e) {
@@ -590,37 +596,36 @@ function getNoteBody() {
   });
 
   var note_body = "onosm.org submitted note from a business:\n";
-  if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
-  if ($("#category").val()) note_body += "category=" + $("#category").val() + "\n";
-  if ($("#categoryalt").val()) note_body += "description=" + $("#categoryalt").val() + "\n";
-  if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
-  if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
-  if ($("#placenamealt").val()) note_body += "addr:place=" + $("#placenamealt").val() + "\n";
-  if ($("#city").val()) note_body += "addr:city=" + $("#city").val() + "\n";
-  if ($("#postcode").val()) note_body += "addr:postcode=" + $("#postcode").val() + "\n";
-  if ($("#phone").val()) note_body += "phone=" + $("#phone").val() + "\n";
-  // fixme - this should be default to an empty string or be escaped
-  if ($("#website").val()) note_body += "website=" + $("#website").val() + "\n";
-  if ($("#social").val()) note_body += "social=" + $("#social").val() + "\n";
-  if ($("#opening_hours").val()) note_body += "opening_hours=" + $("#opening_hours").val() + "\n";
-  if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
+  if (fieldValue("#name")) note_body += "name=" + fieldValue("#name") + "\n";
+  if (fieldValue("#category")) note_body += "category=" + fieldValue("#category") + "\n";
+  if (fieldValue("#categoryalt")) note_body += "description=" + fieldValue("#categoryalt") + "\n";
+  if (fieldValue("#hnumberalt")) note_body += "addr:housenumber=" + fieldValue("#hnumberalt") + "\n";
+  if (fieldValue("#addressalt")) note_body += "addr:street=" + fieldValue("#addressalt") + "\n";
+  if (fieldValue("#placenamealt")) note_body += "addr:place=" + fieldValue("#placenamealt") + "\n";
+  if (fieldValue("#city")) note_body += "addr:city=" + fieldValue("#city") + "\n";
+  if (fieldValue("#postcode")) note_body += "addr:postcode=" + fieldValue("#postcode") + "\n";
+  if (fieldValue("#phone")) note_body += "phone=" + fieldValue("#phone") + "\n";
+  if (fieldValue("#website")) note_body += "website=" + fieldValue("#website") + "\n";
+  if (fieldValue("#social")) note_body += "social=" + fieldValue("#social") + "\n";
+  if (fieldValue("#opening_hours")) note_body += "opening_hours=" + fieldValue("#opening_hours") + "\n";
+  if (fieldValue("#wheel")) note_body += "wheelchair=" + fieldValue("#wheel") + "\n";
   paymentIds.forEach(function (id) { note_body += id + "\n"; });
 
   // delivery
-  if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "")
-    note_body += `delivery=${$("#delivery").val()}\n`;
-  else if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() == "")
+  if ($("input:checked[name=delivery-check]").val() && fieldValue("#delivery") != "")
+    note_body += `delivery=${fieldValue("#delivery")}\n`;
+  else if ($("input:checked[name=delivery-check]").val() && fieldValue("#delivery") == "")
     note_body += "delivery=yes\n";
   else if ($('#delivery-check').not(':indeterminate') == true)
     note_body += "delivery=no\n";
 
-  if ($("#delivery_description").val()) note_body += `delivery:description=${$("#delivery_description").val()}\n`;
+  if (fieldValue("#delivery_description")) note_body += `delivery:description=${fieldValue("#delivery_description")}\n`;
 
   // take-away
   if ($("input:checked[name=takeaway]").val())
     note_body += `takeaway=${$("input:checked[name=takeaway]").val()}\n`;
-  if ($("#takeaway_description").val())
-    note_body += `takeaway:description=${$("#takeaway_description").val()}\n`;
+  if (fieldValue("#takeaway_description"))
+    note_body += `takeaway:description=${fieldValue("#takeaway_description")}\n`;
 
   // Source hashtag so notes from onosm.org (as opposed to one of its forks)
   // can be found/filtered, and the date lets us tell whether a given issue
