@@ -622,6 +622,12 @@ function getNoteBody() {
   if ($("#takeaway_description").val())
     note_body += `takeaway:description=${$("#takeaway_description").val()}\n`;
 
+  // Source hashtag so notes from onosm.org (as opposed to one of its forks)
+  // can be found/filtered, and the date lets us tell whether a given issue
+  // has since been fixed. See https://github.com/osmlab/onosm.org/issues/117
+  var today = new Date().toISOString().slice(0, 10);
+  note_body += "\n#OnOSM.org-" + today;
+
   return note_body;
 }
 
