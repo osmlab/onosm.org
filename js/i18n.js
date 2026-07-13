@@ -4,6 +4,7 @@ const lngs = {
     de: { nativeName: 'Deutsch' },
     es: { nativeName: 'Español' },
     'fi-FI': { nativeName: 'Suomi' },
+    hu: { nativeName: 'Magyar' },
     'it-IT': { nativeName: 'Italiano (IT)' },
     fr: { nativeName: 'Français' },
     'nb-NO': { nativeName: 'Norsk (NO)' },
