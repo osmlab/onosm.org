@@ -72,7 +72,7 @@ $(function () {
         // for all options read: https://www.i18next.com/overview/configuration-options
         .init({
             // requires language-only translation for fallback even when country version is present
-            debug: true,
+            debug: false,
             fallbackLng: 'en-US',
             preload: ['en-US'],
             backend: {
@@ -91,8 +91,8 @@ $(function () {
                 }
                 $('#languageSwitcher').append(opt);
             });
-            $('#languageSwitcher').change((a, b, c) => {
-                const chosenLng = $(this).find("option:selected").attr('value');
+            $('#languageSwitcher').change((event) => {
+                const chosenLng = event.target.value;
                 i18next.changeLanguage(chosenLng, () => {
                     $("html").attr("lang", chosenLng);
                     rerender(chosenLng);
