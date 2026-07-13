@@ -243,7 +243,7 @@ $("#find").submit(function (e) {
               $("#map-information").show();
               $('.step-2 a').attr('href', '#details');
               $('#step2').removeClass("disabled");
-              $('#continue').removeClass("disabled");
+              setContinueEnabled(true);
             })
 
             .catch(err => {
@@ -367,7 +367,7 @@ function updateAddressInfo(chosen_place) {
   } else {
     $('#step2').removeClass("disabled");
     $('.step-2 a').attr('href', '#details');
-    $('#continue').removeClass("disabled");
+    setContinueEnabled(true);
     $("#address").addClass("is-valid");
     $("#address").removeClass("is-invalid");
   }
@@ -631,15 +631,29 @@ function hasMinimumData() {
   return $("#name").val() && $("#city").val() && ($("#category").val() || $("#categoryalt").val());
 }
 
+// hasValidLocation returns true if the user has actually searched for and/or
+// placed a marker for this note. Relying only on hash-based navigation to
+// keep users off step 2 without a location isn't enough on its own -- e.g. a
+// keyboard user can activate the visually-"disabled" Continue link, or a
+// stale marker from a previous note can be left in place -- so this is
+// checked again immediately before a note is submitted.
+// https://github.com/osmlab/onosm.org/issues/103
+function hasValidLocation() {
+  return findme_marker !== null && activeMarkerLatLng !== null;
+}
+
 $("#collect-data-done").click(function (event) {
   // https://stackoverflow.com/questions/18274383/ajax-post-working-in-chrome-but-not-in-firefox
   event.preventDefault();
 
   // Don't submit if the form is invalid
-  if (!hasMinimumData()) {
+  if (!hasMinimumData() || !hasValidLocation()) {
     event.stopPropagation();
     $("#required_info_alert").removeClass("alert-info");
     $("#required_info_alert").addClass("alert-danger");
+    if (!hasValidLocation()) {
+      location.hash = '';
+    }
     return;
   }
 
@@ -660,6 +674,18 @@ $("#collect-data-done").click(function (event) {
   });
 });
 
+// setContinueEnabled toggles the "Continue" link between its disabled and
+// enabled states. The "disabled" class alone only blocks mouse clicks
+// (via pointer-events: none); aria-disabled/tabindex are needed so the link
+// can't be activated by keyboard (or an errant Enter) while a location
+// hasn't actually been set. https://github.com/osmlab/onosm.org/issues/103
+function setContinueEnabled(enabled) {
+  $('#continue')
+    .toggleClass('disabled', !enabled)
+    .attr('aria-disabled', String(!enabled))
+    .attr('tabindex', enabled ? null : '-1');
+}
+
 function clearFields() {
   $("#form")[0].reset();
   $("#address").val("");
@@ -668,4 +694,6 @@ function clearFields() {
   $('#delivery-check').val("");
   $('#delivery-check').prop('indeterminate', true);
   disableDelivery();
+  $('#step2').addClass("disabled");
+  setContinueEnabled(false);
 }
