@@ -580,8 +580,16 @@ $('#delivery-check').prop('indeterminate', true);
 $(function () { deliveryCheck(); $("#delivery-check").click(deliveryCheck); });
 function deliveryCheck() { if (this.checked) { enableDelivery(); } else { disableDelivery(); } }
 
-function disableDelivery() { $("#delivery").attr("disabled", true); $("#delivery_description").attr("disabled", true); $("#label-delivery-check").html(i18n.t('step2.no')); }
-function enableDelivery() { $("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#label-delivery-check").html(i18n.t('step2.yes')); }
+function disableDelivery() { $("#delivery").attr("disabled", true); $("#delivery_description").attr("disabled", true); $("#delivery-details").addClass("d-none"); }
+function enableDelivery() { $("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#delivery-details").removeClass("d-none"); }
+
+// Show the takeaway description field only when takeaway is offered.
+// https://github.com/osmlab/onosm.org/issues/106
+$(function () {
+  $('input[name=takeaway]').change(function () {
+    $('#takeaway-description-group').toggleClass('d-none', this.value === 'no');
+  });
+});
 
 function getNoteBody() {
   var paymentIds = [];
@@ -700,6 +708,7 @@ function clearFields() {
   $('#delivery-check').val("");
   $('#delivery-check').prop('indeterminate', true);
   disableDelivery();
+  $('#takeaway-description-group').addClass("d-none");
   $('#step2').addClass("disabled");
   setContinueEnabled(false);
 }
