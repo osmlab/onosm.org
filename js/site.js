@@ -584,15 +584,15 @@ function disableDelivery() { $("#delivery").attr("disabled", true); $("#delivery
 function enableDelivery() { $("#delivery").removeAttr("disabled"); $("#delivery_description").removeAttr("disabled"); $("#label-delivery-check").html(i18n.t('step2.yes')); }
 
 function getNoteBody() {
-  var paymentIds = [],
-    paymentTexts = [];
+  var paymentIds = [];
   $.each($("#payment").select2("data"), function (_, e) {
     paymentIds.push(e.id);
-    paymentTexts.push(e.text);
   });
 
   var note_body = "onosm.org submitted note from a business:\n";
   if ($("#name").val()) note_body += "name=" + $("#name").val() + "\n";
+  if ($("#category").val()) note_body += "category=" + $("#category").val() + "\n";
+  if ($("#categoryalt").val()) note_body += "description=" + $("#categoryalt").val() + "\n";
   if ($("#hnumberalt").val()) note_body += "addr:housenumber=" + $("#hnumberalt").val() + "\n";
   if ($("#addressalt").val()) note_body += "addr:street=" + $("#addressalt").val() + "\n";
   if ($("#placenamealt").val()) note_body += "addr:place=" + $("#placenamealt").val() + "\n";
@@ -601,8 +601,10 @@ function getNoteBody() {
   if ($("#phone").val()) note_body += "phone=" + $("#phone").val() + "\n";
   // fixme - this should be default to an empty string or be escaped
   if ($("#website").val()) note_body += "website=" + $("#website").val() + "\n";
+  if ($("#social").val()) note_body += "social=" + $("#social").val() + "\n";
   if ($("#opening_hours").val()) note_body += "opening_hours=" + $("#opening_hours").val() + "\n";
   if ($("#wheel").val()) note_body += "wheelchair=" + $("#wheel").val() + "\n";
+  paymentIds.forEach(function (id) { note_body += id + "\n"; });
 
   // delivery
   if ($("input:checked[name=delivery-check]").val() && $("#delivery").val() != "")
