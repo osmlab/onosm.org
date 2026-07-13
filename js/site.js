@@ -93,7 +93,63 @@ let findme_boundingBox = null;
 // Bounding box around map
 let circleBoundsVisible = true;
 
+// A link like onosm.org/#17/14.50479/121.06624 (zoom/lat/lon) pre-positions
+// the marker so e.g. a mapper can send a business owner a link that skips
+// the address search. https://github.com/osmlab/onosm.org/issues/85
+const initialLocationMatch = location.hash.match(/^#(\d{1,2})\/(-?\d{1,2}(?:\.\d+)?)\/(-?\d{1,3}(?:\.\d+)?)$/);
+
 if (location.hash) location.hash = '';
+
+if (initialLocationMatch) {
+  // wait for translations so the marker instructions render localized
+  i18n.on('initialized', function () {
+    showLinkedLocation(
+      Number(initialLocationMatch[2]),
+      Number(initialLocationMatch[3]),
+      Math.min(Number(initialLocationMatch[1]), 18));
+  });
+}
+
+/**
+ * Place the marker at a location provided in the URL hash. The address
+ * fields are prefilled from a reverse geocode of the point, but the marker
+ * stays at the linked coordinates: whoever made the link knows the spot
+ * better than the geocoder does.
+ * @param {Number} lat
+ * @param {Number} lon
+ * @param {Number} zoom
+ */
+function showLinkedLocation(lat, lon, zoom) {
+  $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
+
+  searchReverseLookup({ lat: lat, lon: lon })
+    .then(foundAddress => {
+      // Keep the linked point and geofence to a small box around it; the
+      // geocoded feature's bounding box isn't guaranteed to contain the
+      // linked point.
+      const boxSize = 0.002;
+      foundAddress.lat = lat;
+      foundAddress.lon = lon;
+      foundAddress.boundingBox = [lat - boxSize, lat + boxSize, lon - boxSize, lon + boxSize];
+      activeSearchAddress = foundAddress;
+      showFoundAddress(foundAddress, zoom);
+
+      // The linked point is already exact, so unlike a searched address
+      // (which may need the marker dragged onto the right building first)
+      // the user can continue right away.
+      $('#step2').removeClass("disabled");
+      $('.step-2 a').attr('href', '#details');
+      setContinueEnabled(true);
+    })
+    .catch(() => {
+      // Nothing to reverse geocode there (open water etc.) -- just center
+      // the map on the linked point and let the user search normally.
+      findme_map.setView([lat, lon], zoom);
+    })
+    .finally(() => {
+      $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
+    });
+}
 
 /**
  * user search event: action
@@ -114,210 +170,9 @@ $("#find").submit(function (e) {
 
   searchAddress(address_to_find)
     .then(foundAddress => {
-
       // save returned address
       activeSearchAddress = foundAddress;
-
-      // Update rest of the site with address data
-      updateAddressInfo(activeSearchAddress);
-
-      const chosen_place = activeSearchAddress.boundingBox;
-      let bounds = new L.LatLngBounds(
-        [+chosen_place[0], +chosen_place[2]],
-        [+chosen_place[1], +chosen_place[3]]);
-
-      mapLatLng = ([
-        (activeSearchAddress.lat),
-        (activeSearchAddress.lon)
-      ]);
-
-      // Show marker at returned address
-      if (findme_marker === null) {
-        findme_marker = L.marker(mapLatLng, {
-          draggable: true
-        }).addTo(findme_map);
-
-        /**
-         * Geo-fence marker to the bounded region (Marker "drag" event)
-         * @param {Object} drag_event
-         */
-        findme_marker.on('drag', function (drag_event) {
-
-          const dragMarkerLocation = drag_event.latlng
-          let isInsideRegion = false
-
-          // check if marker is outside the circle
-
-          if (!circleBoundsVisible) {
-            // check if marker is inside the bounding box
-            isInsideRegion = findme_boundingBox.getBounds().contains(dragMarkerLocation);
-          } else {
-            // check if marker is inside the circle
-            isInsideRegion = isInsideCircle(dragMarkerLocation);
-          }
-
-          // reset marker to previous position when dragged outside the active bounding box
-          if (!isInsideRegion) {
-            findme_marker.setLatLng(activeMarkerLatLng);
-          }
-        });
-
-        /**
-         * Validate new marker location (Marker "drag ended" event)
-         * @param {Object} dragged_event
-         */
-        findme_marker.on('dragend', function (dragged_event) {
-
-          // update marker position after drag event
-          const eventMarkerLocation = dragged_event.target._latlng;
-
-          // cancel event when no movement happened (drag event cancelled)
-          if (activeMarkerLatLng === eventMarkerLocation) {
-            return;
-          }
-
-          // original marker position (from search results)
-          const searchPositionLatLong = {
-            lat: activeSearchAddress.lat,
-            lng: activeSearchAddress.lon
-          };
-
-          // convert marker position from Leaflet to Nominatim format for lookup
-          const userEventCoordinates = {
-            lat: eventMarkerLocation.lat,
-            lon: eventMarkerLocation.lng
-          };
-
-
-          if (circleBoundsVisible) {
-            // Use raw marker position when the circle region is active (skip lookup)
-
-            if (!findme_circle) {
-              // prevent null reference to circle region
-              console.error("unable to check bounds due to missing circle region")
-            }
-            else if (isInsideCircle(eventMarkerLocation)) {
-              // save new valid marker position
-              findme_marker.setLatLng(userEventCoordinates);
-              activeMarkerLatLng = findme_marker.getLatLng();
-            }
-
-            return;
-          }
-
-          // show loading animation
-          $("#findme h4").text(loadingText);
-          $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
-
-          let finalMarkerPositionLatLng = eventMarkerLocation;
-
-          // search for valid marker location using a Nominatim point
-          searchReverseLookup(userEventCoordinates)
-            .then(foundAddress => {
-
-              // convert Nominatim supplied nearby position to Leaflet
-              const nominatimNearbyPosition = {
-                lat: foundAddress.lat,
-                lng: foundAddress.lon
-              };
-
-              const nominatim_boundingBox = foundAddress.boundingBox;
-              const nominatimBounds = new L.LatLngBounds(
-                [+nominatim_boundingBox[0], +nominatim_boundingBox[2]],
-                [+nominatim_boundingBox[1], +nominatim_boundingBox[3]]);
-
-              // user location is outside nominatim's bounding box (in a lake or some other bad business location)
-              if (!nominatimBounds.contains(eventMarkerLocation)) {
-
-                if (findme_boundingBox.getBounds().contains(nominatimNearbyPosition)) {
-                  // use the Nominatim supplied point since the user one is outside the Nominatim bounding box
-                  finalMarkerPositionLatLng = Object.assign({}, nominatimNearbyPosition);
-
-                } else {
-                  // revert the "drag" since both locations are out of bounds
-                  finalMarkerPositionLatLng = Object.assign({}, activeMarkerLatLng);
-                }
-              }
-
-              $("#map-information").html(manualPosition);
-              $("#map-information").show();
-              $('.step-2 a').attr('href', '#details');
-              $('#step2').removeClass("disabled");
-              setContinueEnabled(true);
-            })
-
-            .catch(err => {
-
-              if (err) {
-                if (err.error) {
-                  console.error(err.error);
-                }
-              }
-              else {
-                $("#couldnt-find").show();
-                $("#map-information").hide();
-              }
-
-              // assume error is due to an invalid location (marker is in the ocean, etc)
-              finalMarkerPositionLatLng = Object.assign({}, searchPositionLatLong);
-            })
-
-            .finally(() => {
-              // stop loading animation
-              $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
-
-              // place marker to initial position
-              findme_marker.setLatLng(finalMarkerPositionLatLng);
-              activeMarkerLatLng = findme_marker.getLatLng();
-
-              // recenter map on original search location to deter map drifting too much
-              findme_map.panTo(activeMarkerLatLng);
-            });
-        });
-      }
-      activeMarkerLatLng = findme_marker.getLatLng();
-
-      findme_marker.setOpacity(1);
-      findme_marker.setLatLng(mapLatLng);
-
-      // start saving previous marker location
-      activeMarkerLatLng = findme_marker.getLatLng();
-
-      // delete previously created geo-fencing regions
-      if (findme_boundingBox != null) {
-        findme_boundingBox.remove();
-        findme_boundingBox = null;
-      }
-      else if (findme_circle != null) {
-        findme_circle.remove();
-        findme_circle = null;
-      }
-
-      // adjusted circle center to match search results
-      findme_circle = new L.circle(activeMarkerLatLng)
-        .addTo(findme_map)
-        .setRadius(circleRadiusMeters)
-        .setStyle({ opacity: 0 });
-
-      // compare default circle to returned bounding box
-      circleBoundsVisible = !bounds.intersects(findme_circle.getBounds());
-
-      if (circleBoundsVisible) {
-        // show circle bounding box on map
-        findme_circle.setStyle({ opacity: 1 });
-
-      }
-      // If the bounds is very small (< 1km on the diagonal), pad the bounds to make it visible
-      if (bounds.getNorthEast().distanceTo(bounds.getSouthWest()) < 1000) {
-        bounds = bounds.pad(0.5);
-      }
-
-      // add initial bounding box to map
-      findme_boundingBox = new L.rectangle(bounds)
-        .addTo(findme_map);
-
-      // recenter map on found address
-      findme_map.setView(mapLatLng, 14);
+      showFoundAddress(foundAddress, 14);
     })
     .catch(e => {
       $("#couldnt-find").show();
@@ -330,6 +185,215 @@ $("#find").submit(function (e) {
       $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
     });
 });
+
+/**
+ * Show a found address on the map: place or move the draggable marker,
+ * build the geofence region around it, and prefill the address fields.
+ * @param {NominatimAddress} foundAddress
+ * @param {Number} zoom map zoom level to show the location at
+ */
+function showFoundAddress(foundAddress, zoom) {
+  // Update rest of the site with address data
+  updateAddressInfo(foundAddress);
+
+  const chosen_place = foundAddress.boundingBox;
+  let bounds = new L.LatLngBounds(
+    [+chosen_place[0], +chosen_place[2]],
+    [+chosen_place[1], +chosen_place[3]]);
+
+  const mapLatLng = ([
+    (foundAddress.lat),
+    (foundAddress.lon)
+  ]);
+
+  // Show marker at returned address
+  if (findme_marker === null) {
+    findme_marker = L.marker(mapLatLng, {
+      draggable: true
+    }).addTo(findme_map);
+
+    /**
+     * Geo-fence marker to the bounded region (Marker "drag" event)
+     * @param {Object} drag_event
+     */
+    findme_marker.on('drag', function (drag_event) {
+
+      const dragMarkerLocation = drag_event.latlng
+      let isInsideRegion = false
+
+      // check if marker is outside the circle
+
+      if (!circleBoundsVisible) {
+        // check if marker is inside the bounding box
+        isInsideRegion = findme_boundingBox.getBounds().contains(dragMarkerLocation);
+      } else {
+        // check if marker is inside the circle
+        isInsideRegion = isInsideCircle(dragMarkerLocation);
+      }
+
+      // reset marker to previous position when dragged outside the active bounding box
+      if (!isInsideRegion) {
+        findme_marker.setLatLng(activeMarkerLatLng);
+      }
+    });
+
+    /**
+     * Validate new marker location (Marker "drag ended" event)
+     * @param {Object} dragged_event
+     */
+    findme_marker.on('dragend', function (dragged_event) {
+
+      // update marker position after drag event
+      const eventMarkerLocation = dragged_event.target._latlng;
+
+      // cancel event when no movement happened (drag event cancelled)
+      if (activeMarkerLatLng === eventMarkerLocation) {
+        return;
+      }
+
+      // original marker position (from search results)
+      const searchPositionLatLong = {
+        lat: activeSearchAddress.lat,
+        lng: activeSearchAddress.lon
+      };
+
+      // convert marker position from Leaflet to Nominatim format for lookup
+      const userEventCoordinates = {
+        lat: eventMarkerLocation.lat,
+        lon: eventMarkerLocation.lng
+      };
+
+
+      if (circleBoundsVisible) {
+        // Use raw marker position when the circle region is active (skip lookup)
+
+        if (!findme_circle) {
+          // prevent null reference to circle region
+          console.error("unable to check bounds due to missing circle region")
+        }
+        else if (isInsideCircle(eventMarkerLocation)) {
+          // save new valid marker position
+          findme_marker.setLatLng(userEventCoordinates);
+          activeMarkerLatLng = findme_marker.getLatLng();
+        }
+
+        return;
+      }
+
+      // show loading animation
+      $("#findme h4").text(loadingText);
+      $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
+
+      let finalMarkerPositionLatLng = eventMarkerLocation;
+
+      // search for valid marker location using a Nominatim point
+      searchReverseLookup(userEventCoordinates)
+        .then(foundAddress => {
+
+          // convert Nominatim supplied nearby position to Leaflet
+          const nominatimNearbyPosition = {
+            lat: foundAddress.lat,
+            lng: foundAddress.lon
+          };
+
+          const nominatim_boundingBox = foundAddress.boundingBox;
+          const nominatimBounds = new L.LatLngBounds(
+            [+nominatim_boundingBox[0], +nominatim_boundingBox[2]],
+            [+nominatim_boundingBox[1], +nominatim_boundingBox[3]]);
+
+          // user location is outside nominatim's bounding box (in a lake or some other bad business location)
+          if (!nominatimBounds.contains(eventMarkerLocation)) {
+
+            if (findme_boundingBox.getBounds().contains(nominatimNearbyPosition)) {
+              // use the Nominatim supplied point since the user one is outside the Nominatim bounding box
+              finalMarkerPositionLatLng = Object.assign({}, nominatimNearbyPosition);
+
+            } else {
+              // revert the "drag" since both locations are out of bounds
+              finalMarkerPositionLatLng = Object.assign({}, activeMarkerLatLng);
+            }
+          }
+
+          $("#map-information").html(manualPosition);
+          $("#map-information").show();
+          $('.step-2 a').attr('href', '#details');
+          $('#step2').removeClass("disabled");
+          setContinueEnabled(true);
+        })
+
+        .catch(err => {
+
+          if (err) {
+            if (err.error) {
+              console.error(err.error);
+            }
+          }
+          else {
+            $("#couldnt-find").show();
+            $("#map-information").hide();
+          }
+
+          // assume error is due to an invalid location (marker is in the ocean, etc)
+          finalMarkerPositionLatLng = Object.assign({}, searchPositionLatLong);
+        })
+
+        .finally(() => {
+          // stop loading animation
+          $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
+
+          // place marker to initial position
+          findme_marker.setLatLng(finalMarkerPositionLatLng);
+          activeMarkerLatLng = findme_marker.getLatLng();
+
+          // recenter map on original search location to deter map drifting too much
+          findme_map.panTo(activeMarkerLatLng);
+        });
+    });
+  }
+  activeMarkerLatLng = findme_marker.getLatLng();
+
+  findme_marker.setOpacity(1);
+  findme_marker.setLatLng(mapLatLng);
+
+  // start saving previous marker location
+  activeMarkerLatLng = findme_marker.getLatLng();
+
+  // delete previously created geo-fencing regions
+  if (findme_boundingBox != null) {
+    findme_boundingBox.remove();
+    findme_boundingBox = null;
+  }
+  else if (findme_circle != null) {
+    findme_circle.remove();
+    findme_circle = null;
+  }
+
+  // adjusted circle center to match search results
+  findme_circle = new L.circle(activeMarkerLatLng)
+    .addTo(findme_map)
+    .setRadius(circleRadiusMeters)
+    .setStyle({ opacity: 0 });
+
+  // compare default circle to returned bounding box
+  circleBoundsVisible = !bounds.intersects(findme_circle.getBounds());
+
+  if (circleBoundsVisible) {
+    // show circle bounding box on map
+    findme_circle.setStyle({ opacity: 1 });
+
+  }
+  // If the bounds is very small (< 1km on the diagonal), pad the bounds to make it visible
+  if (bounds.getNorthEast().distanceTo(bounds.getSouthWest()) < 1000) {
+    bounds = bounds.pad(0.5);
+  }
+
+  // add initial bounding box to map
+  findme_boundingBox = new L.rectangle(bounds)
+    .addTo(findme_map);
+
+  // recenter map on found address
+  findme_map.setView(mapLatLng, zoom);
+}
 
 /**
  * Is a point inside the circle region
@@ -676,8 +740,6 @@ $("#collect-data-done").click(function (event) {
     return;
   }
 
-  location.hash = '#done';
-
   var latlon = findme_marker.getLatLng(),
     qwarg = {
       lat: latlon.lat,
@@ -685,12 +747,25 @@ $("#collect-data-done").click(function (event) {
       text: getNoteBody()
     };
 
-  $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg, function (data) {
-    // console.log(data);
-    var noteId = data.properties.id;
-    var link = 'https://openstreetmap.org/?note=' + noteId + '#map=19/' + latlon.lat + '/' + latlon.lng + '&layers=N';
-    $("#linkcoords").append('<div class="mt-3 h4"><a href="' + link + '">' + link + '</a></div>');
-  });
+  // Disable the button while the note is created so an impatient second
+  // click can't create a duplicate, and only show the "Thanks!" step once
+  // the note actually exists. https://github.com/osmlab/onosm.org/issues/118
+  $("#collect-data-done").prop('disabled', true);
+
+  $.post('https://api.openstreetmap.org/api/0.6/notes.json', qwarg)
+    .done(function (data) {
+      var noteId = data.properties.id;
+      var link = 'https://openstreetmap.org/?note=' + noteId + '#map=19/' + latlon.lat + '/' + latlon.lng + '&layers=N';
+      $("#linkcoords").append('<div class="mt-3 h4"><a href="' + link + '">' + link + '</a></div>');
+      $("#submit-error").hide();
+      location.hash = '#done';
+    })
+    .fail(function () {
+      $("#submit-error").show();
+    })
+    .always(function () {
+      $("#collect-data-done").prop('disabled', false);
+    });
 });
 
 // setContinueEnabled toggles the "Continue" link between its disabled and
@@ -708,6 +783,7 @@ function setContinueEnabled(enabled) {
 function clearFields() {
   $("#form")[0].reset();
   $("#address").val("");
+  $("#submit-error").hide();
   $("#category").select2("val", "");
   $("#payment").select2("val", "");
   $('#delivery-check').val("");

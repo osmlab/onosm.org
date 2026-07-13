@@ -67,7 +67,9 @@
     "only_takeaway": "Only takeaway",
     "yes": "Yes",
     "no": "No",
-    "done": "Done!",
+    "done": "Create my note on OpenStreetMap",
+    "submitnotice": "Pressing this button creates a public <a href='https://wiki.openstreetmap.org/wiki/Notes'>note</a> on OpenStreetMap with the details above. A volunteer mapper will review it and add your business to the map &mdash; how quickly that happens depends on the local community.",
+    "submitfail": "<strong>Something went wrong while creating your note.</strong> Please check your internet connection and try again.",
     "wheelmodal": "<h2>Unrestricted access</h2><p><ul><li> The <b>entrance</b> is stepless</li><li> All the <b>rooms</b> is stepless</li><li> The <b>bathroom</b> (if applicable) is accessible and cabin is wide enough to fit a wheelchair next to the toilet</li></ul></p><h2>Partial access</h2><p><ul><li> The <b>entrance</b> has a step but not higher than 7 cm / 3 inch ('width of a hand')</li><li> The most important <b>rooms</b> are accessible by wheelchair</li><li> The <b>bathroom</b> (if applicable) is not accessible</li></ul></p><h2>No unrestricted access</h2><p><ul><li> The <b>entrance</b> has a step higher than 7 cm / 3 inch</li><li> The important <b>rooms</b> are not accessible</li><li> The <b>bathroom</b> (if applicable) is not accessible</li></ul></p><h2>Unknown access</h2><p>If you aren't sure or don't have information, choose this option.</p>"
   },
   "step3": {
