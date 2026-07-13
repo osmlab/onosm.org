@@ -564,7 +564,7 @@ $(window).on('hashchange', function () {
     $('#collect-data-step').addClass('d-none');
     $('#address-step').addClass('d-none');
     $('#step3').addClass('active bg-success');
-    $('#required_info_alert').addClass('alert-info').removeClass('alert-danger');
+    $('#required_info_alert').addClass('alert-info').removeClass('alert-danger').text(i18n.t('step2.required'));
   } else {
     $('#address-step').removeClass('d-none');
     $('#collect-data-step').addClass('d-none');
@@ -629,15 +629,26 @@ function hasMinimumData() {
   return $("#name").val() && $("#city").val() && ($("#category").val() || $("#categoryalt").val());
 }
 
+// hasValidPhone returns true if the phone field is empty, or starts with a
+// "+" and country code, as OSM's phone tagging guidelines require.
+// https://wiki.openstreetmap.org/wiki/Key:phone
+function hasValidPhone() {
+  var phone = $("#phone").val();
+  return !phone || /^\+[0-9][0-9()\-.\s]*$/.test(phone);
+}
+
 $("#collect-data-done").click(function (event) {
   // https://stackoverflow.com/questions/18274383/ajax-post-working-in-chrome-but-not-in-firefox
   event.preventDefault();
 
   // Don't submit if the form is invalid
-  if (!hasMinimumData()) {
+  if (!hasMinimumData() || !hasValidPhone()) {
     event.stopPropagation();
     $("#required_info_alert").removeClass("alert-info");
     $("#required_info_alert").addClass("alert-danger");
+    $("#required_info_alert").text(
+      !hasValidPhone() ? i18n.t('validation.missingPhoneOrWebsite') : i18n.t('step2.required')
+    );
     return;
   }
 
