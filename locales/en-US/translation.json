@@ -1,10 +1,12 @@
 ﻿{
   "app": {
     "title": "On OpenStreetMap",
+    "languageswitch": "Select language: ",
     "desc": "OpenStreetMap is an open, global map used by people around the world to navigate and find local businesses. It's easy and free to get on the map!"
   },
   "step1": {
     "title": "Location",
+    "addrlabel": "Address",
     "desc": "Start by telling us where your business is located.",
     "addr": "501 West Main Street, Alexandria, VA",
     "button": "Find me!",

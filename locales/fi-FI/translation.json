@@ -1,11 +1,13 @@
 ﻿{
   "app": {
     "title": "On OpenStreetMap",
+    "languageswitch": "Valitse kieli: ",
     "desc": "OpenStreetMap on avoin maailmanlaajuinen kartta jota käytetään navigoinnissa ja paikallisten palvelujen löytämisessä.<br/> Liiketoimintasi lisääminen kartalle on helppoa ja ilmaista!",
     "footer": "Lähdekoodi on <a href='https://github.com/osmlab/onosm.org'>GitHubissa</p>"
   },
   "step1": {
     "title": "Sijainti",
+    "addrlabel": "Osoite",
     "desc": "Missä liikkeesi sijaitsee.",
     "addr": "Kaivokatu 1, 00100 Helsinki",
     "button": "Etsi osoite!",

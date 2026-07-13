@@ -1,11 +1,13 @@
 {
   "app": {
     "title": "Op OpenStreetMap",
+    "languageswitch": "Taal selecteren: ",
     "desc": "OpenStreetMap is een open wereldkaart gebruikt door mensen wereldwijd om te navigeren en lokale bedrijven te vinden.<br/> Het is makkelijk en gratis om jouw bedrijf aan de kaart toe te voegen!",
     "footer": "Broncode is beschikbaar op <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
   },
   "step1": {
     "title": "Locatie",
+    "addrlabel": "Adres",
     "desc": "Begin door ons te zeggen waar je bedrijf gevestigd is.",
     "addr": "Singel 1, Baarle-Nassau",
     "button": "Vind me!",
