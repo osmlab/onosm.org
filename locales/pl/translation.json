@@ -2,7 +2,7 @@
   "app": {
     "title": "Na OpenStreetMap",
     "desc": "OpenStreetMap to otwarta, globalna mapa używana przez ludzi dookoła świata do nawigacji i szukania lokalnych biznesów. Dodanie swojej firmy do mapy jest proste i bezpłatne!",
-    "footer": "Kod źródłowy strony jest dostępny w serwisie <a href='https://github.com/osmlab/onosm.org'>GitHub</p>"
+    "footer": "Kod źródłowy strony jest dostępny w serwisie <a href='https://github.com/osmlab/onosm.org'>GitHub</a>"
   },
   "step1": {
     "title": "Lokalizacja",
@@ -21,7 +21,7 @@
     "catplaceholder": "Wybierz kategorię...",
     "catalt": "Jeśli nie znalazłeś kategorii, która najlepiej opisuje typ działalności twojego biznesu, opisz go proszę w tym miejscu.",
     "cataltplaceholder": "Opis działalności biznesu",
-    "cataltdesc": "Description",
+    "cataltdesc": "Opis",
     "addressalt": "Pomóż nam podając pełny adres (numer budynku, kod pocztowy) albo popraw wypełnione już dane",
     "street": "Ulica",
     "placename": "Miejscowość (gdy ulice nie mają nadanych nazw)",
@@ -33,7 +33,7 @@
     "housenumberplaceholder": "1",
     "cityplaceholder": "Warszawa",
     "postcodeplaceholder": "00-110",
-    "addressaltdesc": "Address",
+    "addressaltdesc": "Adres",
     "name": "Nazwa biznesu",
     "nameplaceholder": "Kawiarnia Zielona",
     "phone": "Numer telefonu",
@@ -86,5 +86,10 @@
     "modalTitle": "Klasyfikacja dostępności dla wózków inwalidzkich",
     "needsChecking": "wymaga sprawdzenia",
     "credits": "Projekt otwartoźródłowy opracowywany przez międzynarodową społeczność <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> <i class=\"twa twa-globe-with-meridians\"></i>. Wspomóż ten projekt w serwisie <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
+  },
+  "validation": {
+    "missingCategory": "Wybierz przynajmniej jedną kategorię.",
+    "missingName": "Podaj nazwę.",
+    "missingPhoneOrWebsite": "Podaj prawidłową stronę internetową lub numer telefonu."
   }
 }
