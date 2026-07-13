@@ -1,0 +1,19 @@
+[
+{"id": "payment:cash=yes", "text": "Készpénz"},
+{"id": "payment:debit_cards=yes", "text": "Bankkártya (betéti kártya)"},
+{"id": "payment:credit_cards=yes", "text": "Hitelkártya"},
+{"id": "payment:meal_voucher=yes", "text": "Étkezési utalvány"},
+{"id": "payment:mastercard=yes", "text": "Mastercard"},
+{"id": "payment:visa=yes", "text": "Visa"},
+{"id": "payment:mobile_phone=yes", "text": "Mobiltelefon"},
+{"id": "payment:wire_transfer=yes", "text": "Átutalás"},
+{"id": "payment:cheque=yes", "text": "Csekk"},
+{"id": "payment:bancomat=yes", "text": "Bancomat (Olaszország)"},
+{"id": "payment:american_express=yes", "text": "American Express"},
+{"id": "payment:sms=yes", "text": "SMS"},
+{"id": "payment:apple_pay=yes", "text": "Apple Pay"},
+{"id": "payment:google_pay=yes", "text": "Google Pay"},
+{"id": "payment:samsung_pay=yes", "text": "Samsung Pay"},
+{"id": "payment:satispay=yes", "text": "Satispay"},
+{"id": "payment:bitcoin=yes", "text": "Bitcoin"}
+]
