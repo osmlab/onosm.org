@@ -89,5 +89,11 @@
     "missingCategory": "Please select at least one category.",
     "missingName": "Please enter a name.",
     "missingPhoneOrWebsite": "Please enter a valid website or phone number."
+  },
+  "editmode": {
+    "banner": "Suggesting changes to",
+    "currenttags": "Currently tagged:",
+    "fetcherror": "Couldn't load that OSM object. You can still add a place normally.",
+    "nothingchanged": "You haven't changed anything yet."
   }
 }

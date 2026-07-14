@@ -89,5 +89,11 @@
     "modalTitle": "Wheelchair accessibility classification",
     "needsChecking": "needs checking",
     "credits": "An open source project developed by the worldwide <a href=\"https://www.openstreetmap.org/\" class=\"badge badge-info\">OpenStreetMap</a> community <i class=\"twa twa-globe-with-meridians\"></i>. Contribute to this project on <a href=\"https://github.com/osmlab/onosm.org\" class=\"badge badge-dark\">GitHub</a>."
+  },
+  "editmode": {
+    "banner": "Suggesting changes to",
+    "currenttags": "Currently tagged:",
+    "fetcherror": "Couldn't load that OSM object. You can still add a place normally.",
+    "nothingchanged": "You haven't changed anything yet."
   }
 }
