@@ -85,6 +85,7 @@
           </div>
         </form>
         <p id="couldnt-find" class="alert alert-danger mt-2" role="alert" style='display: none;' data-i18n="[html]step1.fail"></p>
+        <p id="edit-fetch-error" class="alert alert-warning mt-2" role="alert" style='display: none;' data-i18n="editmode.fetcherror"></p>
         <p id="map-information" class="alert alert-warning mt-2" role="alert" style='display: none;'></p>
       </div>
       <div id='findme-map'></div>
@@ -95,6 +96,12 @@
 
     <!-- step 2 -->
     <div class='mt-3 d-none' id='collect-data-step'>
+      <!-- Shown only when the form was reached via an #/edit/(node|way)/id
+           link (see loadElementForEditing() in js/site.js). -->
+      <div id="edit-mode-info" class="alert alert-info d-none" role="alert" dir="auto">
+        <div id="edit-mode-banner"></div>
+        <div id="edit-mode-tags" class="small"></div>
+      </div>
       <p data-i18n="[html]step2.desc" class="h3 text-info" dir="auto"></p>
       <form id="form" dir="auto">
         <!-- categories -->
@@ -318,6 +325,7 @@
         <div class="row">
           <div class="col">
               <p id="required_info_alert" class="alert alert-info" role="alert" data-i18n="step2.required"></p>
+              <p id="edit-nothing-changed-alert" class="alert alert-danger" role="alert" style="display: none;" data-i18n="editmode.nothingchanged"></p>
               <p id="submit-error" class="alert alert-danger" role="alert" style="display: none;" data-i18n="[html]step2.submitfail"></p>
           </div>
         </div>

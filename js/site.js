@@ -98,6 +98,13 @@ let circleBoundsVisible = true;
 // the address search. https://github.com/osmlab/onosm.org/issues/85
 const initialLocationMatch = location.hash.match(/^#(\d{1,2})\/(-?\d{1,2}(?:\.\d+)?)\/(-?\d{1,3}(?:\.\d+)?)$/);
 
+// A link like onosm.org/#/edit/node/1234 (or #edit/node/1234) loads that
+// existing OSM element for editing: the form is prefilled from its tags and
+// position so a mapper can send a business owner a link to suggest changes
+// to a place that's already on the map, instead of only adding new ones.
+// See docs/superpowers/specs/2026-07-13-edit-existing-element-design.md
+const initialEditMatch = location.hash.match(/^#\/?edit\/(node|way)\/(\d+)$/);
+
 if (location.hash) location.hash = '';
 
 if (initialLocationMatch) {
@@ -108,6 +115,249 @@ if (initialLocationMatch) {
       Number(initialLocationMatch[3]),
       Math.min(Number(initialLocationMatch[1]), 18));
   });
+}
+
+if (initialEditMatch) {
+  // wait for translations so the marker instructions / edit-mode banner
+  // render localized
+  i18n.on('initialized', function () {
+    loadElementForEditing(initialEditMatch[1], initialEditMatch[2]);
+  });
+}
+
+// editContext records the OSM element currently being edited (null when the
+// form is being used to add a brand-new place). Set by
+// loadElementForEditing() and cleared by clearFields(). See
+// docs/superpowers/specs/2026-07-13-edit-existing-element-design.md
+let editContext = null;
+
+// Tags shown in the read-only "Currently tagged:" line in edit mode.
+const editModeTagKeys = ['amenity', 'shop', 'tourism', 'leisure', 'craft', 'office', 'cuisine'];
+
+// Form field -> OSM tag(s) to prefill from, first match wins. Address fields
+// here are re-applied after showFoundAddress()/updateAddressInfo() runs so
+// that tag values win over the reverse geocoder's guess.
+const editPrefillTagMap = {
+  '#name': ['name'],
+  '#phone': ['phone', 'contact:phone'],
+  '#website': ['website', 'contact:website'],
+  '#opening_hours': ['opening_hours'],
+  '#hnumberalt': ['addr:housenumber'],
+  '#addressalt': ['addr:street'],
+  '#placenamealt': ['addr:place'],
+  '#city': ['addr:city'],
+  '#postcode': ['addr:postcode']
+};
+
+/**
+ * Load an existing OSM node or way for editing. Fetches the element from
+ * the OSM API, prefills the form from its tags/position, and reuses the
+ * showLinkedLocation() flow to drop the user directly onto the details
+ * step. Any fetch/parse failure just falls back to the normal blank flow
+ * with a dismissible warning -- this is a nice-to-have shortcut, not a
+ * required path. See
+ * docs/superpowers/specs/2026-07-13-edit-existing-element-design.md
+ * @param {"node"|"way"} type
+ * @param {string} id
+ */
+function loadElementForEditing(type, id) {
+  $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
+
+  const url = type === 'node'
+    ? 'https://api.openstreetmap.org/api/0.6/node/' + id + '.json'
+    : 'https://api.openstreetmap.org/api/0.6/way/' + id + '/full.json';
+
+  $.ajax({
+    url: url,
+    dataType: 'json',
+    timeout: 10000
+  })
+    .done(function (data) {
+      const extracted = extractEditElement(type, id, data);
+      if (!extracted) {
+        showEditFetchError();
+        return;
+      }
+
+      editContext = { type: type, id: id, tags: extracted.tags, lat: extracted.lat, lon: extracted.lon };
+      showEditModeBanner();
+
+      // Same flow as showLinkedLocation(): reverse-geocode the point for
+      // address fields, but keep the marker at the element's own position.
+      // Unlike a plain location link, a failed reverse geocode isn't fatal
+      // here -- the element itself is the source of truth, so continue with
+      // its tags alone rather than leaving edit mode half-initialized.
+      searchReverseLookup({ lat: extracted.lat, lon: extracted.lon })
+        .catch(() => ({ address: {}, display_name: '' }))
+        .then(foundAddress => {
+          const boxSize = 0.002;
+          foundAddress.lat = extracted.lat;
+          foundAddress.lon = extracted.lon;
+          foundAddress.boundingBox = [extracted.lat - boxSize, extracted.lat + boxSize, extracted.lon - boxSize, extracted.lon + boxSize];
+          activeSearchAddress = foundAddress;
+          showFoundAddress(foundAddress, 18);
+
+          // updateAddressInfo() (called from showFoundAddress) just filled
+          // the address fields from the geocoder -- now overwrite with tag
+          // values where the element actually has them.
+          prefillFromTags(editContext.tags);
+
+          $('#step2').removeClass("disabled");
+          $('.step-2 a').attr('href', '#details');
+          setContinueEnabled(true);
+
+          location.hash = '#details';
+        });
+    })
+    .fail(function () {
+      showEditFetchError();
+    })
+    .always(function () {
+      $("#findme").removeClass("progress-bar progress-bar-striped progress-bar-animated");
+    });
+}
+
+/**
+ * Pull the tags and a representative lat/lon out of an OSM API response for
+ * the element being edited. Returns null if the element (or its tags) can't
+ * be found, so the caller can fall back to the normal blank flow.
+ * @param {"node"|"way"} type
+ * @param {string} id
+ * @param {Object} data OSM API JSON response (node.json or way/full.json)
+ * @returns {?{tags: Object, lat: Number, lon: Number}}
+ */
+function extractEditElement(type, id, data) {
+  if (!data || !Array.isArray(data.elements)) return null;
+
+  const element = data.elements.find(function (e) {
+    return e.type === type && String(e.id) === String(id);
+  });
+
+  if (!element || !element.tags || Object.keys(element.tags).length === 0) return null;
+
+  if (type === 'node') {
+    return { tags: element.tags, lat: element.lat, lon: element.lon };
+  }
+
+  // way: centroid (arithmetic mean) of its member nodes' coordinates. A
+  // closed way repeats its first node id as the last one -- drop that
+  // duplicate so it isn't double-counted.
+  let nodeIds = element.nodes.slice();
+  if (nodeIds.length > 1 && nodeIds[0] === nodeIds[nodeIds.length - 1]) {
+    nodeIds = nodeIds.slice(0, -1);
+  }
+
+  const nodesById = {};
+  data.elements.forEach(function (e) {
+    if (e.type === 'node') nodesById[e.id] = e;
+  });
+
+  let sumLat = 0, sumLon = 0, count = 0;
+  nodeIds.forEach(function (nodeId) {
+    const node = nodesById[nodeId];
+    if (node) {
+      sumLat += node.lat;
+      sumLon += node.lon;
+      count++;
+    }
+  });
+
+  if (count === 0) return null;
+
+  return { tags: element.tags, lat: sumLat / count, lon: sumLon / count };
+}
+
+/**
+ * Prefill form fields from the edited element's tags (see editPrefillTagMap)
+ * and remember the prefilled value of each field on editContext.prefilled
+ * so getNoteBody() can later report only what changed. The category picker
+ * is intentionally left blank -- see showEditModeBanner() for the
+ * current-tags display instead.
+ * @param {Object} tags OSM tags of the element being edited
+ */
+function prefillFromTags(tags) {
+  Object.keys(editPrefillTagMap).forEach(function (selector) {
+    const tagKeys = editPrefillTagMap[selector];
+    for (let i = 0; i < tagKeys.length; i++) {
+      if (tags[tagKeys[i]]) {
+        $(selector).val(tags[tagKeys[i]]);
+        break;
+      }
+    }
+  });
+
+  // #wheel is a <select> restricted to a few known values; only prefill it
+  // when the tag value is one of the ones the form actually offers.
+  const wheelchair = tags['wheelchair'];
+  if (wheelchair === 'yes' || wheelchair === 'limited' || wheelchair === 'no') {
+    $('#wheel').val(wheelchair);
+  }
+
+  // Snapshot the resulting form values -- tag-derived AND geocoder-derived
+  // (updateAddressInfo() ran just before this) -- as the diff baseline.
+  // Snapshotting only tag values would make an untouched geocoder-filled
+  // field (say a city the element has no addr:city tag for) show up in the
+  // note as a spurious "(new)" suggestion and defeat the nothing-changed
+  // guard in editModeHasChanges().
+  editContext.prefilled = {};
+  editableFieldSpecs.forEach(function (f) {
+    editContext.prefilled[f.selector] = fieldValue(f.selector);
+  });
+}
+
+/**
+ * Leave edit mode: clear the edit context and its banner/alerts so the next
+ * note is a plain new-place submission. Called when the form is reset after
+ * a submission and when the user starts a fresh address search -- a manual
+ * search means they're describing some other place, and keeping the old
+ * editContext would make the note misattribute that place's details as
+ * changes to the originally linked element.
+ */
+function exitEditMode() {
+  editContext = null;
+  $('#edit-mode-info').addClass('d-none');
+  $('#edit-mode-banner').empty();
+  $('#edit-mode-tags').empty();
+  $('#edit-nothing-changed-alert').hide();
+}
+
+/**
+ * Show the dismissible "couldn't load that OSM object" warning used when
+ * loadElementForEditing() can't fetch or make sense of the linked element.
+ * The user is left on the normal blank flow.
+ */
+function showEditFetchError() {
+  $('#edit-fetch-error')
+    .text(i18n.t('editmode.fetcherror', { defaultValue: "Couldn't load that OSM object. You can still add a place normally." }))
+    .show();
+}
+
+/**
+ * Render the edit-mode banner ("Suggesting changes to node 1234") and the
+ * read-only "Currently tagged: amenity=cafe, ..." line shown on the details
+ * step while editContext is set.
+ */
+function showEditModeBanner() {
+  if (!editContext) return;
+
+  const osmUrl = 'https://osm.org/' + editContext.type + '/' + editContext.id;
+
+  const $banner = $('#edit-mode-banner').empty();
+  $banner.append(document.createTextNode(
+    i18n.t('editmode.banner', { defaultValue: 'Suggesting changes to' }) + ' '
+  ));
+  $('<a>').attr('href', osmUrl).text(editContext.type + ' ' + editContext.id).appendTo($banner);
+
+  const tagPairs = editModeTagKeys
+    .filter(function (key) { return editContext.tags[key]; })
+    .map(function (key) { return key + '=' + editContext.tags[key]; });
+
+  const $tags = $('#edit-mode-tags').empty();
+  if (tagPairs.length > 0) {
+    $tags.text(i18n.t('editmode.currenttags', { defaultValue: 'Currently tagged:' }) + ' ' + tagPairs.join(', '));
+  }
+
+  $('#edit-mode-info').removeClass('d-none');
 }
 
 /**
@@ -160,10 +410,13 @@ function showLinkedLocation(lat, lon, zoom) {
 $("#find").submit(function (e) {
   e.preventDefault();
   $("#couldnt-find").hide();
+  $("#edit-fetch-error").hide();
 
   // show loading indicator if user input is not empty
   let address_to_find = $("#address").val();
   if (address_to_find.length === 0) return;
+
+  exitEditMode();
 
   $("#findme h4").text(loadingText);
   $("#findme").addClass("progress-bar progress-bar-striped progress-bar-animated");
@@ -661,26 +914,84 @@ function fieldValue(selector) {
   return ($(selector).val() || "").replace(/\s*[\r\n]+\s*/g, " ").trim();
 }
 
+// editableFieldSpecs lists every form field that has a corresponding OSM
+// tag key in the note body, in the same order the note body has always used.
+// Shared by getNoteBody() (both plain and edit-mode/diff rendering) and
+// editModeHasChanges() (the "nothing changed" guard).
+const editableFieldSpecs = [
+  { selector: "#name", tag: "name" },
+  { selector: "#category", tag: "category" },
+  { selector: "#categoryalt", tag: "description" },
+  { selector: "#hnumberalt", tag: "addr:housenumber" },
+  { selector: "#addressalt", tag: "addr:street" },
+  { selector: "#placenamealt", tag: "addr:place" },
+  { selector: "#city", tag: "addr:city" },
+  { selector: "#postcode", tag: "addr:postcode" },
+  { selector: "#phone", tag: "phone" },
+  { selector: "#website", tag: "website" },
+  { selector: "#social", tag: "social" },
+  { selector: "#opening_hours", tag: "opening_hours" },
+  { selector: "#wheel", tag: "wheelchair" }
+];
+
+// noteBodyFieldLine renders one line of the note body for a field. Outside
+// edit mode this is unchanged from before: "key=value\n" when non-empty,
+// nothing otherwise. In edit mode it instead diffs the current value
+// against editContext.prefilled (fields with no tag counterpart -- category,
+// description, social, ... -- are treated as having had no prior value, so
+// any entered value shows as "(new)"), and cleared fields are silently
+// ignored rather than reported as removals.
+function noteBodyFieldLine(selector, tagKey) {
+  const newValue = fieldValue(selector);
+
+  if (!editContext) {
+    return newValue ? tagKey + "=" + newValue + "\n" : "";
+  }
+
+  if (!newValue) return "";
+
+  const oldValue = (editContext.prefilled && editContext.prefilled[selector]) || "";
+  if (newValue === oldValue) return "";
+
+  return oldValue
+    ? tagKey + "=" + newValue + " (was " + oldValue + ")\n"
+    : tagKey + "=" + newValue + " (new)\n";
+}
+
+// markerMoveDistanceMeters returns how far the marker has moved from the
+// edited element's original position, or 0 when not in edit mode / no
+// marker is placed yet.
+function markerMoveDistanceMeters() {
+  if (!editContext || !findme_marker) return 0;
+  return findme_map.distance(findme_marker.getLatLng(), { lat: editContext.lat, lng: editContext.lon });
+}
+
+// editModeHasChanges returns true when the user has actually suggested a
+// change to the edited element: a differing field or a marker move of more
+// than ~10 m. Used to block submitting a no-op edit-mode note.
+function editModeHasChanges() {
+  if (!editContext) return false;
+
+  const fieldChanged = editableFieldSpecs.some(function (f) {
+    return noteBodyFieldLine(f.selector, f.tag) !== "";
+  });
+
+  return fieldChanged || markerMoveDistanceMeters() > 10;
+}
+
 function getNoteBody() {
   var paymentIds = [];
   $.each($("#payment").select2("data"), function (_, e) {
     paymentIds.push(e.id);
   });
 
-  var note_body = "onosm.org submitted note from a business:\n";
-  if (fieldValue("#name")) note_body += "name=" + fieldValue("#name") + "\n";
-  if (fieldValue("#category")) note_body += "category=" + fieldValue("#category") + "\n";
-  if (fieldValue("#categoryalt")) note_body += "description=" + fieldValue("#categoryalt") + "\n";
-  if (fieldValue("#hnumberalt")) note_body += "addr:housenumber=" + fieldValue("#hnumberalt") + "\n";
-  if (fieldValue("#addressalt")) note_body += "addr:street=" + fieldValue("#addressalt") + "\n";
-  if (fieldValue("#placenamealt")) note_body += "addr:place=" + fieldValue("#placenamealt") + "\n";
-  if (fieldValue("#city")) note_body += "addr:city=" + fieldValue("#city") + "\n";
-  if (fieldValue("#postcode")) note_body += "addr:postcode=" + fieldValue("#postcode") + "\n";
-  if (fieldValue("#phone")) note_body += "phone=" + fieldValue("#phone") + "\n";
-  if (fieldValue("#website")) note_body += "website=" + fieldValue("#website") + "\n";
-  if (fieldValue("#social")) note_body += "social=" + fieldValue("#social") + "\n";
-  if (fieldValue("#opening_hours")) note_body += "opening_hours=" + fieldValue("#opening_hours") + "\n";
-  if (fieldValue("#wheel")) note_body += "wheelchair=" + fieldValue("#wheel") + "\n";
+  var note_body = editContext
+    ? "onosm.org suggested update to https://osm.org/" + editContext.type + "/" + editContext.id + " from the business:\n"
+    : "onosm.org submitted note from a business:\n";
+
+  editableFieldSpecs.forEach(function (f) {
+    note_body += noteBodyFieldLine(f.selector, f.tag);
+  });
   paymentIds.forEach(function (id) { note_body += id + "\n"; });
 
   // delivery
@@ -699,6 +1010,13 @@ function getNoteBody() {
   if (fieldValue("#takeaway_description"))
     note_body += `takeaway:description=${fieldValue("#takeaway_description")}\n`;
 
+  // If the marker was dragged away from the edited element's own position,
+  // record that as part of the suggestion too.
+  if (editContext && markerMoveDistanceMeters() > 10) {
+    const movedTo = findme_marker.getLatLng();
+    note_body += "location moved to " + movedTo.lat.toFixed(5) + ", " + movedTo.lng.toFixed(5) + "\n";
+  }
+
   // Source hashtag so notes from onosm.org (as opposed to one of its forks)
   // can be found/filtered, and the date lets us tell whether a given issue
   // has since been fixed. See https://github.com/osmlab/onosm.org/issues/117
@@ -709,8 +1027,13 @@ function getNoteBody() {
 }
 
 // hasMinimumData returns true if the form has the minimum data required to create a note.
-// We want to see at least a name, a city, and a category/description.
+// We want to see at least a name, a city, and a category/description. In
+// edit mode the category picker is intentionally left blank (see
+// showEditModeBanner()), so it isn't required there.
 function hasMinimumData() {
+  if (editContext) {
+    return $("#name").val() && $("#city").val();
+  }
   return $("#name").val() && $("#city").val() && ($("#category").val() || $("#categoryalt").val());
 }
 
@@ -729,6 +1052,8 @@ $("#collect-data-done").click(function (event) {
   // https://stackoverflow.com/questions/18274383/ajax-post-working-in-chrome-but-not-in-firefox
   event.preventDefault();
 
+  $("#edit-nothing-changed-alert").hide();
+
   // Don't submit if the form is invalid
   if (!hasMinimumData() || !hasValidLocation()) {
     event.stopPropagation();
@@ -737,6 +1062,16 @@ $("#collect-data-done").click(function (event) {
     if (!hasValidLocation()) {
       location.hash = '';
     }
+    return;
+  }
+
+  // In edit mode, don't let a no-op "note" go out just because the user
+  // clicked through without actually changing anything.
+  if (editContext && !editModeHasChanges()) {
+    event.stopPropagation();
+    $("#required_info_alert").removeClass("alert-info");
+    $("#required_info_alert").addClass("alert-danger");
+    $("#edit-nothing-changed-alert").show();
     return;
   }
 
@@ -792,4 +1127,6 @@ function clearFields() {
   $('#takeaway-description-group').addClass("d-none");
   $('#step2').addClass("disabled");
   setContinueEnabled(false);
+
+  exitEditMode();
 }
