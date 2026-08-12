@@ -914,13 +914,12 @@ function fieldValue(selector) {
   return ($(selector).val() || "").replace(/\s*[\r\n]+\s*/g, " ").trim();
 }
 
-// editableFieldSpecs lists every form field that has a corresponding OSM
-// tag key in the note body, in the same order the note body has always used.
-// Shared by getNoteBody() (both plain and edit-mode/diff rendering) and
-// editModeHasChanges() (the "nothing changed" guard).
+// editableFieldSpecs lists every form field rendered as a line in the note
+// body. `tag` fields are real OSM keys and render as "key=value"; `label`
+// fields (e.g. social) aren't OSM tags, so they render as a plain sentence
+// instead (#169). Shared by getNoteBody() and editModeHasChanges().
 const editableFieldSpecs = [
   { selector: "#name", tag: "name" },
-  { selector: "#category", tag: "category" },
   { selector: "#categoryalt", tag: "description" },
   { selector: "#hnumberalt", tag: "addr:housenumber" },
   { selector: "#addressalt", tag: "addr:street" },
@@ -929,33 +928,33 @@ const editableFieldSpecs = [
   { selector: "#postcode", tag: "addr:postcode" },
   { selector: "#phone", tag: "phone" },
   { selector: "#website", tag: "website" },
-  { selector: "#social", tag: "social" },
+  { selector: "#social", label: "Social media" },
   { selector: "#opening_hours", tag: "opening_hours" },
   { selector: "#wheel", tag: "wheelchair" }
 ];
 
-// noteBodyFieldLine renders one line of the note body for a field. Outside
-// edit mode this is unchanged from before: "key=value\n" when non-empty,
-// nothing otherwise. In edit mode it instead diffs the current value
-// against editContext.prefilled (fields with no tag counterpart -- category,
-// description, social, ... -- are treated as having had no prior value, so
-// any entered value shows as "(new)"), and cleared fields are silently
-// ignored rather than reported as removals.
-function noteBodyFieldLine(selector, tagKey) {
-  const newValue = fieldValue(selector);
+// noteBodyFieldLine renders one line for a field: the value when non-empty,
+// nothing otherwise. In edit mode it diffs against editContext.prefilled
+// instead, showing "(new)"/"(was ...)", and cleared fields are ignored
+// rather than reported as removals.
+function noteBodyFieldLine(spec) {
+  const newValue = fieldValue(spec.selector);
+  const render = spec.tag
+    ? function (v) { return spec.tag + " = " + v; }
+    : function (v) { return spec.label + ": " + v; };
 
   if (!editContext) {
-    return newValue ? tagKey + " = " + newValue + "\n" : "";
+    return newValue ? render(newValue) + "\n" : "";
   }
 
   if (!newValue) return "";
 
-  const oldValue = (editContext.prefilled && editContext.prefilled[selector]) || "";
+  const oldValue = (editContext.prefilled && editContext.prefilled[spec.selector]) || "";
   if (newValue === oldValue) return "";
 
   return oldValue
-    ? tagKey + " = " + newValue + " (was " + oldValue + ")\n"
-    : tagKey + " = " + newValue + " (new)\n";
+    ? render(newValue) + " (was " + oldValue + ")\n"
+    : render(newValue) + " (new)\n";
 }
 
 // markerMoveDistanceMeters returns how far the marker has moved from the
@@ -973,7 +972,7 @@ function editModeHasChanges() {
   if (!editContext) return false;
 
   const fieldChanged = editableFieldSpecs.some(function (f) {
-    return noteBodyFieldLine(f.selector, f.tag) !== "";
+    return noteBodyFieldLine(f) !== "";
   });
 
   return fieldChanged || markerMoveDistanceMeters() > 10;
@@ -985,12 +984,15 @@ function getNoteBody() {
     paymentIds.push(e.id);
   });
 
+  // category isn't an OSM tag, so it goes in the intro sentence, not a
+  // "category=" line (#169); it's blank in edit mode per hasMinimumData().
+  var category = editContext ? "" : fieldValue("#category");
   var note_body = editContext
     ? "onosm.org suggested update to https://osm.org/" + editContext.type + "/" + editContext.id + " from the business:\n"
-    : "onosm.org submitted note from a business:\n";
+    : "onosm.org submitted note from a business" + (category ? " that wants to create a \"" + category + "\"" : "") + ":\n";
 
   editableFieldSpecs.forEach(function (f) {
-    note_body += noteBodyFieldLine(f.selector, f.tag);
+    note_body += noteBodyFieldLine(f);
   });
   paymentIds.forEach(function (id) { note_body += id + "\n"; });
 
@@ -1002,13 +1004,14 @@ function getNoteBody() {
   else if ($('#delivery-check').not(':indeterminate') == true)
     note_body += "delivery = no\n";
 
-  if (fieldValue("#delivery_description")) note_body += `delivery:description = ${fieldValue("#delivery_description")}\n`;
+  // delivery:description/takeaway:description aren't real OSM tags (#169)
+  if (fieldValue("#delivery_description")) note_body += `Delivery details: ${fieldValue("#delivery_description")}\n`;
 
   // take-away
   if ($("input:checked[name=takeaway]").val())
     note_body += `takeaway = ${$("input:checked[name=takeaway]").val()}\n`;
   if (fieldValue("#takeaway_description"))
-    note_body += `takeaway:description = ${fieldValue("#takeaway_description")}\n`;
+    note_body += `Takeaway details: ${fieldValue("#takeaway_description")}\n`;
 
   // If the marker was dragged away from the edited element's own position,
   // record that as part of the suggestion too.
