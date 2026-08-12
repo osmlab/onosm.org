@@ -945,7 +945,7 @@ function noteBodyFieldLine(selector, tagKey) {
   const newValue = fieldValue(selector);
 
   if (!editContext) {
-    return newValue ? tagKey + "=" + newValue + "\n" : "";
+    return newValue ? tagKey + " = " + newValue + "\n" : "";
   }
 
   if (!newValue) return "";
@@ -954,8 +954,8 @@ function noteBodyFieldLine(selector, tagKey) {
   if (newValue === oldValue) return "";
 
   return oldValue
-    ? tagKey + "=" + newValue + " (was " + oldValue + ")\n"
-    : tagKey + "=" + newValue + " (new)\n";
+    ? tagKey + " = " + newValue + " (was " + oldValue + ")\n"
+    : tagKey + " = " + newValue + " (new)\n";
 }
 
 // markerMoveDistanceMeters returns how far the marker has moved from the
@@ -996,19 +996,19 @@ function getNoteBody() {
 
   // delivery
   if ($("input:checked[name=delivery-check]").val() && fieldValue("#delivery") != "")
-    note_body += `delivery=${fieldValue("#delivery")}\n`;
+    note_body += `delivery = ${fieldValue("#delivery")}\n`;
   else if ($("input:checked[name=delivery-check]").val() && fieldValue("#delivery") == "")
-    note_body += "delivery=yes\n";
+    note_body += "delivery = yes\n";
   else if ($('#delivery-check').not(':indeterminate') == true)
-    note_body += "delivery=no\n";
+    note_body += "delivery = no\n";
 
-  if (fieldValue("#delivery_description")) note_body += `delivery:description=${fieldValue("#delivery_description")}\n`;
+  if (fieldValue("#delivery_description")) note_body += `delivery:description = ${fieldValue("#delivery_description")}\n`;
 
   // take-away
   if ($("input:checked[name=takeaway]").val())
-    note_body += `takeaway=${$("input:checked[name=takeaway]").val()}\n`;
+    note_body += `takeaway = ${$("input:checked[name=takeaway]").val()}\n`;
   if (fieldValue("#takeaway_description"))
-    note_body += `takeaway:description=${fieldValue("#takeaway_description")}\n`;
+    note_body += `takeaway:description = ${fieldValue("#takeaway_description")}\n`;
 
   // If the marker was dragged away from the edited element's own position,
   // record that as part of the suggestion too.
